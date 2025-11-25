@@ -1,0 +1,11 @@
+{
+  "id": "obsidian-xmind-plugin",
+  "name": "XMind Integration",
+  "version": "1.6.0",
+  "minAppVersion": "1.0.0",
+  "description": "在Obsidian中查看XMind文件，支持Markdown和XMind格式转换，并提供增强的思维导图编辑功能",
+  "author": "springrain",
+  "authorUrl": "https://github.com/springrain1/obsidian-xmind-plugin",
+  "fundingUrl": "",
+  "isDesktopOnly": true
+}

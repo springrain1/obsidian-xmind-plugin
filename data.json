@@ -1,0 +1,93 @@
+{
+  "xmindPath": "1",
+  "useOnlineConverter": true,
+  "enableXMindViewer": true,
+  "enableFileSync": true,
+  "syncMode": "folders",
+  "syncFolders": [
+    "xmind"
+  ],
+  "enableXMindEmbedThumbnail": true,
+  "showFileName": true,
+  "xmindViewerRegion": "cn",
+  "enableZoom": true,
+  "zoomOnClick": true,
+  "globalDebugMode": false,
+  "mindmapTheme": "dopamine-ruby",
+  "mindmapCanvasSize": 8000,
+  "mindmapBackground": "transparent",
+  "mindmapFontSize": 16,
+  "mindmapHeadLevel": 3,
+  "mindmapLayoutDirect": "mind map",
+  "mindmapColor": "pure-colors",
+  "mindmapStrokeArray": [
+    "#FF0000",
+    "#00FF00",
+    "#0000FF",
+    "#FFFF00",
+    "#FF00FF",
+    "#00FFFF"
+  ],
+  "mindmapFocusOnMove": true,
+  "requireFrontMatter": false,
+  "ai": {
+    "provider": "openaiCompatible",
+    "ollama": {
+      "host": "http://localhost:11434",
+      "model": "",
+      "availableModels": [
+        "deepseek-r1:8b"
+      ]
+    },
+    "openai": {
+      "apiKey": "",
+      "model": "",
+      "baseURL": "",
+      "isCustomModel": true
+    },
+    "gemini": {
+      "apiKey": "",
+      "model": "",
+      "isCustomModel": true
+    },
+    "anthropic": {
+      "apiKey": "",
+      "model": "",
+      "isCustomModel": true
+    },
+    "deepseek": {
+      "apiKey": "",
+      "model": "deepseek-chat",
+      "isCustomModel": false,
+      "lastCustomModel": ""
+    },
+    "siliconflow": {
+      "apiKey": "",
+      "model": "deepseek-ai/deepseek-llm-7b-chat"
+    },
+    "customPrompts": [],
+    "prompts": {
+      "一键生成思维导图": "请提炼{{highlight}}内容要点，以Markdown格式输出，层级清晰，分三级目录结构(#、##、###)，每个节点包含不超过15字的关键词，确保内容符合XMind思维导图对应的Markdown格式",
+      "简要总结": "请提炼{{highlight}}内容核心要点，给出20字总结"
+    },
+    "openaiCompatible": {
+      "apiKey": "sk-W0rpStc95T7JVYVwDYc29IyirjtpPPby6SozFMQr17m8KWeo",
+      "model": "free:Qwen3-30B-A3B",
+      "apiAddress": "https://api.suanli.cn/v1",
+      "isCustomModel": true,
+      "lastCustomModel": "free:Qwen3-30B-A3B"
+    },
+    "savePath": "pages"
+  },
+  "mindmapLayout": "mindmap",
+  "mindmapRequireFrontMatter": false,
+  "enableXMindEmbed": true,
+  "thumbnailMaxWidth": 600,
+  "thumbnailMaxHeight": 400,
+  "showThumbnailLabel": false,
+  "xmindEmbedViewerRegion": "cn",
+  "debugMode": true,
+  "licenseData": {
+    "licenseKey": ""
+  }
+}
