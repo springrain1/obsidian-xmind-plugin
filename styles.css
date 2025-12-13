@@ -1899,3 +1899,908 @@
     opacity: 0 !important;
     pointer-events: none !important;
 }
+
+
+/* 思维导图中的表格基础样式 */
+.mm-node-content table {
+  border-collapse: collapse;
+  margin: 4px 0;
+  font-size: 0.85em;
+  min-width: 150px;
+  max-width: 500px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.mm-node-content table th,
+.mm-node-content table td {
+  padding: 5px 8px;
+  text-align: left;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+}
+
+.mm-node-content table th {
+  font-weight: 600;
+}
+
+/* 经典主题表格 */
+.mm-theme-classic .mm-node-content table th {
+  background-color: #4a90e2;
+  color: white;
+}
+.mm-theme-classic .mm-node-content table td {
+  background-color: #f0f7ff;
+  color: #2c3e50;
+}
+.mm-theme-classic .mm-node-content table tr:nth-child(even) td {
+  background-color: #e1effc;
+}
+
+/* 商务主题表格 */
+.mm-theme-business .mm-node-content table th {
+  background-color: #2c3e50;
+  color: white;
+}
+.mm-theme-business .mm-node-content table td {
+  background-color: #ecf0f1;
+  color: #2c3e50;
+}
+.mm-theme-business .mm-node-content table tr:nth-child(even) td {
+  background-color: #d5dbdb;
+}
+
+/* 创意主题表格 */
+.mm-theme-creative .mm-node-content table th {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+.mm-theme-creative .mm-node-content table td {
+  background-color: #f8f4ff;
+  color: #2c3e50;
+}
+.mm-theme-creative .mm-node-content table tr:nth-child(even) td {
+  background-color: #efe8ff;
+}
+
+/* 自然主题表格 */
+.mm-theme-nature .mm-node-content table th {
+  background-color: #27ae60;
+  color: white;
+}
+.mm-theme-nature .mm-node-content table td {
+  background-color: #eafaf1;
+  color: #1e8449;
+}
+.mm-theme-nature .mm-node-content table tr:nth-child(even) td {
+  background-color: #d4efdf;
+}
+
+/* 科技主题表格 */
+.mm-theme-tech .mm-node-content table th {
+  background-color: #0d1117;
+  color: #58a6ff;
+}
+.mm-theme-tech .mm-node-content table td {
+  background-color: #21262d;
+  color: #c9d1d9;
+}
+.mm-theme-tech .mm-node-content table tr:nth-child(even) td {
+  background-color: #161b22;
+}
+.mm-theme-tech .mm-node-content table th,
+.mm-theme-tech .mm-node-content table td {
+  border-color: #30363d;
+}
+
+/* 温暖主题表格 */
+.mm-theme-warm .mm-node-content table th {
+  background-color: #e67e22;
+  color: white;
+}
+.mm-theme-warm .mm-node-content table td {
+  background-color: #fef9e7;
+  color: #7d6608;
+}
+.mm-theme-warm .mm-node-content table tr:nth-child(even) td {
+  background-color: #fcf3cf;
+}
+
+/* 冷色主题表格 */
+.mm-theme-cool .mm-node-content table th {
+  background-color: #3498db;
+  color: white;
+}
+.mm-theme-cool .mm-node-content table td {
+  background-color: #ebf5fb;
+  color: #1b4f72;
+}
+.mm-theme-cool .mm-node-content table tr:nth-child(even) td {
+  background-color: #d6eaf8;
+}
+
+/* 活力橙黄主题表格 */
+.mm-theme-dopamine-orange .mm-node-content table th {
+  background: linear-gradient(135deg, #FF6B6B 0%, #FFD166 100%);
+  color: white;
+}
+.mm-theme-dopamine-orange .mm-node-content table td {
+  background-color: #FFF8E1;
+  color: #1A535C;
+}
+.mm-theme-dopamine-orange .mm-node-content table tr:nth-child(even) td {
+  background-color: #FFECB3;
+}
+
+/* 梦幻紫粉主题表格 */
+.mm-theme-dopamine-purple .mm-node-content table th {
+  background: linear-gradient(135deg, #9B5DE5 0%, #F15BB5 100%);
+  color: white;
+}
+.mm-theme-dopamine-purple .mm-node-content table td {
+  background-color: #F0F6FF;
+  color: #2A2D43;
+}
+.mm-theme-dopamine-purple .mm-node-content table tr:nth-child(even) td {
+  background-color: #E8E0F0;
+}
+
+/* 珊瑚阳光主题表格 */
+.mm-theme-dopamine-coral .mm-node-content table th {
+  background: linear-gradient(135deg, #FF5E5B 0%, #FFED66 100%);
+  color: white;
+}
+.mm-theme-dopamine-coral .mm-node-content table td {
+  background-color: #FDFFFC;
+  color: #2F2D2E;
+}
+.mm-theme-dopamine-coral .mm-node-content table tr:nth-child(even) td {
+  background-color: #FFF5E6;
+}
+
+/* 蓝山日出主题表格 */
+.mm-theme-dopamine-blue .mm-node-content table th {
+  background: linear-gradient(135deg, #6A67CE 0%, #FCD757 100%);
+  color: white;
+}
+.mm-theme-dopamine-blue .mm-node-content table td {
+  background-color: #F8F9FC;
+  color: #1E1E24;
+}
+.mm-theme-dopamine-blue .mm-node-content table tr:nth-child(even) td {
+  background-color: #EEF0F8;
+}
+
+/* 活力粉绿主题表格 */
+.mm-theme-dopamine-pink .mm-node-content table th {
+  background: linear-gradient(135deg, #EF476F 0%, #06D6A0 100%);
+  color: white;
+}
+.mm-theme-dopamine-pink .mm-node-content table td {
+  background-color: #F8F9FA;
+  color: #26547C;
+}
+.mm-theme-dopamine-pink .mm-node-content table tr:nth-child(even) td {
+  background-color: #E8F5F0;
+}
+
+/* 红宝石绿主题表格 */
+.mm-theme-dopamine-ruby .mm-node-content table th {
+  background: linear-gradient(135deg, #E71D36 0%, #2EC4B6 100%);
+  color: white;
+}
+.mm-theme-dopamine-ruby .mm-node-content table td {
+  background-color: #FDFFFC;
+  color: #011627;
+}
+.mm-theme-dopamine-ruby .mm-node-content table tr:nth-child(even) td {
+  background-color: #E8F8F5;
+}
+
+/* ========== Callout 节点样式 ========== */
+
+.mm-node-content .callout {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border-left: 4px solid;
+  min-width: 120px;
+}
+
+.mm-node-content .callout-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 600;
+  font-size: 0.95em;
+}
+
+.mm-node-content .callout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mm-node-content .callout-title-inner {
+  flex: 1;
+}
+
+/* Callout 类型颜色 */
+.mm-node-content .callout-note {
+  background: rgba(68, 138, 255, 0.1);
+  border-color: #448aff;
+  color: #1565c0;
+}
+
+.mm-node-content .callout-tip,
+.mm-node-content .callout-hint {
+  background: rgba(0, 200, 83, 0.1);
+  border-color: #00c853;
+  color: #2e7d32;
+}
+
+.mm-node-content .callout-warning,
+.mm-node-content .callout-caution,
+.mm-node-content .callout-attention {
+  background: rgba(255, 171, 0, 0.1);
+  border-color: #ffab00;
+  color: #f57c00;
+}
+
+.mm-node-content .callout-danger,
+.mm-node-content .callout-error {
+  background: rgba(255, 82, 82, 0.1);
+  border-color: #ff5252;
+  color: #c62828;
+}
+
+.mm-node-content .callout-info {
+  background: rgba(41, 182, 246, 0.1);
+  border-color: #29b6f6;
+  color: #0277bd;
+}
+
+.mm-node-content .callout-success,
+.mm-node-content .callout-check,
+.mm-node-content .callout-done {
+  background: rgba(102, 187, 106, 0.1);
+  border-color: #66bb6a;
+  color: #388e3c;
+}
+
+.mm-node-content .callout-question,
+.mm-node-content .callout-help,
+.mm-node-content .callout-faq {
+  background: rgba(171, 71, 188, 0.1);
+  border-color: #ab47bc;
+  color: #7b1fa2;
+}
+
+.mm-node-content .callout-quote,
+.mm-node-content .callout-cite {
+  background: rgba(158, 158, 158, 0.1);
+  border-color: #9e9e9e;
+  color: #616161;
+}
+
+.mm-node-content .callout-example {
+  background: rgba(126, 87, 194, 0.1);
+  border-color: #7e57c2;
+  color: #512da8;
+}
+
+.mm-node-content .callout-abstract,
+.mm-node-content .callout-summary,
+.mm-node-content .callout-tldr {
+  background: rgba(0, 188, 212, 0.1);
+  border-color: #00bcd4;
+  color: #00838f;
+}
+
+.mm-node-content .callout-todo {
+  background: rgba(33, 150, 243, 0.1);
+  border-color: #2196f3;
+  color: #1565c0;
+}
+
+.mm-node-content .callout-bug {
+  background: rgba(244, 67, 54, 0.1);
+  border-color: #f44336;
+  color: #c62828;
+}
+
+/* 深色主题 Callout 适配 */
+.theme-dark .mm-node-content .callout-note {
+  background: rgba(68, 138, 255, 0.15);
+  color: #82b1ff;
+}
+
+.theme-dark .mm-node-content .callout-tip,
+.theme-dark .mm-node-content .callout-hint {
+  background: rgba(0, 200, 83, 0.15);
+  color: #69f0ae;
+}
+
+.theme-dark .mm-node-content .callout-warning,
+.theme-dark .mm-node-content .callout-caution,
+.theme-dark .mm-node-content .callout-attention {
+  background: rgba(255, 171, 0, 0.15);
+  color: #ffd740;
+}
+
+.theme-dark .mm-node-content .callout-danger,
+.theme-dark .mm-node-content .callout-error {
+  background: rgba(255, 82, 82, 0.15);
+  color: #ff8a80;
+}
+
+.theme-dark .mm-node-content .callout-info {
+  background: rgba(41, 182, 246, 0.15);
+  color: #80d8ff;
+}
+
+.theme-dark .mm-node-content .callout-success,
+.theme-dark .mm-node-content .callout-check,
+.theme-dark .mm-node-content .callout-done {
+  background: rgba(102, 187, 106, 0.15);
+  color: #b9f6ca;
+}
+
+.theme-dark .mm-node-content .callout-question,
+.theme-dark .mm-node-content .callout-help,
+.theme-dark .mm-node-content .callout-faq {
+  background: rgba(171, 71, 188, 0.15);
+  color: #ea80fc;
+}
+
+.theme-dark .mm-node-content .callout-quote,
+.theme-dark .mm-node-content .callout-cite {
+  background: rgba(158, 158, 158, 0.15);
+  color: #bdbdbd;
+}
+
+
+/* ========== Callout 主题适配 ========== */
+
+/* 经典主题 Callout */
+.mm-theme-classic .mm-node-content .callout {
+  background: rgba(74, 144, 226, 0.1);
+  border-color: #4a90e2;
+}
+.mm-theme-classic .mm-node-content .callout-title {
+  color: #4a90e2;
+}
+
+/* 商务主题 Callout */
+.mm-theme-business .mm-node-content .callout {
+  background: rgba(44, 62, 80, 0.1);
+  border-color: #2c3e50;
+}
+.mm-theme-business .mm-node-content .callout-title {
+  color: #2c3e50;
+}
+
+/* 创意主题 Callout */
+.mm-theme-creative .mm-node-content .callout {
+  background: rgba(102, 126, 234, 0.15);
+  border-color: #667eea;
+}
+.mm-theme-creative .mm-node-content .callout-title {
+  color: #667eea;
+}
+
+/* 自然主题 Callout */
+.mm-theme-nature .mm-node-content .callout {
+  background: rgba(39, 174, 96, 0.1);
+  border-color: #27ae60;
+}
+.mm-theme-nature .mm-node-content .callout-title {
+  color: #27ae60;
+}
+
+/* 科技主题 Callout */
+.mm-theme-tech .mm-node-content .callout {
+  background: rgba(88, 166, 255, 0.1);
+  border-color: #58a6ff;
+}
+.mm-theme-tech .mm-node-content .callout-title {
+  color: #58a6ff;
+}
+
+/* 温暖主题 Callout */
+.mm-theme-warm .mm-node-content .callout {
+  background: rgba(230, 126, 34, 0.1);
+  border-color: #e67e22;
+}
+.mm-theme-warm .mm-node-content .callout-title {
+  color: #e67e22;
+}
+
+/* 冷色主题 Callout */
+.mm-theme-cool .mm-node-content .callout {
+  background: rgba(52, 152, 219, 0.1);
+  border-color: #3498db;
+}
+.mm-theme-cool .mm-node-content .callout-title {
+  color: #3498db;
+}
+
+/* 多巴胺橙黄主题 Callout */
+.mm-theme-dopamine-orange .mm-node-content .callout {
+  background: rgba(255, 107, 107, 0.1);
+  border-color: #FF6B6B;
+}
+.mm-theme-dopamine-orange .mm-node-content .callout-title {
+  color: #FF6B6B;
+}
+
+/* 多巴胺紫粉主题 Callout */
+.mm-theme-dopamine-purple .mm-node-content .callout {
+  background: rgba(155, 93, 229, 0.1);
+  border-color: #9B5DE5;
+}
+.mm-theme-dopamine-purple .mm-node-content .callout-title {
+  color: #9B5DE5;
+}
+
+/* 多巴胺珊瑚主题 Callout */
+.mm-theme-dopamine-coral .mm-node-content .callout {
+  background: rgba(255, 94, 91, 0.1);
+  border-color: #FF5E5B;
+}
+.mm-theme-dopamine-coral .mm-node-content .callout-title {
+  color: #FF5E5B;
+}
+
+/* 多巴胺蓝山主题 Callout */
+.mm-theme-dopamine-blue .mm-node-content .callout {
+  background: rgba(106, 103, 206, 0.1);
+  border-color: #6A67CE;
+}
+.mm-theme-dopamine-blue .mm-node-content .callout-title {
+  color: #6A67CE;
+}
+
+/* 多巴胺粉绿主题 Callout */
+.mm-theme-dopamine-pink .mm-node-content .callout {
+  background: rgba(239, 71, 111, 0.1);
+  border-color: #EF476F;
+}
+.mm-theme-dopamine-pink .mm-node-content .callout-title {
+  color: #EF476F;
+}
+
+/* 多巴胺红宝石主题 Callout */
+.mm-theme-dopamine-ruby .mm-node-content .callout {
+  background: rgba(231, 29, 54, 0.1);
+  border-color: #E71D36;
+}
+.mm-theme-dopamine-ruby .mm-node-content .callout-title {
+  color: #E71D36;
+}
+
+}
+
+/* ========== 嵌入内容样式 - 适配13种主题 ========== */
+
+/* 嵌入内容基础样式 */
+.mm-node-content .internal-embed,
+.mm-node-content .markdown-embed {
+  position: relative;
+}
+
+.mm-node-content .markdown-embed-link {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.mm-node-content .markdown-embed-link:hover {
+  opacity: 1;
+}
+
+/* 经典主题嵌入内容 */
+.mm-theme-classic .mm-node-content .markdown-preview-view,
+.mm-theme-classic .mm-node-content .markdown-preview-view h1,
+.mm-theme-classic .mm-node-content .markdown-preview-view h2,
+.mm-theme-classic .mm-node-content .markdown-preview-view h3,
+.mm-theme-classic .mm-node-content .markdown-preview-view h4,
+.mm-theme-classic .mm-node-content .markdown-preview-view p,
+.mm-theme-classic .mm-node-content .markdown-preview-view li,
+.mm-theme-classic .mm-node-content .markdown-preview-view code {
+  color: #2c3e50 !important;
+}
+.mm-theme-classic .mm-node.mm-root .mm-node-content .markdown-preview-view,
+.mm-theme-classic .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-classic .mm-node.mm-node-second .mm-node-content .markdown-preview-view,
+.mm-theme-classic .mm-node.mm-node-second .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 商务主题嵌入内容 */
+.mm-theme-business .mm-node-content .markdown-preview-view,
+.mm-theme-business .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 创意主题嵌入内容 */
+.mm-theme-creative .mm-node-content .markdown-preview-view,
+.mm-theme-creative .mm-node-content .markdown-preview-view * {
+  color: #2c3e50 !important;
+}
+.mm-theme-creative .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-creative .mm-node.mm-node-second .mm-node-content .markdown-preview-view *,
+.mm-theme-creative .mm-node.mm-node-third .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 自然主题嵌入内容 */
+.mm-theme-nature .mm-node-content .markdown-preview-view,
+.mm-theme-nature .mm-node-content .markdown-preview-view * {
+  color: #1e8449 !important;
+}
+.mm-theme-nature .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-nature .mm-node.mm-node-second .mm-node-content .markdown-preview-view *,
+.mm-theme-nature .mm-node.mm-node-third .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 科技主题嵌入内容 */
+.mm-theme-tech .mm-node-content .markdown-preview-view,
+.mm-theme-tech .mm-node-content .markdown-preview-view * {
+  color: #c9d1d9 !important;
+}
+.mm-theme-tech .mm-node.mm-root .mm-node-content .markdown-preview-view * {
+  color: #58a6ff !important;
+}
+
+/* 温暖主题嵌入内容 */
+.mm-theme-warm .mm-node-content .markdown-preview-view,
+.mm-theme-warm .mm-node-content .markdown-preview-view * {
+  color: #7d6608 !important;
+}
+.mm-theme-warm .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-warm .mm-node.mm-node-second .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 冷色主题嵌入内容 */
+.mm-theme-cool .mm-node-content .markdown-preview-view,
+.mm-theme-cool .mm-node-content .markdown-preview-view * {
+  color: #1b4f72 !important;
+}
+.mm-theme-cool .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-cool .mm-node.mm-node-second .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 活力橙黄主题嵌入内容 */
+.mm-theme-dopamine-orange .mm-node-content .markdown-preview-view,
+.mm-theme-dopamine-orange .mm-node-content .markdown-preview-view * {
+  color: #1A535C !important;
+}
+.mm-theme-dopamine-orange .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-orange .mm-node.mm-node-second .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 梦幻紫粉主题嵌入内容 */
+.mm-theme-dopamine-purple .mm-node-content .markdown-preview-view,
+.mm-theme-dopamine-purple .mm-node-content .markdown-preview-view * {
+  color: #2A2D43 !important;
+}
+.mm-theme-dopamine-purple .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-purple .mm-node.mm-node-second .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-purple .mm-node.mm-node-third .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 珊瑚阳光主题嵌入内容 */
+.mm-theme-dopamine-coral .mm-node-content .markdown-preview-view,
+.mm-theme-dopamine-coral .mm-node-content .markdown-preview-view * {
+  color: #2F2D2E !important;
+}
+.mm-theme-dopamine-coral .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-coral .mm-node.mm-node-second .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 蓝山日出主题嵌入内容 */
+.mm-theme-dopamine-blue .mm-node-content .markdown-preview-view,
+.mm-theme-dopamine-blue .mm-node-content .markdown-preview-view * {
+  color: #1E1E24 !important;
+}
+.mm-theme-dopamine-blue .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-blue .mm-node.mm-node-second .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-blue .mm-node.mm-node-third .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 活力粉绿主题嵌入内容 */
+.mm-theme-dopamine-pink .mm-node-content .markdown-preview-view,
+.mm-theme-dopamine-pink .mm-node-content .markdown-preview-view * {
+  color: #26547C !important;
+}
+.mm-theme-dopamine-pink .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-pink .mm-node.mm-node-second .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-pink .mm-node.mm-node-third .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+/* 红宝石绿主题嵌入内容 */
+.mm-theme-dopamine-ruby .mm-node-content .markdown-preview-view,
+.mm-theme-dopamine-ruby .mm-node-content .markdown-preview-view * {
+  color: #011627 !important;
+}
+.mm-theme-dopamine-ruby .mm-node.mm-root .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-ruby .mm-node.mm-node-second .mm-node-content .markdown-preview-view *,
+.mm-theme-dopamine-ruby .mm-node.mm-node-third .mm-node-content .markdown-preview-view * {
+  color: white !important;
+}
+
+
+/* ========== 节点笔记样式 ========== */
+
+/* 笔记基础样式 */
+.mm-node-note {
+  margin-top: 8px;
+  padding: 6px 10px;
+  border-left: 3px solid rgba(128, 128, 128, 0.5);
+  background: rgba(128, 128, 128, 0.08);
+  border-radius: 0 4px 4px 0;
+  font-size: 0.8em;  /* 比主题字体小 */
+  line-height: 1.4;
+  opacity: 0.9;
+  max-width: 100%;  /* 跟随节点主题宽度 */
+  word-wrap: break-word;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* 根节点笔记 */
+.mm-node.mm-root .mm-node-note {
+  font-size: 0.75em;  /* 根节点字体大，笔记相对更小 */
+  max-width: 350px;
+}
+
+/* 二级节点笔记 */
+.mm-node.mm-node-second .mm-node-note {
+  font-size: 0.78em;
+  max-width: 300px;
+}
+
+/* 三级及以下节点笔记 */
+.mm-node.mm-node-third .mm-node-note,
+.mm-node.mm-node-fourth .mm-node-note,
+.mm-node.mm-node-fifth .mm-node-note,
+.mm-node.mm-node-sixth .mm-node-note {
+  font-size: 0.85em;
+  max-width: 250px;
+}
+
+.mm-node-note p {
+  margin: 0 0 4px 0;
+  line-height: 1.4;
+}
+
+.mm-node-note p:last-child {
+  margin-bottom: 0;
+}
+
+/* ========== 笔记类型特定样式 ========== */
+
+/* 表格类型笔记 */
+.mm-node-note-table {
+  padding: 4px 8px;
+  border-left: none;
+  background: transparent;
+  overflow-x: auto;
+}
+
+.mm-node-note-table table {
+  border-collapse: collapse;
+  font-size: 0.9em;
+  min-width: 100%;
+}
+
+.mm-node-note-table th,
+.mm-node-note-table td {
+  border: 1px solid var(--background-modifier-border);
+  padding: 4px 8px;
+  text-align: left;
+}
+
+.mm-node-note-table th {
+  background: var(--background-secondary);
+  font-weight: 600;
+}
+
+.mm-node-note-table tr:nth-child(even) {
+  background: rgba(128, 128, 128, 0.05);
+}
+
+/* Callout类型笔记 */
+.mm-node-note-callout {
+  padding: 0;
+  border-left: none;
+  background: transparent;
+}
+
+.mm-node-note-callout .callout {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+/* 引用类型笔记 */
+.mm-node-note-blockquote {
+  padding: 6px 12px;
+  border-left: 4px solid var(--text-accent);
+  background: rgba(var(--text-accent-rgb, 128, 128, 128), 0.08);
+  font-style: italic;
+}
+
+.mm-node-note-blockquote blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+/* 文本类型笔记（默认） */
+.mm-node-note-text {
+  /* 使用基础样式 */
+}
+
+/* ========== 引用节点样式（独立节点，不是文本块中的引用） ========== */
+/* 当引用作为独立节点渲染时，去除默认的blockquote样式，融入节点主题 */
+.mm-node-content > blockquote {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-style: normal;
+}
+
+.mm-node-content > blockquote p {
+  margin: 0;
+}
+
+/* 经典主题笔记 */
+.mm-theme-classic .mm-node-note {
+  border-left-color: #4a90e2;
+  background: rgba(74, 144, 226, 0.08);
+  color: #2c3e50;
+}
+
+/* 商务主题笔记 */
+.mm-theme-business .mm-node-note {
+  border-left-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 创意主题笔记 */
+.mm-theme-creative .mm-node-note {
+  border-left-color: #667eea;
+  background: rgba(102, 126, 234, 0.08);
+  color: #2c3e50;
+}
+
+/* 自然主题笔记 */
+.mm-theme-nature .mm-node-note {
+  border-left-color: #27ae60;
+  background: rgba(39, 174, 96, 0.08);
+  color: #1e8449;
+}
+
+/* 科技主题笔记 */
+.mm-theme-tech .mm-node-note {
+  border-left-color: #58a6ff;
+  background: rgba(88, 166, 255, 0.08);
+  color: #c9d1d9;
+}
+
+/* 温暖主题笔记 */
+.mm-theme-warm .mm-node-note {
+  border-left-color: #e67e22;
+  background: rgba(230, 126, 34, 0.08);
+  color: #7d6608;
+}
+
+/* 冷色主题笔记 */
+.mm-theme-cool .mm-node-note {
+  border-left-color: #3498db;
+  background: rgba(52, 152, 219, 0.08);
+  color: #1b4f72;
+}
+
+/* 活力橙黄主题笔记 */
+.mm-theme-dopamine-orange .mm-node-note {
+  border-left-color: #FF6B6B;
+  background: rgba(255, 107, 107, 0.08);
+  color: #1A535C;
+}
+
+/* 梦幻紫粉主题笔记 */
+.mm-theme-dopamine-purple .mm-node-note {
+  border-left-color: #9B5DE5;
+  background: rgba(155, 93, 229, 0.08);
+  color: #2A2D43;
+}
+
+/* 珊瑚阳光主题笔记 */
+.mm-theme-dopamine-coral .mm-node-note {
+  border-left-color: #FF5E5B;
+  background: rgba(255, 94, 91, 0.08);
+  color: #2F2D2E;
+}
+
+/* 蓝山日出主题笔记 */
+.mm-theme-dopamine-blue .mm-node-note {
+  border-left-color: #6A67CE;
+  background: rgba(106, 103, 206, 0.08);
+  color: #1E1E24;
+}
+
+/* 活力粉绿主题笔记 */
+.mm-theme-dopamine-pink .mm-node-note {
+  border-left-color: #EF476F;
+  background: rgba(239, 71, 111, 0.08);
+  color: #26547C;
+}
+
+/* 红宝石绿主题笔记 */
+.mm-theme-dopamine-ruby .mm-node-note {
+  border-left-color: #E71D36;
+  background: rgba(231, 29, 54, 0.08);
+  color: #011627;
+}
+
+
+/* 快捷设置按钮样式 */
+.mm-quick-settings-toggle {
+  position: absolute;
+  bottom: 20px;
+  right: 100px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.mm-quick-settings-toggle:hover {
+  background: var(--background-modifier-hover);
+  transform: translateZ(0) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.mm-quick-settings-toggle:active {
+  transform: translateZ(0) scale(0.95);
+}
+
+.mm-quick-settings-toggle svg {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.mm-quick-settings-toggle:hover svg {
+  color: var(--text-normal);
+}
+
+/* 深色模式适配 */
+.theme-dark .mm-quick-settings-toggle {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-dark .mm-quick-settings-toggle:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
