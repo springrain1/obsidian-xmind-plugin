@@ -78,7 +78,7 @@
       "isCustomModel": true,
       "lastCustomModel": "free:Qwen3-30B-A3B"
     },
-    "savePath": "pages",
+    "savePath": "",
     "linkResolve": {
       "menuAI": {
         "enabled": true,
@@ -110,5 +110,64 @@
   "collapseState": {
     "enabled": true,
     "marker": "c"
+  },
+  "aiInsight": {
+    "perspectives": [
+      {
+        "id": "9cb7a472-7eab-454b-bb10-9cc441bf7c35",
+        "name": "MOC梳理",
+        "description": "为我这些笔记梳理一个目录或框架",
+        "prompt": "我要为我这些笔记梳理一个目录或框架。主体的架构是 Why-What-How。\n首先，帮我提炼笔记内容的核心主题，洞察为什么我会记录下这些笔记，这部分的内容标题是「❓Why」；\n其次，帮我提炼笔记内容，如何定义我现在的问题，这部分的内容标题是「❓ What」；\n最后提供一个框架串联起我笔记中提到的所有方法和行动方案，不要遗漏任何一个方法或行动方案，这部分的内容标题是「❓ How」。",
+        "icon": "✨",
+        "category": "custom",
+        "isBuiltIn": false,
+        "createdAt": 1765694611821,
+        "updatedAt": 1765694611821
+      },
+      {
+        "id": "e3ab613f-d608-49eb-82df-8458caccbb43",
+        "name": "待办大清洗",
+        "description": "专治各种“灵光一闪”和“回头再说”，抽离待办，绝不遗漏，智能归档你的每一份野心。纯文本输出，去重合并，大类有间距，小类更紧凑。",
+        "prompt": "你是一名兼具“整理癖”与“侦探直觉”的待办事项专家。请对输入内容进行清洗重组，规则如下：\n\n1.  **去重与合并**：识别重复或高度相似的事项，将其合并。\n2.  **智能备注（核心升级）**：\n    *   对于简单直白的事项（如“约某人吃饭”），保持简练。\n    *   **重点**：对于语焉不详、时间久远、容易遗忘背景或较为复杂的条目，**必须在事项后用括号补充关键线索**（提取原文中的目的、来源、灵感原点或具体操作细节）。让用户一眼能回想起“为什么要记这条”。\n3.  **逻辑归类**：可参考如下归类\n    *   AI与探索\n    *   连接与社交\n    *   工作与项目\n    *   灵感与杂事\n4.  **输出格式规范（严格执行）**：\n    *   **结构**：分类名称独占一行。事项用数字“1. 2. 3.”排序。\n    *   **排版**：类内不空行，大类间空一行。\n    *   **语言**：第一人称，动词开头。\n\n**输出示例模版：**\n\nAI与探索\n1. 尝试Get Draft新工具（用于优化写作流程）\n2. 研究《你就是那束光》LiveMV（重点分析其走心内容的制作方法）\n\n连接与社交\n1. 约A姐吃饭\n2. 回复某人消息\n\n(以此类推，请直接开始处理输入内容)",
+        "icon": "✨",
+        "category": "custom",
+        "isBuiltIn": false,
+        "createdAt": 1765694633543,
+        "updatedAt": 1765694633543
+      }
+    ]
+  },
+  "export": {
+    "imageExport": {
+      "imageWidth": 960,
+      "cardSummary": "",
+      "showFilename": true,
+      "showDate": true,
+      "authorInfo": {
+        "show": false,
+        "name": "及时春雨",
+        "remark": "",
+        "avatar": "",
+        "position": "top",
+        "align": "left"
+      },
+      "watermark": {
+        "enable": false,
+        "type": "text",
+        "text": {
+          "content": "",
+          "fontSize": 16,
+          "color": "#cccccc"
+        },
+        "image": {
+          "src": ""
+        },
+        "opacity": 0.3,
+        "rotate": -30,
+        "width": 150,
+        "height": 80
+      },
+      "selectedTemplate": "academic"
+    }
   }
 }

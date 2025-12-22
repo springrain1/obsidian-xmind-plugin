@@ -2262,121 +2262,290 @@
 
 /* 经典主题 Callout */
 .mm-theme-classic .mm-node-content .callout {
-  background: rgba(74, 144, 226, 0.1);
+  background: rgba(74, 144, 226, 0.12);
   border-color: #4a90e2;
 }
 .mm-theme-classic .mm-node-content .callout-title {
-  color: #4a90e2;
+  color: #2c5aa0;
+}
+.mm-theme-classic .mm-node-content .callout-content {
+  color: #2c3e50;
+}
+/* 经典主题 - 二级节点Callout（白色背景） */
+.mm-theme-classic .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-classic .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #2c5aa0;
+}
+.mm-theme-classic .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #2c3e50;
 }
 
-/* 商务主题 Callout */
+/* 商务主题 Callout - 暗色背景+白色文字，与节点风格一致 */
 .mm-theme-business .mm-node-content .callout {
-  background: rgba(44, 62, 80, 0.1);
-  border-color: #2c3e50;
+  background: rgba(44, 62, 80, 0.95);
+  border-color: #5dade2;
 }
 .mm-theme-business .mm-node-content .callout-title {
-  color: #2c3e50;
+  color: #5dade2;
+}
+.mm-theme-business .mm-node-content .callout-content {
+  color: #ffffff;
+}
+/* 商务主题 - 二级节点Callout */
+.mm-theme-business .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(44, 62, 80, 0.95);
+  border-color: #5dade2;
+}
+.mm-theme-business .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #85c1e9;
+}
+.mm-theme-business .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #ffffff;
 }
 
 /* 创意主题 Callout */
 .mm-theme-creative .mm-node-content .callout {
-  background: rgba(102, 126, 234, 0.15);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #667eea;
 }
 .mm-theme-creative .mm-node-content .callout-title {
-  color: #667eea;
+  color: #5a67d8;
+}
+.mm-theme-creative .mm-node-content .callout-content {
+  color: #4a5568;
+}
+/* 创意主题 - 二级节点Callout */
+.mm-theme-creative .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-creative .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #5a67d8;
+}
+.mm-theme-creative .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #2d3748;
 }
 
 /* 自然主题 Callout */
 .mm-theme-nature .mm-node-content .callout {
-  background: rgba(39, 174, 96, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #27ae60;
 }
 .mm-theme-nature .mm-node-content .callout-title {
-  color: #27ae60;
+  color: #1e8449;
+}
+.mm-theme-nature .mm-node-content .callout-content {
+  color: #1e5631;
+}
+/* 自然主题 - 二级节点Callout */
+.mm-theme-nature .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-nature .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #1e8449;
+}
+.mm-theme-nature .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #145a32;
 }
 
-/* 科技主题 Callout */
+/* 科技主题 Callout - 暗色背景+白色文字，与节点风格一致 */
 .mm-theme-tech .mm-node-content .callout {
-  background: rgba(88, 166, 255, 0.1);
+  background: rgba(22, 27, 34, 0.95);
   border-color: #58a6ff;
 }
 .mm-theme-tech .mm-node-content .callout-title {
   color: #58a6ff;
 }
+.mm-theme-tech .mm-node-content .callout-content {
+  color: #ffffff;
+}
+/* 科技主题 - 二级节点Callout */
+.mm-theme-tech .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(13, 17, 23, 0.95);
+  border-color: #58a6ff;
+}
+.mm-theme-tech .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #79c0ff;
+}
+.mm-theme-tech .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #ffffff;
+}
 
 /* 温暖主题 Callout */
 .mm-theme-warm .mm-node-content .callout {
-  background: rgba(230, 126, 34, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #e67e22;
 }
 .mm-theme-warm .mm-node-content .callout-title {
-  color: #e67e22;
+  color: #d35400;
+}
+.mm-theme-warm .mm-node-content .callout-content {
+  color: #7d5a29;
+}
+/* 温暖主题 - 二级节点Callout */
+.mm-theme-warm .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-warm .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #d35400;
+}
+.mm-theme-warm .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #5d4e37;
 }
 
 /* 冷色主题 Callout */
 .mm-theme-cool .mm-node-content .callout {
-  background: rgba(52, 152, 219, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #3498db;
 }
 .mm-theme-cool .mm-node-content .callout-title {
-  color: #3498db;
+  color: #2980b9;
+}
+.mm-theme-cool .mm-node-content .callout-content {
+  color: #1b4f72;
+}
+/* 冷色主题 - 二级节点Callout */
+.mm-theme-cool .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-cool .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #2980b9;
+}
+.mm-theme-cool .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #154360;
 }
 
 /* 多巴胺橙黄主题 Callout */
 .mm-theme-dopamine-orange .mm-node-content .callout {
-  background: rgba(255, 107, 107, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #FF6B6B;
 }
 .mm-theme-dopamine-orange .mm-node-content .callout-title {
-  color: #FF6B6B;
+  color: #e55555;
+}
+.mm-theme-dopamine-orange .mm-node-content .callout-content {
+  color: #1A535C;
+}
+/* 多巴胺橙黄主题 - 二级节点Callout */
+.mm-theme-dopamine-orange .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-dopamine-orange .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #e55555;
+}
+.mm-theme-dopamine-orange .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #1A535C;
 }
 
 /* 多巴胺紫粉主题 Callout */
 .mm-theme-dopamine-purple .mm-node-content .callout {
-  background: rgba(155, 93, 229, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #9B5DE5;
 }
 .mm-theme-dopamine-purple .mm-node-content .callout-title {
-  color: #9B5DE5;
+  color: #8b4dd5;
+}
+.mm-theme-dopamine-purple .mm-node-content .callout-content {
+  color: #2A2D43;
+}
+/* 多巴胺紫粉主题 - 二级节点Callout */
+.mm-theme-dopamine-purple .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-dopamine-purple .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #8b4dd5;
+}
+.mm-theme-dopamine-purple .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #2A2D43;
 }
 
 /* 多巴胺珊瑚主题 Callout */
 .mm-theme-dopamine-coral .mm-node-content .callout {
-  background: rgba(255, 94, 91, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #FF5E5B;
 }
 .mm-theme-dopamine-coral .mm-node-content .callout-title {
-  color: #FF5E5B;
+  color: #e54e4b;
+}
+.mm-theme-dopamine-coral .mm-node-content .callout-content {
+  color: #2F2D2E;
+}
+/* 多巴胺珊瑚主题 - 二级节点Callout */
+.mm-theme-dopamine-coral .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-dopamine-coral .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #e54e4b;
+}
+.mm-theme-dopamine-coral .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #2F2D2E;
 }
 
 /* 多巴胺蓝山主题 Callout */
 .mm-theme-dopamine-blue .mm-node-content .callout {
-  background: rgba(106, 103, 206, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #6A67CE;
 }
 .mm-theme-dopamine-blue .mm-node-content .callout-title {
-  color: #6A67CE;
+  color: #5a57be;
+}
+.mm-theme-dopamine-blue .mm-node-content .callout-content {
+  color: #1E1E24;
+}
+/* 多巴胺蓝山主题 - 二级节点Callout */
+.mm-theme-dopamine-blue .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-dopamine-blue .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #5a57be;
+}
+.mm-theme-dopamine-blue .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #1E1E24;
 }
 
 /* 多巴胺粉绿主题 Callout */
 .mm-theme-dopamine-pink .mm-node-content .callout {
-  background: rgba(239, 71, 111, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #EF476F;
 }
 .mm-theme-dopamine-pink .mm-node-content .callout-title {
-  color: #EF476F;
+  color: #df375f;
+}
+.mm-theme-dopamine-pink .mm-node-content .callout-content {
+  color: #26547C;
+}
+/* 多巴胺粉绿主题 - 二级节点Callout */
+.mm-theme-dopamine-pink .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-dopamine-pink .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #df375f;
+}
+.mm-theme-dopamine-pink .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #26547C;
 }
 
 /* 多巴胺红宝石主题 Callout */
 .mm-theme-dopamine-ruby .mm-node-content .callout {
-  background: rgba(231, 29, 54, 0.1);
+  background: rgba(255, 255, 255, 0.92);
   border-color: #E71D36;
 }
 .mm-theme-dopamine-ruby .mm-node-content .callout-title {
-  color: #E71D36;
+  color: #d71d36;
 }
-
+.mm-theme-dopamine-ruby .mm-node-content .callout-content {
+  color: #011627;
+}
+/* 多巴胺红宝石主题 - 二级节点Callout */
+.mm-theme-dopamine-ruby .mm-node.mm-node-second .mm-node-content .callout {
+  background: rgba(255, 255, 255, 0.95);
+}
+.mm-theme-dopamine-ruby .mm-node.mm-node-second .mm-node-content .callout-title {
+  color: #d71d36;
+}
+.mm-theme-dopamine-ruby .mm-node.mm-node-second .mm-node-content .callout-content {
+  color: #011627;
 }
 
 /* ========== 嵌入内容样式 - 适配13种主题 ========== */
@@ -2803,4 +2972,2746 @@
 
 .theme-dark .mm-quick-settings-toggle:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ========== 移动端编辑按钮样式 ========== */
+.mm-mobile-edit-buttons {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 12px;
+  z-index: 100;
+}
+
+.mm-mobile-edit-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.mm-mobile-edit-btn:active,
+.mm-mobile-edit-btn.active {
+  transform: translateZ(0) scale(0.95);
+  background: var(--background-modifier-hover);
+}
+
+.mm-mobile-edit-btn svg {
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.mm-mobile-edit-btn:active svg,
+.mm-mobile-edit-btn.active svg {
+  color: var(--text-normal);
+}
+
+/* 深色模式适配 */
+.theme-dark .mm-mobile-edit-btn {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 桌面端隐藏移动端编辑按钮 */
+@media (min-width: 769px) {
+  .mm-mobile-edit-buttons {
+    display: none;
+  }
+}
+
+
+/* ==================== AI 洞察模态框样式 ==================== */
+
+/* 模态框容器 */
+.insight-modal .modal-content {
+    padding: 0;
+    overflow: hidden;
+}
+
+.insight-modal-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* 模态框头部 */
+.insight-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+}
+
+.insight-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.insight-back-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--text-normal);
+    transition: background 0.2s ease;
+}
+
+.insight-back-button:hover {
+    background: var(--background-modifier-hover);
+}
+
+.insight-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+.insight-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.insight-create-button {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 12px;
+    border-radius: 4px;
+    transition: opacity 0.2s ease;
+}
+
+.insight-create-button:hover {
+    opacity: 0.9;
+}
+
+.insight-close-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.insight-close-button:hover {
+    color: var(--text-normal);
+}
+
+/* 模态框内容区域 */
+.insight-modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+/* 发现视角视图 */
+.discover-perspectives-view {
+    padding: 8px 0;
+}
+
+/* 视角分类 */
+.perspective-category {
+    margin-bottom: 24px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.category-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-add-button {
+    background: none;
+    border: 1px dashed var(--background-modifier-border);
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.category-add-button:hover {
+    border-color: var(--interactive-accent);
+    color: var(--interactive-accent);
+}
+
+/* 视角卡片容器 */
+.perspective-cards-container {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-behavior: smooth;
+}
+
+/* 自定义滚动条 */
+.perspective-cards-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.perspective-cards-container::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+    border-radius: 3px;
+}
+
+.perspective-cards-container::-webkit-scrollbar-thumb {
+    background: var(--background-modifier-border);
+    border-radius: 3px;
+}
+
+.perspective-cards-container::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* 视角卡片 */
+.perspective-card {
+    flex-shrink: 0;
+    width: 200px;
+    padding: 16px;
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.perspective-card:hover {
+    border-color: var(--interactive-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.perspective-card.selected {
+    border-color: var(--interactive-accent);
+    background: var(--background-primary-alt);
+}
+
+.card-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-normal);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-description {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 8px;
+    min-height: 34px;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-author {
+    font-size: 11px;
+    color: var(--text-faint);
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card-start-button {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.2s ease;
+}
+
+.card-start-button:hover {
+    opacity: 0.9;
+}
+
+.card-menu-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+}
+
+.card-menu-button:hover {
+    background: var(--background-modifier-hover);
+}
+
+/* 空分类提示 */
+.category-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    height: 120px;
+    border: 1px dashed var(--background-modifier-border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* 创建视角视图 */
+.create-perspective-view {
+    padding: 8px 0;
+}
+
+.perspective-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-normal);
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    background: var(--background-primary);
+    color: var(--text-normal);
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    border-color: var(--interactive-accent);
+    outline: none;
+}
+
+.form-field textarea {
+    resize: vertical;
+    font-family: var(--font-text);
+}
+
+.field-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.icon-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.icon-preview {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+}
+
+.common-icons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.common-icons button {
+    background: none;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.common-icons button:hover {
+    border-color: var(--interactive-accent);
+    background: var(--background-modifier-hover);
+}
+
+.form-error {
+    color: var(--text-error);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.form-buttons button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.form-buttons button:first-child {
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+    color: var(--text-normal);
+}
+
+.form-buttons button:first-child:hover {
+    background: var(--background-modifier-hover);
+}
+
+.form-buttons button:last-child {
+    border: none;
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    font-weight: 500;
+}
+
+.form-buttons button:last-child:hover {
+    opacity: 0.9;
+}
+
+/* ========================================
+   AI Insight Modal Styles
+   ======================================== */
+
+/* Modal Container */
+.insight-modal {
+    --insight-card-width: 200px;
+    --insight-card-gap: 12px;
+}
+
+.insight-modal .modal-content {
+    padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.insight-modal-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Modal Header */
+.insight-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    flex-shrink: 0;
+}
+
+.insight-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.insight-header-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.insight-modal-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+/* Modal Buttons */
+.insight-back-button,
+.insight-close-button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--text-normal);
+    transition: background-color 0.15s ease;
+}
+
+.insight-back-button:hover,
+.insight-close-button:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+.insight-create-button {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 12px;
+    border-radius: 4px;
+    transition: background-color 0.15s ease;
+}
+
+.insight-create-button:hover {
+    background: var(--interactive-accent-hover);
+}
+
+/* Modal Content */
+.insight-modal-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+/* Discover Perspectives View */
+.discover-perspectives-view {
+    padding: 0;
+}
+
+.perspective-category {
+    margin-bottom: 24px;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.category-title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.category-add-button {
+    background: none;
+    border: 1px dashed var(--background-modifier-border);
+    color: var(--text-muted);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+}
+
+.category-add-button:hover {
+    border-color: var(--interactive-accent);
+    color: var(--interactive-accent);
+}
+
+/* Perspective Cards Container */
+.perspective-cards-container {
+    display: flex;
+    gap: var(--insight-card-gap, 12px);
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-behavior: smooth;
+}
+
+.perspective-cards-container::-webkit-scrollbar {
+    height: 6px;
+}
+
+.perspective-cards-container::-webkit-scrollbar-track {
+    background: var(--background-secondary);
+    border-radius: 3px;
+}
+
+.perspective-cards-container::-webkit-scrollbar-thumb {
+    background: var(--background-modifier-border);
+    border-radius: 3px;
+}
+
+.perspective-cards-container::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
+
+/* Perspective Card */
+.perspective-card {
+    flex-shrink: 0;
+    width: var(--insight-card-width, 200px);
+    padding: 16px;
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.perspective-card:hover {
+    border-color: var(--interactive-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.perspective-card.selected {
+    border-color: var(--interactive-accent);
+    background: var(--background-secondary-alt);
+}
+
+.card-icon {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-normal);
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-description {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    margin-bottom: 8px;
+    min-height: 34px;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-author {
+    font-size: 11px;
+    color: var(--text-faint);
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card-start-button {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+.card-start-button:hover {
+    background: var(--interactive-accent-hover);
+}
+
+.card-menu-button {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.15s ease;
+}
+
+.card-menu-button:hover {
+    background: var(--background-modifier-hover);
+}
+
+/* Empty Category */
+.category-empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    height: 120px;
+    border: 1px dashed var(--background-modifier-border);
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* Create Perspective Form */
+.create-perspective-view {
+    padding: 0;
+}
+
+.perspective-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-field {
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-normal);
+    margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    background: var(--background-primary);
+    color: var(--text-normal);
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease;
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    border-color: var(--interactive-accent);
+    outline: none;
+}
+
+.field-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.form-error {
+    color: var(--text-error);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+/* Icon Selector */
+.icon-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.icon-preview {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    background: var(--background-secondary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+}
+
+.common-icons {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+}
+
+.common-icons button {
+    background: none;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.15s ease;
+}
+
+.common-icons button:hover {
+    border-color: var(--interactive-accent);
+    background: var(--background-modifier-hover);
+}
+
+/* Form Buttons */
+.form-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+
+/* ========== 图片导出模态框样式 ========== */
+
+/* 导出模态框主容器 */
+.highlight-export-modal {
+    padding: 0;
+}
+
+.highlight-export-modal .modal-content {
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* 主容器 */
+.highlight-export-main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* 模板选择下拉框 */
+/* 移除了中间容器，样式直接应用到选择器上 */
+.highlight-template-select {
+    width: 100%;
+    padding: 8px 32px 8px 12px;  /* 右侧留出箭头的空间 */
+    border-radius: 6px;
+    background-color: var(--background-modifier-form-field);
+    border: 1px solid var(--background-modifier-border);
+    height: 40px;  /* 设置固定高度 */
+    line-height: 1.4;  /* 添加行高 */
+    font-size: 14px;
+    margin-bottom: 16px;
+    position: relative;  /* 添加相对定位 */
+    z-index: 1;         /* 确保选择器在按钮上方 */
+    color: var(--text-normal);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    /* 移除默认样式 */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    /* 自定义下拉箭头 */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+}
+
+.highlight-template-select:hover {
+    border-color: var(--interactive-accent);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.highlight-template-select:focus {
+    outline: none;
+    border-color: var(--interactive-accent);
+    box-shadow: 0 0 0 2px var(--interactive-accent-hover);
+}
+
+/* 预览容器 */
+.highlight-export-preview-container {
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 12px;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; /* iOS 平滑滚动 */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 300px;
+    max-height: 500px;
+}
+
+.highlight-export-preview {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.highlight-export-preview-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 按钮组 */
+.highlight-export-modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+/* 通用按钮样式 */
+.highlight-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 6px;
+    background: var(--background-primary);
+    color: var(--text-normal);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.highlight-btn:hover {
+    background: var(--background-modifier-hover);
+    border-color: var(--interactive-accent);
+}
+
+/* 主要按钮 */
+.highlight-btn-primary {
+    background: var(--interactive-accent);
+    color: var(--text-on-accent);
+    border-color: var(--interactive-accent);
+}
+
+.highlight-btn-primary:hover {
+    background: var(--interactive-accent-hover);
+    border-color: var(--interactive-accent-hover);
+}
+
+/* 次要按钮 */
+.highlight-btn-secondary {
+    background: var(--background-secondary);
+    border-color: var(--background-modifier-border);
+}
+
+.highlight-btn-secondary:hover {
+    background: var(--background-modifier-hover);
+}
+
+/* 设置按钮 */
+.highlight-btn-settings {
+    margin-right: auto;
+}
+
+/* iOS 分享提示 */
+.ios-share-hint {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    margin: 10px 0;
+    padding: 8px 12px;
+    background: var(--background-secondary);
+    border-radius: 6px;
+}
+
+/* ========== 导出设置模态框样式 ========== */
+
+.export-settings-modal {
+    padding: 0;
+}
+
+.export-settings-modal .modal-content {
+    padding: 20px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.export-settings-modal h2 {
+    margin: 0 0 20px 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--background-modifier-border);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.export-settings-modal h3 {
+    margin: 20px 0 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-normal);
+}
+
+/* 设置按钮组 */
+.export-settings-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+/* 作者设置容器 */
+.author-settings-container {
+    padding: 12px;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+/* 头像控制容器 */
+.avatar-control-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 头像预览 */
+.avatar-preview {
+    position: relative;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    overflow: visible;
+    border: 2px solid var(--background-modifier-border);
+}
+
+.avatar-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* 头像删除按钮 */
+.avatar-delete-btn {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 18px;
+    height: 18px;
+    background: var(--text-error);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.avatar-delete-btn:hover {
+    transform: scale(1.1);
+}
+
+/* 水印设置容器 */
+.watermark-settings-container {
+    padding: 12px;
+    background: var(--background-secondary);
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+/* 水印图片容器 */
+.watermark-image-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 水印图片预览 */
+.watermark-image-preview {
+    position: relative;
+    width: 60px;
+    height: 40px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--background-modifier-border);
+    background: var(--background-primary);
+}
+
+.watermark-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* 水印删除按钮 */
+.watermark-delete-btn {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 16px;
+    height: 16px;
+    background: var(--text-error);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.watermark-delete-btn:hover {
+    transform: scale(1.1);
+}
+
+/* ========== 导出卡片作者信息样式 ========== */
+
+.export-author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+}
+
+.export-author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.export-author-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.export-author-name {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.export-author-remark {
+    font-size: 12px;
+    margin-top: 2px;
+}
+
+/* 浅色主题作者信息 */
+.export-author-light {
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.export-author-light .export-author-avatar {
+    border: 2px solid #dee2e6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.export-author-light .export-author-name {
+    color: #343a40;
+}
+
+.export-author-light .export-author-remark {
+    color: #6c757d;
+}
+
+/* 深色主题作者信息 */
+.export-author-dark {
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.export-author-dark .export-author-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.export-author-dark .export-author-name {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.export-author-dark .export-author-remark {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 渐变主题作者信息 */
+.export-author-gradient {
+    background: rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+}
+
+.export-author-gradient .export-author-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.export-author-gradient .export-author-name {
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+}
+
+.export-author-gradient .export-author-remark {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 彩色主题作者信息 */
+.export-author-colorful {
+    background: rgba(255, 255, 255, 0.9);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.export-author-colorful .export-author-avatar {
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.export-author-colorful .export-author-name {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.export-author-colorful .export-author-remark {
+    color: #7f8c8d;
+}
+
+/* ========== 各模板特定的作者信息样式 ========== */
+
+/* 深色专业模板 */
+.export-author-dark-professional {
+    background: rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.export-author-dark-professional .export-author-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.export-author-dark-professional .export-author-name {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.export-author-dark-professional .export-author-remark {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* 现代渐变模板 */
+.export-author-modern-gradient {
+    background: rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
+}
+
+.export-author-modern-gradient .export-author-avatar {
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.export-author-modern-gradient .export-author-name {
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    font-weight: 700;
+}
+
+.export-author-modern-gradient .export-author-remark {
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* 粉色渐变模板 */
+.export-author-pink-gradient {
+    background: rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(233, 30, 99, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.export-author-pink-gradient .export-author-avatar {
+    border: 2px solid #e91e63;
+    box-shadow: 0 3px 10px rgba(233, 30, 99, 0.2);
+}
+
+.export-author-pink-gradient .export-author-name {
+    color: #8e24aa;
+    font-weight: 600;
+}
+
+.export-author-pink-gradient .export-author-remark {
+    color: #ad47a3;
+}
+
+/* 绿色自然模板 */
+.export-author-green-nature {
+    background: rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.export-author-green-nature .export-author-avatar {
+    border: 2px solid #28a745;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+}
+
+.export-author-green-nature .export-author-name {
+    color: #155724;
+    font-weight: 600;
+}
+
+.export-author-green-nature .export-author-remark {
+    color: #388e3c;
+}
+
+/* 蓝色科技模板 */
+.export-author-blue-tech {
+    background: rgba(0, 123, 255, 0.1);
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    border-radius: 8px;
+}
+
+.export-author-blue-tech .export-author-avatar {
+    border: 2px solid #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.export-author-blue-tech .export-author-name {
+    color: #007bff;
+    font-weight: 600;
+}
+
+.export-author-blue-tech .export-author-remark {
+    color: #6c757d;
+}
+
+/* 橙色温暖模板 */
+.export-author-orange-warm {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%);
+    border-top: 1px solid rgba(255, 152, 0, 0.2);
+}
+
+.export-author-orange-warm .export-author-avatar {
+    border: 2px solid #ff9800;
+    box-shadow: 0 3px 10px rgba(255, 152, 0, 0.3);
+}
+
+.export-author-orange-warm .export-author-name {
+    color: #e65100;
+    font-weight: 600;
+}
+
+.export-author-orange-warm .export-author-remark {
+    color: #bf360c;
+}
+
+/* 紫色优雅模板 */
+.export-author-purple-elegant {
+    background: rgba(156, 39, 176, 0.1);
+    border: 1px solid rgba(156, 39, 176, 0.2);
+}
+
+.export-author-purple-elegant .export-author-avatar {
+    border: 2px solid #9c27b0;
+    box-shadow: 0 4px 12px rgba(156, 39, 176, 0.2);
+}
+
+.export-author-purple-elegant .export-author-name {
+    color: #7b1fa2;
+    font-weight: 600;
+}
+
+.export-author-purple-elegant .export-author-remark {
+    color: #6c757d;
+}
+
+/* 红色激情模板 */
+.export-author-red-passion {
+    background: rgba(244, 67, 54, 0.1);
+    border-left: 4px solid #f44336;
+    border-radius: 0 8px 8px 0;
+}
+
+.export-author-red-passion .export-author-avatar {
+    border: 2px solid #f44336;
+    box-shadow: 0 3px 10px rgba(244, 67, 54, 0.3);
+}
+
+.export-author-red-passion .export-author-name {
+    color: #c62828;
+    font-weight: 600;
+}
+
+.export-author-red-passion .export-author-remark {
+    color: #6c757d;
+}
+
+/* 黄色明亮模板 */
+.export-author-yellow-bright {
+    background: rgba(255, 235, 59, 0.2);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.export-author-yellow-bright .export-author-avatar {
+    border: 2px solid #ffc107;
+    box-shadow: 0 2px 8px rgba(255, 193, 7, 0.3);
+}
+
+.export-author-yellow-bright .export-author-name {
+    color: #f57f17;
+    font-weight: 600;
+}
+
+.export-author-yellow-bright .export-author-remark {
+    color: #e65100;
+}
+
+/* 青色清新模板 */
+.export-author-teal-fresh {
+    background: rgba(0, 150, 136, 0.1);
+    border-top: 1px solid rgba(0, 150, 136, 0.2);
+}
+
+.export-author-teal-fresh .export-author-avatar {
+    border: 2px solid #009688;
+    box-shadow: 0 3px 10px rgba(0, 150, 136, 0.2);
+}
+
+.export-author-teal-fresh .export-author-name {
+    color: #00695c;
+    font-weight: 600;
+}
+
+.export-author-teal-fresh .export-author-remark {
+    color: #6c757d;
+}
+
+/* 日历风格模板 */
+.export-author-calendar-style {
+    background: #ffffff;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+}
+
+.export-author-calendar-style .export-author-avatar {
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.export-author-calendar-style .export-author-name {
+    color: #495057;
+    font-weight: 600;
+}
+
+.export-author-calendar-style .export-author-remark {
+    color: #6c757d;
+    font-family: 'Courier New', monospace;
+}
+
+/* 文档正式模板 */
+.export-author-document-formal {
+    background: rgba(255, 255, 255, 0.95);
+    border-top: 2px solid #333333;
+}
+
+.export-author-document-formal .export-author-avatar {
+    border: 2px solid #333333;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.export-author-document-formal .export-author-name {
+    color: #333333;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.export-author-document-formal .export-author-remark {
+    color: #666666;
+    font-family: 'Courier New', monospace;
+}
+
+/* 卡片阴影模板 */
+.export-author-card-shadow {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-top: 1px solid rgba(102, 126, 234, 0.2);
+}
+
+.export-author-card-shadow .export-author-avatar {
+    border: 2px solid #667eea;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.export-author-card-shadow .export-author-name {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.export-author-card-shadow .export-author-remark {
+    color: #8c8c8c;
+}
+
+/* 优雅引用模板 */
+.export-author-quote-elegant {
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+    border-top: 1px solid #e0e0e0;
+}
+
+.export-author-quote-elegant .export-author-avatar {
+    border: 2px solid #d0d0d0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.export-author-quote-elegant .export-author-name {
+    color: #333333;
+    font-weight: 600;
+    font-style: italic;
+}
+
+.export-author-quote-elegant .export-author-remark {
+    color: #666666;
+}
+
+/* 极简设计模板 */
+.export-author-minimal-clean {
+    background: transparent;
+    border-top: none;
+}
+
+.export-author-minimal-clean .export-author-avatar {
+    border: 1px solid #e0e0e0;
+    box-shadow: none;
+}
+
+.export-author-minimal-clean .export-author-name {
+    color: #2c2c2c;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.export-author-minimal-clean .export-author-remark {
+    color: #8c8c8c;
+}
+
+/* ========== 水印容器样式 ========== */
+
+.export-watermark-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.export-watermark-item {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+/* ========== 移动端适配 ========== */
+
+@media (max-width: 768px) {
+    .highlight-export-modal .modal-content {
+        padding: 16px;
+    }
+
+    .highlight-export-preview-container {
+        max-height: 400px;
+    }
+
+    .highlight-export-modal-buttons {
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+
+    .highlight-btn-settings {
+        margin-right: auto;
+        flex-shrink: 0;
+    }
+
+    .highlight-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .export-settings-modal .modal-content {
+        padding: 16px;
+    }
+
+    .author-settings-container,
+    .watermark-settings-container {
+        padding: 8px;
+    }
+}
+
+/* ========== 移动端 AI 进度指示器样式 ========== */
+.mm-ai-progress-indicator {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background: var(--background-primary);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10000;
+    opacity: 0;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    max-width: 90vw;
+}
+
+.mm-ai-progress-indicator.mm-ai-progress-visible {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.mm-ai-progress-spinner {
+    font-size: 16px;
+    animation: mm-ai-spin 1s linear infinite;
+}
+
+@keyframes mm-ai-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.mm-ai-progress-text {
+    font-size: 13px;
+    color: var(--text-normal);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* 深色主题适配 */
+.theme-dark .mm-ai-progress-indicator {
+    background: var(--background-secondary);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== 深色主题适配 ========== */
+
+.theme-dark .highlight-export-preview-container {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+}
+
+.theme-dark .highlight-template-select {
+    background: var(--background-secondary);
+}
+
+.theme-dark .ios-share-hint {
+    background: var(--background-secondary);
+    color: var(--text-muted);
+}
+
+
+/* ========== 导出卡片模板样式 ========== */
+/* 这些样式用于预览时渲染12个模板 */
+
+/* 导出卡片基础样式 */
+.highlight-export-card {
+    transition: all 0.3s ease;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+    position: relative;
+}
+
+/* 现代风格模板（默认） */
+.highlight-export-card-modern {
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.highlight-export-card-modern::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to bottom right, #5871ef 0%, #4c63e6 100%);
+}
+
+.highlight-export-card-modern .highlight-export-quote-decoration {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    opacity: 0.06;
+    transform: scale(2);
+}
+
+.highlight-export-card-modern .highlight-export-quote-section {
+    position: relative;
+    padding: 24px 0;
+}
+
+.highlight-export-card-modern .highlight-export-quote {
+    font-size: 1em;
+    line-height: 1.7;
+    color: #333333;
+    font-weight: 400;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* 学术模板 */
+.highlight-export-card-academic {
+    padding: 12px 24px 24px 24px;
+    background-color: var(--background-primary, #ffffff);
+    border: 2px solid var(--background-modifier-border, #e0e0e0);
+    font-family: "Times New Roman", Times, serif;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.highlight-export-card-academic .highlight-export-quote {
+    font-size: 1em;
+    line-height: 1.8;
+    font-style: italic;
+    color: var(--text-normal, #333333);
+    margin: 16px 0;
+}
+
+.highlight-export-card-academic .highlight-export-footer {
+    color: var(--text-muted, #666666);
+    font-size: 0.9em;
+}
+
+/* 社交媒体模板 */
+.highlight-export-card-social {
+    padding: 20px;
+    background-color: var(--background-primary, #ffffff);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.highlight-export-card-social .highlight-export-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.highlight-export-card-social .highlight-export-logo {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.highlight-export-card-social .highlight-export-app-name {
+    font-weight: 600;
+    color: var(--text-normal, #333333);
+    line-height: 24px;
+}
+
+.highlight-export-card-social .highlight-export-quote {
+    font-size: 1em;
+    line-height: 1.6;
+    color: var(--text-normal, #333333);
+    margin: 20px 0;
+}
+
+.highlight-export-card-social .highlight-export-footer {
+    color: var(--text-muted, #666666);
+    font-size: 0.9em;
+}
+
+/* 粉色渐变模板 */
+.highlight-export-card-pink-gradient {
+    background: linear-gradient(135deg, #ffeef8 0%, #f8d7da 50%, #f5c2c7 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(245, 194, 199, 0.3);
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-header-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e91e63 0%, #f06292 100%);
+}
+
+.highlight-export-card-pink-gradient .highlight-export-date-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 20px;
+    color: #8e24aa;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-year {
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.8;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-month-day {
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-content-section {
+    margin: 20px 0;
+    padding: 16px 0;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-quote {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #4a4a4a;
+    font-style: italic;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(233, 30, 99, 0.2);
+}
+
+.highlight-export-card-pink-gradient .highlight-export-source {
+    font-size: 14px;
+    color: #8e24aa;
+    font-weight: 500;
+}
+
+.highlight-export-card-pink-gradient .highlight-export-tagline {
+    font-size: 12px;
+    color: #ad47a3;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 绿色自然风格模板 */
+.highlight-export-card-green-nature {
+    background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 50%, #a5d6a7 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(165, 214, 167, 0.3);
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.highlight-export-card-green-nature .highlight-export-leaf-decoration {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: #4caf50;
+    opacity: 0.5;
+}
+
+.highlight-export-card-green-nature .highlight-export-content-section {
+    margin: 16px 0;
+    padding: 12px 0;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #2e7d32;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+    padding-right: 0;
+}
+
+.highlight-export-card-green-nature .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.highlight-export-card-green-nature .highlight-export-source {
+    font-size: 14px;
+    color: #388e3c;
+    font-weight: 500;
+}
+
+.highlight-export-card-green-nature .highlight-export-tagline {
+    font-size: 12px;
+    color: #4caf50;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 深色专业模板 */
+.highlight-export-card-dark-professional {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1f1f1f 100%);
+    border: 1px solid #404040;
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.highlight-export-card-dark-professional .highlight-export-top-decoration {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #00bcd4 0%, #4fc3f7 100%);
+}
+
+.highlight-export-card-dark-professional .highlight-export-content-section {
+    margin: 20px 0;
+    padding: 16px 0;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+    font-family: 'Segoe UI', 'Roboto', sans-serif;
+}
+
+.highlight-export-card-dark-professional .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #404040;
+}
+
+.highlight-export-card-dark-professional .highlight-export-source {
+    font-size: 14px;
+    color: #00bcd4;
+    font-weight: 500;
+}
+
+.highlight-export-card-dark-professional .highlight-export-tagline {
+    font-size: 12px;
+    color: #b0b0b0;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 日历风格模板 */
+.highlight-export-card-calendar-style {
+    background: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+}
+
+.highlight-export-card-calendar-style .highlight-export-calendar-header {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    padding: 16px 20px;
+    text-align: center;
+    border-bottom: 2px solid #d0d0d0;
+}
+
+.highlight-export-card-calendar-style .highlight-export-year-month {
+    font-size: 12px;
+    color: #666666;
+    font-weight: 500;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+}
+
+.highlight-export-card-calendar-style .highlight-export-day-number {
+    font-size: 32px;
+    color: #333333;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.highlight-export-card-calendar-style .highlight-export-content-section {
+    padding: 20px;
+}
+
+.highlight-export-card-calendar-style .highlight-export-quote {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #333333;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+}
+
+.highlight-export-card-calendar-style .highlight-export-footer {
+    padding: 16px 20px;
+    border-top: 1px solid #e0e0e0;
+    background: #fafafa;
+}
+
+.highlight-export-card-calendar-style .highlight-export-source {
+    font-size: 13px;
+    color: #666666;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* 优雅引用模板 */
+.highlight-export-card-quote-elegant {
+    background: linear-gradient(135deg, #fafafa 0%, #f0f0f0 100%);
+    border: none;
+    border-radius: 16px;
+    padding: 32px 24px 24px 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    font-family: 'Georgia', 'Times New Roman', serif;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-quote-mark {
+    position: absolute;
+    font-size: 120px;
+    font-family: 'Georgia', serif;
+    color: #d0d0d0;
+    font-weight: bold;
+    line-height: 1;
+    pointer-events: none;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-quote-mark.left {
+    top: -20px;
+    left: 10px;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-quote-mark.right {
+    bottom: -60px;
+    right: 10px;
+    transform: rotate(180deg);
+}
+
+.highlight-export-card-quote-elegant .highlight-export-content-section {
+    margin: 20px 0;
+    padding: 16px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-quote {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333333;
+    text-align: center;
+    margin: 0;
+    font-weight: 400;
+    font-style: italic;
+    padding: 0 20px;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 1;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-source {
+    font-size: 14px;
+    color: #666666;
+    font-weight: 500;
+}
+
+.highlight-export-card-quote-elegant .highlight-export-tagline {
+    font-size: 12px;
+    color: #999999;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 极简设计模板 */
+.highlight-export-card-minimal-clean {
+    background: #ffffff;
+    border: none;
+    border-radius: 0;
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: none;
+    font-family: 'Helvetica Neue', 'Arial', sans-serif;
+}
+
+.highlight-export-card-minimal-clean .highlight-export-content-section {
+    margin: 40px 0;
+    padding: 0;
+}
+
+.highlight-export-card-minimal-clean .highlight-export-quote {
+    font-size: 20px;
+    line-height: 1.8;
+    color: #2c2c2c;
+    text-align: left;
+    margin: 0;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+
+.highlight-export-card-minimal-clean .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 48px;
+    padding-top: 0;
+    border-top: none;
+}
+
+.highlight-export-card-minimal-clean .highlight-export-source {
+    font-size: 14px;
+    color: #8c8c8c;
+    font-weight: 400;
+}
+
+.highlight-export-card-minimal-clean .highlight-export-tagline {
+    font-size: 11px;
+    color: #b8b8b8;
+    font-weight: 300;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* 卡片式模板 */
+.highlight-export-card-card-shadow {
+    background: #ffffff;
+    border: 1px solid #e8e8e8;
+    border-radius: 16px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15), 0 4px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.highlight-export-card-card-shadow .highlight-export-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.highlight-export-card-card-shadow .highlight-export-header-icon {
+    font-size: 20px;
+    line-height: 1;
+}
+
+.highlight-export-card-card-shadow .highlight-export-header-title {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.highlight-export-card-card-shadow .highlight-export-content-section {
+    padding: 24px 20px;
+}
+
+.highlight-export-card-card-shadow .highlight-export-quote {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333333;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+}
+
+.highlight-export-card-card-shadow .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border-top: 1px solid #e8e8e8;
+}
+
+.highlight-export-card-card-shadow .highlight-export-source {
+    font-size: 14px;
+    color: #667eea;
+    font-weight: 500;
+}
+
+.highlight-export-card-card-shadow .highlight-export-tagline {
+    font-size: 12px;
+    color: #8c8c8c;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 正式文档模板 */
+.highlight-export-card-document-formal {
+    background: #ffffff;
+    border: 2px solid #333333;
+    border-radius: 0;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    font-family: 'Times New Roman', 'Georgia', serif;
+}
+
+.highlight-export-card-document-formal .highlight-export-document-header {
+    background: #333333;
+    padding: 12px 20px;
+    position: relative;
+}
+
+.highlight-export-card-document-formal .highlight-export-header-line {
+    height: 2px;
+    background: #ffffff;
+    margin-bottom: 8px;
+}
+
+.highlight-export-card-document-formal .highlight-export-document-title {
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.highlight-export-card-document-formal .highlight-export-content-section {
+    padding: 24px 20px;
+}
+
+.highlight-export-card-document-formal .highlight-export-quote {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #333333;
+    text-align: justify;
+    margin: 0;
+    font-weight: 400;
+    text-indent: 2em;
+}
+
+.highlight-export-card-document-formal .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f8f8;
+    border-top: 1px solid #e0e0e0;
+}
+
+.highlight-export-card-document-formal .highlight-export-source {
+    font-size: 14px;
+    color: #333333;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.highlight-export-card-document-formal .highlight-export-date {
+    font-size: 13px;
+    color: #666666;
+    font-weight: 400;
+    font-family: 'Courier New', monospace;
+}
+
+/* 现代渐变模板 */
+.highlight-export-card-modern-gradient {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
+    border: none;
+    border-radius: 20px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 16px 48px rgba(102, 126, 234, 0.3);
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+.highlight-export-card-modern-gradient::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+    pointer-events: none;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-decorative-icon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 24px;
+    opacity: 0.7;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-content-section {
+    margin: 16px 0;
+    padding: 12px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #ffffff;
+    text-align: left;
+    margin: 0;
+    font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    padding-right: 0;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    z-index: 1;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-source {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 500;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-tagline {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* 响应式文本处理 */
+.highlight-export-quote {
+    word-wrap: break-word;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+}
+
+/* 文本长度自适应 */
+.highlight-export-card[data-text-length="short"] .highlight-export-quote {
+    font-size: 1.1em;
+    text-align: center;
+    padding: 24px 0;
+}
+
+.highlight-export-card[data-text-length="medium"] .highlight-export-quote {
+    font-size: 1em;
+    line-height: 1.6;
+}
+
+.highlight-export-card[data-text-length="long"] .highlight-export-quote {
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+/* Markdown渲染内容样式 */
+.highlight-export-quote.markdown-rendered h1,
+.highlight-export-quote.markdown-rendered h2,
+.highlight-export-quote.markdown-rendered h3,
+.highlight-export-quote.markdown-rendered h4,
+.highlight-export-quote.markdown-rendered h5,
+.highlight-export-quote.markdown-rendered h6 {
+    margin: 0.5em 0 0.3em 0;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.highlight-export-quote.markdown-rendered h1 {
+    font-size: 1.5em;
+    color: #2c3e50;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 0.2em;
+}
+
+.highlight-export-quote.markdown-rendered h2 {
+    font-size: 1.3em;
+    color: #34495e;
+    border-bottom: 1px solid #bdc3c7;
+    padding-bottom: 0.1em;
+}
+
+.highlight-export-quote.markdown-rendered h3 {
+    font-size: 1.2em;
+    color: #34495e;
+}
+
+.highlight-export-quote.markdown-rendered p {
+    margin: 0.5em 0;
+    line-height: inherit;
+}
+
+.highlight-export-quote.markdown-rendered ul,
+.highlight-export-quote.markdown-rendered ol {
+    margin: 0.5em 0;
+    padding-left: 1.5em;
+}
+
+.highlight-export-quote.markdown-rendered li {
+    margin: 0.2em 0;
+    line-height: inherit;
+}
+
+.highlight-export-quote.markdown-rendered blockquote {
+    margin: 0.5em 0;
+    padding: 0.5em 1em;
+    border-left: 3px solid #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+    font-style: italic;
+}
+
+.highlight-export-quote.markdown-rendered code {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+.highlight-export-quote.markdown-rendered pre {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.8em;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 0.5em 0;
+}
+
+.highlight-export-quote.markdown-rendered pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.highlight-export-quote.markdown-rendered a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.highlight-export-quote.markdown-rendered strong {
+    font-weight: 600;
+}
+
+.highlight-export-quote.markdown-rendered em {
+    font-style: italic;
+}
+
+/* 深色主题模板调整 */
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered h1,
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered h2,
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered h3 {
+    color: #ffffff;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered h1 {
+    border-bottom-color: #5dade2;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered blockquote {
+    border-left-color: #5dade2;
+    background-color: rgba(93, 173, 226, 0.2);
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered code {
+    background-color: #fafafa;
+    color: #333333;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered pre {
+    background-color: #fafafa;
+    color: #333333;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered a {
+    color: #5dade2;
+}
+
+/* 深色专业模板 - 表格样式 */
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered th {
+    background: #404040;
+    color: #ffffff;
+    padding: 8px 12px;
+    border: 1px solid #555;
+    font-weight: 600;
+    text-align: left;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered td {
+    background: #2d2d2d;
+    color: #ffffff;
+    padding: 8px 12px;
+    border: 1px solid #404040;
+}
+
+/* 深色专业模板 - Callout 样式 */
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered .callout {
+    background: #333333;
+    border-left: 4px solid #00bcd4;
+    padding: 12px 16px;
+    margin: 1em 0;
+    border-radius: 0 4px 4px 0;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered .callout-title {
+    color: #00bcd4;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.highlight-export-card-dark-professional .highlight-export-quote.markdown-rendered .callout-content {
+    color: #ffffff;
+}
+
+/* 现代渐变模板 Markdown 样式调整 - 统一白色系配色 */
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h1,
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h2,
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h3,
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h4,
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h5,
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h6 {
+    color: #ffffff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h1 {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered h2 {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered p,
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered li {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered blockquote {
+    border-left-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered code {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered pre {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered a {
+    color: #ffd700;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 215, 0, 0.5);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered strong {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered em {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+/* 现代渐变模板 - 表格样式 */
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1em 0;
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered th {
+    background: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    text-align: left;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.highlight-export-card-modern-gradient .highlight-export-quote.markdown-rendered td {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* 绿色自然模板 Markdown 样式调整 - 统一绿色系配色 */
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h1,
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h2,
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h3,
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h4,
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h5,
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h6 {
+    color: #1b5e20;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h1 {
+    border-bottom: 2px solid #4caf50;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered h2 {
+    border-bottom: 1px solid #81c784;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered p,
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered li {
+    color: #2e7d32;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered blockquote {
+    border-left-color: #4caf50;
+    background-color: rgba(76, 175, 80, 0.15);
+    color: #2e7d32;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered code {
+    background-color: rgba(76, 175, 80, 0.2);
+    color: #1b5e20;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered pre {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #1b5e20;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered a {
+    color: #388e3c;
+    text-decoration: underline;
+    text-decoration-color: rgba(56, 142, 60, 0.5);
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered strong {
+    color: #1b5e20;
+    font-weight: 700;
+}
+
+.highlight-export-card-green-nature .highlight-export-quote.markdown-rendered em {
+    color: #2e7d32;
 }
