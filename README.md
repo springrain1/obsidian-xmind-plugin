@@ -200,9 +200,12 @@ obsidian-xmind-plugin不仅仅是一个插件，它是**思维管理的新范式
 后台回复：==xmind==，可获取本教程配套使用的obsidian插件（电脑端使用）
 
 > 更新日志
-> [[obsidian-xmind-plugin-changelog]]
+> [obsidian-xmind-plugin-changelog](https://github.com/springrain1/obsidian-xmind-plugin/blob/main/obsidian-xmind-plugin-changelog.md)
 
 > 文章推荐
+
 > [XMind&Obsidian联用库](https://mp.weixin.qq.com/s/blvcqFoIS33YF0JmycyZBQ)
+
 > [让思维导图与笔记完美融合！Obsidian XMind Integration 插件全面解析](https://mp.weixin.qq.com/s/TEXdCRjWItCMc9pt4fVoCw)
+
 > [与DeepSeek对话12小时，成功实现flomo卡片批量发送至Anki，代码开发经验全分享！](https://mp.weixin.qq.com/s/SznLuLxxLKlf54tOFrYBHw)
