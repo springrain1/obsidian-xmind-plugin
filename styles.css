@@ -1551,7 +1551,7 @@
 }
 
 /* AI 服务设置区域样式 */
-.ai-service-settings {
+.mm-ai-service-settings {
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 8px;
@@ -1561,7 +1561,7 @@
 }
 
 /* 设置项容器样式 */
-.ai-service-settings .setting-item {
+.mm-ai-service-settings .setting-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -1569,8 +1569,18 @@
     background-color: transparent;
 }
 
+/* 设置项标签文字样式 - 确保可读性 */
+.mm-ai-service-settings .setting-item-name {
+    color: #000000 !important;
+    font-weight: 500;
+}
+
+.mm-ai-service-settings .setting-item-description {
+    color: #333333 !important;
+}
+
 /* 设置项控制区域样式 */
-.ai-service-settings .setting-item-control {
+.mm-ai-service-settings .setting-item-control {
     flex-shrink: 0;
     display: flex;
     gap: 8px;
@@ -1580,10 +1590,10 @@
 }
 
 /* AI服务设置中的输入框样式 */
-.ai-service-settings input[type="text"],
-.ai-service-settings input[type="password"],
-.ai-service-settings textarea,
-.ai-service-settings select {
+.mm-ai-service-settings input[type="text"],
+.mm-ai-service-settings input[type="password"],
+.mm-ai-service-settings textarea,
+.mm-ai-service-settings select {
     background-color: rgba(255, 255, 255, 0.8) !important;
     color: #000000 !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1591,20 +1601,20 @@
 }
 
 /* AI服务设置中的按钮样式 */
-.ai-service-settings button {
+.mm-ai-service-settings button {
     background-color: rgba(255, 255, 255, 0.8) !important;
     color: #000000 !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 4px;
 }
 
-.ai-service-settings button:hover {
+.mm-ai-service-settings button:hover {
     background-color: rgba(255, 255, 255, 0.9) !important;
     color: #000000 !important;
 }
 
 /* 设置页面样式 */
-.prompt-settings-container {
+.mm-prompt-settings-container {
     background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 8px;
@@ -1613,21 +1623,21 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.prompt-settings-header {
+.mm-prompt-settings-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
 }
 
-.prompt-settings-title {
+.mm-prompt-settings-title {
     margin: 0;
     font-size: 16px;
     font-weight: 600;
     color: #FFD700;
 }
 
-.new-prompt-section {
+.mm-new-prompt-section {
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
     padding: 16px;
@@ -1635,14 +1645,14 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.prompt-list {
+.mm-prompt-list {
     margin-top: 12px;
     display: flex;
-    flex-direction: column; /* 元素垂直排列 */
-    gap: 8px; /* 设置元素之间的间距 */
+    flex-direction: column;
+    gap: 8px;
 }
 
-.prompt-item {
+.mm-prompt-item {
     background-color: rgba(255, 255, 255, 0.05);
     border-radius: 6px;
     padding: 12px;
@@ -1650,7 +1660,7 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.prompt-name-input {
+.mm-prompt-name-input {
     width: 100%;
     margin-bottom: 8px;
     padding: 4px 8px;
@@ -1663,7 +1673,7 @@
     resize: vertical;
 }
 
-.prompt-content-input {
+.mm-prompt-content-input {
     width: 100%;
     margin-bottom: 8px;
     padding: 8px;
@@ -1676,7 +1686,7 @@
     resize: vertical;
 }
 
-.prompt-add-btn {
+.mm-prompt-add-btn {
     padding: 4px 12px;
     border-radius: 4px;
     cursor: pointer;
@@ -1685,12 +1695,12 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.prompt-add-btn:hover {
+.mm-prompt-add-btn:hover {
     background-color: rgba(255, 255, 255, 0.9) !important;
     color: #000000 !important;
 }
 
-.prompt-display-mode {
+.mm-prompt-display-mode {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
@@ -1699,17 +1709,17 @@
     margin-bottom: 2px;
 }
 
-.prompt-info {
+.mm-prompt-info {
     flex: 1;
     margin-right: 16px;
 }
 
-.prompt-name {
+.mm-prompt-name {
     font-weight: 500;
     margin-bottom: 4px;
 }
 
-.prompt-content-preview {
+.mm-prompt-content-preview {
     color: var(--text-muted);
     font-size: 0.9em;
     line-height: 1.4;
@@ -1722,14 +1732,14 @@
     text-overflow: ellipsis;
 }
 
-.prompt-buttons {
+.mm-prompt-buttons {
     display: flex;
     flex-direction: row-reverse;
     gap: 8px;
     margin-top: 8px;
 }
 
-.prompt-buttons button {
+.mm-prompt-buttons button {
     background-color: rgba(255, 255, 255, 0.8) !important;
     color: #000000 !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1737,18 +1747,18 @@
     padding: 4px 8px;
 }
 
-.prompt-buttons button:hover {
+.mm-prompt-buttons button:hover {
     background-color: rgba(255, 255, 255, 0.9) !important;
     color: #000000 !important;
 }
 
-.prompt-edit-buttons {
+.mm-prompt-edit-buttons {
     display: flex;
     flex-direction: row-reverse;
     gap: 8px;
 }
 
-.prompt-edit-buttons button {
+.mm-prompt-edit-buttons button {
     background-color: rgba(255, 255, 255, 0.8) !important;
     color: #000000 !important;
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -1756,13 +1766,13 @@
     padding: 4px 8px;
 }
 
-.prompt-edit-buttons button:hover {
+.mm-prompt-edit-buttons button:hover {
     background-color: rgba(255, 255, 255, 0.9) !important;
     color: #000000 !important;
 }
 
 /* Prompt textarea styling */
-.prompt-textarea {
+.mm-prompt-textarea {
     min-height: 100px;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.8) !important;
@@ -1772,47 +1782,52 @@
 }
 
 /* Prompt设置中的所有图标颜色 */
-.prompt-settings-container svg,
-.prompt-item svg,
-.prompt-edit-buttons svg,
-.prompt-buttons svg {
+.mm-prompt-settings-container svg,
+.mm-prompt-item svg,
+.mm-prompt-edit-buttons svg,
+.mm-prompt-buttons svg {
     color: #000000 !important;
     fill: #000000 !important;
 }
 
 /* Prompt设置中的所有文本颜色 */
-.prompt-settings-container,
-.prompt-settings-container *,
-.prompt-item,
-.prompt-item *,
-.prompt-name-input,
-.prompt-content-input,
-.prompt-textarea {
+.mm-prompt-settings-container,
+.mm-prompt-settings-container *,
+.mm-prompt-item,
+.mm-prompt-item *,
+.mm-prompt-name-input,
+.mm-prompt-content-input,
+.mm-prompt-textarea {
     color: #000000 !important;
 }
 
 /* 确保输入框内的文字是黑色 */
-.prompt-settings-container input,
-.prompt-settings-container textarea {
+.mm-prompt-settings-container input,
+.mm-prompt-settings-container textarea {
     color: #000000 !important;
 }
 
 /* 特殊处理标题颜色 */
-.prompt-settings-title {
+.mm-prompt-settings-title {
     color: #FFD700 !important;
 }
 
 /* Prompt名称和内容显示 */
-.prompt-name,
-.prompt-content {
+.mm-prompt-name,
+.mm-prompt-content {
     color: #000000 !important;
 }
 
 /* 确保按钮图标可见 */
-.prompt-edit-btn svg,
-.prompt-delete-btn svg {
+.mm-prompt-edit-btn svg,
+.mm-prompt-delete-btn svg {
     color: #000000 !important;
     fill: #000000 !important;
+}
+
+/* 隐藏类 */
+.mm-hidden {
+    display: none !important;
 }
 
 /* 思维导图AI悬浮按钮样式 */
@@ -5714,4 +5729,166 @@
 
 .highlight-export-card-green-nature .highlight-export-quote.markdown-rendered em {
     color: #2e7d32;
+}
+
+
+/* ========== 代码块节点样式 ========== */
+
+/* 代码块节点基础样式 */
+.mm-node-content pre {
+  margin: 0;
+  padding: 12px;
+  border-radius: 6px;
+  background: var(--background-secondary);
+  overflow-x: auto;
+  max-width: 400px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.mm-node-content pre code {
+  font-family: var(--font-monospace);
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: pre;
+  display: block;
+}
+
+/* 隐藏代码块的复制按钮 */
+.mm-node-content .copy-code-button {
+  display: none;
+}
+
+/* 代码块节点只读样式 */
+.mm-node-content pre.language-css,
+.mm-node-content pre.language-js,
+.mm-node-content pre.language-javascript,
+.mm-node-content pre.language-typescript,
+.mm-node-content pre.language-ts,
+.mm-node-content pre.language-python,
+.mm-node-content pre.language-java,
+.mm-node-content pre.language-html,
+.mm-node-content pre.language-json,
+.mm-node-content pre.language-markdown,
+.mm-node-content pre.language-md,
+.mm-node-content pre.language-bash,
+.mm-node-content pre.language-shell,
+.mm-node-content pre.language-sql,
+.mm-node-content pre.language-yaml,
+.mm-node-content pre.language-xml {
+  border: 1px solid var(--background-modifier-border);
+}
+
+/* 代码块笔记样式 */
+.mm-node-note-code {
+  padding: 0;
+  border-left: none;
+  background: transparent;
+  max-width: 350px;
+}
+
+.mm-node-note-code pre {
+  margin: 0;
+  border-radius: 6px;
+}
+
+/* 根节点代码块 */
+.mm-node.mm-root .mm-node-content pre {
+  max-width: 500px;
+}
+
+/* 二级节点代码块 */
+.mm-node.mm-node-second .mm-node-content pre {
+  max-width: 450px;
+}
+
+/* 深色主题代码块 */
+.theme-dark .mm-node-content pre {
+  background: var(--background-primary-alt);
+  border-color: var(--background-modifier-border);
+}
+
+/* 科技主题代码块特殊样式 */
+.mm-theme-tech .mm-node-content pre {
+  background: #0d1117;
+  border: 1px solid #30363d;
+}
+
+.mm-theme-tech .mm-node-content pre code {
+  color: #c9d1d9;
+}
+
+/* 商务主题代码块 */
+.mm-theme-business .mm-node-content pre {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mm-theme-business .mm-node-content pre code {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* 脚注样式 - 隐藏脚注引用（像块引用 ^blockid 一样） */
+.mm-node-content .footnote-ref,
+.mm-node-content sup[data-footnote-ref],
+.mm-node-content a[data-footnote-ref] {
+    display: none !important;
+}
+
+
+/* 任务列表复选框样式 */
+.mm-node-content .mm-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text-muted);
+    border-radius: 4px;
+    margin-right: 6px;
+    flex-shrink: 0;
+    vertical-align: middle;
+    background: var(--background-primary);
+    position: relative;
+    top: -1px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mm-node-content .mm-checkbox:hover {
+    border-color: var(--interactive-accent);
+    transform: scale(1.05);
+}
+
+.mm-node-content .mm-checkbox.completed {
+    background: var(--background-primary);
+    border-color: var(--text-faint);
+    color: var(--text-faint);
+}
+
+.mm-node-content .mm-checkbox svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+}
+
+/* 已完成任务的文字样式 */
+.mm-node.mm-todo-completed .mm-node-content {
+    text-decoration: line-through;
+    opacity: 0.5;
+    color: var(--text-muted);
+}
+
+/* 已完成任务的复选框不影响删除线 */
+.mm-node.mm-todo-completed .mm-node-content .mm-checkbox {
+    text-decoration: none;
+    opacity: 1;
+}
+
+/* 已完成任务的子节点置灰（不需要删除线） */
+.mm-node.mm-child-of-completed-todo .mm-node-content {
+    text-decoration: none;
+    opacity: 0.5;
+    color: var(--text-muted);
 }

@@ -1,4 +1,37 @@
 {
+  "ui": {
+    "indentSize": 30,
+    "showBullets": true,
+    "showCollapseIndicators": true,
+    "animationsEnabled": false,
+    "theme": "default"
+  },
+  "editor": {
+    "autoSave": true,
+    "autoSaveDelay": 1000,
+    "placeholder": "输入内容...",
+    "renderMode": "source"
+  },
+  "search": {
+    "mode": "highlight",
+    "caseSensitive": false,
+    "autoExpandMatches": true
+  },
+  "dragDrop": {
+    "enabled": true,
+    "showDropIndicators": true,
+    "allowNestedDrop": true
+  },
+  "isolation": {
+    "strictMode": true,
+    "enableAssertions": true,
+    "debugMode": false,
+    "healthCheckInterval": 30000
+  },
+  "collapseState": {
+    "enabled": true,
+    "marker": "c"
+  },
   "xmindPath": "1",
   "useOnlineConverter": true,
   "enableXMindViewer": true,
@@ -106,10 +139,6 @@
   "debugMode": true,
   "licenseData": {
     "licenseKey": ""
-  },
-  "collapseState": {
-    "enabled": true,
-    "marker": "c"
   },
   "aiInsight": {
     "perspectives": [

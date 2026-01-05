@@ -1,7 +1,7 @@
 {
   "id": "obsidian-xmind-plugin",
   "name": "SuperMind",
-  "version": "2.0.0",
+  "version": "2.2.0",
   "minAppVersion": "1.0.0",
   "description": "在Obsidian中查看XMind文件，支持Markdown和XMind格式转换、提供增强的思维导图编辑功能，支持AI智能扩展和多种导出格式",
   "author": "springrain",
