@@ -196,8 +196,7 @@ obsidian-xmind-plugin不仅仅是一个插件，它是**思维管理的新范式
 2. 打开Obsidian → 设置 → 第三方插件
 3. 关闭安全模式
 4. 启用插件
-### 插件下载
-后台回复：==xmind==，可获取本教程配套使用的obsidian插件（电脑端使用）
+
 
 > 更新日志
 > [obsidian-xmind-plugin-changelog](https://github.com/springrain1/obsidian-xmind-plugin/blob/main/obsidian-xmind-plugin-changelog.md)
