@@ -1,7 +1,7 @@
 {
   "id": "supermind",
   "name": "SuperMind",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "minAppVersion": "1.0.0",
   "description": "View XMind files, convert between Markdown and XMind formats, with enhanced mind map editing, AI-powered expansion, and multiple export formats | 查看XMind文件，支持Markdown和XMind格式转换、提供增强的思维导图编辑功能，支持AI智能扩展和多种导出格式.",
   "author": "springrain | 公众号:及时春雨",
