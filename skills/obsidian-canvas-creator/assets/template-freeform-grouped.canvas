@@ -1,0 +1,132 @@
+{
+  "nodes": [
+    {
+      "id": "group01",
+      "type": "group",
+      "x": -50,
+      "y": -50,
+      "width": 600,
+      "height": 400,
+      "label": "Group 1 - Core Concepts",
+      "color": "4"
+    },
+    {
+      "id": "group02",
+      "type": "group",
+      "x": 650,
+      "y": -50,
+      "width": 600,
+      "height": 400,
+      "label": "Group 2 - Applications",
+      "color": "5"
+    },
+    {
+      "id": "node01",
+      "type": "text",
+      "x": 0,
+      "y": 0,
+      "width": 240,
+      "height": 100,
+      "text": "Concept A",
+      "color": "4"
+    },
+    {
+      "id": "node02",
+      "type": "text",
+      "x": 290,
+      "y": 0,
+      "width": 240,
+      "height": 100,
+      "text": "Concept B",
+      "color": "4"
+    },
+    {
+      "id": "node03",
+      "type": "text",
+      "x": 0,
+      "y": 150,
+      "width": 240,
+      "height": 100,
+      "text": "Concept C",
+      "color": "4"
+    },
+    {
+      "id": "node04",
+      "type": "text",
+      "x": 290,
+      "y": 150,
+      "width": 240,
+      "height": 100,
+      "text": "Concept D",
+      "color": "4"
+    },
+    {
+      "id": "node05",
+      "type": "text",
+      "x": 700,
+      "y": 0,
+      "width": 240,
+      "height": 100,
+      "text": "Application 1",
+      "color": "5"
+    },
+    {
+      "id": "node06",
+      "type": "text",
+      "x": 990,
+      "y": 0,
+      "width": 240,
+      "height": 100,
+      "text": "Application 2",
+      "color": "5"
+    },
+    {
+      "id": "node07",
+      "type": "text",
+      "x": 700,
+      "y": 150,
+      "width": 240,
+      "height": 100,
+      "text": "Application 3",
+      "color": "5"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "node01",
+      "fromSide": "bottom",
+      "toNode": "node03",
+      "toSide": "top",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "e2",
+      "fromNode": "node02",
+      "fromSide": "bottom",
+      "toNode": "node04",
+      "toSide": "top",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "e3",
+      "fromNode": "node01",
+      "fromSide": "right",
+      "toNode": "node05",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "leads to",
+      "color": "3"
+    },
+    {
+      "id": "e4",
+      "fromNode": "node02",
+      "fromSide": "right",
+      "toNode": "node06",
+      "toSide": "left",
+      "toEnd": "arrow",
+      "label": "enables",
+      "color": "3"
+    }
+  ]
+}

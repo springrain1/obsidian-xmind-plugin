@@ -1,0 +1,106 @@
+{
+  "nodes": [
+    {
+      "id": "root001",
+      "type": "text",
+      "x": -150,
+      "y": -60,
+      "width": 300,
+      "height": 120,
+      "text": "# Central Topic\n\nMain concept goes here",
+      "color": "4"
+    },
+    {
+      "id": "branch01",
+      "type": "text",
+      "x": 250,
+      "y": -200,
+      "width": 220,
+      "height": 100,
+      "text": "Branch 1\n\nFirst main idea",
+      "color": "5"
+    },
+    {
+      "id": "branch02",
+      "type": "text",
+      "x": 250,
+      "y": -50,
+      "width": 220,
+      "height": 100,
+      "text": "Branch 2\n\nSecond main idea",
+      "color": "5"
+    },
+    {
+      "id": "branch03",
+      "type": "text",
+      "x": 250,
+      "y": 100,
+      "width": 220,
+      "height": 100,
+      "text": "Branch 3\n\nThird main idea",
+      "color": "5"
+    },
+    {
+      "id": "detail01",
+      "type": "text",
+      "x": 550,
+      "y": -200,
+      "width": 200,
+      "height": 80,
+      "text": "Detail A",
+      "color": "6"
+    },
+    {
+      "id": "detail02",
+      "type": "text",
+      "x": 550,
+      "y": -100,
+      "width": 200,
+      "height": 80,
+      "text": "Detail B",
+      "color": "6"
+    }
+  ],
+  "edges": [
+    {
+      "id": "e1",
+      "fromNode": "root001",
+      "fromSide": "right",
+      "toNode": "branch01",
+      "toSide": "left",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "e2",
+      "fromNode": "root001",
+      "fromSide": "right",
+      "toNode": "branch02",
+      "toSide": "left",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "e3",
+      "fromNode": "root001",
+      "fromSide": "right",
+      "toNode": "branch03",
+      "toSide": "left",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "e4",
+      "fromNode": "branch01",
+      "fromSide": "right",
+      "toNode": "detail01",
+      "toSide": "left",
+      "toEnd": "arrow"
+    },
+    {
+      "id": "e5",
+      "fromNode": "branch01",
+      "fromSide": "right",
+      "toNode": "detail02",
+      "toSide": "left",
+      "toEnd": "arrow"
+    }
+  ]
+}
