@@ -45,16 +45,4 @@ declare module "*.json" {
 declare module "xmind-sdk" {
   export function open(filePath: string): any;
   export function save(data: any, filePath: string): Promise<void>;
-}
-
-// 声明jszip模块
-declare module "jszip" {
-  class JSZip {
-    constructor();
-    file(path: string, data: any): JSZip;
-    file(path: string): any;
-    generateAsync(options: { type: string }): Promise<any>;
-    loadAsync(data: any): Promise<JSZip>;
-  }
-  export default JSZip;
 } 

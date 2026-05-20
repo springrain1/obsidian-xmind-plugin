@@ -1,5 +1,4 @@
 import { App, MarkdownPostProcessorContext, TFile } from 'obsidian';
-import { extractXMindThumbnail } from './xmind-thumbnail-extractor';
 import XMindPlugin from './main';
 import { createDebugLogger, DebugLogger } from './debug-logger';
 
@@ -18,7 +17,7 @@ interface LinkParseResult {
 
 /**
  * XMind Markdown后处理器
- * 用于在Markdown预览中将XMind文件嵌入链接替换为缩略图预览
+ * 用于在Markdown预览中将XMind文件嵌入链接替换为可点击的预览卡片
  * 支持Reading View和Live Preview模式
  */
 export class XMindMarkdownProcessor {
@@ -213,15 +212,6 @@ export class XMindMarkdownProcessor {
 
     this.logger.log('找到XMind文件:', file.path);
 
-    // 提取缩略图
-    const thumbnailDataURL = await extractXMindThumbnail(file, this.app, this.logger);
-    if (!thumbnailDataURL) {
-      this.logger.log('缩略图提取失败:', file.path);
-      return;
-    }
-
-    this.logger.log('缩略图提取成功，长度:', thumbnailDataURL.length);
-
     // 获取尺寸参数（从src属性或元素属性）
     const width = embedEl.getAttribute('width');
     const height = embedEl.getAttribute('height');
@@ -229,13 +219,13 @@ export class XMindMarkdownProcessor {
 
     this.logger.log('尺寸参数:', sizeParams);
 
-    // 创建缩略图预览元素
-    const thumbnailEl = this.createThumbnailElement(file, thumbnailDataURL, true, sizeParams);
+    // 创建预览卡片元素（使用占位符替代缩略图）
+    const cardEl = this.createPreviewCard(file, true, sizeParams);
 
     // 替换原嵌入元素
-    embedEl.replaceWith(thumbnailEl);
+    embedEl.replaceWith(cardEl);
 
-    this.logger.success('嵌入链接处理完成，已替换为缩略图');
+    this.logger.success('嵌入链接处理完成，已替换为预览卡片');
   }
 
   /**
@@ -281,22 +271,13 @@ export class XMindMarkdownProcessor {
 
     this.logger.log('Live Preview找到XMind文件:', file.path);
 
-    // 提取缩略图
-    const thumbnailDataURL = await extractXMindThumbnail(file, this.app, this.logger);
-    if (!thumbnailDataURL) {
-      this.logger.log('Live Preview缩略图提取失败:', file.path);
-      return;
-    }
-
-    this.logger.log('Live Preview缩略图提取成功');
-
-    // 创建缩略图预览元素
-    const thumbnailEl = this.createThumbnailElement(file, thumbnailDataURL, true, linkInfo.size);
+    // 创建预览卡片元素（使用占位符替代缩略图）
+    const cardEl = this.createPreviewCard(file, true, linkInfo.size);
 
     // 替换原嵌入元素
-    embedEl.replaceWith(thumbnailEl);
+    embedEl.replaceWith(cardEl);
 
-    this.logger.success('Live Preview嵌入处理完成，已替换为缩略图');
+    this.logger.success('Live Preview嵌入处理完成，已替换为预览卡片');
   }
 
   /**
@@ -332,16 +313,14 @@ export class XMindMarkdownProcessor {
   }
 
   /**
-   * 创建缩略图预览元素
+   * 创建预览卡片元素（不依赖JSZip，使用占位符图标）
    * @param file XMind文件
-   * @param dataURL 缩略图数据URL
    * @param isEmbed 是否为嵌入模式
    * @param sizeParams 尺寸参数
    * @returns HTML元素
    */
-  private createThumbnailElement(
+  private createPreviewCard(
     file: TFile,
-    dataURL: string,
     isEmbed: boolean,
     sizeParams?: SizeParams
   ): HTMLElement {
@@ -363,82 +342,111 @@ export class XMindMarkdownProcessor {
 
     container.className = containerClasses;
 
-    // 创建图片元素
-    const img = document.createElement('img');
-    img.src = dataURL;
-    img.alt = `XMind: ${file.name}`;
-    img.className = 'xmind-thumbnail-image';
+    // 创建占位符图标区域
+    const iconContainer = document.createElement('div');
+    iconContainer.className = 'xmind-placeholder-icon';
+    iconContainer.style.cssText = `
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--background-secondary);
+      border: 2px dashed var(--background-modifier-border);
+      border-radius: 8px;
+      padding: 24px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-height: 120px;
+    `;
 
     // 应用尺寸参数
     if (sizeParams) {
       if (sizeParams.width) {
-        img.style.width = `${sizeParams.width}px`;
-        img.style.maxWidth = `${sizeParams.width}px`;
+        iconContainer.style.width = `${sizeParams.width}px`;
+        iconContainer.style.maxWidth = `${sizeParams.width}px`;
       }
       if (sizeParams.height) {
-        img.style.height = `${sizeParams.height}px`;
-        img.style.maxHeight = `${sizeParams.height}px`;
-      }
-      // 如果只指定了宽度，保持宽高比
-      if (sizeParams.width && !sizeParams.height) {
-        img.style.height = 'auto';
-      }
-      // 如果只指定了高度，保持宽高比
-      if (sizeParams.height && !sizeParams.width) {
-        img.style.width = 'auto';
+        iconContainer.style.height = `${sizeParams.height}px`;
+        iconContainer.style.maxHeight = `${sizeParams.height}px`;
       }
     } else {
       // 默认样式
-      img.style.maxWidth = '100%';
-      img.style.height = 'auto';
+      iconContainer.style.maxWidth = '100%';
+      iconContainer.style.width = '300px';
     }
 
-    // 设置其他图片样式
-    img.style.borderRadius = '8px';
-    img.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
-    img.style.cursor = 'pointer';
+    // 创建XMind图标（使用SVG）
+    const svgIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svgIcon.setAttribute('width', '48');
+    svgIcon.setAttribute('height', '48');
+    svgIcon.setAttribute('viewBox', '0 0 48 48');
+    svgIcon.setAttribute('fill', 'none');
+    svgIcon.innerHTML = `
+      <rect x="4" y="8" width="40" height="32" rx="4" fill="var(--interactive-accent)" opacity="0.15"/>
+      <rect x="4" y="8" width="40" height="32" rx="4" stroke="var(--interactive-accent)" stroke-width="2"/>
+      <circle cx="16" cy="24" r="4" fill="var(--interactive-accent)"/>
+      <line x1="20" y1="24" x2="28" y2="18" stroke="var(--interactive-accent)" stroke-width="1.5"/>
+      <line x1="20" y1="24" x2="28" y2="30" stroke="var(--interactive-accent)" stroke-width="1.5"/>
+      <circle cx="28" cy="18" r="3" fill="var(--interactive-accent)" opacity="0.7"/>
+      <circle cx="28" cy="30" r="3" fill="var(--interactive-accent)" opacity="0.7"/>
+      <line x1="31" y1="18" x2="36" y2="14" stroke="var(--interactive-accent)" stroke-width="1.5" opacity="0.5"/>
+      <line x1="31" y1="18" x2="36" y2="22" stroke="var(--interactive-accent)" stroke-width="1.5" opacity="0.5"/>
+      <circle cx="36" cy="14" r="2" fill="var(--interactive-accent)" opacity="0.4"/>
+      <circle cx="36" cy="22" r="2" fill="var(--interactive-accent)" opacity="0.4"/>
+    `;
 
-    // 创建标题元素
-    const title = document.createElement('div');
-    title.className = 'xmind-thumbnail-title';
-    title.textContent = file.basename;
-    title.style.textAlign = 'center';
-    title.style.marginTop = '8px';
-    title.style.fontSize = '0.9em';
-    title.style.color = 'var(--text-muted)';
+    iconContainer.appendChild(svgIcon);
+
+    // 创建文件名标签
+    const fileName = document.createElement('div');
+    fileName.className = 'xmind-file-name';
+    fileName.textContent = file.basename;
+    fileName.style.cssText = `
+      margin-top: 12px;
+      font-size: 0.9em;
+      font-weight: 500;
+      color: var(--text-normal);
+      text-align: center;
+      word-break: break-word;
+    `;
+    iconContainer.appendChild(fileName);
+
+    // 创建文件类型标签
+    const fileType = document.createElement('div');
+    fileType.textContent = 'XMind';
+    fileType.style.cssText = `
+      margin-top: 4px;
+      font-size: 0.75em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    `;
+    iconContainer.appendChild(fileType);
 
     // 添加点击事件
     const clickHandler = (event: MouseEvent) => {
       event.preventDefault();
       event.stopPropagation();
-      
-      if (event.ctrlKey || event.metaKey) {
-        // Ctrl+点击：在新标签页中打开
-        this.plugin.activateXMindViewer(file);
-      } else {
-        // 普通点击：在当前视图中打开
-        this.plugin.activateXMindViewer(file);
-      }
+      this.plugin.activateXMindViewer(file);
     };
 
-    img.addEventListener('click', clickHandler);
-    title.addEventListener('click', clickHandler);
+    iconContainer.addEventListener('click', clickHandler);
 
     // 添加悬停效果
-    container.addEventListener('mouseenter', () => {
-      img.style.transform = 'scale(1.02)';
-      img.style.transition = 'transform 0.2s ease';
+    iconContainer.addEventListener('mouseenter', () => {
+      iconContainer.style.borderColor = 'var(--interactive-accent)';
+      iconContainer.style.background = 'var(--background-secondary-alt)';
+      iconContainer.style.transform = 'scale(1.02)';
     });
 
-    container.addEventListener('mouseleave', () => {
-      img.style.transform = 'scale(1)';
+    iconContainer.addEventListener('mouseleave', () => {
+      iconContainer.style.borderColor = 'var(--background-modifier-border)';
+      iconContainer.style.background = 'var(--background-secondary)';
+      iconContainer.style.transform = 'scale(1)';
     });
 
     // 组装元素
-    container.appendChild(img);
-    if (isEmbed && this.plugin.settings.showFileName) {
-      container.appendChild(title);
-    }
+    container.appendChild(iconContainer);
 
     return container;
   }

@@ -1,6 +1,5 @@
 import {
   App,
-  FileSystemAdapter,
   Menu,
   MenuItem,
   Notice,
@@ -20,20 +19,14 @@ interface ViewState {
   state?: any;
   popstate?: boolean;
 }
-import * as path from 'path';
-import * as fs from 'fs';
 import { XMindViewer, XMindView, VIEW_TYPE_XMIND } from './xmind-viewer';
-import { convertMarkdownToXMind } from './md-to-xmind';
-import { convertXMindToMarkdown } from './xmind-to-md';
 import { VIEW_TYPE_XMIND as XMIND_VIEWER_TYPE, XMindViewerView, XMindViewerCreator } from './xmind-viewer-view';
 import { XMindEmbedViewer } from 'xmind-embed-viewer';
 import {
   useXMindAIConverter,
   checkXMindAPIAvailability
 } from './online-converter';
-import { FileSyncManager } from './file-sync';
 import { ZoomManager } from './zoom/ZoomManager';
-import JSZip from 'jszip';
 import { createXMindMarkdownProcessor } from './xmind-markdown-processor';
 import { createXMindEmbedViewerWithFallback } from './xmind-embed-helper';
 import { createDebugLogger, DebugLogger } from './debug-logger';
@@ -255,7 +248,6 @@ export default class XMindPlugin extends Plugin {
   xmindViewer: XMindViewer;
   xmindViewerCreator: XMindViewerCreator;
   apiAvailable: boolean = false;
-  fileSyncManager: FileSyncManager;
   zoomManager: ZoomManager;
   logger: DebugLogger;
   private markdownProcessor: any = null;
@@ -297,10 +289,6 @@ export default class XMindPlugin extends Plugin {
 
     // 注册思维导图视图
     this.registerView(mindmapViewType, (leaf: WorkspaceLeaf) => new MindMapView(leaf, this as any));
-    
-    // 初始化文件同步管理器
-    this.fileSyncManager = new FileSyncManager(this);
-    await this.fileSyncManager.initialize();
     
     // 初始化Zoom管理器（如果启用）
     if (this.settings.enableZoom) {
@@ -362,52 +350,6 @@ export default class XMindPlugin extends Plugin {
         id: 'open-xmind-viewer',
         name: '打开XMind预览器',
         callback: () => this.activateXMindViewer()
-      });
-    }
-
-    // 启用文件同步功能
-    if (this.settings.enableFileSync) {
-      this.fileSyncManager.initialize();
-      
-      // 添加手动同步命令（保留一个统一的同步命令）
-      this.addCommand({
-        id: 'sync-xmind-markdown',
-        name: '手动同步当前文件 (XMind/Markdown)',
-        callback: async () => {
-          const activeFile = this.app.workspace.getActiveFile();
-          if (!activeFile) {
-            new Notice('没有活动文件可以同步');
-            return;
-          }
-          
-          if (activeFile.extension !== 'md' && activeFile.extension !== 'xmind') {
-            new Notice('只能同步 Markdown 或 XMind 文件');
-            return;
-          }
-          
-          try {
-            await this.fileSyncManager.forceSync(activeFile.path);
-            new Notice('已同步当前文件');
-          } catch (error) {
-            this.logger.error('手动同步文件失败', error);
-            new Notice(`同步失败: ${error.message || '未知错误'}`);
-          }
-        }
-      });
-      
-      // 添加一个隐藏的调试命令（名称前面加双下划线表示开发者功能）
-      this.addCommand({
-        id: 'debug-xmind-sync',
-        name: '__调试文件同步 (开发者功能)',
-        callback: async () => {
-          try {
-            await this.fileSyncManager.debugFilePaths();
-            new Notice('调试信息已输出到控制台，请按 Ctrl+Shift+I 查看');
-          } catch (error) {
-            this.logger.error('调试失败', error);
-            new Notice(`调试失败: ${error.message || '未知错误'}`);
-          }
-        }
       });
     }
 
@@ -480,46 +422,6 @@ export default class XMindPlugin extends Plugin {
         }
 
         if (file instanceof TFile && file.extension === 'md') {
-          // 本地转换选项
-          menu.addItem((item: MenuItem) => {
-            item
-              .setTitle('转换为XMind')
-              .setIcon('document')
-              .onClick(async () => {
-                try {
-                  const adapter = this.app.vault.adapter as FileSystemAdapter;
-                  const basePath = adapter.getBasePath();
-                  const filePath = path.join(basePath, file.path);
-                  const outputPath = filePath.replace('.md', '.xmind');
-                  
-                  if (!this.settings.xmindPath) {
-                    new Notice('请先在插件设置中配置XMind可执行文件路径');
-                    // 直接显示一个更明确的提示
-                    new Notice('请打开设置 > 第三方插件 > XMind Integration > 设置XMind路径', 10000);
-                    return;
-                  }
-                  
-                  await convertMarkdownToXMind(filePath, outputPath, this.settings.xmindPath);
-                  
-                  // 刷新文件浏览器
-                  this.app.vault.adapter.exists(file.path.replace('.md', '.xmind'))
-                    .then((exists: boolean) => {
-                      if (exists) {
-                        new Notice('已成功转换为XMind文件');
-                        this.app.vault.adapter.list(path.dirname(file.path))
-                          .then(() => {
-                            // 刷新文件浏览器 - 移除错误的file-menu触发
-                            // 文件浏览器会自动检测到新文件
-                          });
-                      }
-                    });
-                } catch (error) {
-                  this.logger.error('转换为XMind时出错', error);
-                  new Notice('转换失败，请检查控制台了解详情');
-                }
-              });
-          });
-          
           // 仅当启用了在线转换时添加选项
           if (this.settings.useOnlineConverter) {
             // 添加使用XMind AI在线转换选项
@@ -537,57 +439,6 @@ export default class XMindPlugin extends Plugin {
                 });
             });
           }
-        }
-      })
-    );
-
-    // 注册右键菜单 - XMind转Markdown
-    this.registerEvent(
-      this.app.workspace.on('file-menu', (menu: Menu, file: TFile) => {
-        // 安全检查：确保menu和file存在
-        if (!menu || !file) {
-          return;
-        }
-
-        if (file instanceof TFile && file.extension === 'xmind') {
-          menu.addItem((item: MenuItem) => {
-            item
-              .setTitle('转换为Markdown')
-              .setIcon('document')
-              .onClick(async () => {
-                try {
-                  const adapter = this.app.vault.adapter as FileSystemAdapter;
-                  const basePath = adapter.getBasePath();
-                  const filePath = path.join(basePath, file.path);
-                  const outputPath = filePath.replace('.xmind', '.md');
-                  
-                  if (!this.settings.xmindPath) {
-                    new Notice('请先在插件设置中配置XMind可执行文件路径');
-                    // 直接显示一个更明确的提示
-                    new Notice('请打开设置 > 第三方插件 > XMind Integration > 设置XMind路径', 10000);
-                    return;
-                  }
-                  
-                  await convertXMindToMarkdown(filePath, outputPath, this.settings.xmindPath);
-                  
-                  // 刷新文件浏览器
-                  this.app.vault.adapter.exists(file.path.replace('.xmind', '.md'))
-                    .then((exists: boolean) => {
-                      if (exists) {
-                        new Notice('已成功转换为Markdown文件');
-                        this.app.vault.adapter.list(path.dirname(file.path))
-                          .then(() => {
-                            // 刷新文件浏览器 - 移除错误的file-menu触发
-                            // 文件浏览器会自动检测到新文件
-                          });
-                      }
-                    });
-                } catch (error) {
-                  this.logger.error('转换为Markdown时出错', error);
-                  new Notice('转换失败，请检查控制台了解详情');
-                }
-              });
-          });
         }
       })
     );
@@ -620,11 +471,6 @@ export default class XMindPlugin extends Plugin {
     // 清理 AI 服务资源
     this.cleanupAIServices();
 
-    // 释放文件同步管理器资源
-    if (this.fileSyncManager) {
-      this.fileSyncManager.unload();
-    }
-
     // 卸载缩放管理器
     if (this.zoomManager) {
       this.zoomManager.unload();
@@ -646,11 +492,6 @@ export default class XMindPlugin extends Plugin {
 
   async saveSettings() {
     await this.saveData(this.settings);
-    
-    // 更新同步管理器设置
-    if (this.fileSyncManager) {
-      this.fileSyncManager.updateSettings();
-    }
     
     // 更新缩放管理器设置
     if (this.zoomManager) {
@@ -2487,24 +2328,6 @@ export class XMindSettingTab extends PluginSettingTab {
 	}
 
 	/**
-	 * 获取文件同步帮助内容
-	 */
-	private getFileSyncHelp(): string {
-		return `
-			<strong>文件夹路径格式说明：</strong><br>
-			• 使用相对路径，如：<code>Daily Notes</code> 或 <code>Projects/MindMaps</code><br>
-			• 每行一个文件夹路径<br>
-			• 子文件夹会自动包含（如添加<code>Projects</code>会包含其所有子文件夹）<br>
-			• 留空表示不同步任何文件夹<br><br>
-
-			<strong>同步机制说明：</strong><br>
-			• 当同一文件夹下存在同名的XMind和Markdown文件时<br>
-			• 修改其中一个文件会自动同步更新另一个文件<br>
-			• 支持双向同步，保持内容一致性
-		`;
-	}
-
-	/**
 	 * 获取在线转换帮助内容
 	 */
 	private getOnlineConverterHelp(): string {
@@ -2558,28 +2381,6 @@ export class XMindSettingTab extends PluginSettingTab {
 			• 支持显示文件名标签，便于识别<br>
 			• 可根据需要开启或关闭文件名标签显示<br>
 			• 提供便捷的思维导图预览和访问方式
-		`;
-	}
-
-	/**
-	 * 获取同步模式帮助内容
-	 */
-	private getSyncModeHelp(): string {
-		return `
-			<strong>关于XMind同步模式：</strong><br>
-			• <strong>全库文件：</strong>监控整个Obsidian库中的所有文件<br>
-			• <strong>指定文件夹：</strong>只监控指定文件夹，提高性能<br><br>
-
-			<strong>文件夹路径格式说明：</strong><br>
-			• 使用相对路径，如：<code>Daily Notes</code> 或 <code>Projects/MindMaps</code><br>
-			• 每行一个文件夹路径<br>
-			• 子文件夹会自动包含（如添加<code>Projects</code>会包含其所有子文件夹）<br>
-			• 留空表示不同步任何文件夹<br><br>
-
-			<strong>常见路径示例：</strong><br>
-			• <code>文档</code> - 监控"文档"文件夹<br>
-			• <code>学习笔记</code> - 监控"学习笔记"文件夹<br>
-			• <code>项目/思维导图</code> - 监控"项目"下的"思维导图"子文件夹
 		`;
 	}
 
@@ -2748,136 +2549,6 @@ export class XMindSettingTab extends PluginSettingTab {
 			  this.plugin.settings.showFileName = value;
 			  await this.plugin.saveSettings();
 			}));
-
-		// 添加XMind文件同步设置
-		const syncSection = mainContainer.createEl('div', { cls: 'xmind-settings-section' });
-		const syncTitle = syncSection.createEl('div', { cls: 'xmind-settings-title' });
-		syncTitle.createEl('span', { text: 'XMind 文件同步设置' });
-		this.createHelpButton(syncTitle, 'XMind文件同步帮助', this.getFileSyncHelp());
-
-		const syncDescEl = syncSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		syncDescEl.innerHTML = '启用后，当同一文件夹下存在同名的XMind和Markdown文件时，修改一个文件会自动同步更新另一个文件。';
-
-		const syncBranch = syncSection.createEl('div', { cls: 'xmind-branch' });
-		new Setting(syncBranch)
-		  .setName('启用文件自动同步')
-		  .setDesc('启用后，同名的XMind和Markdown文件将保持同步')
-		  .addToggle(toggle => toggle
-			.setValue(this.plugin.settings.enableFileSync)
-			.onChange(async (value: boolean) => {
-			  this.plugin.settings.enableFileSync = value;
-
-			  // 如果启用同步，初始化同步管理器
-			  if (value && !this.plugin.fileSyncManager) {
-				this.plugin.fileSyncManager = new FileSyncManager(this.plugin);
-				this.plugin.fileSyncManager.initialize();
-			  } else if (this.plugin.fileSyncManager) {
-				// 如果禁用同步，更新同步管理器状态
-				this.plugin.fileSyncManager.updateSettings();
-			  }
-
-			  await this.plugin.saveSettings();
-			  new Notice('XMind文件同步功能已' + (value ? '启用' : '禁用'), 2000);
-			}));
-		
-		// 添加同步模式设置
-		const syncModeSection = mainContainer.createEl('div', { cls: 'xmind-settings-section' });
-		const syncModeTitle = syncModeSection.createEl('div', { cls: 'xmind-settings-title' });
-		syncModeTitle.createEl('span', { text: 'XMind 同步模式设置' });
-		this.createHelpButton(syncModeTitle, 'XMind同步模式帮助', this.getSyncModeHelp());
-
-		const syncModeDescEl = syncModeSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		syncModeDescEl.innerHTML = '选择文件同步的范围模式：全库文件或指定文件夹';
-
-		const folderSettingContainerId = 'xmind-folder-setting-container';
-
-		// 添加下拉选择器
-		const syncModeBranch = syncModeSection.createEl('div', { cls: 'xmind-branch' });
-		new Setting(syncModeBranch)
-		  .setName('同步模式')
-		  .setDesc('选择同步模式，指定文件夹模式可提高同步性能')
-		  .addDropdown(dropdown => {
-			// 添加选项
-			dropdown.addOption('all', '全库文件');
-			dropdown.addOption('folders', '指定文件夹');
-
-			// 设置当前值
-			dropdown.setValue(this.plugin.settings.syncMode);
-
-			// 添加onChange处理函数
-			dropdown.onChange(async (value: 'all' | 'folders') => {
-			  // 更新设置
-			  this.plugin.settings.syncMode = value;
-			  await this.plugin.saveSettings();
-
-			  // 通知同步管理器设置已更改
-			  if (this.plugin.fileSyncManager) {
-				this.plugin.fileSyncManager.updateSettings();
-			  }
-
-			  // 根据选择显示/隐藏文件夹设置容器
-			  const folderSettingContainer = document.getElementById(folderSettingContainerId);
-			  if (folderSettingContainer) {
-				folderSettingContainer.style.display = value === 'folders' ? 'block' : 'none';
-			  } else if (value === 'folders') {
-				// 如果容器不存在但选择了folders模式，直接刷新设置页面
-				this.display();
-			  }
-			});
-
-			return dropdown;
-		  });
-		
-		// 创建文件夹设置容器 (无论选择何种模式都创建，但根据模式决定是否显示)
-		const folderSettingContainer = syncModeSection.createEl('div', {
-		  cls: 'xmind-folder-setting-container xmind-branch',
-		  attr: {
-			id: folderSettingContainerId
-		  }
-		});
-
-		// 根据当前设置决定是否显示
-		folderSettingContainer.style.display = this.plugin.settings.syncMode === 'folders' ? 'block' : 'none';
-
-		// 添加文件夹设置内容
-		const syncFoldersDescEl = folderSettingContainer.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		syncFoldersDescEl.innerHTML = '请添加需要同步的文件夹路径（相对于库根目录），多个文件夹将同时监控';
-
-		// 创建文本框容器
-		const textAreaContainer = folderSettingContainer.createEl('div', { cls: 'xmind-textarea-container' });
-		textAreaContainer.createEl('div', { cls: 'xmind-textarea-label', text: '同步文件夹列表 (每行一个路径)' });
-
-		// 使用多行文本框，更易于编辑多个文件夹
-		const textArea = textAreaContainer.createEl('textarea', {
-		  cls: 'xmind-folder-textarea',
-		  attr: {
-			rows: '5',
-			placeholder: '例如:\n文档\n学习笔记\n项目/思维导图'
-		  }
-		});
-
-		// 设置初始值
-		textArea.value = this.plugin.settings.syncFolders.join('\n');
-
-		// 添加变更监听
-		textArea.addEventListener('input', async () => {
-		  // 将文本框内容按行拆分为数组
-		  const folders = textArea.value.split('\n')
-			.map(line => line.trim())
-			.filter(line => line.length > 0);
-
-		  // 更新设置
-		  this.plugin.settings.syncFolders = folders;
-		  await this.plugin.saveSettings();
-
-		  // 通知同步管理器设置已更改
-		  if (this.plugin.fileSyncManager) {
-			this.plugin.fileSyncManager.updateSettings();
-		  }
-		});
-
-		// 添加简短说明文本
-		textAreaContainer.createEl('div', { cls: 'setting-item-description', text: '每行一个文件夹路径，不需要引号或逗号' });
 
 		// 思维导图设置区
 			const mindmapSection = mainContainer.createEl('div', { cls: 'xmind-settings-section' });
