@@ -10,9 +10,7 @@ export function isFoldingEnabled(app: App): boolean {
     foldIndent: boolean;
   } = {
     foldHeading: true,
-    foldIndent: true,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type inference limitation
-    ...(app.vault as any).config,
+    foldIndent: true,    ...((app.vault as { config?: Record<string, unknown> }).config ?? {}),
   };
 
   return config.foldHeading && config.foldIndent;

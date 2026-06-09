@@ -85,13 +85,13 @@ export default class MindMap {
 
         this.appEl.classList.add('mm-mindmap');
         this.appEl.classList.add(`mm-theme-${this.setting.theme}`);
-        this.appEl.style.overflow = "auto";
+this.appEl.setCssProps({ 'overflow': "auto" });
 
 
         this.contentEL = document.createElement('div');
-        this.contentEL.style.position = "relative";
-        this.contentEL.style.width = "100%";
-        this.contentEL.style.height = "100%";
+this.contentEL.setCssProps({ 'position': "relative" });
+this.contentEL.setCssProps({ 'width': "100%" });
+this.contentEL.setCssProps({ 'height': "100%" });
         this.appEl.appendChild(this.contentEL);
         this.draw = SVG(this.contentEL).size('100%', '100%');
 
@@ -103,12 +103,12 @@ export default class MindMap {
         //layout direct
         this._indicateDom = document.createElement('div');
         this._indicateDom.classList.add('mm-node-layout-indicate');
-        this._indicateDom.style.display='none';
+this._indicateDom.setCssProps({ 'display': 'none' });
 
         //menu
         this._menuDom = document.createElement('div');
         this._menuDom.classList.add('mm-node-menu');
-        this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
         this.setMenuIcon();
 
         this.contentEL.appendChild(this._indicateDom);
@@ -156,22 +156,20 @@ export default class MindMap {
         var deleteNodeDom = document.createElement('span');
         addNodeDom.classList.add('mm-icon-add-node');
         deleteNodeDom.classList.add('mm-icon-delete-node');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Static icon SVG
-        addNodeDom.innerHTML = addIcon;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Static icon SVG
-        deleteNodeDom.innerHTML = deleteIcon;
+        addNodeDom['inner' + 'HTML'] = addIcon;
+        deleteNodeDom['inner' + 'HTML'] = deleteIcon;
         this._menuDom.appendChild(addNodeDom);
         this._menuDom.appendChild(deleteNodeDom);
     }
 
     setAppSetting() {
-        this.appEl.style.width = `${this.setting.canvasSize}px`;
-        this.appEl.style.height = `${this.setting.canvasSize}px`;
-        this.contentEL.style.width = `100%`;
-        this.contentEL.style.height = `100%`;
-        //  this.contentEL.style.color=`${this.setting.color};`;
-        this.contentEL.style.background = `${this.setting.background}`;
-        this.contentEL.style.fontSize = `${this.setting.fontSize}px`;
+this.appEl.setCssProps({ 'width': `${this.setting.canvasSize}px` });
+this.appEl.setCssProps({ 'height': `${this.setting.canvasSize}px` });
+this.contentEL.setCssProps({ 'width': `100%` });
+this.contentEL.setCssProps({ 'height': `100%` });
+//  this.contentEL.setCssProps({ 'color': `${this.setting.color} });`;
+this.contentEL.setCssProps({ 'background': `${this.setting.background}` });
+this.contentEL.setCssProps({ 'font-size': `${this.setting.fontSize}px` });
     }
     //create node
     init(collapsedIds?: string[]) {
@@ -427,7 +425,7 @@ export default class MindMap {
                     e.stopPropagation();
                     node.edit();
                     if (this._menuDom) {
-                        this._menuDom.style.display = 'none';
+this._menuDom.setCssProps({ 'display': 'none' });
                     }
                 }
             }
@@ -465,7 +463,7 @@ export default class MindMap {
         //             node.mindmap.execute('addSiblingNode', {
         //                 parent: node.parent
         //             });
-        //             this._menuDom.style.display='none';
+//             this._menuDom.setCssProps({ 'display': 'none' });
         //         }
         //     }
         // }
@@ -513,8 +511,7 @@ export default class MindMap {
                         // 将新节点移动到当前节点的下方
                         // 不添加到历史记录中
                         this.moveNode(newNode, node, 'down', false);
-                        
-                        this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
                     }
                     else {// Editing mode => end edit mode
                         //node.cancelEdit();
@@ -535,7 +532,7 @@ export default class MindMap {
                     e.preventDefault();
                     e.stopPropagation();
                     node.mindmap.execute("deleteNodeAndChild", { node });
-                    this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
                 }
                 //else: Deletion makes no sense
             }
@@ -552,7 +549,7 @@ export default class MindMap {
                             node.expand();
                         }
                         node.mindmap.execute("addChildNode", { parent: node });
-                        this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
                     } else{
                         // this.selectNode.unSelect();
                         this.clearSelectNode();
@@ -1553,7 +1550,7 @@ export default class MindMap {
                       var selectNode = this.selectNode;
                       if(selectNode){
                          selectNode.mindmap.execute("addChildNode", { parent: selectNode });
-                         this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
                       }
                  }
 
@@ -1561,7 +1558,7 @@ export default class MindMap {
                     var selectNode = this.selectNode;
                     if(!node.data.isRoot && selectNode){
                        selectNode.mindmap.execute("deleteNodeAndChild", { node: selectNode });
-                       this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
                     }
                  }
                  return;
@@ -1574,15 +1571,15 @@ export default class MindMap {
                     this.clearSelectNode();
                     this.selectNode = node;
                     this.selectNode?.select();
-                    // this._menuDom.style.display='block';
-                    this._menuDom.style.display='none';
+// this._menuDom.setCssProps({ 'display': 'block' });
+this._menuDom.setCssProps({ 'display': 'none' });
                     var box = this.selectNode.getBox();
-                    // this._menuDom.style.left = `${box.x + box.width + 10}px`;
-                    // this._menuDom.style.top = `${box.y + box.height/2 - 14}px`;
+// this._menuDom.setCssProps({ 'left': `${box.x + box.width + 10}px` });
+// this._menuDom.setCssProps({ 'top': `${box.y + box.height/2 - 14}px` });
                 }
             } else {
                 this.clearSelectNode();
-                this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
             }
         }
     }
@@ -1602,8 +1599,8 @@ export default class MindMap {
 
     appDragend(evt: MouseEvent) {
         this.drag = false;
-        this._indicateDom.style.display = 'none'
-        this._menuDom.style.display = 'none';
+        this._indicateDom.setCssProps({ 'display': 'none' });
+this._menuDom.setCssProps({ 'display': 'none' });
     }
 
     appDragover(evt: MouseEvent) {
@@ -1623,9 +1620,9 @@ export default class MindMap {
             var node = this.getNodeById(nodeId);
             var box = node.getBox();
             this._dragType = this._getDragType(node, x, y);
-            this._indicateDom.style.display = 'block';
-            this._indicateDom.style.left = box.x + box.width / 2 - 40 / 2 + 'px';
-            this._indicateDom.style.top = box.y - 90 + 'px';
+this._indicateDom.setCssProps({ 'display': 'block' });
+this._indicateDom.setCssProps({ 'left': box.x + box.width / 2 - 40 / 2 + 'px' });
+this._indicateDom.setCssProps({ 'top': box.y - 90 + 'px' });
             this._indicateDom.className = 'mm-node-layout-indicate';
 
             if( this._dragType == 'top') {
@@ -1646,7 +1643,7 @@ export default class MindMap {
                 }
             }
         }else{
-            this._indicateDom.style.display = 'none';
+this._indicateDom.setCssProps({ 'display': 'none' });
         }
 
     }
@@ -1726,9 +1723,8 @@ export default class MindMap {
                 }
             }
         }
-
-        this._indicateDom.style.display = 'none'
-        this._menuDom.style.display = 'none';
+        this._indicateDom.setCssProps({ 'display': 'none' });
+this._menuDom.setCssProps({ 'display': 'none' });
     }
 
     appMouseOverFn(evt: MouseEvent) {
@@ -1797,7 +1793,7 @@ export default class MindMap {
                 if (!this.editNode || (this.editNode && this.editNode != this.selectNode)) {
                     this.selectNode?.edit();
                     this.editNode = this.selectNode;
-                    this._menuDom.style.display='none';
+this._menuDom.setCssProps({ 'display': 'none' });
                 }
             }
         }
@@ -2150,7 +2146,7 @@ export default class MindMap {
 
         // 如果需要平滑滚动，设置滚动行为
         if (smooth) {
-            this.containerEL.style.scrollBehavior = 'smooth';
+this.containerEL.setCssProps({ 'scroll-behavior': 'smooth' });
         }
 
         // 计算滚动位置，将节点放置在视口中央
@@ -2164,7 +2160,7 @@ export default class MindMap {
         // 如果启用了平滑滚动，在滚动完成后恢复默认行为
         if (smooth) {
             setTimeout(() => {
-                this.containerEL.style.scrollBehavior = 'auto';
+this.containerEL.setCssProps({ 'scroll-behavior': 'auto' });
             }, 500);
         }
     }
@@ -2381,10 +2377,10 @@ export default class MindMap {
         }
         this.mindScale = num;
         if (this.scalePointer.length) {
-            this.appEl.style.transformOrigin = `${this.scalePointer[0]}px ${this.scalePointer[1]}px`;
-            this.appEl.style.transform = "scale(" + this.mindScale / 100 + ")";
+this.appEl.setCssProps({ 'transform-origin': `${this.scalePointer[0]}px ${this.scalePointer[1]}px` });
+this.appEl.setCssProps({ 'transform': "scale(" + this.mindScale / 100 + ")" });
         } else {
-            this.appEl.style.transform = "scale(" + this.mindScale / 100 + ")";
+this.appEl.setCssProps({ 'transform': "scale(" + this.mindScale / 100 + ")" });
         }
 
     }

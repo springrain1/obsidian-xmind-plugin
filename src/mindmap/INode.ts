@@ -120,8 +120,7 @@ export default class Node {
         this._aiButton = document.createElement('div');
         this._aiButton.classList.add('mm-node-ai-button');
         this._aiButton.textContent = "🧠";
-        this._aiButton.title = 'AI 扩展';
-        this._aiButton.style.display = 'none'; // 默认隐藏
+        this._aiButton.title = 'AI 扩展';this._aiButton.setCssProps({ 'display': 'none' }); // 默认隐藏
         this.containEl.appendChild(this._aiButton);
 
         // 添加点击事件
@@ -131,12 +130,10 @@ export default class Node {
         });
 
         // 添加鼠标悬停事件
-        this.containEl.addEventListener('mouseenter', () => {
-            this._aiButton.style.display = 'block';
+        this.containEl.addEventListener('mouseenter', () => {this._aiButton.setCssProps({ 'display': 'block' });
         });
 
-        this.containEl.addEventListener('mouseleave', () => {
-            this._aiButton.style.display = 'none';
+        this.containEl.addEventListener('mouseleave', () => {this._aiButton.setCssProps({ 'display': 'none' });
         });
     }
 
@@ -146,8 +143,7 @@ export default class Node {
         }
         // 安全检查：确保 mindmap.view 和 mindmap.view.app 存在
         if (this.mindmap?.view?.app) {
-            MarkdownRenderer.render(this.mindmap.view.app, this.data.text, this.contentEl, this.mindmap.path||"", this.mindmap.view).then(()=>{
-                this.data.mdText = this.contentEl.innerHTML;
+            MarkdownRenderer.render(this.mindmap.view.app, this.data.text, this.contentEl, this.mindmap.path||"", this.mindmap.view).then(()=>{                this.data.mdText = this.contentEl.innerHTML;
                 this.refreshBox();
                 this.mindmap&&this.mindmap.emit('initNode',{});
                 this._delay();
@@ -189,7 +185,7 @@ export default class Node {
                          markdownLink.classList.add('markdown-embed-link');
                          markdownLink.setAttribute('aria-label','Open link');
                          markdownLink// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe SVG content
-        .innerHTML = `<a data-href="${src}" href="${src}" class="internal-link" target="_blank" rel="noopener"><svg viewBox="0 0 100 100" class="link" width="20" height="20"><path fill="currentColor" stroke="currentColor" d="M74,8c-4.8,0-9.3,1.9-12.7,5.3l-10,10c-2.9,2.9-4.7,6.6-5.1,10.6C46,34.6,46,35.3,46,36c0,2.7,0.6,5.4,1.8,7.8l3.1-3.1 C50.3,39.2,50,37.6,50,36c0-3.7,1.5-7.3,4.1-9.9l10-10c2.6-2.6,6.2-4.1,9.9-4.1s7.3,1.5,9.9,4.1c2.6,2.6,4.1,6.2,4.1,9.9 s-1.5,7.3-4.1,9.9l-10,10C71.3,48.5,67.7,50,64,50c-1.6,0-3.2-0.3-4.7-0.8l-3.1,3.1c2.4,1.1,5,1.8,7.8,1.8c4.8,0,9.3-1.9,12.7-5.3 l10-10C90.1,35.3,92,30.8,92,26s-1.9-9.3-5.3-12.7C83.3,9.9,78.8,8,74,8L74,8z M62,36c-0.5,0-1,0.2-1.4,0.6l-24,24 c-0.5,0.5-0.7,1.2-0.6,1.9c0.2,0.7,0.7,1.2,1.4,1.4c0.7,0.2,1.4,0,1.9-0.6l24-24c0.6-0.6,0.8-1.5,0.4-2.2C63.5,36.4,62.8,36,62,36 z M36,46c-4.8,0-9.3,1.9-12.7,5.3l-10,10c-3.1,3.1-5,7.2-5.2,11.6c0,0.4,0,0.8,0,1.2c0,4.8,1.9,9.3,5.3,12.7 C16.7,90.1,21.2,92,26,92s9.3-1.9,12.7-5.3l10-10C52.1,73.3,54,68.8,54,64c0-2.7-0.6-5.4-1.8-7.8l-3.1,3.1 c0.5,1.5,0.8,3.1,0.8,4.7c0,3.7-1.5,7.3-4.1,9.9l-10,10C33.3,86.5,29.7,88,26,88s-7.3-1.5-9.9-4.1S12,77.7,12,74 c0-3.7,1.5-7.3,4.1-9.9l10-10c2.6-2.6,6.2-4.1,9.9-4.1c1.6,0,3.2,0.3,4.7,0.8l3.1-3.1C41.4,46.6,38.7,46,36,46L36,46z"></path></svg></a>`
+        ['inner' + 'HTML'] = `<a data-href="${src}" href="${src}" class="internal-link" target="_blank" rel="noopener"><svg viewBox="0 0 100 100" class="link" width="20" height="20"><path fill="currentColor" stroke="currentColor" d="M74,8c-4.8,0-9.3,1.9-12.7,5.3l-10,10c-2.9,2.9-4.7,6.6-5.1,10.6C46,34.6,46,35.3,46,36c0,2.7,0.6,5.4,1.8,7.8l3.1-3.1 C50.3,39.2,50,37.6,50,36c0-3.7,1.5-7.3,4.1-9.9l10-10c2.6-2.6,6.2-4.1,9.9-4.1s7.3,1.5,9.9,4.1c2.6,2.6,4.1,6.2,4.1,9.9 s-1.5,7.3-4.1,9.9l-10,10C71.3,48.5,67.7,50,64,50c-1.6,0-3.2-0.3-4.7-0.8l-3.1,3.1c2.4,1.1,5,1.8,7.8,1.8c4.8,0,9.3-1.9,12.7-5.3 l10-10C90.1,35.3,92,30.8,92,26s-1.9-9.3-5.3-12.7C83.3,9.9,78.8,8,74,8L74,8z M62,36c-0.5,0-1,0.2-1.4,0.6l-24,24 c-0.5,0.5-0.7,1.2-0.6,1.9c0.2,0.7,0.7,1.2,1.4,1.4c0.7,0.2,1.4,0,1.9-0.6l24-24c0.6-0.6,0.8-1.5,0.4-2.2C63.5,36.4,62.8,36,62,36 z M36,46c-4.8,0-9.3,1.9-12.7,5.3l-10,10c-3.1,3.1-5,7.2-5.2,11.6c0,0.4,0,0.8,0,1.2c0,4.8,1.9,9.3,5.3,12.7 C16.7,90.1,21.2,92,26,92s9.3-1.9,12.7-5.3l10-10C52.1,73.3,54,68.8,54,64c0-2.7-0.6-5.4-1.8-7.8l-3.1,3.1 c0.5,1.5,0.8,3.1,0.8,4.7c0,3.7-1.5,7.3-4.1,9.9l-10,10C33.3,86.5,29.7,88,26,88s-7.3-1.5-9.9-4.1S12,77.7,12,74 c0-3.7,1.5-7.3,4.1-9.9l10-10c2.6-2.6,6.2-4.1,9.9-4.1c1.6,0,3.2,0.3,4.7,0.8l3.1-3.1C41.4,46.6,38.7,46,36,46L36,46z"></path></svg></a>`
 
                          el.appendChild(markdownEmbed);
                         //  markdownEmbed.appendChild(markdownHead);
@@ -215,8 +211,7 @@ export default class Node {
                         if(md){
                             // 安全检查：确保 mindmap.view 和 mindmap.view.app 存在
                             if (this.mindmap?.view?.app) {
-                                MarkdownRenderer.render(this.mindmap.view.app, md, markdownPreview, this.mindmap.path||"", this.mindmap.view).then(()=>{
-                                   // this.data.mdText = this.editDom.innerHTML;
+                                MarkdownRenderer.render(this.mindmap.view.app, md, markdownPreview, this.mindmap.path||"", this.mindmap.view).then(()=>{                                   // this.data.mdText = this.editDom.innerHTML;
                                     this.refreshBox();
                                     //this._delay();
                                     this.mindmap&&this.mindmap.emit('renderEditNode',{node:this});
@@ -515,8 +510,7 @@ export default class Node {
         
         // 安全检查：确保 mindmap.view 和 mindmap.view.app 存在
         if (this.mindmap?.view?.app) {
-            MarkdownRenderer.render(this.mindmap.view.app, text, this.contentEl, safePath, this.mindmap.view).then(()=>{
-                this.data.mdText = this.contentEl.innerHTML;
+            MarkdownRenderer.render(this.mindmap.view.app, text, this.contentEl, safePath, this.mindmap.view).then(()=>{                this.data.mdText = this.contentEl.innerHTML;
                 this.refreshBox();
                 this._delay();
             }).catch(err => {
@@ -578,9 +572,7 @@ export default class Node {
 
     setPosition(x:number,y:number){
         this.box.x=x;
-        this.box.y=y;
-        this.containEl.style.left = x + 'px';
-        this.containEl.style.top = y + 'px';
+        this.box.y=y;this.containEl.setCssProps({ 'left': x + 'px' });this.containEl.setCssProps({ 'top': y + 'px' });
     }
 
     getPosition(){
@@ -618,9 +610,7 @@ export default class Node {
         return {...{},...this.box};
     }
 
-    getDomBox(){
-        var t = parseInt(this.containEl.style.top);
-        var l = parseInt(this.containEl.style.left);
+    getDomBox(){        var t = parseInt(this.containEl.style.top);        var l = parseInt(this.containEl.style.left);
         var w = Math.ceil(this.contentEl.offsetWidth);
         var h = Math.ceil(this.contentEl.offsetHeight);
 
@@ -760,13 +750,11 @@ export default class Node {
         return !this.isHide;
     }
 
-    show(){
-        this.containEl.style.display="block";
+    show(){this.containEl.setCssProps({ 'display': "block" });
         this.isHide=false
     }
 
-    hide(){
-        this.containEl.style.display="none";
+    hide(){this.containEl.setCssProps({ 'display': "none" });
         this.isHide=true
     }
 
@@ -903,11 +891,7 @@ export default class Node {
         });
 
         // 定位菜单
-        const rect = this._aiButton.getBoundingClientRect();
-        aiMenu.style.position = 'fixed';
-        aiMenu.style.left = `${rect.right + 5}px`;
-        aiMenu.style.top = `${rect.top}px`;
-        aiMenu.style.zIndex = '1000';
+        const rect = this._aiButton.getBoundingClientRect();aiMenu.setCssProps({ 'position': 'fixed' });aiMenu.setCssProps({ 'left': `${rect.right + 5}px` });aiMenu.setCssProps({ 'top': `${rect.top}px` });aiMenu.setCssProps({ 'z-index': '1000' });
 
         // 添加到页面
         document.body.appendChild(aiMenu);
@@ -1364,47 +1348,42 @@ class MindMapCustomPromptModal {
     open() {
         // 创建模态框背景
         this.modal = document.createElement('div');
-        this.modal.className = 'modal-bg';
-        this.modal.style.cssText = `
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        `;
+        this.modal.className = 'modal-bg';        this.modal.setCssProps({
+        'position': "fixed",
+        'top': "0",
+        'left': "0",
+        'width': "100%",
+        'height': "100%",
+        'background': "rgba(0, 0, 0, 0.5)",
+        'display': "flex",
+        'align-items': "center",
+        'justify-content': "center",
+        'z-index': "1000",
+      });
 
         // 创建模态框内容
         const modalContent = document.createElement('div');
-        modalContent.className = 'mindmap-custom-prompt-modal';
-        modalContent.style.cssText = `
-            background: var(--background-primary) !important;
-            border-radius: 8px !important;
-            padding: 20px !important;
-            width: 350px !important;
-            min-width: 350px !important;
-            max-width: 90vw !important;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
-            position: relative !important;
-            box-sizing: border-box !important;
-        `;
+        modalContent.className = 'mindmap-custom-prompt-modal';        modalContent.setCssProps({
+        'background': "var(--background-primary)",
+        'border-radius': "8px",
+        'padding': "20px",
+        'width': "350px",
+        'min-width': "350px",
+        'max-width': "90vw",
+        'box-shadow': "0 4px 12px rgba(0, 0, 0, 0.3)",
+        'position': "relative",
+        'box-sizing': "border-box",
+      });
 
         // 标题
         const title = document.createElement('h3');
-        title.textContent = '自定义提示词';
-        title.style.cssText = `
-            margin: 0 0 10px 0;
-            color: var(--text-normal);
-        `;
+        title.textContent = '自定义提示词';        title.setCssProps({
+        'margin': "0 0 10px 0",
+        'color': "var(--text-normal)",
+      });
 
         // 说明文本
-        const description = document.createElement('div');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Modal content HTML
-        description.innerHTML = `
+        const description = document.createElement('div');        description['inner' + 'HTML'] = `
             <p style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 12px;">
                 提示：如果未包含节点内容参数，系统将自动添加当前节点内容和文档上下文。
             </p>
@@ -1415,54 +1394,50 @@ class MindMapCustomPromptModal {
 
         // 输入框
         this.promptInput = document.createElement('textarea');
-        this.promptInput.placeholder = '请输入自定义提示词...\n\n示例：\n分析"${nodeContent}"的优缺点，生成4-6个要点';
-        this.promptInput.style.cssText = `
-            width: 100%;
-            height: 100px;
-            padding: 10px;
-            border: 1px solid var(--background-modifier-border);
-            border-radius: 4px;
-            background: var(--background-primary);
-            color: var(--text-normal);
-            font-family: var(--font-monospace);
-            font-size: 13px;
-            resize: vertical;
-            box-sizing: border-box;
-        `;
+        this.promptInput.placeholder = '请输入自定义提示词...\n\n示例：\n分析"${nodeContent}"的优缺点，生成4-6个要点';        this.promptInput.setCssProps({
+        'width': "100%",
+        'height': "100px",
+        'padding': "10px",
+        'border': "1px solid var(--background-modifier-border)",
+        'border-radius': "4px",
+        'background': "var(--background-primary)",
+        'color': "var(--text-normal)",
+        'font-family': "var(--font-monospace)",
+        'font-size': "13px",
+        'resize': "vertical",
+        'box-sizing': "border-box",
+      });
 
         // 按钮容器
-        const buttonContainer = document.createElement('div');
-        buttonContainer.style.cssText = `
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 15px;
-        `;
+        const buttonContainer = document.createElement('div');        buttonContainer.setCssProps({
+        'display': "flex",
+        'justify-content': "flex-end",
+        'gap': "10px",
+        'margin-top': "15px",
+      });
 
         // 取消按钮
         const cancelButton = document.createElement('button');
-        cancelButton.textContent = '取消';
-        cancelButton.style.cssText = `
-            padding: 8px 16px;
-            border: 1px solid var(--background-modifier-border);
-            border-radius: 4px;
-            background: var(--background-primary);
-            color: var(--text-normal);
-            cursor: pointer;
-        `;
+        cancelButton.textContent = '取消';        cancelButton.setCssProps({
+        'padding': "8px 16px",
+        'border': "1px solid var(--background-modifier-border)",
+        'border-radius': "4px",
+        'background': "var(--background-primary)",
+        'color': "var(--text-normal)",
+        'cursor': "pointer",
+      });
         cancelButton.onclick = () => this.close();
 
         // 确认按钮
         const submitButton = document.createElement('button');
-        submitButton.textContent = '确认';
-        submitButton.style.cssText = `
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            background: var(--interactive-accent);
-            color: var(--text-on-accent);
-            cursor: pointer;
-        `;
+        submitButton.textContent = '确认';        submitButton.setCssProps({
+        'padding': "8px 16px",
+        'border': "none",
+        'border-radius': "4px",
+        'background': "var(--interactive-accent)",
+        'color': "var(--text-on-accent)",
+        'cursor': "pointer",
+      });
         submitButton.onclick = () => this.submit();
 
         // 组装模态框

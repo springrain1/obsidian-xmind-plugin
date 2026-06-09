@@ -54,19 +54,14 @@ export class MindmapAIIntegration {
             if (!floatingButton) {
                 floatingButton = this.createFloatingButton(node, mindmapView);
                 node.el.appendChild(floatingButton);
-            }
-
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            floatingButton.style.display = 'block';
+            }floatingButton.setCssProps({ 'display': 'block' });
         });
 
         // 鼠标离开节点时延迟隐藏悬浮按钮
         node.el.addEventListener('mouseleave', () => {
             if (floatingButton) {
                 hideTimeout = setTimeout(() => {
-                    if (floatingButton) {
-                        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-                        floatingButton.style.display = 'none';
+                    if (floatingButton) {floatingButton.setCssProps({ 'display': 'none' });
                     }
                 }, 500); // 500ms延迟
             }
@@ -101,18 +96,10 @@ export class MindmapAIIntegration {
         });
 
         // 悬停效果
-        button.addEventListener('mouseenter', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            button.style.transform = 'scale(1.1)';
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            button.style.backgroundColor = '#3730a3';
+        button.addEventListener('mouseenter', () => {button.setCssProps({ 'transform': 'scale(1.1)' });button.setCssProps({ 'background-color': '#3730a3' });
         });
 
-        button.addEventListener('mouseleave', () => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            button.style.transform = 'scale(1)';
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            button.style.backgroundColor = '#4f46e5';
+        button.addEventListener('mouseleave', () => {button.setCssProps({ 'transform': 'scale(1)' });button.setCssProps({ 'background-color': '#4f46e5' });
         });
 
         // 点击事件

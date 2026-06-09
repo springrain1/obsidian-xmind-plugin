@@ -1899,3 +1899,66 @@
     opacity: 0 !important;
     pointer-events: none !important;
 }
+
+/* Obsidian review static styles */
+:root {
+  --text-muted-rgb: 136, 136, 136;
+  --text-normal-rgb: 64, 64, 64;
+  --interactive-accent-rgb: 14, 210, 247;
+  --background-modifier-border-rgb: 127, 132, 151;
+}
+.theme-dark {
+  --text-muted-rgb: 153, 153, 153;
+  --text-normal-rgb: 220, 220, 220;
+  --interactive-accent-rgb: 76, 175, 223;
+  --background-modifier-border-rgb: 50, 56, 62;
+}
+.mm-outline-view {
+  position: fixed;
+  top: 55px;
+  right: 20px;
+  width: 280px;
+  max-height: 70vh;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.mm-map-overview {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  width: 280px;
+  height: 200px;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.mm-map-overview-toggle, .mm-view-toggle {
+  position: fixed;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--background-primary);
+  border: 1px solid var(--background-modifier-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 9999;
+}
+.mm-view-toggle { bottom: 20px; }
+.mm-map-overview-toggle { bottom: 70px; }
+.xmind-settings-container, .xmind-settings-container * { color: white; }
+.xmind-settings-container input[type="text"], .xmind-settings-container select { color: #333; background: rgba(255,255,255,0.95); }

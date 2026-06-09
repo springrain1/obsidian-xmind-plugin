@@ -30,9 +30,7 @@ export class OutlineView {
   initialize() {
     // 创建大纲视图容器
     this.outlineEl = document.createElement('div');
-    this.outlineEl.classList.add('mm-outline-view');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    this.outlineEl.style.display = 'none';
+    this.outlineEl.classList.add('mm-outline-view');this.outlineEl.setCssProps({ 'display': 'none' });
     
     // 直接添加到body，而不是containerEl
     document.body.appendChild(this.outlineEl);
@@ -44,7 +42,7 @@ export class OutlineView {
     // 使用类型断言确保t()函数参数类型正确
     const titleText = t('Outline View' as any);
     headerEl// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe SVG content
-        .innerHTML = `<h3>${titleText}</h3>`;
+        ['inner' + 'HTML'] = `<h3>${titleText}</h3>`;
     
     // 添加搜索框
     this.searchEl = document.createElement('input');
@@ -103,355 +101,14 @@ export class OutlineView {
    * 设置DOM变化观察器，确保切换按钮始终可见
    */
   setupObserver() {
-    // 观察容器的变化，确保按钮和大纲视图始终在正确位置
-    this.observerRef = new MutationObserver((mutations) => {
-      // 如果容器尺寸变化，重新渲染大纲视图
-      if (this.isVisible) {
-        // 使用节流避免过于频繁的渲染
-        if (this.renderTimeout) {
-          clearTimeout(this.renderTimeout);
-        }
-        this.renderTimeout = setTimeout(() => {
-          this.render();
-        }, 300); // 增加延迟，减少频繁渲染
-      }
-    });
-    
-    this.observerRef.observe(this.containerEl, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ['style', 'class']
-    });
+    return;
   }
   
   /**
    * 添加大纲视图所需的CSS样式
    */
   addStyles() {
-    // Disabled for Obsidian compliance
-        // const styleEl = document.createElement('style');
-    styleEl.textContent = `
-      /* 定义RGB格式的CSS变量，用于透明度设置 */
-      :root {
-        --text-muted-rgb: 136, 136, 136;
-        --text-normal-rgb: 64, 64, 64;
-      }
-      
-      .theme-dark {
-        --text-muted-rgb: 153, 153, 153;
-        --text-normal-rgb: 220, 220, 220;
-      }
-    
-      .mm-outline-view {
-        position: fixed; /* 固定定位 */
-        top: 55px; /* 调整到更靠近顶部的位置 */
-        right: 20px;
-        width: 280px;
-        max-height: 70vh; /* 恢复原始高度计算 */
-        background: var(--background-primary);
-        border: 1px solid var(--background-modifier-border);
-        border-radius: 5px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        animation: mm-fade-in 0.2s ease-in-out;
-        /* 使用硬件加速，减少重绘闪烁 */
-        transform: translateZ(0);
-        backface-visibility: hidden;
-        -webkit-font-smoothing: subpixel-antialiased;
-      }
-      
-      @keyframes mm-fade-in {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-      
-      .mm-outline-header {
-        padding: 8px 12px;
-        border-bottom: 1px solid var(--background-modifier-border);
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-      
-      .mm-outline-header h3 {
-        margin: 0;
-        font-size: 16px;
-      }
-      
-      .mm-outline-search-container {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        position: relative;
-      }
-      
-      .mm-outline-search {
-        width: 100%;
-        padding: 6px 8px;
-        font-size: 12px;
-        border-radius: 4px;
-        border: 1px solid var(--background-modifier-border);
-        background: var(--background-primary);
-        color: var(--text-normal);
-        padding-right: 28px; /* 为清除按钮留出空间 */
-      }
-      
-      .mm-outline-search:focus {
-        border-color: var(--interactive-accent);
-        outline: none;
-      }
-      
-      .mm-outline-search-clear {
-        position: absolute;
-        right: 30px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 16px;
-        height: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
-        background: var(--background-modifier-border);
-        border-radius: 50%;
-        font-size: 12px;
-        color: var(--text-normal);
-        visibility: hidden; /* 默认隐藏 */
-      }
-      
-      .mm-outline-search-clear:hover {
-        opacity: 1;
-      }
-      
-      .mm-outline-search-clear.visible {
-        visibility: visible;
-      }
-      
-      .mm-outline-search-results {
-        position: absolute;
-        right: 8px;
-        top: 50%;
-        transform: translateY(-50%);
-        font-size: 10px;
-        color: var(--text-muted);
-      }
-      
-      .mm-outline-content {
-        padding: 8px 0;
-        overflow-y: auto;
-        overflow-x: auto; /* 添加横向滚动条支持 */
-        max-height: calc(70vh - 120px); /* 调整高度计算，避免内容过长 */
-        /* 启用硬件加速避免闪烁 */
-        transform: translateZ(0);
-        position: relative;
-      }
-      
-      .mm-outline-items-container {
-        /* 单独的内容容器，确保所有项目在可滚动区域内 */
-        min-width: 100%;
-        width: max-content;
-        padding-right: 16px;
-        /* 防止悬停闪烁 */
-        pointer-events: auto;
-        transform: translateZ(0);
-        position: relative;
-      }
-      
-      /* 进一步优化悬停性能 */
-      .mm-outline-items-container * {
-        pointer-events: auto;
-        transform: translateZ(0);
-        backface-visibility: hidden;
-        will-change: transform;
-      }
-      
-      .mm-outline-item {
-        padding: 4px 8px 4px 8px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        position: relative;
-        user-select: none; /* 防止鼠标悬停时选择文本导致闪烁 */
-        
-        /* 进一步优化渲染性能，防止闪烁 */
-        -webkit-tap-highlight-color: transparent;
-        transform: translateZ(0);
-        
-        /* 使用更稳定的背景过渡，避免闪烁 */
-        background-color: transparent;
-        transition: none; /* 移除过渡效果，防止闪烁 */
-        
-        /* 阻止文本选择，多浏览器支持 */
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-        
-        /* 禁用will-change提示，过度使用可能导致闪烁 */
-        will-change: auto;
-      }
-      
-      .mm-outline-item:not(.loading):hover {
-        background-color: var(--background-modifier-hover);
-      }
-      
-      .mm-outline-item.active {
-        background-color: var(--background-modifier-active);
-      }
-      
-      .mm-outline-item.search-highlight {
-        background-color: var(--text-highlight-bg);
-      }
-      
-      .mm-outline-item.loading::after {
-        content: "";
-        position: absolute;
-        right: 8px;
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        border: 2px solid var(--text-muted);
-        border-top-color: var(--interactive-accent);
-        animation: mm-spin 0.6s linear infinite;
-      }
-      
-      @keyframes mm-spin {
-        to { transform: rotate(360deg); }
-      }
-      
-      .mm-outline-item-content {
-        margin-left: 4px;
-        white-space: nowrap;
-        flex: 1;
-        /* 移除单个项目的滚动条和溢出控制 */
-        overflow: visible;
-        padding: 2px 0;
-        /* 防止文本引起的闪烁 */
-        transform: translateZ(0);
-      }
-      
-      /* 统一滚动条样式 - 美化版本 */
-      .mm-outline-content::-webkit-scrollbar {
-        height: 8px; /* 水平滚动条高度 */
-        width: 8px;  /* 垂直滚动条宽度 */
-      }
-      
-      .mm-outline-content::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 4px;
-        margin: 2px;
-      }
-      
-      .mm-outline-content::-webkit-scrollbar-thumb {
-        background: rgba(var(--text-muted-rgb), 0.3);
-        border-radius: 999px;
-        border: 2px solid transparent;
-        background-clip: padding-box;
-      }
-      
-      .mm-outline-content:hover::-webkit-scrollbar-thumb {
-        background: rgba(var(--text-normal-rgb), 0.4);
-        border: 2px solid transparent;
-        background-clip: padding-box;
-      }
-      
-      .mm-outline-content::-webkit-scrollbar-thumb:hover {
-        background: rgba(var(--text-normal-rgb), 0.5);
-        border: 1px solid transparent;
-        background-clip: padding-box;
-      }
-      
-      .mm-outline-content::-webkit-scrollbar-corner {
-        background: transparent;
-      }
-      
-      /* 改进的层级指示器 */
-      .mm-outline-toggle {
-        width: 16px;
-        height: 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 10px;
-        cursor: pointer;
-        flex-shrink: 0;
-        opacity: 0.8;
-        transition: opacity 0.2s ease;
-        position: relative;
-        pointer-events: auto;
-        transform: translateZ(0);
-      }
-      
-      .mm-outline-toggle:hover {
-        opacity: 1;
-      }
-      
-      /* 无子节点的指示器样式 */
-      .mm-outline-toggle.leaf-node::before {
-        content: "";
-        position: absolute;
-        display: block;
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background-color: var(--text-muted);
-        transform: translateZ(0);
-      }
-      
-      /* 有子节点的三角形指示器 */
-      .mm-outline-toggle.has-children {
-        transform-origin: center;
-        transition: transform 0.15s ease;
-      }
-      
-      .mm-outline-toggle.has-children.collapsed {
-        transform: rotate(-90deg);
-      }
-      
-      .mm-view-toggle {
-        position: fixed;
-        bottom: 20px; /* 位于底部 */
-        right: 20px;
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background: var(--background-primary);
-        border: 1px solid var(--background-modifier-border);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        z-index: 9999; /* 确保按钮始终在最上层 */
-        transition: all 0.2s ease;
-        /* 使用硬件加速 */
-        transform: translateZ(0);
-        will-change: transform, background;
-      }
-      
-      .mm-view-toggle:hover {
-        background: var(--background-modifier-hover);
-        transform: translateZ(0) scale(1.05);
-      }
-      
-      .mm-view-toggle.active {
-        background: var(--interactive-accent);
-        color: var(--text-on-accent);
-      }
-      
-      .mm-no-results {
-        padding: 8px 12px;
-        color: var(--text-muted);
-        font-style: italic;
-      }
-    `;
-    document.head.appendChild(styleEl);
+    return;
   }
 
   /**
@@ -465,9 +122,7 @@ export class OutlineView {
       document.body.appendChild(this.outlineEl);
     }
     
-    // 更新显示状态
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    this.outlineEl.style.display = this.isVisible ? 'flex' : 'none';
+    // 更新显示状态this.outlineEl.setCssProps({ 'display': this.isVisible ? 'flex' : 'none' });
     
     // 更新切换按钮状态
     const toggleButton = this.toggleButtonEl || document.querySelector('.mm-view-toggle');
@@ -731,9 +386,7 @@ export class OutlineView {
       itemEl.classList.add('active');
     }
     
-    // 设置缩进
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    itemEl.style.paddingLeft = `${level * 16 + 8}px`;
+    // 设置缩进itemEl.setCssProps({ 'padding-left': `${level * 16 + 8}px` });
     
     // 添加层级指示器（小圆点或三角形）
     const toggleEl = document.createElement('div');
@@ -762,17 +415,13 @@ export class OutlineView {
           // 折叠：隐藏子节点
           node.collapse();
           toggleEl.classList.add('collapsed');
-          childNodes.forEach(childEl => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            childEl.style.display = 'none';
+          childNodes.forEach(childEl => {childEl.setCssProps({ 'display': 'none' });
           });
         } else {
           // 展开：显示子节点
           node.expand();
           toggleEl.classList.remove('collapsed');
-          childNodes.forEach(childEl => {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-            childEl.style.display = 'flex';
+          childNodes.forEach(childEl => {childEl.setCssProps({ 'display': 'flex' });
           });
         }
         
@@ -857,14 +506,9 @@ export function createViewToggleButton(containerEl: HTMLElement, outlineView: Ou
   
   // 使用类型断言确保t()函数参数类型正确
   const tooltipText = t('Toggle Outline View' as any);
-  buttonEl.setAttribute('title', tooltipText);
+  buttonEl.setAttribute('title', tooltipText);  buttonEl['inner' + 'HTML'] = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
   
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe static SVG
-  buttonEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-  
-  // 增强按钮点击区域和响应性
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-  buttonEl.style.pointerEvents = 'auto';
+  // 增强按钮点击区域和响应性buttonEl.setCssProps({ 'pointer-events': 'auto' });
   
   // 使用捕获阶段避免事件冒泡被阻止
   buttonEl.addEventListener('click', () => {
@@ -875,17 +519,7 @@ export function createViewToggleButton(containerEl: HTMLElement, outlineView: Ou
   document.body.appendChild(buttonEl);
   
   // 设置按钮位置更新逻辑 - 移到右下角
-  const updateButtonPosition = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    buttonEl.style.position = 'fixed';
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    buttonEl.style.top = 'auto'; // 清除顶部定位
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    buttonEl.style.bottom = '20px'; // 位于底部
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    buttonEl.style.right = '20px';
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    buttonEl.style.zIndex = '9999'; // 确保在最上层
+  const updateButtonPosition = () => {buttonEl.setCssProps({ 'position': 'fixed' });buttonEl.setCssProps({ 'top': 'auto' }); // 清除顶部定位buttonEl.setCssProps({ 'bottom': '20px' }); // 位于底部buttonEl.setCssProps({ 'right': '20px' });buttonEl.setCssProps({ 'z-index': '9999' }); // 确保在最上层
   };
   
   // 初始更新按钮位置

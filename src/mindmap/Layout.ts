@@ -443,10 +443,7 @@ export default class Layout {
 
                 if(!child.stroke){
                     child.stroke = _stroke;
-                }
-
-                child._barDom.style.backgroundColor = _stroke;
-                child._barDom.style.borderColor = _stroke;
+                }child._barDom.setCssProps({ 'background-color': _stroke });child._barDom.setCssProps({ 'border-color': _stroke });
 
 				if (level == rootLevel) {
 					var from = {

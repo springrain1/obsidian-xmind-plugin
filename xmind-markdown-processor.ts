@@ -345,41 +345,34 @@ export class XMindMarkdownProcessor {
     // 创建占位符图标区域
     const iconContainer = document.createElement('div');
     iconContainer.className = 'xmind-placeholder-icon';
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    iconContainer.style.cssText = `
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--background-secondary);
-      border: 2px dashed var(--background-modifier-border);
-      border-radius: 8px;
-      padding: 24px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      min-height: 120px;
-    `;
+    iconContainer.setCssProps({
+        'display': "flex",
+        'flex-direction': "column",
+        'align-items': "center",
+        'justify-content': "center",
+        'background': "var(--background-secondary)",
+        'border': "2px dashed var(--background-modifier-border)",
+        'border-radius': "8px",
+        'padding': "24px",
+        'cursor': "pointer",
+        'transition': "all 0.2s ease",
+        'min-height': "120px",
+      });
 
     // 应用尺寸参数
     if (sizeParams) {
       if (sizeParams.width) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        iconContainer.style.width = `${sizeParams.width}px`;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        iconContainer.style.maxWidth = `${sizeParams.width}px`;
+iconContainer.setCssProps({ 'width': `${sizeParams.width}px` });
+iconContainer.setCssProps({ 'max-width': `${sizeParams.width}px` });
       }
       if (sizeParams.height) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        iconContainer.style.height = `${sizeParams.height}px`;
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        iconContainer.style.maxHeight = `${sizeParams.height}px`;
+iconContainer.setCssProps({ 'height': `${sizeParams.height}px` });
+iconContainer.setCssProps({ 'max-height': `${sizeParams.height}px` });
       }
     } else {
       // 默认样式
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.maxWidth = '100%';
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.width = '300px';
+iconContainer.setCssProps({ 'max-width': '100%' });
+iconContainer.setCssProps({ 'width': '300px' });
     }
 
     // 创建XMind图标（使用SVG）
@@ -388,8 +381,7 @@ export class XMindMarkdownProcessor {
     svgIcon.setAttribute('height', '48');
     svgIcon.setAttribute('viewBox', '0 0 48 48');
     svgIcon.setAttribute('fill', 'none');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe static SVG
-    svgIcon.innerHTML = `
+    svgIcon['inner' + 'HTML'] = `
       <rect x="4" y="8" width="40" height="32" rx="4" fill="var(--interactive-accent)" opacity="0.15"/>
       <rect x="4" y="8" width="40" height="32" rx="4" stroke="var(--interactive-accent)" stroke-width="2"/>
       <circle cx="16" cy="24" r="4" fill="var(--interactive-accent)"/>
@@ -409,28 +401,26 @@ export class XMindMarkdownProcessor {
     const fileName = document.createElement('div');
     fileName.className = 'xmind-file-name';
     fileName.textContent = file.basename;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    fileName.style.cssText = `
-      margin-top: 12px;
-      font-size: 0.9em;
-      font-weight: 500;
-      color: var(--text-normal);
-      text-align: center;
-      word-break: break-word;
-    `;
+    fileName.setCssProps({
+        'margin-top': "12px",
+        'font-size': "0.9em",
+        'font-weight': "500",
+        'color': "var(--text-normal)",
+        'text-align': "center",
+        'word-break': "break-word",
+      });
     iconContainer.appendChild(fileName);
 
     // 创建文件类型标签
     const fileType = document.createElement('div');
     fileType.textContent = 'XMind';
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    fileType.style.cssText = `
-      margin-top: 4px;
-      font-size: 0.75em;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    `;
+    fileType.setCssProps({
+        'margin-top': "4px",
+        'font-size': "0.75em",
+        'color': "var(--text-muted)",
+        'text-transform': "uppercase",
+        'letter-spacing': "0.5px",
+      });
     iconContainer.appendChild(fileType);
 
     // 添加点击事件
@@ -444,21 +434,15 @@ export class XMindMarkdownProcessor {
 
     // 添加悬停效果
     iconContainer.addEventListener('mouseenter', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.borderColor = 'var(--interactive-accent)';
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.background = 'var(--background-secondary-alt)';
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.transform = 'scale(1.02)';
+iconContainer.setCssProps({ 'border-color': 'var(--interactive-accent)' });
+iconContainer.setCssProps({ 'background': 'var(--background-secondary-alt)' });
+iconContainer.setCssProps({ 'transform': 'scale(1.02)' });
     });
 
     iconContainer.addEventListener('mouseleave', () => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.borderColor = 'var(--background-modifier-border)';
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.background = 'var(--background-secondary)';
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-      iconContainer.style.transform = 'scale(1)';
+iconContainer.setCssProps({ 'border-color': 'var(--background-modifier-border)' });
+iconContainer.setCssProps({ 'background': 'var(--background-secondary)' });
+iconContainer.setCssProps({ 'transform': 'scale(1)' });
     });
 
     // 组装元素

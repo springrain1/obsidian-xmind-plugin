@@ -17,13 +17,7 @@ export class XMindViewerView extends ItemView {
         this.plugin = plugin;
         this.logger = createDebugLogger(plugin);
         // 设置容器样式
-        this.contentEl.addClass('xmind-viewer-container');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        this.contentEl.style.width = '100%';
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        this.contentEl.style.height = '100%';
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        this.contentEl.style.overflow = 'hidden';
+        this.contentEl.addClass('xmind-viewer-container');this.contentEl.setCssProps({ 'width': '100%' });this.contentEl.setCssProps({ 'height': '100%' });this.contentEl.setCssProps({ 'overflow': 'hidden' });
     }
 
     getViewType(): string {

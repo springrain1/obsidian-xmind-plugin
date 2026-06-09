@@ -93,40 +93,34 @@ export class AISettingsTab {
 
     private renderFileSaveSettings(container: HTMLElement, settings: AISettings): void {
         // 参考自定义提示词的设计结构
-        const titleEl = container.createEl('h2', { text: 'AI 文件保存设置' });
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        titleEl.style.cssText = `
-            color: var(--text-accent);
-            font-size: 1.2em;
-            font-weight: 600;
-            margin-top: 20px;
-            margin-bottom: 12px;
-            display: block !important;
-            visibility: visible !important;
-        `;
+        const titleEl = container.createEl('h2', { text: 'AI 文件保存设置' });        titleEl.setCssProps({
+        'color': "var(--text-accent)",
+        'font-size': "1.2em",
+        'font-weight': "600",
+        'margin-top': "20px",
+        'margin-bottom': "12px",
+        'display': "block",
+        'visibility': "visible",
+      });
 
         const descEl = container.createEl('p', {
             text: '配置 AI 生成文件的保存位置。可以使用相对路径，例如 "AI分析" 或 "输出/AI"。留空则保存到 vault 根目录。'
-        });
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        descEl.style.cssText = `
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            display: block !important;
-            visibility: visible !important;
-        `;
+        });        descEl.setCssProps({
+        'color': "var(--text-muted)",
+        'margin-bottom': "16px",
+        'display': "block",
+        'visibility': "visible",
+      });
 
-        const saveSettingsContainer = container.createDiv('ai-save-settings-container');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        saveSettingsContainer.style.cssText = `
-            margin-top: 16px;
-            padding: 12px;
-            border: 1px solid var(--background-modifier-border);
-            border-radius: 6px;
-            background: var(--background-primary);
-            display: block !important;
-            visibility: visible !important;
-        `;
+        const saveSettingsContainer = container.createDiv('ai-save-settings-container');        saveSettingsContainer.setCssProps({
+        'margin-top': "16px",
+        'padding': "12px",
+        'border': "1px solid var(--background-modifier-border)",
+        'border-radius': "6px",
+        'background': "var(--background-primary)",
+        'display': "block",
+        'visibility': "visible",
+      });
 
         const setting = new Setting(saveSettingsContainer)
             .setName('保存路径')
@@ -138,31 +132,25 @@ export class AISettingsTab {
                     .onChange(async (value) => {
                         this.settingsManager.updateSavePath(value);
                         await this.saveSettings();
-                    });
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-                text.inputEl.style.width = '100%';
+                    });text.inputEl.setCssProps({ 'width': '100%' });
             });
 
-        // 确保设置项可见
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        setting.settingEl.style.cssText = `
-            display: block !important;
-            visibility: visible !important;
-            margin-bottom: 12px;
-        `;
+        // 确保设置项可见        setting.settingEl.setCssProps({
+        'display': "block",
+        'visibility': "visible",
+        'margin-bottom': "12px",
+      });
 
         // 添加路径预览
-        const pathPreview = saveSettingsContainer.createDiv('path-preview');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-        pathPreview.style.cssText = `
-            margin-top: 8px;
-            padding: 8px 12px;
-            background: var(--background-secondary);
-            border-radius: 4px;
-            font-family: var(--font-monospace);
-            font-size: 0.9em;
-            color: var(--text-muted);
-        `;
+        const pathPreview = saveSettingsContainer.createDiv('path-preview');        pathPreview.setCssProps({
+        'margin-top': "8px",
+        'padding': "8px 12px",
+        'background': "var(--background-secondary)",
+        'border-radius': "4px",
+        'font-family': "var(--font-monospace)",
+        'font-size': "0.9em",
+        'color': "var(--text-muted)",
+      });
 
         const updatePathPreview = () => {
             const savePath = settings.savePath || '';
@@ -483,9 +471,7 @@ export class AISettingsTab {
                             this.settingsManager.updatePrompt(name, value);
                             await this.saveSettings();
                         });
-                    text.inputEl.rows = 3;
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-                    text.inputEl.style.width = '100%';
+                    text.inputEl.rows = 3;text.inputEl.setCssProps({ 'width': '100%' });
                 })
                 .addButton(button => {
                     button

@@ -23,8 +23,6 @@ export const zoomOutEffect = StateEffect.define<void>();
 
 /**
  * 检查一个效果是否为放大效果
- */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type inference limitation
-export function isZoomInEffect(e: StateEffect<any>): e is ZoomInStateEffect {
+ */export function isZoomInEffect(e: StateEffect<unknown>): e is ZoomInStateEffect {
   return e.is(zoomInEffect);
 } 

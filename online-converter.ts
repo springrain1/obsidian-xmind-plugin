@@ -46,11 +46,7 @@ async function copyToClipboard(text: string): Promise<void> {
   } catch (err) {
     // 如果navigator.clipboard API不可用，使用旧方法
     const textArea = document.createElement('textarea');
-    textArea.value = text;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    textArea.style.position = 'fixed';
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
-    textArea.style.opacity = '0';
+    textArea.value = text;textArea.setCssProps({ 'position': 'fixed' });textArea.setCssProps({ 'opacity': '0' });
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();

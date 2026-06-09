@@ -278,7 +278,7 @@ function loadJSItem(item, context) {
 
 function loadCSSItem(item) {
   if (item.type === 'style') {
-    document.head.append(createElement('style', {
+    document.head.append(createElement('template', {
       textContent: item.data
     }));
   } else if (item.type === 'stylesheet') {

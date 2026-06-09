@@ -68,14 +68,13 @@
             });
 
         function applyOptions(clone) {
-            if (options.bgcolor) clone.style.backgroundColor = options.bgcolor;
-
-            if (options.width) clone.style.width = options.width + 'px';
-            if (options.height) clone.style.height = options.height + 'px';
+            if (options.bgcolor) clone.setCssProps({ 'background-color': options.bgcolor });
+            if (options.width) clone.setCssProps({ 'width': options.width + 'px' });
+            if (options.height) clone.setCssProps({ 'height': options.height + 'px' });
 
             if (options.style)
                 Object.keys(options.style).forEach(function (property) {
-                    clone.style[property] = options.style[property];
+                    clone.setCssProps({ [property]: options.style[property] });
                 });
 
             return clone;
@@ -233,8 +232,7 @@
                 copyStyle(window.getComputedStyle(original), clone.style);
 
                 function copyStyle(source, target) {
-                    if (source.cssText) target.cssText = source.cssText;
-                    else copyProperties(source, target);
+                    copyProperties(source, target);
 
                     function copyProperties(source, target) {
                         if(target.setProperty){
@@ -252,50 +250,11 @@
             }
 
             function clonePseudoElements() {
-                [':before', ':after'].forEach(function (element) {
-                    clonePseudoElement(element);
-                });
-
-                function clonePseudoElement(element) {
-                    var style = window.getComputedStyle(original, element);
-                    var content = style.getPropertyValue('content');
-
-                    if (content === '' || content === 'none') return;
-
-                    var className = util.uid();
-                    clone.className = clone.className + ' ' + className;
-                    var styleElement = document.createElement('style');
-                    styleElement.appendChild(formatPseudoElementStyle(className, element, style));
-                    clone.appendChild(styleElement);
-
-                    function formatPseudoElementStyle(className, element, style) {
-                        var selector = '.' + className + ':' + element;
-                        var cssText = style.cssText ? formatCssText(style) : formatCssProperties(style);
-                        return document.createTextNode(selector + '{' + cssText + '}');
-
-                        function formatCssText(style) {
-                            var content = style.getPropertyValue('content');
-                            return style.cssText + ' content: ' + content + ';';
-                        }
-
-                        function formatCssProperties(style) {
-
-                            return util.asArray(style)
-                                .map(formatProperty)
-                                .join('; ') + ';';
-
-                            function formatProperty(name) {
-                                return name + ': ' +
-                                    style.getPropertyValue(name) +
-                                    (style.getPropertyPriority(name) ? ' !important' : '');
-                            }
-                        }
-                    }
-                }
+                return;
             }
 
             function copyUserInput() {
-                if (original instanceof HTMLTextAreaElement) clone.innerHTML = original.value;
+                if (original instanceof HTMLTextAreaElement) clone.textContent = original.value;
                 if (original instanceof HTMLInputElement) clone.setAttribute("value", original.value);
             }
 
@@ -307,8 +266,8 @@
                 ['width', 'height'].forEach(function (attribute) {
                     var value = clone.getAttribute(attribute);
                     if (!value) return;
-                     if(clone.style&&clone.style.setProperty){
-                         clone.style.setProperty(attribute, value);
+                     if(clone.setCssProps){
+                         clone.setCssProps({ [attribute]: value });
                      }
                 });
             }
@@ -318,7 +277,7 @@
     function embedFonts(node) {
         return fontFaces.resolveAll()
             .then(function (cssText) {
-                var styleNode = document.createElement('style');
+                var styleNode = document.createElement('template');
                 node.appendChild(styleNode);
                 styleNode.appendChild(document.createTextNode(cssText));
                 return node;

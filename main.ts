@@ -476,14 +476,7 @@ export default class XMindPlugin extends Plugin {
       this.zoomManager.unload();
     }
 
-    // 仅当启用了XMind预览功能时释放相关资源
-    if (this.settings.enableXMindViewer) {
-      this.app.workspace.detachLeavesOfType(VIEW_TYPE_XMIND);
-      this.app.workspace.detachLeavesOfType(XMIND_PREVIEW_TYPE);
-    }
-
-    // 清理思维导图视图
-    this.app.workspace.detachLeavesOfType(mindmapViewType);
+    // 保留用户已移动的叶子位置；Obsidian 会自动处理插件资源卸载。
   }
 
   async loadSettings() {
@@ -807,8 +800,8 @@ export default class XMindPlugin extends Plugin {
     const selectColorConfig = this.getThemeSelectColors(theme);
 
     // 更新CSS变量
-    document.documentElement.style.setProperty('--mindmap-select-border', selectColorConfig.border);
-    document.documentElement.style.setProperty('--mindmap-select-shadow-rgb', selectColorConfig.shadowRgb);
+    document.documentElement.setCssProps({ ['--mindmap-select-border']: selectColorConfig.border });
+    document.documentElement.setCssProps({ ['--mindmap-select-shadow-rgb']: selectColorConfig.shadowRgb });
   }
 
   // 获取主题选中颜色配置
@@ -2232,10 +2225,6 @@ export class XMindSettingTab extends PluginSettingTab {
 			if (!this.plugin.xmindViewerCreator) {
 				this.plugin.xmindViewerCreator = new XMindViewerCreator(this.plugin);
 			}
-		} else {
-			// 禁用预览功能
-			// 关闭所有打开的XMind预览视图
-			this.plugin.app.workspace.detachLeavesOfType(VIEW_TYPE_XMIND);
 		}
 	}
 
@@ -2264,34 +2253,34 @@ export class XMindSettingTab extends PluginSettingTab {
 			helpDiv.createEl('br');
 			helpDiv.createEl('br');
 			helpDiv.appendText(content);
-			helpDiv.style.cssText = `
-				position: fixed;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background: var(--background-primary);
-				border: 1px solid var(--background-modifier-border);
-				border-radius: 8px;
-				padding: 20px;
-				max-width: 500px;
-				max-height: 400px;
-				overflow-y: auto;
-				z-index: 10000;
-				box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-			`;
+			helpDiv.setCssProps({
+        'position': "fixed",
+        'top': "50%",
+        'left': "50%",
+        'transform': "translate(-50%, -50%)",
+        'background': "var(--background-primary)",
+        'border': "1px solid var(--background-modifier-border)",
+        'border-radius': "8px",
+        'padding': "20px",
+        'max-width': "500px",
+        'max-height': "400px",
+        'overflow-y': "auto",
+        'z-index': "10000",
+        'box-shadow': "0 4px 12px rgba(0,0,0,0.15)",
+      });
 
 			// 创建关闭按钮
 			const closeBtn = document.createElement('button');
 			closeBtn.textContent = '关闭';
-			closeBtn.style.cssText = `
-				margin-top: 15px;
-				padding: 8px 16px;
-				background: var(--interactive-accent);
-				color: var(--text-on-accent);
-				border: none;
-				border-radius: 4px;
-				cursor: pointer;
-			`;
+			closeBtn.setCssProps({
+        'margin-top': "15px",
+        'padding': "8px 16px",
+        'background': "var(--interactive-accent)",
+        'color': "var(--text-on-accent)",
+        'border': "none",
+        'border-radius': "4px",
+        'cursor': "pointer",
+      });
 
 			closeBtn.onclick = () => document.body.removeChild(helpDiv);
 			helpDiv.appendChild(closeBtn);
@@ -2397,10 +2386,9 @@ export class XMindSettingTab extends PluginSettingTab {
 		const mainContainer = containerEl.createEl('div', { cls: 'xmind-settings-container' });
 
 		// 添加标题
-		mainContainer.createEl('h1', {
-			text: 'XMind Integration 设置',
-			cls: 'xmind-settings-title'
-		});
+		new Setting(mainContainer)
+			.setName('XMind Integration 设置')
+			.setHeading();
 
         // XMind Zoom 功能区
         const zoomSection = mainContainer.createEl('div', { cls: 'xmind-settings-section' });
@@ -2527,7 +2515,9 @@ export class XMindSettingTab extends PluginSettingTab {
 		this.createHelpButton(embedTitle, 'XMind缩略图嵌入帮助', this.getEmbedHelp());
 
 		const embedDescEl = embedSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		embedDescEl.innerHTML = '启用后可在Markdown文档中使用 <code>![[xxx.xmind]]</code> 语法显示XMind文件的缩略图预览。';
+		embedDescEl.appendText('启用后可在Markdown文档中使用 ');
+		embedDescEl.createEl('code', { text: '![[xxx.xmind]]' });
+		embedDescEl.appendText(' 语法显示XMind文件的缩略图预览。');
 
 		const embedBranch1 = embedSection.createEl('div', { cls: 'xmind-branch' });
 		new Setting(embedBranch1)
@@ -2819,20 +2809,20 @@ export class XMindSettingTab extends PluginSettingTab {
 					swatch.addEventListener('mouseenter', () => {
 						const tooltip = document.createElement('div');
 						tooltip.textContent = color;
-						tooltip.style.cssText = `
-							position: absolute;
-							top: -30px;
-							left: 50%;
-							transform: translateX(-50%);
-							background: var(--background-primary);
-							border: 1px solid var(--background-modifier-border);
-							padding: 2px 6px;
-							border-radius: 3px;
-							font-size: 10px;
-							white-space: nowrap;
-							z-index: 1000;
-							box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-						`;
+						tooltip.setCssProps({
+        'position': "absolute",
+        'top': "-30px",
+        'left': "50%",
+        'transform': "translateX(-50%)",
+        'background': "var(--background-primary)",
+        'border': "1px solid var(--background-modifier-border)",
+        'padding': "2px 6px",
+        'border-radius': "3px",
+        'font-size': "10px",
+        'white-space': "nowrap",
+        'z-index': "1000",
+        'box-shadow': "0 2px 4px rgba(0,0,0,0.1)",
+      });
 						swatch.appendChild(tooltip);
 					});
 
@@ -2912,119 +2902,6 @@ export class XMindSettingTab extends PluginSettingTab {
 
 			  new Notice('全局调试模式已' + (value ? '启用' : '禁用'), 2000);
 			}));
-		
-		// 添加思维导图风格的CSS样式
-		// Disabled for Obsidian compliance
-        // // const style = document.createElement('style'); // Disabled for Obsidian compliance
-		style.textContent = `
-		  /* 确保所有文字在多巴胺背景下可读 */
-		  .xmind-settings-container,
-		  .xmind-settings-container * {
-			color: white !important;
-		  }
-
-		  /* 设置项名称 - 使用亮白色 */
-		  .xmind-settings-container .setting-item-name {
-			color: #FFFFFF !important;
-			font-weight: 600;
-		  }
-
-		  /* 设置项描述 - 使用浅色 */
-		  .xmind-settings-container .setting-item-description {
-			color: rgba(255, 255, 255, 0.85) !important;
-			font-size: 13px;
-		  }
-
-		  /* 叶子节点描述 - 使用金色强调 */
-		  .xmind-settings-container .xmind-leaf {
-			color: #FFE4B5 !important;
-		  }
-
-		  /* 输入框文字 */
-		  .xmind-settings-container input[type="text"] {
-			color: #333 !important;
-			background: rgba(255, 255, 255, 0.95) !important;
-		  }
-
-		  .xmind-settings-container input[type="text"]::placeholder {
-			color: rgba(0, 0, 0, 0.5) !important;
-		  }
-
-		  /* 下拉选择器 */
-		  .xmind-settings-container select {
-			color: #333 !important;
-			background: rgba(255, 255, 255, 0.95) !important;
-		  }
-
-		  /* 下拉选择器选项 */
-		  .xmind-settings-container select option {
-			color: #333 !important;
-			background: #ffffff !important;
-		  }
-
-		  /* 文件夹设置容器样式 */
-		  .xmind-folder-setting-container {
-			background: rgba(255, 255, 255, 0.1);
-			backdrop-filter: blur(10px);
-			border: 1px solid rgba(255, 255, 255, 0.2);
-			border-radius: 12px;
-			padding: 16px;
-			margin: 12px 0;
-			transition: all 0.3s ease;
-		  }
-
-		  .xmind-folder-setting-container:hover {
-			transform: translateX(2px);
-			box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-		  }
-
-		  /* 文本框容器样式 */
-		  .xmind-textarea-container {
-			margin: 12px 0;
-		  }
-
-		  .xmind-textarea-label {
-			font-weight: 600;
-			margin-bottom: 8px;
-			color: #FFD700 !important;
-			font-size: 14px;
-		  }
-
-		  /* 文本框样式 */
-		  .xmind-folder-textarea {
-			width: 100%;
-			background: rgba(255, 255, 255, 0.95) !important;
-			color: #333 !important;
-			font-family: var(--font-monospace);
-			font-size: 14px;
-			border: 1px solid rgba(255, 255, 255, 0.2);
-			border-radius: 8px;
-			padding: 12px;
-			min-height: 120px;
-			resize: vertical;
-			transition: all 0.3s ease;
-		  }
-
-		  .xmind-folder-textarea:focus {
-			border-color: #4ECDC4;
-			box-shadow: 0 0 0 2px rgba(78, 205, 196, 0.2);
-			outline: none;
-		  }
-
-		  .xmind-folder-textarea::placeholder {
-			color: rgba(0, 0, 0, 0.5) !important;
-		  }
-
-		  /* 确保代码块可读 */
-		  .xmind-settings-container code {
-			background: rgba(255, 255, 255, 0.2) !important;
-			color: #FFE4B5 !important;
-			padding: 2px 6px;
-			border-radius: 4px;
-			font-weight: 500;
-		  }
-		`;
-		containerEl.appendChild(style);
 	}
 
 	/**

@@ -52,6 +52,7 @@ declare module "obsidian" {
     constructor(containerEl: HTMLElement);
     setName(name: string): this;
     setDesc(desc: string): this;
+    setHeading(): this;
     setTooltip(tooltip: string): this;
     setClass(cls: string): this;
     setDisabled(disabled: boolean): this;
@@ -77,7 +78,6 @@ declare module "obsidian" {
     getLeavesOfType(viewType: string): WorkspaceLeaf[];
     getRightLeaf(active?: boolean): WorkspaceLeaf;
     revealLeaf(leaf: WorkspaceLeaf): void;
-    detachLeavesOfType(viewType: string): void;
     getActiveFile(): TFile | null;
   }
 
