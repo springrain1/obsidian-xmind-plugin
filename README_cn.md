@@ -6,7 +6,7 @@
 
 支持交互式编辑 • AI 智能扩展 • 多种导出格式 • 企业级稳定性
 
-[![Version](https://img.shields.io/badge/version-2.5-blue.svg)](CHANGELOG_cn.md)
+[![Version](https://img.shields.io/badge/version-2.8-blue.svg)](CHANGELOG_cn.md)
 [![Platform](https://img.shields.io/badge/platform-Desktop%20%7C%20Mobile-green.svg)](#平台支持)
 
 [English](README.md)
@@ -335,12 +335,31 @@
 
 ## 🔄 最新版本
 
+### v2.8 - 思维导图视图增强与格式完善
+- ✨ 思维导图视图新增渲染节点表格，支持表格节点下子节点
+- ✨ 修复 Callout、表格、代码块、引用块组件渲染，块级组件作为可渲染子节点保留
+- 🐛 修复思维导图回写 Markdown 时空行被清掉的问题、note 空行丢失问题
+- 🐛 修复新增节点后转为 Markdown 内容层级错位问题
+- 🐛 修复列表转换后同级别无序列表之间存在空行问题
+- 🤖 新增 xmind-mdoutline-generator 技能：基于原文提取思维导图大纲，自动添加 XMind 独有组件
+
+### v2.7 - XMind 转换设置与问题修复
+- ⚙️ XMind → Markdown 附件路径三种模式：Obsidian 默认/原文件路径/自定义路径
+- 🐛 修复画布概览鼠标拖动惯性问题
+- 🐛 新增 AI 服务配置中的上下文窗口 Token 数配置项
+- 🐛 修复备注 notes 和 `---` 分隔符丢失问题
+- 🐛 XMind→Markdown 备注格式优化，使用更稳定的 `<strong>` / `<em>` 语法
+
+### v2.6 - 批量转换与全面格式支持
+- 🔄 文件列表支持文件夹右键或 Alt 多选批量转换 XMind ↔ Markdown
+- ✨ 全面格式支持：颜色、笔记、标签、概要、外框、折叠、公式、图片、自由主题、多 sheet
+- ✨ 新增命令支持"一二三级标题 + 无序列表"与"全部无序列表"相互转换
+
 ### v2.5 - 设置页面重构
 - ✨ 设置页面两级 Tab 导航布局（通用/AI/授权），告别长页面滚动
 - ✨ Dopamine 紫色渐变导航栏，浅色/深色主题兼容
 - ✨ 懒加载 Tab 内容面板，Tab 状态记忆
 - 🐛 修复 BASE 视图 AI 洞察无法获取筛选文档问题（适配 Obsidian 新版 DOM 结构）
-- 🐛 修复 AI 子 Tab 间距不一致、授权面板 Plus 功能说明缺失等问题
 
 📖 查看 [完整更新日志](CHANGELOG_cn.md)
 

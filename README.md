@@ -6,7 +6,7 @@
 
 Interactive Editing • AI Smart Expansion • Multiple Export Formats • Enterprise-Grade Stability
 
-[![Version](https://img.shields.io/badge/version-2.5-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-2.8-blue.svg)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-Desktop%20%7C%20Mobile-green.svg)](#platform-support)
 
 [中文文档](README_cn.md)
@@ -334,12 +334,31 @@ Method 2: Command palette → "Toggle markdown or mindmap mode"
 
 ## 🔄 Latest Version
 
+### v2.8 - Mind Map View Enhancements & Format Improvements
+- ✨ Mind map view now renders node tables with support for child nodes under table nodes
+- ✨ Fixed rendering of Callout, table, code block, and quote block components; block-level components preserved as renderable child nodes
+- 🐛 Fixed blank line removal between components when writing back to Markdown, fixed note blank line loss
+- 🐛 Fixed content hierarchy misalignment after adding new nodes and converting to Markdown
+- 🐛 Fixed blank line issues between same-level unordered lists after list conversion
+- 🤖 New skill: xmind-mdoutline-generator - Extract mind map outline from original text, automatically add XMind-specific components
+
+### v2.7 - XMind Conversion Settings & Bug Fixes
+- ⚙️ Three save path modes for XMind → Markdown attachments: Obsidian default/original file location/custom path
+- 🐛 Fixed mouse drag inertia issue in canvas overview
+- 🐛 Added context window token count configuration option in AI service settings
+- 🐛 Fixed notes and `---` separator loss issues
+- 🐛 XMind→Markdown note formatting optimization using more stable `<strong>` / `<em>` syntax
+
+### v2.6 - Batch Conversion & Comprehensive Format Support
+- 🔄 File list supports folder right-click or Alt multi-select for batch XMind ↔ Markdown conversion
+- ✨ Comprehensive format support: colors, notes, tags, summaries, boundaries, collapse states, formulas, images, floating topics, multiple sheets
+- ✨ New command to convert between "Level 1-3 headings + unordered lists" and "All unordered lists"
+
 ### v2.5 - Settings Page Redesign
 - ✨ Two-level tab navigation layout for settings (General/AI/License), no more endless scrolling
 - ✨ Dopamine purple gradient navigation bar, light/dark theme compatible
 - ✨ Lazy-loaded tab content panels with tab state memory
 - 🐛 Fixed BASE view AI Insight unable to retrieve filtered documents (adapted to Obsidian's updated DOM structure)
-- 🐛 Fixed AI sub-tab spacing inconsistency, missing Plus feature description in license panel
 
 📖 See [Full Changelog](CHANGELOG.md)
 

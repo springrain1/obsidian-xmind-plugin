@@ -316,3 +316,106 @@ An Obsidian XMind & AI Mind Mapping Plugin
 - Adapted to Obsidian's updated BASE view DOM structure (internal links changed from `<a class="internal-link" href="...">` to `<span class="internal-link" data-href="...">`)
 - `BaseDocumentResolver` selector changed from `a.internal-link` to `.internal-link`, compatible with both old and new versions
 - Attribute reading prioritizes `data-href` with fallback to `href` for backward compatibility
+
+
+## v2.6:
+
+### 🔄 Batch XMind & Markdown Conversion
+
+1. **File List Batch Operations**
+- Right-click folder in Obsidian file list to batch convert all XMind/Markdown files
+- Hold Alt key to multi-select files for batch conversion
+- Supports bidirectional conversion: XMind ↔ Markdown
+
+2. **Comprehensive Format Support**
+- Text and background colors
+- Notes (including ordered/unordered lists)
+- Tags
+- Summaries
+- Boundaries
+- Collapse states
+- Formulas
+- Images
+- Floating topics
+- Multiple sheets
+
+3. **Outline Note Support**
+- New command (Ctrl+P): Convert between "Level 1-3 headings + unordered lists" and "All unordered lists"
+- Compatible with obsidian-workflowy-plugin for rendering and editing
+
+
+## v2.7:
+
+### ⚙️ XMind Conversion Settings
+
+1. **Attachment Path Options**
+- Three save path modes for XMind → Markdown attachments (e.g., images):
+  - **Use Obsidian default attachment path** (default)
+  - **Original file location**: Save to same directory as source file
+  - **Custom path**: User-specified directory
+- Optional: Preserve XMind filename folder structure
+
+### 🐛 Bug Fixes
+
+1. **Mind Map View Canvas Overview**
+- Fixed mouse drag inertia issue in canvas overview (continued sliding after drag release)
+
+2. **AI Service Configuration**
+- Added context window token count configuration option
+
+3. **Mind Map View Notes & Separators**
+- Fixed notes loss issue in mind map view
+- Fixed `---` separator loss issue
+- Content layer now automatically converts floating topics and additional sheets to level 2 headings under title
+
+4. **XMind → Markdown Note Formatting**
+- Bold and italic in notes now use more stable syntax for consistent visual effect
+- Prioritize `<strong>` / `<em>` output to avoid consecutive `*` mismatching in Obsidian
+
+
+## v2.8:
+
+### 🎨 Mind Map View Enhancements
+
+1. **Table Rendering**
+- Mind map view now renders node tables
+- Supports child nodes under table nodes
+
+2. **Block Component Rendering**
+- Fixed rendering of Callout, table, code block, and quote block components
+- Obsidian block-level components under headings now preserved as renderable child nodes
+
+### 🐛 Bug Fixes
+
+1. **Markdown Conversion Issues**
+- Fixed blank line removal between Callout, table, code block, and quote block components when writing back to Markdown
+- Fixed note blank line loss issue
+
+2. **Node Hierarchy Issues**
+- Fixed content hierarchy misalignment after adding new nodes in mind map view and converting to Markdown
+
+3. **List Conversion Issues**
+- Fixed blank line issues between same-level unordered lists after converting "Level 3 heading + unordered list" to "All unordered lists"
+- Preserved note blank lines
+
+### 🤖 AI Skills Enhancement
+
+4. **New Skill: xmind-mdoutline-generator**
+- Extract mind map outline from original text
+- Automatically add XMind-specific components (summaries, boundaries, etc.)
+
+## v2.9:
+
+### 🌍 Global Internationalization (i18n)
+
+1. **Comprehensive Language Support**
+- Completely eliminated hardcoded Chinese strings in the plugin codebase, supporting seamless switching between Simplified Chinese, Traditional Chinese, and English interfaces.
+- Optimized Traditional Chinese translation using `opencc-js` to better suit regional vocabulary habits.
+- All error messages, exception handling, settings interfaces, and notification popups are fully internationalized.
+
+2. **AI Menu Prompts Internationalization**
+- Implemented full language support for 11 default AI prompts (including "Core Insights", "Content Expansion", "Generate Mermaid", etc.) covering both UI display names and prompt templates.
+- Optimized the conditional rendering and function recognition logic for context menu items, dynamically matching AI instructions based on the current user's system language environment.
+
+3. **Intelligent Streaming Component Style Distribution**
+- Refactored the Callout rendering rules in the AI result streaming popup (StreamingModal). To handle internal function names passed in different language environments, implemented a multi-dimensional vocabulary fault-tolerant matching scheme to ensure UI aesthetics and style consistency.
