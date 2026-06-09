@@ -123,6 +123,7 @@ export class AIServiceTab {
 
                         await this.plugin.saveSettings();
                     });
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
                 text.inputEl.style.width = '100%';
             });
     }

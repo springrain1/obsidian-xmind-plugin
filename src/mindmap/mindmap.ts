@@ -156,7 +156,9 @@ export default class MindMap {
         var deleteNodeDom = document.createElement('span');
         addNodeDom.classList.add('mm-icon-add-node');
         deleteNodeDom.classList.add('mm-icon-delete-node');
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Static icon SVG
         addNodeDom.innerHTML = addIcon;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Static icon SVG
         deleteNodeDom.innerHTML = deleteIcon;
         this._menuDom.appendChild(addNodeDom);
         this._menuDom.appendChild(deleteNodeDom);

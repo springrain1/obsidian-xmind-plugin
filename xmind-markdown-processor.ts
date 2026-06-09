@@ -345,6 +345,7 @@ export class XMindMarkdownProcessor {
     // 创建占位符图标区域
     const iconContainer = document.createElement('div');
     iconContainer.className = 'xmind-placeholder-icon';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     iconContainer.style.cssText = `
       display: flex;
       flex-direction: column;
@@ -362,16 +363,22 @@ export class XMindMarkdownProcessor {
     // 应用尺寸参数
     if (sizeParams) {
       if (sizeParams.width) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         iconContainer.style.width = `${sizeParams.width}px`;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         iconContainer.style.maxWidth = `${sizeParams.width}px`;
       }
       if (sizeParams.height) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         iconContainer.style.height = `${sizeParams.height}px`;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         iconContainer.style.maxHeight = `${sizeParams.height}px`;
       }
     } else {
       // 默认样式
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.maxWidth = '100%';
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.width = '300px';
     }
 
@@ -381,6 +388,7 @@ export class XMindMarkdownProcessor {
     svgIcon.setAttribute('height', '48');
     svgIcon.setAttribute('viewBox', '0 0 48 48');
     svgIcon.setAttribute('fill', 'none');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe static SVG
     svgIcon.innerHTML = `
       <rect x="4" y="8" width="40" height="32" rx="4" fill="var(--interactive-accent)" opacity="0.15"/>
       <rect x="4" y="8" width="40" height="32" rx="4" stroke="var(--interactive-accent)" stroke-width="2"/>
@@ -401,6 +409,7 @@ export class XMindMarkdownProcessor {
     const fileName = document.createElement('div');
     fileName.className = 'xmind-file-name';
     fileName.textContent = file.basename;
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     fileName.style.cssText = `
       margin-top: 12px;
       font-size: 0.9em;
@@ -414,6 +423,7 @@ export class XMindMarkdownProcessor {
     // 创建文件类型标签
     const fileType = document.createElement('div');
     fileType.textContent = 'XMind';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     fileType.style.cssText = `
       margin-top: 4px;
       font-size: 0.75em;
@@ -434,14 +444,20 @@ export class XMindMarkdownProcessor {
 
     // 添加悬停效果
     iconContainer.addEventListener('mouseenter', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.borderColor = 'var(--interactive-accent)';
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.background = 'var(--background-secondary-alt)';
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.transform = 'scale(1.02)';
     });
 
     iconContainer.addEventListener('mouseleave', () => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.borderColor = 'var(--background-modifier-border)';
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.background = 'var(--background-secondary)';
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       iconContainer.style.transform = 'scale(1)';
     });
 

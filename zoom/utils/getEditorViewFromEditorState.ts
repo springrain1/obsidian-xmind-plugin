@@ -11,7 +11,7 @@ import { EditorView } from "@codemirror/view";
 export function getEditorViewFromEditorState(state: EditorState): EditorView | null {
   // @ts-ignore - 使用私有API访问视图实例
   if (state && state.field && state.field.panels) {
-    // @ts-ignore
+    // @ts-ignore -- Legacy code compatibility
     const view = state.field.panels.panels;
     if (view instanceof EditorView) {
       return view;

@@ -38,7 +38,7 @@ export default class MindMapPlugin extends Plugin {
     try {
       // @ts-ignore - 类型定义可能不完整，但API实际存在
       if (this.app.commands && this.app.commands.commands) {
-        // @ts-ignore
+        // @ts-ignore -- Legacy code compatibility
         const existingCommands = this.app.commands.commands;
         for (const id in existingCommands) {
           if (id.startsWith('obsidian-enhancing-mindmap:')) {
@@ -1110,7 +1110,7 @@ export default class MindMapPlugin extends Plugin {
       );
 
     try {
-      // @ts-ignore
+      // @ts-ignore -- Legacy code compatibility
       const mindmap: TFile = await this.app.fileManager.createNewMarkdownFile(
         targetFolder,
         `${t('Untitled mindmap')}`

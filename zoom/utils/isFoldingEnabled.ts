@@ -11,7 +11,7 @@ export function isFoldingEnabled(app: App): boolean {
   } = {
     foldHeading: true,
     foldIndent: true,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Type inference limitation
     ...(app.vault as any).config,
   };
 

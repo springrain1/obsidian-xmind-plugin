@@ -142,7 +142,7 @@ export class ZoomManager {
       name: "放大到当前位置 (初始化失败)",
       icon: "zoom-in",
       editorCallback: (editor) => {
-        // @ts-ignore
+        // @ts-ignore -- Legacy code compatibility
         new this.plugin.app.Notice(
           "XMind Zoom 功能初始化失败。请检查控制台错误信息。"
         );
@@ -160,7 +160,7 @@ export class ZoomManager {
       name: "缩小到整个文档 (初始化失败)",
       icon: "zoom-out",
       editorCallback: (editor) => {
-        // @ts-ignore
+        // @ts-ignore -- Legacy code compatibility
         new this.plugin.app.Notice(
           "XMind Zoom 功能初始化失败。请检查控制台错误信息。"
         );

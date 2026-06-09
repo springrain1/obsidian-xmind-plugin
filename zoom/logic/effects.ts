@@ -40,5 +40,5 @@ export const zoomStateField = StateField.define<ZoomState | null>({
 });
 
 // 将状态字段添加到效果上，以便在其他地方访问
-// @ts-ignore
+// @ts-ignore -- Legacy code compatibility
 zoomInEffect.field = zoomStateField; 

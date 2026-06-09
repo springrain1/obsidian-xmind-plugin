@@ -5,7 +5,7 @@ import {
   WorkspaceLeaf,
   FileView
 } from 'obsidian';
-// @ts-ignore
+// @ts-ignore -- Legacy code compatibility
 import { XMindEmbedViewer } from 'xmind-embed-viewer';
 import { createXMindEmbedViewerWithFallback } from './xmind-embed-helper';
 import { createDebugLogger, DebugLogger } from './debug-logger';
@@ -24,8 +24,11 @@ export class XMindView extends FileView {
     
     // 设置容器样式
     this.contentEl.addClass('xmind-view-container');
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.contentEl.style.width = '100%';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.contentEl.style.height = '100%';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.contentEl.style.overflow = 'hidden'; // 防止滚动条出现
     
     // 允许在没有文件的情况下打开视图

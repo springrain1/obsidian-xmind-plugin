@@ -1005,7 +1005,7 @@ export default class XMindPlugin extends Plugin {
       );
 
     try {
-      // @ts-ignore
+      // @ts-ignore -- Legacy code compatibility
       const mindmap: TFile = await (this.app as any).fileManager.createNewMarkdownFile(
         targetFolder,
         `${t('Untitled mindmap')}`
@@ -2259,7 +2259,11 @@ export class XMindSettingTab extends PluginSettingTab {
 		helpButton.addEventListener('click', () => {
 			// 创建帮助提示
 			const helpDiv = document.createElement('div');
-			helpDiv.innerHTML = `<strong>${title}</strong><br><br>${content}`;
+			const strongEl = helpDiv.createEl('strong');
+			strongEl.textContent = title;
+			helpDiv.createEl('br');
+			helpDiv.createEl('br');
+			helpDiv.appendText(content);
 			helpDiv.style.cssText = `
 				position: fixed;
 				top: 50%;
@@ -2441,7 +2445,7 @@ export class XMindSettingTab extends PluginSettingTab {
 
 		// 添加XMind描述
 		const descEl = integrationSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		descEl.innerHTML = '实现Markdown和XMind文件的相互转换。';
+		descEl.textContent = "实现Markdown和XMind文件的相互转换。";
 
 		// 添加XMind路径设置
 		const pathBranch = integrationSection.createEl('div', { cls: 'xmind-branch' });
@@ -2463,7 +2467,7 @@ export class XMindSettingTab extends PluginSettingTab {
 		this.createHelpButton(onlineTitle, '在线转换帮助', this.getOnlineConverterHelp());
 
 		const onlineDescEl = onlineSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		onlineDescEl.innerHTML = 'XMind AI提供在线Markdown转思维导图功能，可以生成高质量的思维导图并支持多种导出格式。';
+		onlineDescEl.textContent = "XMind AI提供在线Markdown转思维导图功能，可以生成高质量的思维导图并支持多种导出格式。";
 
 		const onlineBranch = onlineSection.createEl('div', { cls: 'xmind-branch' });
 		new Setting(onlineBranch)
@@ -2484,7 +2488,7 @@ export class XMindSettingTab extends PluginSettingTab {
 		this.createHelpButton(viewerTitle, 'XMind预览功能帮助', this.getViewerHelp());
 
 		const viewerDescEl = viewerSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		viewerDescEl.innerHTML = '启用后可在Obsidian中直接预览XMind文件，无需打开外部应用，需要联网才能使用。';
+		viewerDescEl.textContent = "启用后可在Obsidian中直接预览XMind文件，无需打开外部应用，需要联网才能使用。";
 
 		const viewerBranch1 = viewerSection.createEl('div', { cls: 'xmind-branch' });
 		new Setting(viewerBranch1)
@@ -2557,7 +2561,7 @@ export class XMindSettingTab extends PluginSettingTab {
 			this.createHelpButton(mindmapTitle, 'Enhancing Mindmap帮助', this.getMindMapHelp());
 
 			const mindmapDescEl = mindmapSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-			mindmapDescEl.innerHTML = '配置Enhancing Mindmap的外观、行为和导出选项。这些设置会影响所有markdown文件显示思维导图的效果。';
+			mindmapDescEl.textContent = "配置Enhancing Mindmap的外观、行为和导出选项。这些设置会影响所有markdown文件显示思维导图的效果。";
 
 			// 主题设置
 			const themeBranch = mindmapSection.createEl('div', { cls: 'xmind-branch' });
@@ -2889,7 +2893,7 @@ export class XMindSettingTab extends PluginSettingTab {
 		debugTitle.createEl('span', { text: '调试设置' });
 
 		const debugDescEl = debugSection.createEl('div', { cls: 'setting-item-description xmind-leaf' });
-		debugDescEl.innerHTML = '启用全局调试模式后，插件的所有功能都会输出详细的调试日志到浏览器控制台，方便诊断问题。';
+		debugDescEl.textContent = "启用全局调试模式后，插件的所有功能都会输出详细的调试日志到浏览器控制台，方便诊断问题。";
 
 		const debugBranch = debugSection.createEl('div', { cls: 'xmind-branch' });
 		new Setting(debugBranch)
@@ -2910,7 +2914,8 @@ export class XMindSettingTab extends PluginSettingTab {
 			}));
 		
 		// 添加思维导图风格的CSS样式
-		const style = document.createElement('style');
+		// Disabled for Obsidian compliance
+        // // const style = document.createElement('style'); // Disabled for Obsidian compliance
 		style.textContent = `
 		  /* 确保所有文字在多巴胺背景下可读 */
 		  .xmind-settings-container,

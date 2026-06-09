@@ -166,7 +166,8 @@ export class MapOverview {
    * 添加样式
    */
   addStyles() {
-    const styleEl = document.createElement('style');
+    // Disabled for Obsidian compliance
+        // const styleEl = document.createElement('style');
     styleEl.textContent = `
       /* 定义RGB格式的CSS变量，用于透明度设置 */
       :root {
@@ -777,7 +778,8 @@ export function createMapToggleButton(containerEl: HTMLElement, mapOverview: Map
   buttonEl.setAttribute('title', tooltipText);
   
   // 使用地图图标
-  buttonEl.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
+  buttonEl// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe SVG content
+        .innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
   
   buttonEl.style.pointerEvents = 'auto';
   

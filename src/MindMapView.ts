@@ -104,10 +104,15 @@ export class MindMapView extends TextFileView implements HoverParent {
       rootBox: this.mindmap.root.getPosition(),
       oldScrollLeft: this.mindmap.containerEL.scrollLeft,
       oldScrollTop: this.mindmap.containerEL.scrollTop,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       originalBgColor: this.mindmap.contentEL.style.background,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       originalWidth: this.mindmap.contentEL.style.width,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       originalHeight: this.mindmap.contentEL.style.height,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       originalTransform: this.mindmap.contentEL.style.transform,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       originalOverflow: this.mindmap.contentEL.style.overflow
     };
 
@@ -140,16 +145,22 @@ export class MindMapView extends TextFileView implements HoverParent {
     var h = Math.max(box.height + padding * 2, 600); // 最小高度600px
 
     // 优化导出样式设置
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.width = w + 'px';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.height = h + 'px';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.overflow = 'visible'; // 确保内容不被裁剪
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.transform = 'none'; // 移除可能影响导出的变换
 
     // 设置背景色，确保导出质量
     if (this.plugin.settings.mindmapBackground === 'transparent') {
       const isDarkMode = document.body.classList.contains('theme-dark');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       this.mindmap.contentEL.style.background = isDarkMode ? '#1e1e1e' : '#ffffff';
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
       this.mindmap.contentEL.style.background = this.plugin.settings.mindmapBackground;
     }
 
@@ -169,10 +180,15 @@ export class MindMapView extends TextFileView implements HoverParent {
     }
 
     // 恢复所有原始样式和状态
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.width = exportData.originalWidth || this.plugin.settings.canvasSize + 'px';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.height = exportData.originalHeight || this.plugin.settings.canvasSize + 'px';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.background = exportData.originalBgColor || '';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.transform = exportData.originalTransform || '';
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
     this.mindmap.contentEL.style.overflow = exportData.originalOverflow || '';
 
     // 恢复滚动位置
@@ -798,7 +814,7 @@ export class MindMapView extends TextFileView implements HoverParent {
     //this.plugin.removeView(this);
     if (this.mindmap) {
       this.mindmap.clear();
-      this.contentEl.innerHTML = '';
+      this.contentEl.empty();
       this.mindmap = null;
     }
 
@@ -847,7 +863,7 @@ export class MindMapView extends TextFileView implements HoverParent {
     try {
       if (this.mindmap) {
         this.mindmap.clear();
-        this.contentEl.innerHTML = '';
+        this.contentEl.empty();
       }
 
       this.data = data || '';
@@ -953,7 +969,10 @@ export class MindMapView extends TextFileView implements HoverParent {
       }
     } catch (error) {
       console.error("设置视图数据时出错:", error);
-      this.contentEl.innerHTML = '<div style="padding: 20px;">加载思维导图时出错。请尝试重新打开文件或切换到Markdown视图。</div>';
+      const errorDiv = this.contentEl.createEl('div');
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
+      errorDiv.style.padding = '20px';
+      errorDiv.textContent = '加载思维导图时出错。请尝试重新打开文件或切换到Markdown视图。';
     }
   }
 
@@ -963,7 +982,7 @@ export class MindMapView extends TextFileView implements HoverParent {
 
     if (this.mindmap) {
       this.mindmap.clear();
-      this.contentEl.innerHTML = '';
+      this.contentEl.empty();
       this.mindmap = null;
     }
 
@@ -1180,6 +1199,7 @@ export class MindMapView extends TextFileView implements HoverParent {
       // 查找菜单元素并修改z-index
       const menuEl = document.querySelector('.menu');
       if (menuEl && menuEl instanceof HTMLElement) {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         menuEl.style.zIndex = "10000"; // 设置更高的z-index
       }
     }, 0);

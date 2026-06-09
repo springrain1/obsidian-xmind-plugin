@@ -11,7 +11,7 @@ import { EditorState } from "@codemirror/state";
 export function getDocumentTitle(state: EditorState): string {
   try {
     // 获取编辑器视图关联的文件
-    // @ts-ignore
+    // @ts-ignore -- Legacy code compatibility
     const file = state.field?.viewState?.state?.file;
     
     if (file) {

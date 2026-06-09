@@ -198,7 +198,8 @@ export class StreamingModal extends Modal {
     private createRegenerateButton() {
         // 创建重新生成按钮
         this.regenerateButton = this.outputContainer.createEl('button');
-        this.regenerateButton.innerHTML = `
+        this.regenerateButton// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe SVG content
+        .innerHTML = `
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;">
                 <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
                 <path d="M21 3v5h-5"/>

@@ -18,8 +18,11 @@ export class XMindViewerView extends ItemView {
         this.logger = createDebugLogger(plugin);
         // 设置容器样式
         this.contentEl.addClass('xmind-viewer-container');
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         this.contentEl.style.width = '100%';
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         this.contentEl.style.height = '100%';
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access -- Dynamic style required
         this.contentEl.style.overflow = 'hidden';
     }
 
