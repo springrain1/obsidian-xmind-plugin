@@ -68,14 +68,22 @@
             });
 
         function applyOptions(clone) {
-            if (options.bgcolor) clone.setCssProps({ 'background-color': options.bgcolor });
-            if (options.width) clone.setCssProps({ 'width': options.width + 'px' });
-            if (options.height) clone.setCssProps({ 'height': options.height + 'px' });
+            // 使用标准 DOM API setProperty 代替 setCssProps
+            if (options.bgcolor) {
+                clone.style.setProperty('background-color', options.bgcolor);
+            }
+            if (options.width) {
+                clone.style.setProperty('width', options.width + 'px');
+            }
+            if (options.height) {
+                clone.style.setProperty('height', options.height + 'px');
+            }
 
-            if (options.style)
+            if (options.style) {
                 Object.keys(options.style).forEach(function (property) {
-                    clone.setCssProps({ [property]: options.style[property] });
+                    clone.style.setProperty(property, options.style[property]);
                 });
+            }
 
             return clone;
         }
@@ -266,9 +274,8 @@
                 ['width', 'height'].forEach(function (attribute) {
                     var value = clone.getAttribute(attribute);
                     if (!value) return;
-                     if(clone.setCssProps){
-                         clone.setCssProps({ [attribute]: value });
-                     }
+                    // 使用标准 DOM API setProperty
+                    clone.style.setProperty(attribute, value);
                 });
             }
         }
