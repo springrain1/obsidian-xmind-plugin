@@ -54,14 +54,16 @@ export class MindmapAIIntegration {
             if (!floatingButton) {
                 floatingButton = this.createFloatingButton(node, mindmapView);
                 node.el.appendChild(floatingButton);
-            }floatingButton.setCssProps({ 'display': 'block' });
+            }
+floatingButton.setCssProps({ 'display': 'block' });
         });
 
         // 鼠标离开节点时延迟隐藏悬浮按钮
         node.el.addEventListener('mouseleave', () => {
             if (floatingButton) {
                 hideTimeout = setTimeout(() => {
-                    if (floatingButton) {floatingButton.setCssProps({ 'display': 'none' });
+                    if (floatingButton) {
+floatingButton.setCssProps({ 'display': 'none' });
                     }
                 }, 500); // 500ms延迟
             }
@@ -96,10 +98,14 @@ export class MindmapAIIntegration {
         });
 
         // 悬停效果
-        button.addEventListener('mouseenter', () => {button.setCssProps({ 'transform': 'scale(1.1)' });button.setCssProps({ 'background-color': '#3730a3' });
+        button.addEventListener('mouseenter', () => {
+button.setCssProps({ 'transform': 'scale(1.1)' });
+button.setCssProps({ 'background-color': '#3730a3' });
         });
 
-        button.addEventListener('mouseleave', () => {button.setCssProps({ 'transform': 'scale(1)' });button.setCssProps({ 'background-color': '#4f46e5' });
+        button.addEventListener('mouseleave', () => {
+button.setCssProps({ 'transform': 'scale(1)' });
+button.setCssProps({ 'background-color': '#4f46e5' });
         });
 
         // 点击事件

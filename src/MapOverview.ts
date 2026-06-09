@@ -43,7 +43,8 @@ export class MapOverview {
    */
   initialize() {
     this.overviewEl = document.createElement('div');
-    this.overviewEl.classList.add('mm-map-overview');this.overviewEl.setCssProps({ 'display': 'none' });
+    this.overviewEl.classList.add('mm-map-overview');
+this.overviewEl.setCssProps({ 'display': 'none' });
     
     // 创建缩略图容器 - 移除标题栏，使界面更简洁
     this.miniMapEl = document.createElement('div');
@@ -189,7 +190,8 @@ export class MapOverview {
    * 切换概览视图显示/隐藏
    */
   toggle() {
-    this.isVisible = !this.isVisible;this.overviewEl.setCssProps({ 'display': this.isVisible ? 'flex' : 'none' });
+    this.isVisible = !this.isVisible;
+this.overviewEl.setCssProps({ 'display': this.isVisible ? 'flex' : 'none' });
     
     // 更新切换按钮状态
     const toggleButton = document.querySelector('.mm-map-overview-toggle');
@@ -400,7 +402,10 @@ export class MapOverview {
     const viewW = (viewWidth / mindmapScale) * scale;
     const viewH = (viewHeight / mindmapScale) * scale;
     
-    // 使用transform代替直接改变left/top，提高性能this.viewportIndicatorEl.setCssProps({ 'transform': `translate(${viewX}px, ${viewY}px)` });this.viewportIndicatorEl.setCssProps({ 'width': `${viewW}px` });this.viewportIndicatorEl.setCssProps({ 'height': `${viewH}px` });
+    // 使用transform代替直接改变left/top，提高性能
+this.viewportIndicatorEl.setCssProps({ 'transform': `translate(${viewX}px, ${viewY}px)` });
+this.viewportIndicatorEl.setCssProps({ 'width': `${viewW}px` });
+this.viewportIndicatorEl.setCssProps({ 'height': `${viewH}px` });
   }
   
   /**
@@ -461,7 +466,9 @@ export class MapOverview {
       this.lastX = x;
       this.lastY = y;
       
-      // 增加视觉反馈this.viewportIndicatorEl.setCssProps({ 'cursor': 'grabbing' });this.viewportIndicatorEl.setCssProps({ 'box-shadow': '0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(var(--interactive-accent-rgb), 0.4)' });
+      // 增加视觉反馈
+this.viewportIndicatorEl.setCssProps({ 'cursor': 'grabbing' });
+this.viewportIndicatorEl.setCssProps({ 'box-shadow': '0 0 0 1px rgba(0, 0, 0, 0.15), 0 0 0 4px rgba(var(--interactive-accent-rgb), 0.4)' });
       
       e.preventDefault();
     }
@@ -492,7 +499,9 @@ export class MapOverview {
    */
   handleMouseUp(e: MouseEvent) {
     if (this.dragging) {
-      // 重置视觉状态this.viewportIndicatorEl.setCssProps({ 'cursor': 'move' });this.viewportIndicatorEl.setCssProps({ 'box-shadow': '' });
+      // 重置视觉状态
+this.viewportIndicatorEl.setCssProps({ 'cursor': 'move' });
+this.viewportIndicatorEl.setCssProps({ 'box-shadow': '' });
     }
     this.dragging = false;
   }
@@ -529,7 +538,9 @@ export class MapOverview {
     if (node) {
       // 添加点击反馈特效
       const clickEffect = document.createElement('div');
-      clickEffect.className = 'mm-map-click-effect';clickEffect.setCssProps({ 'left': (e.clientX - rect.left) + 'px' });clickEffect.setCssProps({ 'top': (e.clientY - rect.top) + 'px' });
+      clickEffect.className = 'mm-map-click-effect';
+clickEffect.setCssProps({ 'left': (e.clientX - rect.left) + 'px' });
+clickEffect.setCssProps({ 'top': (e.clientY - rect.top) + 'px' });
       this.miniMapEl.appendChild(clickEffect);
       
       // 动画结束后移除
@@ -636,7 +647,8 @@ export function createMapToggleButton(containerEl: HTMLElement, mapOverview: Map
   
   // 使用地图图标
   buttonEl// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe SVG content
-        ['inner' + 'HTML'] = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';buttonEl.setCssProps({ 'pointer-events': 'auto' });
+        ['inner' + 'HTML'] = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>';
+buttonEl.setCssProps({ 'pointer-events': 'auto' });
   
   buttonEl.addEventListener('click', () => {
     mapOverview.toggle();
@@ -646,7 +658,11 @@ export function createMapToggleButton(containerEl: HTMLElement, mapOverview: Map
   document.body.appendChild(buttonEl);
   
   // 位置在大纲视图按钮的左侧
-  const updateButtonPosition = () => {buttonEl.setCssProps({ 'position': 'fixed' });buttonEl.setCssProps({ 'bottom': '20px' }); // 与大纲视图按钮在同一高度buttonEl.setCssProps({ 'right': '70px' });  // 位于大纲视图按钮左侧buttonEl.setCssProps({ 'z-index': '9999' });
+  const updateButtonPosition = () => {
+buttonEl.setCssProps({ 'position': 'fixed' });
+buttonEl.setCssProps({ 'bottom': '20px' }); // 与大纲视图按钮在同一高度
+buttonEl.setCssProps({ 'right': '70px' });  // 位于大纲视图按钮左侧
+buttonEl.setCssProps({ 'z-index': '9999' });
   };
   
   updateButtonPosition();

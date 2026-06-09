@@ -36,10 +36,15 @@ export class StreamingModal extends Modal {
         contentEl.empty();
 
         // 设置模态框样式
-        this.modalEl.addClass('streaming-modal');this.modalEl.setCssProps({ 'width': '80%' });this.modalEl.setCssProps({ 'max-width': '800px' });this.modalEl.setCssProps({ 'height': '70%' });this.modalEl.setCssProps({ 'max-height': '600px' });
+        this.modalEl.addClass('streaming-modal');
+this.modalEl.setCssProps({ 'width': '80%' });
+this.modalEl.setCssProps({ 'max-width': '800px' });
+this.modalEl.setCssProps({ 'height': '70%' });
+this.modalEl.setCssProps({ 'max-height': '600px' });
 
         // 创建主容器
-        const mainContainer = contentEl.createDiv();        mainContainer.setCssProps({
+        const mainContainer = contentEl.createDiv();
+        mainContainer.setCssProps({
         'display': "flex",
         'flex-direction': "column",
         'gap': "16px",
@@ -48,7 +53,8 @@ export class StreamingModal extends Modal {
 
         // 原始内容显示（如果有选中文本）
         if (this.options.selectedText) {
-            const originalSection = mainContainer.createDiv();            originalSection.setCssProps({
+            const originalSection = mainContainer.createDiv();
+            originalSection.setCssProps({
         'max-height': "240px",
         'overflow-y': "auto",
         'white-space': "pre-wrap",
@@ -62,7 +68,8 @@ export class StreamingModal extends Modal {
         }
 
         // 功能标题
-        const titleSection = mainContainer.createDiv();        titleSection.setCssProps({
+        const titleSection = mainContainer.createDiv();
+        titleSection.setCssProps({
         'display': "flex",
         'align-items': "center",
         'gap': "8px",
@@ -73,12 +80,14 @@ export class StreamingModal extends Modal {
         titleSection.createSpan({ text: this.options.functionName });
 
         // AI 输出区域
-        this.outputContainer = mainContainer.createDiv();        this.outputContainer.setCssProps({
+        this.outputContainer = mainContainer.createDiv();
+        this.outputContainer.setCssProps({
         'position': "relative",
         'flex': "1",
       });
 
-        this.outputEl = this.outputContainer.createEl('textarea') as HTMLTextAreaElement;        this.outputEl.setCssProps({
+        this.outputEl = this.outputContainer.createEl('textarea') as HTMLTextAreaElement;
+        this.outputEl.setCssProps({
         'width': "100%",
         'height': "240px",
         'resize': "none",
@@ -94,7 +103,8 @@ export class StreamingModal extends Modal {
         this.outputEl.placeholder = 'AI 正在生成内容...';
 
         // 按钮容器
-        this.buttonContainer = mainContainer.createDiv();        this.buttonContainer.setCssProps({
+        this.buttonContainer = mainContainer.createDiv();
+        this.buttonContainer.setCssProps({
         'display': "flex",
         'justify-content': "space-between",
         'gap': "8px",
@@ -108,7 +118,8 @@ export class StreamingModal extends Modal {
 
     private createButtons() {
         // 左侧：模型信息
-        const leftSection = this.buttonContainer.createDiv();        leftSection.setCssProps({
+        const leftSection = this.buttonContainer.createDiv();
+        leftSection.setCssProps({
         'display': "flex",
         'align-items': "center",
         'gap': "8px",
@@ -120,7 +131,8 @@ export class StreamingModal extends Modal {
         leftSection.createSpan({ text: 'AI Assistant' });
 
         // 右侧：操作按钮
-        const rightSection = this.buttonContainer.createDiv();        rightSection.setCssProps({
+        const rightSection = this.buttonContainer.createDiv();
+        rightSection.setCssProps({
         'display': "flex",
         'gap': "8px",
       });
@@ -128,19 +140,22 @@ export class StreamingModal extends Modal {
         // Stop 按钮（仅在流式输出时显示）
         this.stopButton = rightSection.createEl('button');
         this.stopButton.textContent = 'Stop';
-        this.stopButton.className = 'mod-warning';this.stopButton.setCssProps({ 'display': 'none' });
+        this.stopButton.className = 'mod-warning';
+this.stopButton.setCssProps({ 'display': 'none' });
         this.stopButton.onclick = () => this.stopStreaming();
 
         // Insert 按钮（完成后显示）
         this.insertButton = rightSection.createEl('button');
-        this.insertButton.className = 'mod-cta';        this.insertButton.setCssProps({
+        this.insertButton.className = 'mod-cta';
+        this.insertButton.setCssProps({
         'display': "none",
         'align-items': "center",
         'gap': "4px",
       });
         this.insertButton.onclick = () => this.insertContent();
 
-        const insertContent = this.insertButton.createDiv();        insertContent.setCssProps({
+        const insertContent = this.insertButton.createDiv();
+        insertContent.setCssProps({
         'display': "flex",
         'align-items': "center",
         'gap': "4px",
@@ -152,14 +167,16 @@ export class StreamingModal extends Modal {
         // Replace 按钮（完成后显示，仅当有选中文本时）
         if (this.options.selectedText) {
             this.replaceButton = rightSection.createEl('button');
-            this.replaceButton.className = 'mod-cta';            this.replaceButton.setCssProps({
+            this.replaceButton.className = 'mod-cta';
+            this.replaceButton.setCssProps({
         'display': "none",
         'align-items': "center",
         'gap': "4px",
       });
             this.replaceButton.onclick = () => this.replaceContent();
 
-            const replaceContent = this.replaceButton.createDiv();            replaceContent.setCssProps({
+            const replaceContent = this.replaceButton.createDiv();
+            replaceContent.setCssProps({
         'display': "flex",
         'align-items': "center",
         'gap': "4px",
@@ -190,7 +207,8 @@ export class StreamingModal extends Modal {
                 <path d="M3 21v-5h5"/>
             </svg>
         `;
-        this.regenerateButton.title = '重新生成';        this.regenerateButton.setCssProps({
+        this.regenerateButton.title = '重新生成';
+        this.regenerateButton.setCssProps({
         'position': "absolute",
         'bottom': "8px",
         'right': "8px",
@@ -209,10 +227,16 @@ export class StreamingModal extends Modal {
       });
 
         // 悬停效果
-        this.regenerateButton.addEventListener('mouseenter', () => {this.regenerateButton!.setCssProps({ 'background': 'var(--background-modifier-hover)' });this.regenerateButton!.setCssProps({ 'color': 'var(--text-normal)' });this.regenerateButton!.setCssProps({ 'transform': 'scale(1.05)' });
+        this.regenerateButton.addEventListener('mouseenter', () => {
+this.regenerateButton!.setCssProps({ 'background': 'var(--background-modifier-hover)' });
+this.regenerateButton!.setCssProps({ 'color': 'var(--text-normal)' });
+this.regenerateButton!.setCssProps({ 'transform': 'scale(1.05)' });
         });
 
-        this.regenerateButton.addEventListener('mouseleave', () => {this.regenerateButton!.setCssProps({ 'background': 'var(--background-primary)' });this.regenerateButton!.setCssProps({ 'color': 'var(--text-muted)' });this.regenerateButton!.setCssProps({ 'transform': 'scale(1)' });
+        this.regenerateButton.addEventListener('mouseleave', () => {
+this.regenerateButton!.setCssProps({ 'background': 'var(--background-primary)' });
+this.regenerateButton!.setCssProps({ 'color': 'var(--text-muted)' });
+this.regenerateButton!.setCssProps({ 'transform': 'scale(1)' });
         });
 
         // 点击事件
@@ -225,22 +249,27 @@ export class StreamingModal extends Modal {
         this.content = '';
 
         // 显示 Stop 按钮
-        if (this.stopButton) {this.stopButton.setCssProps({ 'display': 'inline-block' });
+        if (this.stopButton) {
+this.stopButton.setCssProps({ 'display': 'inline-block' });
         }
 
         // 隐藏 Insert/Replace 按钮
-        if (this.insertButton) {this.insertButton.setCssProps({ 'display': 'none' });
+        if (this.insertButton) {
+this.insertButton.setCssProps({ 'display': 'none' });
         }
-        if (this.replaceButton) {this.replaceButton.setCssProps({ 'display': 'none' });
+        if (this.replaceButton) {
+this.replaceButton.setCssProps({ 'display': 'none' });
         }
 
         // 隐藏重新生成按钮
-        if (this.regenerateButton) {this.regenerateButton.setCssProps({ 'display': 'none' });
+        if (this.regenerateButton) {
+this.regenerateButton.setCssProps({ 'display': 'none' });
         }
 
         // 设置输出区域为只读状态
         this.outputEl.disabled = true;
-        this.outputEl.value = '正在生成内容...';this.outputEl.setCssProps({ 'color': 'var(--text-muted)' });
+        this.outputEl.value = '正在生成内容...';
+this.outputEl.setCssProps({ 'color': 'var(--text-muted)' });
     }
 
     appendToken(token: string) {
@@ -248,7 +277,8 @@ export class StreamingModal extends Modal {
 
         this.content += token;
 
-        // 重置样式this.outputEl.setCssProps({ 'color': 'var(--text-normal)' });
+        // 重置样式
+this.outputEl.setCssProps({ 'color': 'var(--text-normal)' });
 
         // 更新显示内容，添加打字机效果
         this.outputEl.value = this.content + '▋'; // 添加光标效果
@@ -266,17 +296,21 @@ export class StreamingModal extends Modal {
         this.outputEl.disabled = false;
 
         // 隐藏 Stop 按钮
-        if (this.stopButton) {this.stopButton.setCssProps({ 'display': 'none' });
+        if (this.stopButton) {
+this.stopButton.setCssProps({ 'display': 'none' });
         }
 
         // 显示 Insert/Replace 按钮
-        if (this.insertButton) {this.insertButton.setCssProps({ 'display': 'flex' });
+        if (this.insertButton) {
+this.insertButton.setCssProps({ 'display': 'flex' });
         }
-        if (this.replaceButton) {this.replaceButton.setCssProps({ 'display': 'flex' });
+        if (this.replaceButton) {
+this.replaceButton.setCssProps({ 'display': 'flex' });
         }
 
         // 显示重新生成按钮
-        if (this.regenerateButton) {this.regenerateButton.setCssProps({ 'display': 'flex' });
+        if (this.regenerateButton) {
+this.regenerateButton.setCssProps({ 'display': 'flex' });
         }
     }
 
@@ -290,17 +324,21 @@ export class StreamingModal extends Modal {
         this.outputEl.disabled = false;
 
         // 隐藏 Stop 按钮
-        if (this.stopButton) {this.stopButton.setCssProps({ 'display': 'none' });
+        if (this.stopButton) {
+this.stopButton.setCssProps({ 'display': 'none' });
         }
 
         // 显示 Insert/Replace 按钮
-        if (this.insertButton) {this.insertButton.setCssProps({ 'display': 'flex' });
+        if (this.insertButton) {
+this.insertButton.setCssProps({ 'display': 'flex' });
         }
-        if (this.replaceButton) {this.replaceButton.setCssProps({ 'display': 'flex' });
+        if (this.replaceButton) {
+this.replaceButton.setCssProps({ 'display': 'flex' });
         }
 
         // 显示重新生成按钮
-        if (this.regenerateButton) {this.regenerateButton.setCssProps({ 'display': 'flex' });
+        if (this.regenerateButton) {
+this.regenerateButton.setCssProps({ 'display': 'flex' });
         }
 
         this.options.onStop?.();
@@ -423,13 +461,15 @@ export class StreamingModal extends Modal {
     private registerKeyboardShortcuts() {
         // 监听键盘事件
         this.scope.register(['Ctrl'], 'Enter', (evt: KeyboardEvent) => {
-            evt.preventDefault();            if (this.replaceButton && this.replaceButton.getAttribute('data-visible') !== 'false') {
+            evt.preventDefault();
+            if (this.replaceButton && this.replaceButton.getAttribute('data-visible') !== 'false') {
                 this.replaceButton.click();
             }
         });
 
         this.scope.register(['Ctrl', 'Shift'], 'Enter', (evt: KeyboardEvent) => {
-            evt.preventDefault();            if (this.insertButton && this.insertButton.getAttribute('data-visible') !== 'false') {
+            evt.preventDefault();
+            if (this.insertButton && this.insertButton.getAttribute('data-visible') !== 'false') {
                 this.insertButton.click();
             }
         });

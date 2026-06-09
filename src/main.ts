@@ -234,7 +234,8 @@ export default class MindMapPlugin extends Plugin {
           var mindmap = mindmapView.mindmap;
           var node = mindmap.selectNode;
           if (node && !node.data.isEdit) {
-            node.edit();mindmap._menuDom.setCssProps({ 'display': 'none' });
+            node.edit();
+mindmap._menuDom.setCssProps({ 'display': 'none' });
           }
         }
       }
@@ -263,7 +264,8 @@ export default class MindMapPlugin extends Plugin {
               if (!node.parent) return;
               var newNode = node.mindmap.execute('addSiblingNode', {
                 parent: node.parent
-              });mindmap._menuDom.setCssProps({ 'display': 'none' });
+              });
+mindmap._menuDom.setCssProps({ 'display': 'none' });
 
               // Move the new node under the previously selected one
               // Do not add this command to the history
@@ -302,7 +304,8 @@ export default class MindMapPlugin extends Plugin {
               if (!node.isExpand) {
                 node.expand();
               }
-              node.mindmap.execute("addChildNode", { parent: node });mindmap._menuDom.setCssProps({ 'display': 'none' });
+              node.mindmap.execute("addChildNode", { parent: node });
+mindmap._menuDom.setCssProps({ 'display': 'none' });
             } else{
               // mindmap.selectNode.unSelect();
               mindmap.clearSelectNode();
@@ -331,7 +334,8 @@ export default class MindMapPlugin extends Plugin {
           var mindmap = mindmapView.mindmap;
           var node = mindmap.selectNode;
           if (node && !node.data.isRoot && !node.data.isEdit) {
-            node.mindmap.execute("deleteNodeAndChild", { node });mindmap._menuDom.setCssProps({ 'display': 'none' });
+            node.mindmap.execute("deleteNodeAndChild", { node });
+mindmap._menuDom.setCssProps({ 'display': 'none' });
           }
           //else: Deletion makes no sense
         }
@@ -1085,7 +1089,8 @@ export default class MindMapPlugin extends Plugin {
     this.addSettingTab(new MindMapSettingsTab(this.app, this));
 
   }
-
+
+
   onunload() {
     // AIService清理已在各个组件中单独处理
   }

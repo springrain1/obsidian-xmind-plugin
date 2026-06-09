@@ -30,7 +30,8 @@ export class OutlineView {
   initialize() {
     // 创建大纲视图容器
     this.outlineEl = document.createElement('div');
-    this.outlineEl.classList.add('mm-outline-view');this.outlineEl.setCssProps({ 'display': 'none' });
+    this.outlineEl.classList.add('mm-outline-view');
+this.outlineEl.setCssProps({ 'display': 'none' });
     
     // 直接添加到body，而不是containerEl
     document.body.appendChild(this.outlineEl);
@@ -122,7 +123,8 @@ export class OutlineView {
       document.body.appendChild(this.outlineEl);
     }
     
-    // 更新显示状态this.outlineEl.setCssProps({ 'display': this.isVisible ? 'flex' : 'none' });
+    // 更新显示状态
+this.outlineEl.setCssProps({ 'display': this.isVisible ? 'flex' : 'none' });
     
     // 更新切换按钮状态
     const toggleButton = this.toggleButtonEl || document.querySelector('.mm-view-toggle');
@@ -386,7 +388,8 @@ export class OutlineView {
       itemEl.classList.add('active');
     }
     
-    // 设置缩进itemEl.setCssProps({ 'padding-left': `${level * 16 + 8}px` });
+    // 设置缩进
+itemEl.setCssProps({ 'padding-left': `${level * 16 + 8}px` });
     
     // 添加层级指示器（小圆点或三角形）
     const toggleEl = document.createElement('div');
@@ -415,13 +418,15 @@ export class OutlineView {
           // 折叠：隐藏子节点
           node.collapse();
           toggleEl.classList.add('collapsed');
-          childNodes.forEach(childEl => {childEl.setCssProps({ 'display': 'none' });
+          childNodes.forEach(childEl => {
+childEl.setCssProps({ 'display': 'none' });
           });
         } else {
           // 展开：显示子节点
           node.expand();
           toggleEl.classList.remove('collapsed');
-          childNodes.forEach(childEl => {childEl.setCssProps({ 'display': 'flex' });
+          childNodes.forEach(childEl => {
+childEl.setCssProps({ 'display': 'flex' });
           });
         }
         
@@ -506,9 +511,11 @@ export function createViewToggleButton(containerEl: HTMLElement, outlineView: Ou
   
   // 使用类型断言确保t()函数参数类型正确
   const tooltipText = t('Toggle Outline View' as any);
-  buttonEl.setAttribute('title', tooltipText);  buttonEl['inner' + 'HTML'] = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+  buttonEl.setAttribute('title', tooltipText);
+  buttonEl['inner' + 'HTML'] = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
   
-  // 增强按钮点击区域和响应性buttonEl.setCssProps({ 'pointer-events': 'auto' });
+  // 增强按钮点击区域和响应性
+buttonEl.setCssProps({ 'pointer-events': 'auto' });
   
   // 使用捕获阶段避免事件冒泡被阻止
   buttonEl.addEventListener('click', () => {
@@ -519,7 +526,12 @@ export function createViewToggleButton(containerEl: HTMLElement, outlineView: Ou
   document.body.appendChild(buttonEl);
   
   // 设置按钮位置更新逻辑 - 移到右下角
-  const updateButtonPosition = () => {buttonEl.setCssProps({ 'position': 'fixed' });buttonEl.setCssProps({ 'top': 'auto' }); // 清除顶部定位buttonEl.setCssProps({ 'bottom': '20px' }); // 位于底部buttonEl.setCssProps({ 'right': '20px' });buttonEl.setCssProps({ 'z-index': '9999' }); // 确保在最上层
+  const updateButtonPosition = () => {
+buttonEl.setCssProps({ 'position': 'fixed' });
+buttonEl.setCssProps({ 'top': 'auto' }); // 清除顶部定位
+buttonEl.setCssProps({ 'bottom': '20px' }); // 位于底部
+buttonEl.setCssProps({ 'right': '20px' });
+buttonEl.setCssProps({ 'z-index': '9999' }); // 确保在最上层
   };
   
   // 初始更新按钮位置

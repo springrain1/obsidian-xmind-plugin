@@ -120,7 +120,8 @@ export default class Node {
         this._aiButton = document.createElement('div');
         this._aiButton.classList.add('mm-node-ai-button');
         this._aiButton.textContent = "🧠";
-        this._aiButton.title = 'AI 扩展';this._aiButton.setCssProps({ 'display': 'none' }); // 默认隐藏
+        this._aiButton.title = 'AI 扩展';
+this._aiButton.setCssProps({ 'display': 'none' }); // 默认隐藏
         this.containEl.appendChild(this._aiButton);
 
         // 添加点击事件
@@ -130,10 +131,12 @@ export default class Node {
         });
 
         // 添加鼠标悬停事件
-        this.containEl.addEventListener('mouseenter', () => {this._aiButton.setCssProps({ 'display': 'block' });
+        this.containEl.addEventListener('mouseenter', () => {
+this._aiButton.setCssProps({ 'display': 'block' });
         });
 
-        this.containEl.addEventListener('mouseleave', () => {this._aiButton.setCssProps({ 'display': 'none' });
+        this.containEl.addEventListener('mouseleave', () => {
+this._aiButton.setCssProps({ 'display': 'none' });
         });
     }
 
@@ -143,7 +146,8 @@ export default class Node {
         }
         // 安全检查：确保 mindmap.view 和 mindmap.view.app 存在
         if (this.mindmap?.view?.app) {
-            MarkdownRenderer.render(this.mindmap.view.app, this.data.text, this.contentEl, this.mindmap.path||"", this.mindmap.view).then(()=>{                this.data.mdText = this.contentEl.innerHTML;
+            MarkdownRenderer.render(this.mindmap.view.app, this.data.text, this.contentEl, this.mindmap.path||"", this.mindmap.view).then(()=>{
+                this.data.mdText = this.contentEl.innerHTML;
                 this.refreshBox();
                 this.mindmap&&this.mindmap.emit('initNode',{});
                 this._delay();
@@ -211,7 +215,8 @@ export default class Node {
                         if(md){
                             // 安全检查：确保 mindmap.view 和 mindmap.view.app 存在
                             if (this.mindmap?.view?.app) {
-                                MarkdownRenderer.render(this.mindmap.view.app, md, markdownPreview, this.mindmap.path||"", this.mindmap.view).then(()=>{                                   // this.data.mdText = this.editDom.innerHTML;
+                                MarkdownRenderer.render(this.mindmap.view.app, md, markdownPreview, this.mindmap.path||"", this.mindmap.view).then(()=>{
+                                   // this.data.mdText = this.editDom.innerHTML;
                                     this.refreshBox();
                                     //this._delay();
                                     this.mindmap&&this.mindmap.emit('renderEditNode',{node:this});
@@ -510,7 +515,8 @@ export default class Node {
         
         // 安全检查：确保 mindmap.view 和 mindmap.view.app 存在
         if (this.mindmap?.view?.app) {
-            MarkdownRenderer.render(this.mindmap.view.app, text, this.contentEl, safePath, this.mindmap.view).then(()=>{                this.data.mdText = this.contentEl.innerHTML;
+            MarkdownRenderer.render(this.mindmap.view.app, text, this.contentEl, safePath, this.mindmap.view).then(()=>{
+                this.data.mdText = this.contentEl.innerHTML;
                 this.refreshBox();
                 this._delay();
             }).catch(err => {
@@ -572,7 +578,9 @@ export default class Node {
 
     setPosition(x:number,y:number){
         this.box.x=x;
-        this.box.y=y;this.containEl.setCssProps({ 'left': x + 'px' });this.containEl.setCssProps({ 'top': y + 'px' });
+        this.box.y=y;
+this.containEl.setCssProps({ 'left': x + 'px' });
+this.containEl.setCssProps({ 'top': y + 'px' });
     }
 
     getPosition(){
@@ -610,7 +618,9 @@ export default class Node {
         return {...{},...this.box};
     }
 
-    getDomBox(){        var t = parseInt(this.containEl.style.top);        var l = parseInt(this.containEl.style.left);
+    getDomBox(){
+        var t = parseInt(this.containEl.style.top);
+        var l = parseInt(this.containEl.style.left);
         var w = Math.ceil(this.contentEl.offsetWidth);
         var h = Math.ceil(this.contentEl.offsetHeight);
 
@@ -750,11 +760,13 @@ export default class Node {
         return !this.isHide;
     }
 
-    show(){this.containEl.setCssProps({ 'display': "block" });
+    show(){
+this.containEl.setCssProps({ 'display': "block" });
         this.isHide=false
     }
 
-    hide(){this.containEl.setCssProps({ 'display': "none" });
+    hide(){
+this.containEl.setCssProps({ 'display': "none" });
         this.isHide=true
     }
 
@@ -891,7 +903,11 @@ export default class Node {
         });
 
         // 定位菜单
-        const rect = this._aiButton.getBoundingClientRect();aiMenu.setCssProps({ 'position': 'fixed' });aiMenu.setCssProps({ 'left': `${rect.right + 5}px` });aiMenu.setCssProps({ 'top': `${rect.top}px` });aiMenu.setCssProps({ 'z-index': '1000' });
+        const rect = this._aiButton.getBoundingClientRect();
+aiMenu.setCssProps({ 'position': 'fixed' });
+aiMenu.setCssProps({ 'left': `${rect.right + 5}px` });
+aiMenu.setCssProps({ 'top': `${rect.top}px` });
+aiMenu.setCssProps({ 'z-index': '1000' });
 
         // 添加到页面
         document.body.appendChild(aiMenu);
@@ -1348,7 +1364,8 @@ class MindMapCustomPromptModal {
     open() {
         // 创建模态框背景
         this.modal = document.createElement('div');
-        this.modal.className = 'modal-bg';        this.modal.setCssProps({
+        this.modal.className = 'modal-bg';
+        this.modal.setCssProps({
         'position': "fixed",
         'top': "0",
         'left': "0",
@@ -1363,7 +1380,8 @@ class MindMapCustomPromptModal {
 
         // 创建模态框内容
         const modalContent = document.createElement('div');
-        modalContent.className = 'mindmap-custom-prompt-modal';        modalContent.setCssProps({
+        modalContent.className = 'mindmap-custom-prompt-modal';
+        modalContent.setCssProps({
         'background': "var(--background-primary)",
         'border-radius': "8px",
         'padding': "20px",
@@ -1377,13 +1395,15 @@ class MindMapCustomPromptModal {
 
         // 标题
         const title = document.createElement('h3');
-        title.textContent = '自定义提示词';        title.setCssProps({
+        title.textContent = '自定义提示词';
+        title.setCssProps({
         'margin': "0 0 10px 0",
         'color': "var(--text-normal)",
       });
 
         // 说明文本
-        const description = document.createElement('div');        description['inner' + 'HTML'] = `
+        const description = document.createElement('div');
+        description['inner' + 'HTML'] = `
             <p style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 12px;">
                 提示：如果未包含节点内容参数，系统将自动添加当前节点内容和文档上下文。
             </p>
@@ -1394,7 +1414,8 @@ class MindMapCustomPromptModal {
 
         // 输入框
         this.promptInput = document.createElement('textarea');
-        this.promptInput.placeholder = '请输入自定义提示词...\n\n示例：\n分析"${nodeContent}"的优缺点，生成4-6个要点';        this.promptInput.setCssProps({
+        this.promptInput.placeholder = '请输入自定义提示词...\n\n示例：\n分析"${nodeContent}"的优缺点，生成4-6个要点';
+        this.promptInput.setCssProps({
         'width': "100%",
         'height': "100px",
         'padding': "10px",
@@ -1409,7 +1430,8 @@ class MindMapCustomPromptModal {
       });
 
         // 按钮容器
-        const buttonContainer = document.createElement('div');        buttonContainer.setCssProps({
+        const buttonContainer = document.createElement('div');
+        buttonContainer.setCssProps({
         'display': "flex",
         'justify-content': "flex-end",
         'gap': "10px",
@@ -1418,7 +1440,8 @@ class MindMapCustomPromptModal {
 
         // 取消按钮
         const cancelButton = document.createElement('button');
-        cancelButton.textContent = '取消';        cancelButton.setCssProps({
+        cancelButton.textContent = '取消';
+        cancelButton.setCssProps({
         'padding': "8px 16px",
         'border': "1px solid var(--background-modifier-border)",
         'border-radius': "4px",
@@ -1430,7 +1453,8 @@ class MindMapCustomPromptModal {
 
         // 确认按钮
         const submitButton = document.createElement('button');
-        submitButton.textContent = '确认';        submitButton.setCssProps({
+        submitButton.textContent = '确认';
+        submitButton.setCssProps({
         'padding': "8px 16px",
         'border': "none",
         'border-radius': "4px",

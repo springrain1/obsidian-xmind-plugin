@@ -46,7 +46,9 @@ async function copyToClipboard(text: string): Promise<void> {
   } catch (err) {
     // 如果navigator.clipboard API不可用，使用旧方法
     const textArea = document.createElement('textarea');
-    textArea.value = text;textArea.setCssProps({ 'position': 'fixed' });textArea.setCssProps({ 'opacity': '0' });
+    textArea.value = text;
+textArea.setCssProps({ 'position': 'fixed' });
+textArea.setCssProps({ 'opacity': '0' });
     document.body.appendChild(textArea);
     textArea.focus();
     textArea.select();

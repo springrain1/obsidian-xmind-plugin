@@ -93,7 +93,8 @@ export class AISettingsTab {
 
     private renderFileSaveSettings(container: HTMLElement, settings: AISettings): void {
         // 参考自定义提示词的设计结构
-        const titleEl = container.createEl('h2', { text: 'AI 文件保存设置' });        titleEl.setCssProps({
+        const titleEl = container.createEl('h2', { text: 'AI 文件保存设置' });
+        titleEl.setCssProps({
         'color': "var(--text-accent)",
         'font-size': "1.2em",
         'font-weight': "600",
@@ -105,14 +106,16 @@ export class AISettingsTab {
 
         const descEl = container.createEl('p', {
             text: '配置 AI 生成文件的保存位置。可以使用相对路径，例如 "AI分析" 或 "输出/AI"。留空则保存到 vault 根目录。'
-        });        descEl.setCssProps({
+        });
+        descEl.setCssProps({
         'color': "var(--text-muted)",
         'margin-bottom': "16px",
         'display': "block",
         'visibility': "visible",
       });
 
-        const saveSettingsContainer = container.createDiv('ai-save-settings-container');        saveSettingsContainer.setCssProps({
+        const saveSettingsContainer = container.createDiv('ai-save-settings-container');
+        saveSettingsContainer.setCssProps({
         'margin-top': "16px",
         'padding': "12px",
         'border': "1px solid var(--background-modifier-border)",
@@ -132,17 +135,20 @@ export class AISettingsTab {
                     .onChange(async (value) => {
                         this.settingsManager.updateSavePath(value);
                         await this.saveSettings();
-                    });text.inputEl.setCssProps({ 'width': '100%' });
+                    });
+text.inputEl.setCssProps({ 'width': '100%' });
             });
 
-        // 确保设置项可见        setting.settingEl.setCssProps({
+        // 确保设置项可见
+        setting.settingEl.setCssProps({
         'display': "block",
         'visibility': "visible",
         'margin-bottom': "12px",
       });
 
         // 添加路径预览
-        const pathPreview = saveSettingsContainer.createDiv('path-preview');        pathPreview.setCssProps({
+        const pathPreview = saveSettingsContainer.createDiv('path-preview');
+        pathPreview.setCssProps({
         'margin-top': "8px",
         'padding': "8px 12px",
         'background': "var(--background-secondary)",
@@ -471,7 +477,8 @@ export class AISettingsTab {
                             this.settingsManager.updatePrompt(name, value);
                             await this.saveSettings();
                         });
-                    text.inputEl.rows = 3;text.inputEl.setCssProps({ 'width': '100%' });
+                    text.inputEl.rows = 3;
+text.inputEl.setCssProps({ 'width': '100%' });
                 })
                 .addButton(button => {
                     button

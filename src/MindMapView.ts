@@ -103,7 +103,12 @@ export class MindMapView extends TextFileView implements HoverParent {
     const originalState = {
       rootBox: this.mindmap.root.getPosition(),
       oldScrollLeft: this.mindmap.containerEL.scrollLeft,
-      oldScrollTop: this.mindmap.containerEL.scrollTop,      originalBgColor: this.mindmap.contentEL.style.background,      originalWidth: this.mindmap.contentEL.style.width,      originalHeight: this.mindmap.contentEL.style.height,      originalTransform: this.mindmap.contentEL.style.transform,      originalOverflow: this.mindmap.contentEL.style.overflow
+      oldScrollTop: this.mindmap.containerEL.scrollTop,
+      originalBgColor: this.mindmap.contentEL.style.background,
+      originalWidth: this.mindmap.contentEL.style.width,
+      originalHeight: this.mindmap.contentEL.style.height,
+      originalTransform: this.mindmap.contentEL.style.transform,
+      originalOverflow: this.mindmap.contentEL.style.overflow
     };
 
     // 收集所有可见节点
@@ -134,12 +139,18 @@ export class MindMapView extends TextFileView implements HoverParent {
     var w = Math.max(box.width + padding * 2, 800); // 最小宽度800px
     var h = Math.max(box.height + padding * 2, 600); // 最小高度600px
 
-    // 优化导出样式设置this.mindmap.contentEL.setCssProps({ 'width': w + 'px' });this.mindmap.contentEL.setCssProps({ 'height': h + 'px' });this.mindmap.contentEL.setCssProps({ 'overflow': 'visible' }); // 确保内容不被裁剪this.mindmap.contentEL.setCssProps({ 'transform': 'none' }); // 移除可能影响导出的变换
+    // 优化导出样式设置
+this.mindmap.contentEL.setCssProps({ 'width': w + 'px' });
+this.mindmap.contentEL.setCssProps({ 'height': h + 'px' });
+this.mindmap.contentEL.setCssProps({ 'overflow': 'visible' }); // 确保内容不被裁剪
+this.mindmap.contentEL.setCssProps({ 'transform': 'none' }); // 移除可能影响导出的变换
 
     // 设置背景色，确保导出质量
     if (this.plugin.settings.mindmapBackground === 'transparent') {
-      const isDarkMode = document.body.classList.contains('theme-dark');this.mindmap.contentEL.setCssProps({ 'background': isDarkMode ? '#1e1e1e' : '#ffffff' });
-    } else {this.mindmap.contentEL.setCssProps({ 'background': this.plugin.settings.mindmapBackground });
+      const isDarkMode = document.body.classList.contains('theme-dark');
+this.mindmap.contentEL.setCssProps({ 'background': isDarkMode ? '#1e1e1e' : '#ffffff' });
+    } else {
+this.mindmap.contentEL.setCssProps({ 'background': this.plugin.settings.mindmapBackground });
     }
 
     // 刷新显示
@@ -157,7 +168,12 @@ export class MindMapView extends TextFileView implements HoverParent {
       return;
     }
 
-    // 恢复所有原始样式和状态this.mindmap.contentEL.setCssProps({ 'width': exportData.originalWidth || this.plugin.settings.canvasSize + 'px' });this.mindmap.contentEL.setCssProps({ 'height': exportData.originalHeight || this.plugin.settings.canvasSize + 'px' });this.mindmap.contentEL.setCssProps({ 'background': exportData.originalBgColor || '' });this.mindmap.contentEL.setCssProps({ 'transform': exportData.originalTransform || '' });this.mindmap.contentEL.setCssProps({ 'overflow': exportData.originalOverflow || '' });
+    // 恢复所有原始样式和状态
+this.mindmap.contentEL.setCssProps({ 'width': exportData.originalWidth || this.plugin.settings.canvasSize + 'px' });
+this.mindmap.contentEL.setCssProps({ 'height': exportData.originalHeight || this.plugin.settings.canvasSize + 'px' });
+this.mindmap.contentEL.setCssProps({ 'background': exportData.originalBgColor || '' });
+this.mindmap.contentEL.setCssProps({ 'transform': exportData.originalTransform || '' });
+this.mindmap.contentEL.setCssProps({ 'overflow': exportData.originalOverflow || '' });
 
     // 恢复滚动位置
     this.mindmap.containerEL.scrollTop = exportData.oldScrollTop;
@@ -937,7 +953,8 @@ export class MindMapView extends TextFileView implements HoverParent {
       }
     } catch (error) {
       console.error("设置视图数据时出错:", error);
-      const errorDiv = this.contentEl.createEl('div');errorDiv.setCssProps({ 'padding': '20px' });
+      const errorDiv = this.contentEl.createEl('div');
+errorDiv.setCssProps({ 'padding': '20px' });
       errorDiv.textContent = '加载思维导图时出错。请尝试重新打开文件或切换到Markdown视图。';
     }
   }
@@ -1164,7 +1181,8 @@ export class MindMapView extends TextFileView implements HoverParent {
     setTimeout(() => {
       // 查找菜单元素并修改z-index
       const menuEl = document.querySelector('.menu');
-      if (menuEl && menuEl instanceof HTMLElement) {menuEl.setCssProps({ 'z-index': "10000" }); // 设置更高的z-index
+      if (menuEl && menuEl instanceof HTMLElement) {
+menuEl.setCssProps({ 'z-index': "10000" }); // 设置更高的z-index
       }
     }, 0);
     
