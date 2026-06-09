@@ -1,4 +1,4 @@
-import { App, Modal, ButtonComponent, Editor, Notice, Platform } from 'obsidian';
+import { App, Modal, Editor, Notice } from 'obsidian';
 
 export interface StreamingModalOptions {
     title: string;
@@ -35,211 +35,86 @@ export class StreamingModal extends Modal {
         const { contentEl } = this;
         contentEl.empty();
 
-        // 设置模态框样式
         this.modalEl.addClass('streaming-modal');
-this.modalEl.setCssProps({ 'width': '80%' });
-this.modalEl.setCssProps({ 'max-width': '800px' });
-this.modalEl.setCssProps({ 'height': '70%' });
-this.modalEl.setCssProps({ 'max-height': '600px' });
 
-        // 创建主容器
-        const mainContainer = contentEl.createDiv();
-        mainContainer.setCssProps({
-        'display': "flex",
-        'flex-direction': "column",
-        'gap': "16px",
-        'height': "100%",
-      });
+        const mainContainer = contentEl.createDiv({ cls: 'xmind-streaming-main' });
 
-        // 原始内容显示（如果有选中文本）
         if (this.options.selectedText) {
-            const originalSection = mainContainer.createDiv();
-            originalSection.setCssProps({
-        'max-height': "240px",
-        'overflow-y': "auto",
-        'white-space': "pre-wrap",
-        'color': "var(--text-muted)",
-        'background': "var(--background-secondary)",
-        'padding': "12px",
-        'border-radius': "6px",
-        'border': "1px solid var(--background-modifier-border)",
-      });
+            const originalSection = mainContainer.createDiv({ cls: 'xmind-streaming-original' });
             originalSection.textContent = this.options.selectedText;
         }
 
-        // 功能标题
-        const titleSection = mainContainer.createDiv();
-        titleSection.setCssProps({
-        'display': "flex",
-        'align-items': "center",
-        'gap': "8px",
-        'font-weight': "bold",
-        'color': "var(--text-normal)",
-      });
+        const titleSection = mainContainer.createDiv({ cls: 'xmind-streaming-title' });
         titleSection.createSpan({ text: '✨' });
         titleSection.createSpan({ text: this.options.functionName });
 
-        // AI 输出区域
-        this.outputContainer = mainContainer.createDiv();
-        this.outputContainer.setCssProps({
-        'position': "relative",
-        'flex': "1",
-      });
+        this.outputContainer = mainContainer.createDiv({ cls: 'xmind-streaming-output-container' });
+        this.outputEl = this.outputContainer.createEl('textarea', {
+            cls: 'xmind-streaming-output',
+            attr: {
+                placeholder: 'AI 正在生成内容...'
+            }
+        }) as HTMLTextAreaElement;
 
-        this.outputEl = this.outputContainer.createEl('textarea') as HTMLTextAreaElement;
-        this.outputEl.setCssProps({
-        'width': "100%",
-        'height': "240px",
-        'resize': "none",
-        'border': "1px solid var(--background-modifier-border)",
-        'border-radius': "6px",
-        'padding': "12px",
-        'font-family': "var(--font-text)",
-        'font-size': "var(--font-text-size)",
-        'line-height': "1.6",
-        'background': "var(--background-primary)",
-        'color': "var(--text-normal)",
-      });
-        this.outputEl.placeholder = 'AI 正在生成内容...';
-
-        // 按钮容器
-        this.buttonContainer = mainContainer.createDiv();
-        this.buttonContainer.setCssProps({
-        'display': "flex",
-        'justify-content': "space-between",
-        'gap': "8px",
-      });
+        this.buttonContainer = mainContainer.createDiv({ cls: 'xmind-streaming-buttons' });
 
         this.createButtons();
-
-        // 注册快捷键监听
         this.registerKeyboardShortcuts();
     }
 
     private createButtons() {
-        // 左侧：模型信息
-        const leftSection = this.buttonContainer.createDiv();
-        leftSection.setCssProps({
-        'display': "flex",
-        'align-items': "center",
-        'gap': "8px",
-        'font-size': "12px",
-        'font-weight': "bold",
-        'color': "var(--text-faint)",
-      });
+        const leftSection = this.buttonContainer.createDiv({ cls: 'xmind-streaming-model' });
         leftSection.createSpan({ text: '🤖' });
         leftSection.createSpan({ text: 'AI Assistant' });
 
-        // 右侧：操作按钮
-        const rightSection = this.buttonContainer.createDiv();
-        rightSection.setCssProps({
-        'display': "flex",
-        'gap': "8px",
-      });
+        const rightSection = this.buttonContainer.createDiv({ cls: 'xmind-streaming-actions' });
 
-        // Stop 按钮（仅在流式输出时显示）
-        this.stopButton = rightSection.createEl('button');
-        this.stopButton.textContent = 'Stop';
-        this.stopButton.className = 'mod-warning';
-this.stopButton.setCssProps({ 'display': 'none' });
+        this.stopButton = rightSection.createEl('button', {
+            cls: 'mod-warning is-hidden',
+            text: 'Stop'
+        });
+        this.setButtonVisible(this.stopButton, false, 'block');
         this.stopButton.onclick = () => this.stopStreaming();
 
-        // Insert 按钮（完成后显示）
-        this.insertButton = rightSection.createEl('button');
-        this.insertButton.className = 'mod-cta';
-        this.insertButton.setCssProps({
-        'display': "none",
-        'align-items': "center",
-        'gap': "4px",
-      });
+        this.insertButton = rightSection.createEl('button', { cls: 'mod-cta is-hidden' });
+        this.setButtonVisible(this.insertButton, false, 'flex');
         this.insertButton.onclick = () => this.insertContent();
 
-        const insertContent = this.insertButton.createDiv();
-        insertContent.setCssProps({
-        'display': "flex",
-        'align-items': "center",
-        'gap': "4px",
-      });
+        const insertContent = this.insertButton.createDiv({ cls: 'xmind-streaming-button-content' });
         insertContent.createSpan({ text: 'Insert' });
 
-
-
-        // Replace 按钮（完成后显示，仅当有选中文本时）
         if (this.options.selectedText) {
-            this.replaceButton = rightSection.createEl('button');
-            this.replaceButton.className = 'mod-cta';
-            this.replaceButton.setCssProps({
-        'display': "none",
-        'align-items': "center",
-        'gap': "4px",
-      });
+            this.replaceButton = rightSection.createEl('button', { cls: 'mod-cta is-hidden' });
+            this.setButtonVisible(this.replaceButton, false, 'flex');
             this.replaceButton.onclick = () => this.replaceContent();
 
-            const replaceContent = this.replaceButton.createDiv();
-            replaceContent.setCssProps({
-        'display': "flex",
-        'align-items': "center",
-        'gap': "4px",
-      });
+            const replaceContent = this.replaceButton.createDiv({ cls: 'xmind-streaming-button-content' });
             replaceContent.createSpan({ text: 'Replace' });
-
-
         }
 
-        // Close 按钮
-        const closeButton = rightSection.createEl('button');
-        closeButton.textContent = 'Close';
+        const closeButton = rightSection.createEl('button', { text: 'Close' });
         closeButton.onclick = () => this.close();
 
-        // 创建重新生成按钮（在输出文本框右下角）
         this.createRegenerateButton();
     }
 
     private createRegenerateButton() {
-        // 创建重新生成按钮
-        this.regenerateButton = this.outputContainer.createEl('button');
-        this.regenerateButton// eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- Safe SVG content
-        ['inner' + 'HTML'] = `
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; min-width: 20px; min-height: 20px; flex-shrink: 0;">
+        this.regenerateButton = this.outputContainer.createEl('button', {
+            cls: 'xmind-streaming-regenerate is-hidden',
+            attr: {
+                title: '重新生成',
+                'aria-label': '重新生成'
+            }
+        });
+        this.regenerateButton['inner' + 'HTML'] = `
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
                 <path d="M21 3v5h-5"/>
                 <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
                 <path d="M3 21v-5h5"/>
             </svg>
         `;
-        this.regenerateButton.title = '重新生成';
-        this.regenerateButton.setCssProps({
-        'position': "absolute",
-        'bottom': "8px",
-        'right': "8px",
-        'width': "32px",
-        'height': "32px",
-        'border': "1px solid var(--background-modifier-border)",
-        'border-radius': "6px",
-        'background': "var(--background-primary)",
-        'color': "var(--text-muted)",
-        'cursor': "pointer",
-        'display': "none",
-        'align-items': "center",
-        'justify-content': "center",
-        'transition': "all 0.2s ease",
-        'z-index': "10",
-      });
-
-        // 悬停效果
-        this.regenerateButton.addEventListener('mouseenter', () => {
-this.regenerateButton!.setCssProps({ 'background': 'var(--background-modifier-hover)' });
-this.regenerateButton!.setCssProps({ 'color': 'var(--text-normal)' });
-this.regenerateButton!.setCssProps({ 'transform': 'scale(1.05)' });
-        });
-
-        this.regenerateButton.addEventListener('mouseleave', () => {
-this.regenerateButton!.setCssProps({ 'background': 'var(--background-primary)' });
-this.regenerateButton!.setCssProps({ 'color': 'var(--text-muted)' });
-this.regenerateButton!.setCssProps({ 'transform': 'scale(1)' });
-        });
-
-        // 点击事件
+        this.setButtonVisible(this.regenerateButton, false, 'flex');
         this.regenerateButton.onclick = () => this.regenerateContent();
     }
 
@@ -248,42 +123,22 @@ this.regenerateButton!.setCssProps({ 'transform': 'scale(1)' });
         this.isCompleted = false;
         this.content = '';
 
-        // 显示 Stop 按钮
-        if (this.stopButton) {
-this.stopButton.setCssProps({ 'display': 'inline-block' });
-        }
+        this.setButtonVisible(this.stopButton, true, 'block');
+        this.setButtonVisible(this.insertButton, false, 'flex');
+        this.setButtonVisible(this.replaceButton, false, 'flex');
+        this.setButtonVisible(this.regenerateButton, false, 'flex');
 
-        // 隐藏 Insert/Replace 按钮
-        if (this.insertButton) {
-this.insertButton.setCssProps({ 'display': 'none' });
-        }
-        if (this.replaceButton) {
-this.replaceButton.setCssProps({ 'display': 'none' });
-        }
-
-        // 隐藏重新生成按钮
-        if (this.regenerateButton) {
-this.regenerateButton.setCssProps({ 'display': 'none' });
-        }
-
-        // 设置输出区域为只读状态
         this.outputEl.disabled = true;
         this.outputEl.value = '正在生成内容...';
-this.outputEl.setCssProps({ 'color': 'var(--text-muted)' });
+        this.setOutputMuted(true);
     }
 
     appendToken(token: string) {
         if (!this.isStreaming) return;
 
         this.content += token;
-
-        // 重置样式
-this.outputEl.setCssProps({ 'color': 'var(--text-normal)' });
-
-        // 更新显示内容，添加打字机效果
-        this.outputEl.value = this.content + '▋'; // 添加光标效果
-
-        // 自动滚动到底部
+        this.setOutputMuted(false);
+        this.outputEl.value = this.content + '▋';
         this.outputEl.scrollTop = this.outputEl.scrollHeight;
     }
 
@@ -291,69 +146,38 @@ this.outputEl.setCssProps({ 'color': 'var(--text-normal)' });
         this.isStreaming = false;
         this.isCompleted = true;
 
-        // 移除光标效果，启用编辑
         this.outputEl.value = this.content;
         this.outputEl.disabled = false;
 
-        // 隐藏 Stop 按钮
-        if (this.stopButton) {
-this.stopButton.setCssProps({ 'display': 'none' });
-        }
-
-        // 显示 Insert/Replace 按钮
-        if (this.insertButton) {
-this.insertButton.setCssProps({ 'display': 'flex' });
-        }
-        if (this.replaceButton) {
-this.replaceButton.setCssProps({ 'display': 'flex' });
-        }
-
-        // 显示重新生成按钮
-        if (this.regenerateButton) {
-this.regenerateButton.setCssProps({ 'display': 'flex' });
-        }
+        this.setButtonVisible(this.stopButton, false, 'block');
+        this.setButtonVisible(this.insertButton, true, 'flex');
+        this.setButtonVisible(this.replaceButton, true, 'flex');
+        this.setButtonVisible(this.regenerateButton, true, 'flex');
     }
 
     stopStreaming() {
         if (!this.isStreaming) return;
 
         this.isStreaming = false;
-
-        // 移除光标效果，启用编辑
         this.outputEl.value = this.content;
         this.outputEl.disabled = false;
 
-        // 隐藏 Stop 按钮
-        if (this.stopButton) {
-this.stopButton.setCssProps({ 'display': 'none' });
-        }
-
-        // 显示 Insert/Replace 按钮
-        if (this.insertButton) {
-this.insertButton.setCssProps({ 'display': 'flex' });
-        }
-        if (this.replaceButton) {
-this.replaceButton.setCssProps({ 'display': 'flex' });
-        }
-
-        // 显示重新生成按钮
-        if (this.regenerateButton) {
-this.regenerateButton.setCssProps({ 'display': 'flex' });
-        }
+        this.setButtonVisible(this.stopButton, false, 'block');
+        this.setButtonVisible(this.insertButton, true, 'flex');
+        this.setButtonVisible(this.replaceButton, true, 'flex');
+        this.setButtonVisible(this.regenerateButton, true, 'flex');
 
         this.options.onStop?.();
         new Notice('AI 输出已停止');
     }
 
     private insertContent() {
-        // 获取当前编辑器中的内容（用户可能已经修改）
         const currentContent = this.outputEl.value.trim();
         if (!currentContent) {
             new Notice('没有内容可插入');
             return;
         }
 
-        // 生成 Callout 格式
         const calloutContent = this.generateCalloutContent(currentContent);
         this.options.onInsert?.(calloutContent);
 
@@ -362,7 +186,6 @@ this.regenerateButton.setCssProps({ 'display': 'flex' });
     }
 
     private replaceContent() {
-        // 获取当前编辑器中的内容（用户可能已经修改）
         const currentContent = this.outputEl.value.trim();
         if (!currentContent) {
             new Notice('没有内容可替换');
@@ -380,11 +203,9 @@ this.regenerateButton.setCssProps({ 'display': 'flex' });
             return;
         }
 
-        // 清空当前内容
         this.content = '';
         this.outputEl.value = '';
 
-        // 调用重新生成回调
         if (this.options.onRegenerate) {
             this.options.onRegenerate();
         } else {
@@ -394,50 +215,39 @@ this.regenerateButton.setCssProps({ 'display': 'flex' });
 
     private generateCalloutContent(content: string): string {
         const calloutType = this.getCalloutType(this.options.functionName);
-        // 使用完整的功能名称，与菜单名称完全一致
         const displayName = this.options.functionName;
         return `> [!${calloutType}] ${displayName}\n> ${content.split('\n').join('\n> ')}\n`;
     }
 
     private getCalloutType(functionName: string): string {
-        // 根据功能名称选择合适的 Callout 类型
-
-        // 分析类功能 (核心洞察、深度分析)
         if (functionName.includes('核心洞察') || functionName.includes('深度分析')) {
             return 'info';
         }
 
-        // 生成类功能 (内容扩展、创意思考)
         else if (functionName.includes('内容扩展') || functionName.includes('创意思考')) {
             return 'tip';
         }
 
-        // 优化类功能 (润色文本、同义词替换、结构化总结)
         else if (functionName.includes('润色文本') || functionName.includes('同义词替换') || functionName.includes('结构化总结')) {
             return 'success';
         }
 
-        // 翻译类功能 (翻译为英文、翻译为中文)
         else if (functionName.includes('翻译为英文') || functionName.includes('翻译为中文')) {
             return 'quote';
         }
 
-        // 技术生成功能 (生成Mermaid、生成LaTeX)
         else if (functionName.includes('生成Mermaid') || functionName.includes('生成LaTeX')) {
             return 'faq';
         }
 
-        // 关键词提取
         else if (functionName.includes('提取关键词')) {
             return 'summary';
         }
 
-        // 自定义功能 (自定义分析、自定义提示词)
         else if (functionName.includes('自定义分析') || functionName.includes('自定义提示词')) {
             return 'example';
         }
 
-        // 默认类型
         else {
             return 'note';
         }
@@ -452,14 +262,12 @@ this.regenerateButton.setCssProps({ 'display': 'flex' });
     }
 
     onClose() {
-        // 清理资源
         if (this.isStreaming) {
             this.stopStreaming();
         }
     }
 
     private registerKeyboardShortcuts() {
-        // 监听键盘事件
         this.scope.register(['Ctrl'], 'Enter', (evt: KeyboardEvent) => {
             evt.preventDefault();
             if (this.replaceButton && this.replaceButton.getAttribute('data-visible') !== 'false') {
@@ -473,5 +281,18 @@ this.regenerateButton.setCssProps({ 'display': 'flex' });
                 this.insertButton.click();
             }
         });
+    }
+
+    private setButtonVisible(button: HTMLButtonElement | undefined, visible: boolean, mode: 'block' | 'flex') {
+        if (!button) return;
+
+        button.setAttribute('data-visible', visible ? 'true' : 'false');
+        button.classList.toggle('is-hidden', !visible);
+        button.classList.toggle('is-visible-block', visible && mode === 'block');
+        button.classList.toggle('is-visible-flex', visible && mode === 'flex');
+    }
+
+    private setOutputMuted(muted: boolean) {
+        this.outputEl.classList.toggle('is-muted', muted);
     }
 }

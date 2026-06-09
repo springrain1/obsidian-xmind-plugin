@@ -2253,34 +2253,12 @@ export class XMindSettingTab extends PluginSettingTab {
 			helpDiv.createEl('br');
 			helpDiv.createEl('br');
 			helpDiv.appendText(content);
-			helpDiv.setCssProps({
-        'position': "fixed",
-        'top': "50%",
-        'left': "50%",
-        'transform': "translate(-50%, -50%)",
-        'background': "var(--background-primary)",
-        'border': "1px solid var(--background-modifier-border)",
-        'border-radius': "8px",
-        'padding': "20px",
-        'max-width': "500px",
-        'max-height': "400px",
-        'overflow-y': "auto",
-        'z-index': "10000",
-        'box-shadow': "0 4px 12px rgba(0,0,0,0.15)",
-      });
+			helpDiv.addClass('xmind-help-popover');
 
 			// 创建关闭按钮
 			const closeBtn = document.createElement('button');
 			closeBtn.textContent = '关闭';
-			closeBtn.setCssProps({
-        'margin-top': "15px",
-        'padding': "8px 16px",
-        'background': "var(--interactive-accent)",
-        'color': "var(--text-on-accent)",
-        'border': "none",
-        'border-radius': "4px",
-        'cursor': "pointer",
-      });
+			closeBtn.addClass('xmind-help-popover-close');
 
 			closeBtn.onclick = () => document.body.removeChild(helpDiv);
 			helpDiv.appendChild(closeBtn);
@@ -2809,20 +2787,7 @@ export class XMindSettingTab extends PluginSettingTab {
 					swatch.addEventListener('mouseenter', () => {
 						const tooltip = document.createElement('div');
 						tooltip.textContent = color;
-						tooltip.setCssProps({
-        'position': "absolute",
-        'top': "-30px",
-        'left': "50%",
-        'transform': "translateX(-50%)",
-        'background': "var(--background-primary)",
-        'border': "1px solid var(--background-modifier-border)",
-        'padding': "2px 6px",
-        'border-radius': "3px",
-        'font-size': "10px",
-        'white-space': "nowrap",
-        'z-index': "1000",
-        'box-shadow': "0 2px 4px rgba(0,0,0,0.1)",
-      });
+						tooltip.addClass('xmind-color-tooltip');
 						swatch.appendChild(tooltip);
 					});
 

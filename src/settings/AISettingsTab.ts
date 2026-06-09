@@ -93,37 +93,17 @@ export class AISettingsTab {
 
     private renderFileSaveSettings(container: HTMLElement, settings: AISettings): void {
         // 参考自定义提示词的设计结构
-        const titleEl = container.createEl('h2', { text: 'AI 文件保存设置' });
-        titleEl.setCssProps({
-        'color': "var(--text-accent)",
-        'font-size': "1.2em",
-        'font-weight': "600",
-        'margin-top': "20px",
-        'margin-bottom': "12px",
-        'display': "block",
-        'visibility': "visible",
-      });
+        const titleEl = container.createEl('h2', {
+            text: 'AI 文件保存设置',
+            cls: 'ai-file-save-title'
+        });
 
         const descEl = container.createEl('p', {
-            text: '配置 AI 生成文件的保存位置。可以使用相对路径，例如 "AI分析" 或 "输出/AI"。留空则保存到 vault 根目录。'
+            text: '配置 AI 生成文件的保存位置。可以使用相对路径，例如 "AI分析" 或 "输出/AI"。留空则保存到 vault 根目录。',
+            cls: 'ai-file-save-desc'
         });
-        descEl.setCssProps({
-        'color': "var(--text-muted)",
-        'margin-bottom': "16px",
-        'display': "block",
-        'visibility': "visible",
-      });
 
         const saveSettingsContainer = container.createDiv('ai-save-settings-container');
-        saveSettingsContainer.setCssProps({
-        'margin-top': "16px",
-        'padding': "12px",
-        'border': "1px solid var(--background-modifier-border)",
-        'border-radius': "6px",
-        'background': "var(--background-primary)",
-        'display': "block",
-        'visibility': "visible",
-      });
 
         const setting = new Setting(saveSettingsContainer)
             .setName('保存路径')
@@ -136,27 +116,12 @@ export class AISettingsTab {
                         this.settingsManager.updateSavePath(value);
                         await this.saveSettings();
                     });
-text.inputEl.setCssProps({ 'width': '100%' });
+text.inputEl.addClass('xmind-full-width-input');
             });
 
-        // 确保设置项可见
-        setting.settingEl.setCssProps({
-        'display': "block",
-        'visibility': "visible",
-        'margin-bottom': "12px",
-      });
 
         // 添加路径预览
         const pathPreview = saveSettingsContainer.createDiv('path-preview');
-        pathPreview.setCssProps({
-        'margin-top': "8px",
-        'padding': "8px 12px",
-        'background': "var(--background-secondary)",
-        'border-radius': "4px",
-        'font-family': "var(--font-monospace)",
-        'font-size': "0.9em",
-        'color': "var(--text-muted)",
-      });
 
         const updatePathPreview = () => {
             const savePath = settings.savePath || '';
@@ -478,7 +443,7 @@ text.inputEl.setCssProps({ 'width': '100%' });
                             await this.saveSettings();
                         });
                     text.inputEl.rows = 3;
-text.inputEl.setCssProps({ 'width': '100%' });
+text.inputEl.addClass('xmind-full-width-input');
                 })
                 .addButton(button => {
                     button

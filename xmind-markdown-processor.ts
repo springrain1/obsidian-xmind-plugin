@@ -345,34 +345,15 @@ export class XMindMarkdownProcessor {
     // 创建占位符图标区域
     const iconContainer = document.createElement('div');
     iconContainer.className = 'xmind-placeholder-icon';
-    iconContainer.setCssProps({
-        'display': "flex",
-        'flex-direction': "column",
-        'align-items': "center",
-        'justify-content': "center",
-        'background': "var(--background-secondary)",
-        'border': "2px dashed var(--background-modifier-border)",
-        'border-radius': "8px",
-        'padding': "24px",
-        'cursor': "pointer",
-        'transition': "all 0.2s ease",
-        'min-height': "120px",
-      });
 
     // 应用尺寸参数
     if (sizeParams) {
-      if (sizeParams.width) {
-iconContainer.setCssProps({ 'width': `${sizeParams.width}px` });
-iconContainer.setCssProps({ 'max-width': `${sizeParams.width}px` });
-      }
-      if (sizeParams.height) {
-iconContainer.setCssProps({ 'height': `${sizeParams.height}px` });
-iconContainer.setCssProps({ 'max-height': `${sizeParams.height}px` });
-      }
-    } else {
-      // 默认样式
-iconContainer.setCssProps({ 'max-width': '100%' });
-iconContainer.setCssProps({ 'width': '300px' });
+      iconContainer.setCssProps({
+        '--xmind-placeholder-width': sizeParams.width ? `${sizeParams.width}px` : '300px',
+        '--xmind-placeholder-max-width': sizeParams.width ? `${sizeParams.width}px` : '100%',
+        '--xmind-placeholder-height': sizeParams.height ? `${sizeParams.height}px` : 'auto',
+        '--xmind-placeholder-max-height': sizeParams.height ? `${sizeParams.height}px` : 'none',
+      });
     }
 
     // 创建XMind图标（使用SVG）
@@ -401,26 +382,12 @@ iconContainer.setCssProps({ 'width': '300px' });
     const fileName = document.createElement('div');
     fileName.className = 'xmind-file-name';
     fileName.textContent = file.basename;
-    fileName.setCssProps({
-        'margin-top': "12px",
-        'font-size': "0.9em",
-        'font-weight': "500",
-        'color': "var(--text-normal)",
-        'text-align': "center",
-        'word-break': "break-word",
-      });
     iconContainer.appendChild(fileName);
 
     // 创建文件类型标签
     const fileType = document.createElement('div');
+    fileType.className = 'xmind-file-type';
     fileType.textContent = 'XMind';
-    fileType.setCssProps({
-        'margin-top': "4px",
-        'font-size': "0.75em",
-        'color': "var(--text-muted)",
-        'text-transform': "uppercase",
-        'letter-spacing': "0.5px",
-      });
     iconContainer.appendChild(fileType);
 
     // 添加点击事件
@@ -432,18 +399,6 @@ iconContainer.setCssProps({ 'width': '300px' });
 
     iconContainer.addEventListener('click', clickHandler);
 
-    // 添加悬停效果
-    iconContainer.addEventListener('mouseenter', () => {
-iconContainer.setCssProps({ 'border-color': 'var(--interactive-accent)' });
-iconContainer.setCssProps({ 'background': 'var(--background-secondary-alt)' });
-iconContainer.setCssProps({ 'transform': 'scale(1.02)' });
-    });
-
-    iconContainer.addEventListener('mouseleave', () => {
-iconContainer.setCssProps({ 'border-color': 'var(--background-modifier-border)' });
-iconContainer.setCssProps({ 'background': 'var(--background-secondary)' });
-iconContainer.setCssProps({ 'transform': 'scale(1)' });
-    });
 
     // 组装元素
     container.appendChild(iconContainer);

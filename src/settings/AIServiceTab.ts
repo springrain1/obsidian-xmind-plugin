@@ -123,7 +123,7 @@ export class AIServiceTab {
 
                         await this.plugin.saveSettings();
                     });
-text.inputEl.setCssProps({ 'width': '100%' });
+text.inputEl.addClass('xmind-full-width-input');
             });
     }
 }

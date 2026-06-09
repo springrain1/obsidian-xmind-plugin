@@ -24,9 +24,6 @@ export class XMindView extends FileView {
     
     // 设置容器样式
     this.contentEl.addClass('xmind-view-container');
-this.contentEl.setCssProps({ 'width': '100%' });
-this.contentEl.setCssProps({ 'height': '100%' });
-this.contentEl.setCssProps({ 'overflow': 'hidden' }); // 防止滚动条出现
     
     // 允许在没有文件的情况下打开视图
     this.allowNoFile = true;

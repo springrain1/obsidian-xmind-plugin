@@ -235,7 +235,7 @@ export default class MindMapPlugin extends Plugin {
           var node = mindmap.selectNode;
           if (node && !node.data.isEdit) {
             node.edit();
-mindmap._menuDom.setCssProps({ 'display': 'none' });
+mindmap._menuDom.addClass('is-hidden');
           }
         }
       }
@@ -265,7 +265,7 @@ mindmap._menuDom.setCssProps({ 'display': 'none' });
               var newNode = node.mindmap.execute('addSiblingNode', {
                 parent: node.parent
               });
-mindmap._menuDom.setCssProps({ 'display': 'none' });
+mindmap._menuDom.addClass('is-hidden');
 
               // Move the new node under the previously selected one
               // Do not add this command to the history
@@ -305,7 +305,7 @@ mindmap._menuDom.setCssProps({ 'display': 'none' });
                 node.expand();
               }
               node.mindmap.execute("addChildNode", { parent: node });
-mindmap._menuDom.setCssProps({ 'display': 'none' });
+mindmap._menuDom.addClass('is-hidden');
             } else{
               // mindmap.selectNode.unSelect();
               mindmap.clearSelectNode();
@@ -335,7 +335,7 @@ mindmap._menuDom.setCssProps({ 'display': 'none' });
           var node = mindmap.selectNode;
           if (node && !node.data.isRoot && !node.data.isEdit) {
             node.mindmap.execute("deleteNodeAndChild", { node });
-mindmap._menuDom.setCssProps({ 'display': 'none' });
+mindmap._menuDom.addClass('is-hidden');
           }
           //else: Deletion makes no sense
         }

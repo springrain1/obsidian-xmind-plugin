@@ -444,8 +444,7 @@ export default class Layout {
                 if(!child.stroke){
                     child.stroke = _stroke;
                 }
-child._barDom.setCssProps({ 'background-color': _stroke });
-child._barDom.setCssProps({ 'border-color': _stroke });
+child._barDom.setCssProps({ '--mm-node-stroke': _stroke });
 
 				if (level == rootLevel) {
 					var from = {

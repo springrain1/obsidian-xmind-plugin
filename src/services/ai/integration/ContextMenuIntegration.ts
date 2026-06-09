@@ -758,7 +758,7 @@ export class CustomPromptModal extends Modal {
                 this.promptInput = text.inputEl;
                 text.setPlaceholder('请输入自定义提示词，例如：请对以下内容进行总结：{{highlight}}');
                 text.inputEl.rows = 4;
-text.inputEl.setCssProps({ 'width': '100%' });
+text.inputEl.addClass('xmind-full-width-input');
                 // 自动聚焦
                 setTimeout(() => text.inputEl.focus(), 100);
             });

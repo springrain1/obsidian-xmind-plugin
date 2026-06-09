@@ -140,18 +140,19 @@ export class MindMapView extends TextFileView implements HoverParent {
     var h = Math.max(box.height + padding * 2, 600); // 最小高度600px
 
     // 优化导出样式设置
-this.mindmap.contentEL.setCssProps({ 'width': w + 'px' });
-this.mindmap.contentEL.setCssProps({ 'height': h + 'px' });
-this.mindmap.contentEL.setCssProps({ 'overflow': 'visible' }); // 确保内容不被裁剪
-this.mindmap.contentEL.setCssProps({ 'transform': 'none' }); // 移除可能影响导出的变换
+this.mindmap.contentEL.setCssProps({
+  '--mm-export-width': `${w}px`,
+  '--mm-export-height': `${h}px`,
+});
 
     // 设置背景色，确保导出质量
     if (this.plugin.settings.mindmapBackground === 'transparent') {
       const isDarkMode = document.body.classList.contains('theme-dark');
-this.mindmap.contentEL.setCssProps({ 'background': isDarkMode ? '#1e1e1e' : '#ffffff' });
+this.mindmap.contentEL.setCssProps({ '--mm-export-background': isDarkMode ? '#1e1e1e' : '#ffffff' });
     } else {
-this.mindmap.contentEL.setCssProps({ 'background': this.plugin.settings.mindmapBackground });
+this.mindmap.contentEL.setCssProps({ '--mm-export-background': this.plugin.settings.mindmapBackground });
     }
+this.mindmap.contentEL.classList.add('is-exporting');
 
     // 刷新显示
     this.mindmap.refresh();
@@ -169,11 +170,7 @@ this.mindmap.contentEL.setCssProps({ 'background': this.plugin.settings.mindmapB
     }
 
     // 恢复所有原始样式和状态
-this.mindmap.contentEL.setCssProps({ 'width': exportData.originalWidth || this.plugin.settings.canvasSize + 'px' });
-this.mindmap.contentEL.setCssProps({ 'height': exportData.originalHeight || this.plugin.settings.canvasSize + 'px' });
-this.mindmap.contentEL.setCssProps({ 'background': exportData.originalBgColor || '' });
-this.mindmap.contentEL.setCssProps({ 'transform': exportData.originalTransform || '' });
-this.mindmap.contentEL.setCssProps({ 'overflow': exportData.originalOverflow || '' });
+this.mindmap.contentEL.classList.remove('is-exporting');
 
     // 恢复滚动位置
     this.mindmap.containerEL.scrollTop = exportData.oldScrollTop;
@@ -954,7 +951,7 @@ this.mindmap.contentEL.setCssProps({ 'overflow': exportData.originalOverflow || 
     } catch (error) {
       console.error("设置视图数据时出错:", error);
       const errorDiv = this.contentEl.createEl('div');
-errorDiv.setCssProps({ 'padding': '20px' });
+errorDiv.classList.add('mm-mindmap-error');
       errorDiv.textContent = '加载思维导图时出错。请尝试重新打开文件或切换到Markdown视图。';
     }
   }
@@ -1182,7 +1179,7 @@ errorDiv.setCssProps({ 'padding': '20px' });
       // 查找菜单元素并修改z-index
       const menuEl = document.querySelector('.menu');
       if (menuEl && menuEl instanceof HTMLElement) {
-menuEl.setCssProps({ 'z-index': "10000" }); // 设置更高的z-index
+menuEl.classList.add('xmind-menu-front');
       }
     }, 0);
     

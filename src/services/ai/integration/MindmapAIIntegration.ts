@@ -55,7 +55,7 @@ export class MindmapAIIntegration {
                 floatingButton = this.createFloatingButton(node, mindmapView);
                 node.el.appendChild(floatingButton);
             }
-floatingButton.setCssProps({ 'display': 'block' });
+floatingButton.removeClass('is-hidden');
         });
 
         // 鼠标离开节点时延迟隐藏悬浮按钮
@@ -63,7 +63,7 @@ floatingButton.setCssProps({ 'display': 'block' });
             if (floatingButton) {
                 hideTimeout = setTimeout(() => {
                     if (floatingButton) {
-floatingButton.setCssProps({ 'display': 'none' });
+floatingButton.addClass('is-hidden');
                     }
                 }, 500); // 500ms延迟
             }
@@ -73,40 +73,9 @@ floatingButton.setCssProps({ 'display': 'none' });
     // 创建悬浮AI按钮
     private createFloatingButton(node: any, mindmapView: any): HTMLElement {
         const button = document.createElement('div');
-        button.className = 'mindmap-ai-floating-button';
+        button.className = 'mindmap-ai-floating-button is-hidden';
         button.textContent = "🧠";
         button.title = 'mindmap AI';
-
-        // 设置样式
-        Object.assign(button.style, {
-            position: 'absolute',
-            top: '-8px',
-            right: '-8px',
-            width: '20px',
-            height: '20px',
-            backgroundColor: '#4f46e5',
-            color: 'white',
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            fontSize: '12px',
-            zIndex: '1000',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
-            transition: 'all 0.2s ease'
-        });
-
-        // 悬停效果
-        button.addEventListener('mouseenter', () => {
-button.setCssProps({ 'transform': 'scale(1.1)' });
-button.setCssProps({ 'background-color': '#3730a3' });
-        });
-
-        button.addEventListener('mouseleave', () => {
-button.setCssProps({ 'transform': 'scale(1)' });
-button.setCssProps({ 'background-color': '#4f46e5' });
-        });
 
         // 点击事件
         button.addEventListener('click', (event: MouseEvent) => {

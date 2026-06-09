@@ -118,10 +118,9 @@ export default class Node {
 
     initAIButton(){
         this._aiButton = document.createElement('div');
-        this._aiButton.classList.add('mm-node-ai-button');
+        this._aiButton.classList.add('mm-node-ai-button', 'is-hidden');
         this._aiButton.textContent = "🧠";
         this._aiButton.title = 'AI 扩展';
-this._aiButton.setCssProps({ 'display': 'none' }); // 默认隐藏
         this.containEl.appendChild(this._aiButton);
 
         // 添加点击事件
@@ -132,11 +131,11 @@ this._aiButton.setCssProps({ 'display': 'none' }); // 默认隐藏
 
         // 添加鼠标悬停事件
         this.containEl.addEventListener('mouseenter', () => {
-this._aiButton.setCssProps({ 'display': 'block' });
+this._aiButton.removeClass('is-hidden');
         });
 
         this.containEl.addEventListener('mouseleave', () => {
-this._aiButton.setCssProps({ 'display': 'none' });
+this._aiButton.addClass('is-hidden');
         });
     }
 
@@ -579,8 +578,10 @@ this._aiButton.setCssProps({ 'display': 'none' });
     setPosition(x:number,y:number){
         this.box.x=x;
         this.box.y=y;
-this.containEl.setCssProps({ 'left': x + 'px' });
-this.containEl.setCssProps({ 'top': y + 'px' });
+this.containEl.setCssProps({
+    '--mm-node-left': `${x}px`,
+    '--mm-node-top': `${y}px`,
+});
     }
 
     getPosition(){
@@ -761,12 +762,12 @@ this.containEl.setCssProps({ 'top': y + 'px' });
     }
 
     show(){
-this.containEl.setCssProps({ 'display': "block" });
+this.containEl.removeClass('is-hidden');
         this.isHide=false
     }
 
     hide(){
-this.containEl.setCssProps({ 'display': "none" });
+this.containEl.addClass('is-hidden');
         this.isHide=true
     }
 
@@ -904,10 +905,10 @@ this.containEl.setCssProps({ 'display': "none" });
 
         // 定位菜单
         const rect = this._aiButton.getBoundingClientRect();
-aiMenu.setCssProps({ 'position': 'fixed' });
-aiMenu.setCssProps({ 'left': `${rect.right + 5}px` });
-aiMenu.setCssProps({ 'top': `${rect.top}px` });
-aiMenu.setCssProps({ 'z-index': '1000' });
+aiMenu.setCssProps({
+    '--mm-ai-menu-left': `${rect.right + 5}px`,
+    '--mm-ai-menu-top': `${rect.top}px`,
+});
 
         // 添加到页面
         document.body.appendChild(aiMenu);
@@ -1364,104 +1365,52 @@ class MindMapCustomPromptModal {
     open() {
         // 创建模态框背景
         this.modal = document.createElement('div');
-        this.modal.className = 'modal-bg';
-        this.modal.setCssProps({
-        'position': "fixed",
-        'top': "0",
-        'left': "0",
-        'width': "100%",
-        'height': "100%",
-        'background': "rgba(0, 0, 0, 0.5)",
-        'display': "flex",
-        'align-items': "center",
-        'justify-content': "center",
-        'z-index': "1000",
-      });
+        this.modal.className = 'modal-bg mindmap-custom-prompt-backdrop';
 
         // 创建模态框内容
         const modalContent = document.createElement('div');
         modalContent.className = 'mindmap-custom-prompt-modal';
-        modalContent.setCssProps({
-        'background': "var(--background-primary)",
-        'border-radius': "8px",
-        'padding': "20px",
-        'width': "350px",
-        'min-width': "350px",
-        'max-width': "90vw",
-        'box-shadow': "0 4px 12px rgba(0, 0, 0, 0.3)",
-        'position': "relative",
-        'box-sizing': "border-box",
-      });
 
         // 标题
         const title = document.createElement('h3');
         title.textContent = '自定义提示词';
-        title.setCssProps({
-        'margin': "0 0 10px 0",
-        'color': "var(--text-normal)",
-      });
+        title.classList.add('mindmap-custom-prompt-title');
 
         // 说明文本
         const description = document.createElement('div');
-        description['inner' + 'HTML'] = `
-            <p style="margin: 0 0 10px 0; color: var(--text-muted); font-size: 12px;">
-                提示：如果未包含节点内容参数，系统将自动添加当前节点内容和文档上下文。
-            </p>
-            <p style="margin: 0 0 15px 0; color: var(--text-muted); font-size: 12px;">
-                可用参数：<code>\${nodeContent}</code> - 当前节点内容，<code>\${markdownContext}</code> - 文档上下文
-            </p>
-        `;
+        const descriptionIntro = description.createEl('p', {
+            cls: 'mindmap-custom-prompt-description',
+            text: '提示：如果未包含节点内容参数，系统将自动添加当前节点内容和文档上下文。'
+        });
+        descriptionIntro.addClass('mindmap-custom-prompt-description-spaced');
+        const descriptionParams = description.createEl('p', {
+            cls: 'mindmap-custom-prompt-description'
+        });
+        descriptionParams.appendText('可用参数：');
+        descriptionParams.createEl('code', { text: '${nodeContent}' });
+        descriptionParams.appendText(' - 当前节点内容，');
+        descriptionParams.createEl('code', { text: '${markdownContext}' });
+        descriptionParams.appendText(' - 文档上下文');
 
         // 输入框
         this.promptInput = document.createElement('textarea');
         this.promptInput.placeholder = '请输入自定义提示词...\n\n示例：\n分析"${nodeContent}"的优缺点，生成4-6个要点';
-        this.promptInput.setCssProps({
-        'width': "100%",
-        'height': "100px",
-        'padding': "10px",
-        'border': "1px solid var(--background-modifier-border)",
-        'border-radius': "4px",
-        'background': "var(--background-primary)",
-        'color': "var(--text-normal)",
-        'font-family': "var(--font-monospace)",
-        'font-size': "13px",
-        'resize': "vertical",
-        'box-sizing': "border-box",
-      });
+        this.promptInput.classList.add('mindmap-custom-prompt-input');
 
         // 按钮容器
         const buttonContainer = document.createElement('div');
-        buttonContainer.setCssProps({
-        'display': "flex",
-        'justify-content': "flex-end",
-        'gap': "10px",
-        'margin-top': "15px",
-      });
+        buttonContainer.classList.add('mindmap-custom-prompt-actions');
 
         // 取消按钮
         const cancelButton = document.createElement('button');
         cancelButton.textContent = '取消';
-        cancelButton.setCssProps({
-        'padding': "8px 16px",
-        'border': "1px solid var(--background-modifier-border)",
-        'border-radius': "4px",
-        'background': "var(--background-primary)",
-        'color': "var(--text-normal)",
-        'cursor': "pointer",
-      });
+        cancelButton.classList.add('mindmap-custom-prompt-button', 'mindmap-custom-prompt-button-cancel');
         cancelButton.onclick = () => this.close();
 
         // 确认按钮
         const submitButton = document.createElement('button');
         submitButton.textContent = '确认';
-        submitButton.setCssProps({
-        'padding': "8px 16px",
-        'border': "none",
-        'border-radius': "4px",
-        'background': "var(--interactive-accent)",
-        'color': "var(--text-on-accent)",
-        'cursor': "pointer",
-      });
+        submitButton.classList.add('mindmap-custom-prompt-button', 'mindmap-custom-prompt-button-submit');
         submitButton.onclick = () => this.submit();
 
         // 组装模态框

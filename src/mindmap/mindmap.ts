@@ -85,13 +85,10 @@ export default class MindMap {
 
         this.appEl.classList.add('mm-mindmap');
         this.appEl.classList.add(`mm-theme-${this.setting.theme}`);
-this.appEl.setCssProps({ 'overflow': "auto" });
 
 
         this.contentEL = document.createElement('div');
-this.contentEL.setCssProps({ 'position': "relative" });
-this.contentEL.setCssProps({ 'width': "100%" });
-this.contentEL.setCssProps({ 'height': "100%" });
+        this.contentEL.classList.add('mm-mindmap-content');
         this.appEl.appendChild(this.contentEL);
         this.draw = SVG(this.contentEL).size('100%', '100%');
 
@@ -102,13 +99,11 @@ this.contentEL.setCssProps({ 'height': "100%" });
 
         //layout direct
         this._indicateDom = document.createElement('div');
-        this._indicateDom.classList.add('mm-node-layout-indicate');
-this._indicateDom.setCssProps({ 'display': 'none' });
+        this._indicateDom.classList.add('mm-node-layout-indicate', 'is-hidden');
 
         //menu
         this._menuDom = document.createElement('div');
-        this._menuDom.classList.add('mm-node-menu');
-this._menuDom.setCssProps({ 'display': 'none' });
+        this._menuDom.classList.add('mm-node-menu', 'is-hidden');
         this.setMenuIcon();
 
         this.contentEL.appendChild(this._indicateDom);
@@ -163,13 +158,11 @@ this._menuDom.setCssProps({ 'display': 'none' });
     }
 
     setAppSetting() {
-this.appEl.setCssProps({ 'width': `${this.setting.canvasSize}px` });
-this.appEl.setCssProps({ 'height': `${this.setting.canvasSize}px` });
-this.contentEL.setCssProps({ 'width': `100%` });
-this.contentEL.setCssProps({ 'height': `100%` });
-//  this.contentEL.setCssProps({ 'color': `${this.setting.color} });`;
-this.contentEL.setCssProps({ 'background': `${this.setting.background}` });
-this.contentEL.setCssProps({ 'font-size': `${this.setting.fontSize}px` });
+this.appEl.setCssProps({ '--mm-canvas-size': `${this.setting.canvasSize}px` });
+this.contentEL.setCssProps({
+    '--mm-background': `${this.setting.background}`,
+    '--mm-font-size': `${this.setting.fontSize}px`,
+});
     }
     //create node
     init(collapsedIds?: string[]) {
@@ -425,7 +418,7 @@ this.contentEL.setCssProps({ 'font-size': `${this.setting.fontSize}px` });
                     e.stopPropagation();
                     node.edit();
                     if (this._menuDom) {
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                     }
                 }
             }
@@ -463,7 +456,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
         //             node.mindmap.execute('addSiblingNode', {
         //                 parent: node.parent
         //             });
-//             this._menuDom.setCssProps({ 'display': 'none' });
+
         //         }
         //     }
         // }
@@ -511,7 +504,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
                         // 将新节点移动到当前节点的下方
                         // 不添加到历史记录中
                         this.moveNode(newNode, node, 'down', false);
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                     }
                     else {// Editing mode => end edit mode
                         //node.cancelEdit();
@@ -532,7 +525,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
                     e.preventDefault();
                     e.stopPropagation();
                     node.mindmap.execute("deleteNodeAndChild", { node });
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                 }
                 //else: Deletion makes no sense
             }
@@ -549,7 +542,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
                             node.expand();
                         }
                         node.mindmap.execute("addChildNode", { parent: node });
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                     } else{
                         // this.selectNode.unSelect();
                         this.clearSelectNode();
@@ -1550,7 +1543,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
                       var selectNode = this.selectNode;
                       if(selectNode){
                          selectNode.mindmap.execute("addChildNode", { parent: selectNode });
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                       }
                  }
 
@@ -1558,7 +1551,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
                     var selectNode = this.selectNode;
                     if(!node.data.isRoot && selectNode){
                        selectNode.mindmap.execute("deleteNodeAndChild", { node: selectNode });
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                     }
                  }
                  return;
@@ -1571,15 +1564,14 @@ this._menuDom.setCssProps({ 'display': 'none' });
                     this.clearSelectNode();
                     this.selectNode = node;
                     this.selectNode?.select();
-// this._menuDom.setCssProps({ 'display': 'block' });
-this._menuDom.setCssProps({ 'display': 'none' });
+
+this._menuDom.addClass('is-hidden');
                     var box = this.selectNode.getBox();
-// this._menuDom.setCssProps({ 'left': `${box.x + box.width + 10}px` });
-// this._menuDom.setCssProps({ 'top': `${box.y + box.height/2 - 14}px` });
+
                 }
             } else {
                 this.clearSelectNode();
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
             }
         }
     }
@@ -1599,8 +1591,8 @@ this._menuDom.setCssProps({ 'display': 'none' });
 
     appDragend(evt: MouseEvent) {
         this.drag = false;
-        this._indicateDom.setCssProps({ 'display': 'none' });
-this._menuDom.setCssProps({ 'display': 'none' });
+        this._indicateDom.addClass('is-hidden');
+this._menuDom.addClass('is-hidden');
     }
 
     appDragover(evt: MouseEvent) {
@@ -1620,9 +1612,11 @@ this._menuDom.setCssProps({ 'display': 'none' });
             var node = this.getNodeById(nodeId);
             var box = node.getBox();
             this._dragType = this._getDragType(node, x, y);
-this._indicateDom.setCssProps({ 'display': 'block' });
-this._indicateDom.setCssProps({ 'left': box.x + box.width / 2 - 40 / 2 + 'px' });
-this._indicateDom.setCssProps({ 'top': box.y - 90 + 'px' });
+this._indicateDom.removeClass('is-hidden');
+this._indicateDom.setCssProps({
+    '--mm-node-indicate-left': `${box.x + box.width / 2 - 40 / 2}px`,
+    '--mm-node-indicate-top': `${box.y - 90}px`,
+});
             this._indicateDom.className = 'mm-node-layout-indicate';
 
             if( this._dragType == 'top') {
@@ -1643,7 +1637,7 @@ this._indicateDom.setCssProps({ 'top': box.y - 90 + 'px' });
                 }
             }
         }else{
-this._indicateDom.setCssProps({ 'display': 'none' });
+this._indicateDom.addClass('is-hidden');
         }
 
     }
@@ -1723,8 +1717,8 @@ this._indicateDom.setCssProps({ 'display': 'none' });
                 }
             }
         }
-        this._indicateDom.setCssProps({ 'display': 'none' });
-this._menuDom.setCssProps({ 'display': 'none' });
+        this._indicateDom.addClass('is-hidden');
+this._menuDom.addClass('is-hidden');
     }
 
     appMouseOverFn(evt: MouseEvent) {
@@ -1793,7 +1787,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
                 if (!this.editNode || (this.editNode && this.editNode != this.selectNode)) {
                     this.selectNode?.edit();
                     this.editNode = this.selectNode;
-this._menuDom.setCssProps({ 'display': 'none' });
+this._menuDom.addClass('is-hidden');
                 }
             }
         }
@@ -2146,7 +2140,7 @@ this._menuDom.setCssProps({ 'display': 'none' });
 
         // 如果需要平滑滚动，设置滚动行为
         if (smooth) {
-this.containerEL.setCssProps({ 'scroll-behavior': 'smooth' });
+            this.containerEL.classList.add('mm-smooth-scroll');
         }
 
         // 计算滚动位置，将节点放置在视口中央
@@ -2160,7 +2154,7 @@ this.containerEL.setCssProps({ 'scroll-behavior': 'smooth' });
         // 如果启用了平滑滚动，在滚动完成后恢复默认行为
         if (smooth) {
             setTimeout(() => {
-this.containerEL.setCssProps({ 'scroll-behavior': 'auto' });
+                this.containerEL.classList.remove('mm-smooth-scroll');
             }, 500);
         }
     }
@@ -2377,11 +2371,11 @@ this.containerEL.setCssProps({ 'scroll-behavior': 'auto' });
         }
         this.mindScale = num;
         if (this.scalePointer.length) {
-this.appEl.setCssProps({ 'transform-origin': `${this.scalePointer[0]}px ${this.scalePointer[1]}px` });
-this.appEl.setCssProps({ 'transform': "scale(" + this.mindScale / 100 + ")" });
+this.appEl.setCssProps({ '--mm-transform-origin': `${this.scalePointer[0]}px ${this.scalePointer[1]}px` });
         } else {
-this.appEl.setCssProps({ 'transform': "scale(" + this.mindScale / 100 + ")" });
+this.appEl.setCssProps({ '--mm-transform-origin': 'center center' });
         }
+this.appEl.setCssProps({ '--mm-scale': `${this.mindScale / 100}` });
 
     }
 

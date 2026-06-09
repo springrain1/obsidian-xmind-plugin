@@ -126,6 +126,18 @@ declare module "obsidian" {
     constructor(message: string, timeout?: number);
   }
 
+  export class Modal {
+    app: App;
+    modalEl: HTMLElement;
+    contentEl: HTMLElement;
+    titleEl: HTMLElement;
+    constructor(app: App);
+    open(): void;
+    close(): void;
+    onOpen(): void;
+    onClose(): void;
+  }
+
   export class ItemView {
     constructor(leaf: WorkspaceLeaf);
     getViewType(): string;
@@ -176,6 +188,21 @@ declare module "obsidian" {
     replaceSelection(replacement: string): void;
     replaceRange(replacement: string, from: {line: number, ch: number}, to?: {line: number, ch: number}): void;
   }
+}
+
+interface HTMLElement {
+  createEl<K extends keyof HTMLElementTagNameMap>(tag: K, options?: any): HTMLElementTagNameMap[K];
+  createEl(tag: string, options?: any): HTMLElement;
+  createDiv(options?: any): HTMLDivElement;
+  createSpan(options?: any): HTMLSpanElement;
+  empty(): void;
+  detach(): void;
+  appendText(text: string): void;
+  setText(text: string): void;
+  setCssProps(props: Record<string, string>): void;
+  toggleClass(className: string, value?: boolean): void;
+  addClass(...classNames: string[]): void;
+  removeClass(...classNames: string[]): void;
 }
 
 // 解决Node.js模块类型问题
