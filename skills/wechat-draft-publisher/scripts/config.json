@@ -1,7 +1,7 @@
 {
-  "appid": "wx66dd690543c3c820",
-  "appsecret": "383b76bb8fe8bb3cd444475756ce366d",
+  "appid": "",
+  "appsecret": "",
   "use_center_token": true,
-  "center_token_url": "https://wewrite.3thinking.cn/mp_token",
-  "doc_id": "2ed3518f6860d188041378494221144a"
+  "center_token_url": "",
+  "doc_id": ""
 }
