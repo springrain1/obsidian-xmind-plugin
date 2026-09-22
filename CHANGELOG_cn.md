@@ -424,3 +424,219 @@
 
 3、**流式组件样式智能分发适配**
 - 重构了 AI 结果流式弹窗（StreamingModal）的 Callout 渲染规则，针对不同语言环境传递的内部函数名称，采用多维词汇映射的容错匹配方案，保证最终呈现 UI 的美观度和样式的一致性。
+
+## v3.0：
+
+### 🤖 PiAI 引擎全量重构
+
+1、**AI 服务内核迁移至 PiAI**
+- 移除旧版自研 AI 服务（OpenAI、Anthropic、Gemini、Deepseek、Ollama、SiliconFlow 等分散 Provider 文件），统一改用 `@earendil-works/pi-ai` 引擎
+- 新增 `PiAIService` 统一服务层，整合模型注册、凭据存储、流式输出与生命周期管理
+- Provider 改为声明式注册，天然支持 OpenAI、Deepseek、Anthropic、Gemini、OpenAI 兼容端点等
+
+2、**凭据安全与 OAuth 登录**
+- 新增 `ObsidianCredentialStore`，API Key 由明文设置迁移至独立凭据存储，`fetchJson` 支持请求中断
+- 新增 AI 认证弹窗（AIAuthModal），支持 API Key 与 OAuth 授权两种方式，适配桌面与移动端
+- 新增 CodeBuddy Provider 完整实现：设备码 OAuth 流程、JWT 解析、鉴权请求、流式响应与跨平台网络层适配
+- 旧版设置自动迁移（`normalizeAISettings`），无需用户重新配置
+
+3、**模型配置面板重构**
+- 新增统一的模型配置面板（AIModelSettingsPanel），一个面板即可管理多模型档案
+- 支持模型档案切换、自定义端点、上下文窗口等配置
+- 新增设置归一化测试，保障新旧配置兼容
+
+### 🛠️ Pi Agent 工具调用（Agent Skills 标准）
+
+4、**Agent 工具集**
+- 新增 `AgentTools`：提供 `read`、`edit`、`write`、`ls`、`find`、`grep`、`bash` 等 Obsidian 原生工具
+- `edit` 支持 `edits[]` 批量局部替换，避免 AI 为改一处而重写全文，节省 Token 并防止截断
+- `grep` / `find` 支持跨库正则全文检索与文件名检索，多文档洞察按需提炼，显著降低上下文占用
+- 工具输出物理截断保护（2000 行 / 50KB），阻断上下文撑爆
+
+5、**技能执行器（ReAct Agent Loop）**
+- `SkillExecutor` 重构为多轮 ReAct 工具调用循环，遵循 Agent Skills 渐进式披露标准
+- System Prompt 按 Agent Skills 标准构建，技能按需通过工具加载 SKILL.md、references 与脚本
+- `SkillManager` 生成 XML 格式技能列表供系统提示词使用
+- `SkillParser` 新增技能名与描述校验，`PiAIService` 新增 `streamSimple` 简化流式调用
+
+### 📂 文件与文件夹右键 AI
+
+6、**多选与文件夹上下文菜单**
+- 文件列表支持多选文件、文件夹右键直接发起 AI 洞察
+- 文件夹右键可批量收集 Markdown 文档进行 AI 分析
+- AI 洞察支持从所选中文件/文件夹直接收集文档，交互更顺畅
+- 新增中英文右键菜单本地化文案
+
+### 🐛 问题修复与优化
+
+7、**稳定性与兼容性**
+- `PiAIService` 引入生命周期管理，插件卸载时取消所有在途认证、发现、流式与刷新任务
+- `fetchJson` 处理空响应体，必要时回退解析文本
+- 按 Provider 动态解析服务地址（如 codebuddy、openai-codex）
+- esbuild 目标调整为 ES2020，新增 Node 模块 shim 与原生模块缺失告警，提升构建兼容性
+- AI 认证弹窗样式重做，适配不同屏幕尺寸
+
+## v3.1：
+
+### 🎯 Skill 任务抽屉与多轮会话交互 (Skill Task Drawer)
+
+1、**非阻塞式任务执行抽屉**
+- 全新任务执行抽屉 UI（Skill Task Drawer）替代原有阻塞式模态弹窗，移除灰色背景遮罩；执行过程中用户可无缝继续在 Obsidian 中阅读与编辑笔记。
+- 引入 `SkillAgentSession` 会话状态管理，支持多轮连续追问与微调；用户可针对已生成的产物直接输入后续修正指令（如补充模块、调整排版），告别单次执行后重头再来的割裂体验。
+- 实时活动流（Activity Feed）动态可视化展示 Agent 的工具调用过程（read / edit / write / bash）、实时 Token 消耗统计与执行轮次。
+- 产物卡片（Artifact Card）智能检测并锁定最终交付物文件，支持一键在 Obsidian 叶节点中快速打开。
+
+2、**极简悬浮小气泡（Collapsible Floating Bubble）**
+- 任务抽屉支持一键最小化折叠为屏幕右下角的轻巧悬浮气泡，带有呼吸脉冲指示灯（Pulse Dot）实时反馈 Agent 执行状态。
+- 点击气泡随时平滑展开抽屉，不遮挡主笔记工作区；支持在执行过程中一键安全中止（Abort）。
+- 上下文解绑控制（Detach）：支持在抽屉中一键移除已绑定的源文档上下文，灵活切换为无上下文模式独立执行。
+
+### 👁️ 多模态视觉与智能链接解析 (Multimodal Vision & Link Resolver)
+
+3、**多模态大模型自动适配**
+- `PiAIService` 升级视觉模型动态支持判定（`resolveProfileVisionSupport`），兼容各大主流多模态模型及自定义 OpenAI 兼容端点，支持直接处理图片输入。
+- 隐私防泄漏保护：可通过 `blockImages` 配置一键关闭所有图片读取，防止意外上传敏感图像。
+- 统一 Prompt 模板解析引擎：支持单趟正则解析 `{{highlight}}`、`{{content}}`、`{{nodeContent}}`、`{{fullContent}}`、`{{markdownContext}}` 及 `${var}` 等多种占位符，未显式声明占位符时自动追加上下文。
+
+4、**富文本与图片附件智能解析提取**
+- 重构 `LinkResolver` 链接解析器，支持递归解析 Wiki 链接、嵌入块引用及本地与网络图片（`![[image.png]]`、`[alt](url)` 等）。
+- 无论是在文档右键 AI、思维导图节点 AI 扩展，还是多文档 AI 洞察系统，均会自动提取并打包相关插图/图表给视觉模型，实现图文融合的深度分析。
+
+### 🧠 XMind 深度互通与原生新建技能 (XMind Integration & Creator Skill)
+
+5、**原生新建 XMind 技能（xmind-creator）**
+- 新增第 7 个内置核心技能：`xmind-creator`，让 AI 直接基于对话、需求或笔记大纲生成原生 `.xmind` 思维导图文件。
+- 依托底层强大的编译引擎，AI 仅需输出结构化 Markdown，即可自动编译并包含外框（Boundary `[B]`）、概要（Summary `[G]`）、标注（Callout `[P]`）、跨分支联系（Relationship `[^1]`）、待办状态（Task `[ ]`）、分类标签（`#tag`）、主题备注（Notes `> `）和数学公式（Math `$..$`）。
+
+6、**XMind 文件免转换直接参与 AI 洞察与分析**
+- 文件列表右键或文件夹批量分析时，全面支持 `.xmind` 文件；
+- 洞察系统与右键菜单可无感将 `.xmind` 文件在内存中快速转码为 Markdown 大纲并提取图片附件，支持跨文件集直接生成汇总导图与核心洞察。
+- 优化 XMind ↔ Markdown 转换中的图片提取与防重复落盘复用机制（`reuseExistingImage`）。
+
+### 🛡️ 工具链安全性与架构精简
+
+7、**工具执行确认与沙箱隔离**
+- AI 设置中新增「Skills 工具调用确认」选项（`requireToolConfirmation`），可配置关键工具（write / edit / bash）执行前是否弹出用户授权确认弹窗，兼顾自主执行与安全掌控。
+- 提取独立的 `truncateOutput` 物理截断工具，严格防范工具输出撑爆上下文；系统 Shell 脚本执行隔离至系统临时目录，执行完毕后自动清理过程文件。
+- 产物自动内嵌：支持在源文档末尾自动追加产物双链（`![[artifact]]`），并在思维导图视图中实时自适应刷新布局。
+
+8、**代码瘦身与全量国际化**
+- 大幅移除旧版废弃的 XMind 查看器视图类、陈旧 Markdown 差异对比类及未使用的配置项（清理 -4300+ 行冗余代码），显著降低插件包体积与内存占用。
+- 补充中英繁三语本地化资源包，全面覆盖抽屉交互、模型管理面板与确认弹窗。
+
+### ⚡ AI 任务抽屉 Slash 命令与多技能顺序流水线 (Slash Commands & Skill Pipeline)
+
+8、**抽屉 Slash (`/`) 技能自动联想与资产接力协议**
+- **0 Token 本地 Slash 模糊联想 (`DrawerSkillSuggest`)**：对齐现有的 `@` 文件联想架构，在抽屉输入框键入 `/` 即刻弹出本地已启用的全部技能列表，展示图标、本地化名称、说明与 `/slug` 指令，支持上下键选择与回车自动补全，具备完整的行首/空白字符防误触守卫。
+- **多轮会话资产自动接力协议 (Context Handover)**：会话级自动追踪前序轮次生成的 Markdown 交付物、封面图与排版 HTML 路径；当后续轮次输入 `/wechat-article-formatter` 或 `/wechat-draft-publisher` 等斜杠命令时，自动将前序资产路径作为标准资产指针注入，实现“起草 ➔ 排版 ➔ 发布”公众号全流程在同一抽屉内 0 粘贴无缝流转。
+- **动态抽屉技能感知与状态更新**：在首轮输入（如 `/wechat-km-writer ...`）或后续多轮中敲击 `/` 命令切换技能时，抽屉标题栏图标与名称即时动态刷新，并自动将工作区基准目录（`baseDir`）切换到新技能所在路径。
+- **设置面板冷启动回弹加固**：修复设置面板在 Obsidian 重启冷启动阶段因网络目录尚未就绪而过度防御将已保存模型误重置为 `'auto'` 并清空思考档位的缺陷；只要用户已有保存配置，100% 严格尊重用户选择。
+
+## v3.2：
+
+### 🚀 通用 AI Copilot 与多源上下文注入 (Universal Copilot & Context Injection)
+
+1、**通用 AI Copilot 模式与动态技能路由**
+- 支持无需指定前置技能直接唤起通用 AI Copilot 任务抽屉，随心向智能助手提问或下达跨任务指令。
+- 动态技能感知：通用模式下，模型通过 `read` 工具读取某个特定技能配置时，抽屉自动识别并实时同步更新标题与技能图标。
+- 专属技能卡片平铺选择：在初态表单中支持一键锁定已启用的专属技能或切换回通用助手。
+- 抽屉单例守护（Guard）：已有正在运行或折叠为悬浮球的抽屉时，再次唤起会自动平滑展开并聚焦输入框，杜绝重复创建幽灵弹窗。
+
+2、**跨笔记划词选区直投与统一附件胶囊**
+- 文档划词右键投喂：阅读长笔记时选中文本片段，右键一键「发送所选内容到 AI 抽屉」（`arrow-up-right`），作为参考上下文存入待发送队列。
+- 精准行号与边界修正：记录 1-based 行号范围，自动处理末行行首（`ch===0`）空尾行溢出边界。
+- 渐进式披露防爆机制：选区超过 6,000 字符时自动退化为 offset/limit 结构化读取指针，避免长文本直接塞入造成的 Token 浪费与模型幻觉。
+- 统一待发送附件行：图片微缩卡片与文本/文件胶囊统一排版，对齐 16×16px 白底细边框关闭 X 按钮，文件名超长自动省略截断，彻底解决全局按钮样式撑破胶囊边框问题。
+
+3、**0 Token 本地 `@` 文件模糊联想（DrawerFileSuggest）**
+- 在追问输入框键入 `@` 即可唤起纯本地文件模糊搜索浮层，毫秒级联想 Vault 内可用文件（.md, .json, .csv, .xmind 等）。
+- 100% 本地运算：基于 Obsidian 原生模糊算法，零网络请求、零 LLM Token 消耗。
+- 键盘导航（上下键选择、Enter/Tab 挂载、Escape 取消）与中文输入法防抖保护；选中后自动剥离 `@query` 并将文件以 `$VAULT_PATH/` 轻量指针挂载为胶囊。
+- 输入栏占位提示词全面升级：清晰指引 `@` 引用文件、划词右键投喂文本、粘贴或拖拽图片等完整多通道操作。
+
+### 📚 知识库 Wiki Agent (LLM-Wiki) 与整库级技能
+
+4、**Karpathy 风格个人知识库构建 Agent（wiki 技能）**
+- 全新内置第 8 个核心技能 `wiki`，将自动化百科编纂、全库预扫描与渐进吸收能力引入 Obsidian。
+- 抽屉内置快捷指令建议按钮组：支持一键填入 `/wiki ingest`、`/wiki absorb 10`、`/wiki query <问题>`、`/wiki status`、`/wiki cleanup`、`/wiki breakdown`。
+- 配套脚本（`ingest.py`, `absorb.py`, `cleanup.py`, `breakdown.py`, `wiki_utils.py`）开箱即用，支持随插件版本升级自动检测并补齐 extraFiles 资产。
+
+5、**Vault 级技能范围隔离机制**
+- 架构层引入 `isVaultLevelSkill` 判定，严格区分单文档处理技能与全库级技能。
+- 多文件/文件夹右键触发时，自动计算公共父目录作用域（`getCommonFolderScope`）传递扫描范围指针，严防整库笔记内容直接塞入造成的上下文炸弹。
+
+### 🛠️ 解析器引擎加固与缺陷修复
+
+6、**加固型 YAML 块标量解析引擎**
+- `SkillParser` 全面支持 YAML 多行块标量语法（`|`, `>`, `>-`, `|-` 等）。
+- 严格区分字面块（`|`，保留行间换行与段落空行）与折叠块（`>`，连续行折叠为空格）。
+- 独占行首 `---` 分隔符匹配：修复块文本中包含普通 `---` 标记时误切断 frontmatter 的缺陷。
+- 彻底保证块标量结束后紧跟的常规 key-value 字段 100% 完整保留、零丢键。
+
+7、**边界防护与全量测试**
+- 纠正 `detectSkillFromPath` 宽泛匹配，严格限制为真实注册的 `s.filePath` 前后缀比对，杜绝库内普通同名笔记越界误判。
+- `startDrawerSession` 全链路包裹异常防御，彻底消除初始化失败导致抽屉控件被永久死锁在执行态的隐患。
+- 添加 Vault 文件胶囊时增加重复检测提示（`file_already_added`）。
+- 自动化单测扩充至 26 个测试套件共 375 项测试，通过率 100%。
+
+## v3.3：
+
+### 🚀 Google Antigravity 官方 Provider 与 OAuth 鉴权体系
+
+1、**官方标准 Loopback + PKCE 授权流**
+
+- 深度集成 Google Antigravity OAuth 鉴权体系：基于桌面端本地回环服务器（Loopback 51121 端口）与 PKCE (S256) 验证协议，实现点击授权后浏览器自动回调完成安全登录。
+- 提供贴心的手动粘贴回调兜底交互，自动适配端口受限或无法唤起外部浏览器的极端场景。
+- 完整接入 Antigravity 全系列大模型：支持 `gemini-3-pro`、`gemini-3-flash` 以及具备深度推理思考能力的 `claude-4-6-sonnet` 等顶尖模型，并在模型目录中支持层级分组呈现。
+- 共享 `platform-fetch` 网络层，桌面端统一使用 Electron / Node 原生流式拉取，并具备移动端系统沙箱限制的优雅守卫。
+
+### 🌐 原生 Web Access 联网搜索与网页抓取子系统 (Zero Dependencies)
+
+2、**零额外依赖的高性能联网检索**
+- 为 Agent 任务抽屉与 Skills 新增原生 `web_search` 和 `web_fetch` 工具，完全基于 Obsidian 原生能力与 Node 内置模块，实现 **0 新增 npm 依赖**。
+- 多服务商架构与智能容灾（Auto 路由）：开箱即用免密 DuckDuckGo、中文权威检索推荐博查 (Bocha)、AI 专业事实检索 Tavily、高质量网页 Markdown 格式化提取 Jina。
+- 严密的企业级 SSRF 防御屏障：彻底阻断私有 IP、回环地址（127.0.0.1 等）、云厂商元数据地址（169.254.169.254）、危险协议（file/gopher/ftp）以及 DNS 重绑定攻击。
+- 智能正文降噪提取（`extractor.ts`）：基于 Obsidian 原生 `htmlToMarkdown` 与启发式算法剔除脚本、样式与导航噪音，严防长篇网页撑爆 LLM 上下文。
+
+### 🎨 统一 AI 多提供商生图大模型架构 (Image Generation Runtime)
+
+3、**ImagesModels 独立运行时与跨服务商生态**
+- 引入 `@earendil-works/pi-ai` 平行独立的 `ImagesModels` 运行时，生图模型与文本对话模型解耦，支持独立配置、并行调用与零静默回退。
+- 全面支持三大生图大模型平台：
+  - **Google Antigravity**：支持 `gemini-3-pro-image` 高清绘图，无缝透传 16:9、1:1、9:16 等宽高比；
+  - **OpenRouter 官方生图目录**：内置 52+ 顶级图像大模型（Flux.2-flex, SDXL, Seedream 等），支持动态拉取模型列表与 `aspect_ratio` 参数透传；
+  - **自定义 OpenAI-compatible / 硅基流动端点**：提供 `openai-images` 与 `siliconflow` 协议分流，同时兼容 `b64_json` 直出与远程 URL 流式下载转码。
+- 凭据安全隔离：自定义生图密钥独立保存于 `image-generation:custom` 命名空间，绝不落入明文配置文件。
+- 移动端安全落盘：`AgentTools` 采用 Obsidian 原生 `base64ToArrayBuffer` 替换 Node 原生 `Buffer`，保障 iOS/Android/桌面全端二进制安全。
+- 扁平化配置面板：在 AI 模型设置面板浏览态底部直接内联 `renderImageServiceSection`，无需额外弹窗即可完成服务商切换与模型管理。
+
+### 📝 微信公众号矩阵技能现代化改造 (WeChat Skills Suite)
+
+4、**4 大核心微信写作技能原生契约对齐**
+- **技术科普写作 (`wechat-tech-writer`)**：强制在撰写正文前优先生成 16:9 封面图，规范 Agent 工具链，杜绝多轮重复交互。
+- **知识管理深度写作 (`wechat-km-writer`)**：基于真实案例与认知模型撰写高质长文，自动化执行「封面图 + 核心架构图」双图协作流。
+- **微信排版转换器 (`wechat-article-formatter`)**：纯原生 Mode A 转换管线，内嵌优雅排版 CSS，自动将 `![[...]]` 转换为适配微信后台的带外边距与圆角图片容器，代码块转为精美高仿 Mac 终端样式。
+- **草稿箱一键发布 (`wechat-draft-publisher`)**：遵循 `$VAULT_PATH` 路径契约，严格禁止 AppSecret 存入 Vault，一键提交草稿箱并输出轻量状态报告。
+
+### 🌍 全界面深度国际化与呈现解耦 (Comprehensive i18n & UX)
+
+5、**UI 彻底告别中英混杂与硬编码**
+- 清除 Copilot 抽屉、AI 认证登录弹窗（`AIAuthModal`）、设置面板及视图报错中的所有硬编码中文，全部抽离为 `skills.drawer.*` 与 `ai.auth.*` 等规范词条。
+- 呈现层与 Prompt 意图解耦（`skill-i18n.ts`）：为内置全部 15 个技能在 `zh-cn` / `en` / `zh-tw` 提供纯正优美的本地化名称与功能描述，告别直显带有 Prompt 路由关键词的英文 Frontmatter；自建技能保持平滑回退。
+
+### 🛡️ Agent 架构健壮性与防泄漏改进
+
+6、**元数据解耦与重入安全防护**
+- 引入 frontmatter `scope: 'vault' | 'content'` 规范，`isVaultLevelSkill` 优先基于元数据识别，彻底解耦硬编码 `wiki` 的限制。
+- 抽屉重入防泄漏守卫：在 `renderDrawerLayout` 重新渲染时显式销毁旧版 `DrawerFileSuggest`，消除潜在的事件监听器泄漏隐患。
+- 自动化单测套件扩充并实现全套测试文件全绿通过，通过率 100%。
+
+### 🧠 CodeBuddy 订阅服务深度推理与多模态视觉解封 (CodeBuddy Thinking & Vision Hardening)
+
+7、**CodeBuddy 推理档位透传与多模态能力重构**
+- **动态绑定推理兼容模式**：将 `compat.supportsReasoningEffort` 与模型远端推理能力（`supportsReasoning`）动态绑定，修复此前硬编码 `false` 导致底座抹除 `reasoning_effort` 的底层 Bug，使 DeepSeek-v4.1 flash、混元推理版等深度思考模型完全恢复档位控制。
+- **契约化思考档位全映射**：采用原生 `ThinkingLevelMap` 契约，遍历 Pi 全量标准档位（`PI_THINKING_LEVELS`），对远端未声明档位显式标记为 `null`；当 `canDisableThinking === false` 时将 `off` 标记为 `null`，杜绝用户在 UI 误选未支持档位产生上游 400 报错。
+- **智能推理档位初始预选**：基于模型支持档位（`thinkingLevelMap`）智能推导首选推荐档位（优先 `high`），在模型切换与下拉渲染时自动选用有效推荐级别，废除向底座注入无效 `thinkingLevelMap.default` 或污染数据面的做法。
+- **解封多模态图片输入**：废除基于模型 ID 正则模式匹配的脆弱白名单，直接基于服务端结构化能力声明（`!m.disabledMultimodal && m.supportsImages !== false`）放行图片多模态，确保思维导图 AI 洞察与 Agent 抽屉图片附件在所有兼容模型下透传无阻。
+- **健壮性防线与网络载荷断言**：对远端 `supportedEfforts` 实施严格的 `Array.isArray` 运行时数组守卫与非空清洗；重构单测用例对真实网络请求体（HTTP Payload）进行全量断言，自动化测试套件全绿通过。
+

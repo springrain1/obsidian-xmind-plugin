@@ -419,3 +419,218 @@ An Obsidian XMind & AI Mind Mapping Plugin
 
 3. **Intelligent Streaming Component Style Distribution**
 - Refactored the Callout rendering rules in the AI result streaming popup (StreamingModal). To handle internal function names passed in different language environments, implemented a multi-dimensional vocabulary fault-tolerant matching scheme to ensure UI aesthetics and style consistency.
+
+## v3.0:
+
+### 🚀 PiAI Engine Full Architecture Refactoring
+
+1. **AI Service Kernel Migration to PiAI**
+- Removed legacy self-developed AI services (dispersed provider files including OpenAI, Anthropic, Gemini, DeepSeek, Ollama, SiliconFlow, etc.), unifying them under the `@earendil-works/pi-ai` engine.
+- Added unified `PiAIService` service layer, consolidating model registration, credential storage, streaming output, and lifecycle management.
+- Transitioned provider integration to declarative registration, natively supporting OpenAI, DeepSeek, Anthropic, Gemini, OpenAI-compatible endpoints, and more.
+
+2. **Credential Security & OAuth Login**
+- Added `ObsidianCredentialStore`, migrating API keys from plaintext settings to isolated credential storage with request abort support in `fetchJson`.
+- Added AI authentication modal (`AIAuthModal`), supporting both API Key and OAuth authorization workflows adapted for desktop and mobile environments.
+- Added full CodeBuddy provider implementation: device code OAuth flow, JWT decoding, authorized requests, streaming responses, and cross-platform network layer adaptation.
+- Automatic legacy settings migration (`normalizeAISettings`) requiring no manual reconfiguration by users.
+
+3. **Model Settings Panel Redesign**
+- Added a unified model settings panel (`AIModelSettingsPanel`) to manage multi-model profiles in a single interface.
+- Supported seamless profile switching, custom endpoints, context window configuration, and more.
+- Added settings normalization test suites to ensure backward compatibility across legacy and modern configurations.
+
+### 🛠️ Pi Agent Tool Calling (Agent Skills Standard)
+
+4. **Agent Tool Suite**
+- Added `AgentTools`: providing native Obsidian tools including `read`, `edit`, `write`, `ls`, `find`, `grep`, and `bash`.
+- `edit` supports `edits[]` batch partial replacements, preventing the AI from rewriting entire files for minor changes, saving tokens, and avoiding truncation.
+- `grep` and `find` support cross-vault regex full-text and file name search, enabling on-demand distillation for multi-document insights and significantly reducing context overhead.
+- Physical truncation safeguards for tool output (2,000 lines / 50 KB) to prevent context window overflow.
+
+5. **Skill Executor (ReAct Agent Loop)**
+- Refactored `SkillExecutor` into a multi-turn ReAct tool-calling loop adhering to the Agent Skills progressive disclosure standard.
+- System prompt constructed per Agent Skills specifications, allowing skills to load `SKILL.md`, references, and scripts on demand via tools.
+- `SkillManager` generates XML-formatted skill catalogs for injection into system prompts.
+- `SkillParser` added name and description validation; `PiAIService` introduced `streamSimple` to streamline streaming invocations.
+
+### 📂 File & Folder Context Menu AI
+
+6. **Multi-Selection & Folder Context Menus**
+- File explorer supports multi-file selection and folder right-click actions to initiate AI insights directly.
+- Folder right-click allows batch gathering of Markdown documents for aggregated AI analysis.
+- AI insights smoothly ingest documents directly from selected files/folders.
+- Added bilingual localization strings for file explorer context menus.
+
+### 🔧 Bug Fixes & Optimizations
+
+7. **Stability & Compatibility**
+- Introduced lifecycle management in `PiAIService` to cancel all in-flight authentication, discovery, streaming, and refresh tasks upon plugin unload.
+- `fetchJson` gracefully handles empty response bodies with text parsing fallback when appropriate.
+- Dynamic provider endpoint resolution for specialized services (such as CodeBuddy and OpenAI Codex).
+- Adjusted esbuild target to ES2020, adding Node module shims and native module missing warnings to improve build compatibility.
+- Redesigned AI authentication modal styles to adapt across various screen sizes.
+
+## v3.1:
+
+### 🎯 Skill Task Drawer & Multi-Turn Follow-Up (Skill Task Drawer)
+
+1. **Non-Blocking Task Drawer with Multi-Turn Refinement**
+- Brand new Skill Task Drawer UI replacing modal dialogs; removes modal backdrop overlay so you can freely read and edit notes while skills execute in the background.
+- Introduced `SkillAgentSession` session state management, allowing continuous natural-language follow-ups, additions, and layout tweaks on the same artifact without starting from scratch.
+- Real-time Activity Feed tracking agent tool calls (read / edit / write / bash), live token consumption, and turn count metrics.
+- Artifact Card automatically detects and highlights the final deliverable, opening it in an Obsidian leaf with one click.
+
+2. **Collapsible Floating Bubble**
+- The task drawer can be minimized into a sleek floating pill badge at the bottom-right corner, featuring a breathing pulse dot indicating running state.
+- Click the bubble anytime to expand the drawer without obstructing note viewing; supports aborting tasks on demand.
+- Supports detaching document context with one click for context-free prompts.
+
+### 👁️ Multimodal Vision & Intelligent Link Resolution
+
+3. **Global Vision Model Support**
+- `PiAIService` enhanced with dynamic vision capability resolution (`resolveProfileVisionSupport`), seamlessly supporting vision-capable models across OpenAI, Anthropic, Gemini, and OpenAI-compatible endpoints.
+- Privacy-aware with `blockImages` configuration to disable image uploading at any time.
+- Unified prompt template engine supporting single-pass regex replacement for `{{highlight}}`, `{{content}}`, `{{nodeContent}}`, `{{fullContent}}`, `{{markdownContext}}`, and `${var}` placeholders.
+
+4. **Rich Content & Image Attachment Extraction**
+- Refactored `LinkResolver` to parse wiki links, embedded block refs, and raster images (`![[image.png]]`, `[alt](url)`).
+- Context menu AI, mind map node AI expansion, and AI Insight now automatically extract and attach referenced images to vision models for deep multimodal understanding.
+
+### 🧠 XMind Deep Interoperability & XMind Creator Skill
+
+5. **Native XMind Generation Skill (`xmind-creator`)**
+- Added new built-in skill `xmind-creator` (expanding default templates to 7 skills), enabling AI to generate native `.xmind` mind maps directly from notes, outlines, or dialogue.
+- Leverages the converter engine: AI writes standard Markdown and it compiles into `.xmind` files with Boundaries (`[B]`), Summaries (`[G]`), Callouts (`[P]`), Relationships (`[^1]`), Tasks (`[ ]`), Labels (`#tag`), Notes (`> `), and Math (`$..$`).
+
+6. **Direct AI Insight & Analysis on XMind Files**
+- File explorer context menu and batch folder analysis fully support `.xmind` files.
+- In-memory conversion parses `.xmind` mind maps to structured Markdown outlines and extracts images for AI analysis, summarization, and mind map generation without manual conversion.
+- Optimized image extraction and deduplication during XMind ↔ Markdown conversions (`reuseExistingImage`).
+
+### 🛡️ Agent Toolchain Safety & Codebase Streamlining
+
+7. **Tool Confirmation & Sandbox Safety**
+- Added "Require Tool Execution Confirmation" setting (`requireToolConfirmation`), allowing optional confirmation popups before writing files, editing notes, or executing bash commands.
+- Standalone `truncateOutput` utility prevents context window overflow; bash commands run safely inside temp directories and clean up automatically.
+- Automatic artifact embedding: appends `![[artifact]]` wikilinks to source files and refreshes open mind map views automatically.
+
+8. **Codebase Cleanup & Comprehensive Localization**
+- Removed deprecated XMind previewer classes, legacy markdown diff modules, and dead CSS rules (-4300+ lines removed), significantly reducing bundle size and memory footprint.
+- Complete localization across Simplified Chinese, Traditional Chinese, and English for all new drawer controls, model settings, and confirmation dialogs.
+
+### ⚡ AI Task Drawer Slash Commands & Multi-Skill Pipelines
+
+8. **Drawer Slash (`/`) Skill Autocompletion & Context Handover Protocol**
+- **0-Token Local Slash Suggestion (`DrawerSkillSuggest`)**: Aligned with the `@` file mention architecture, typing `/` in the drawer textarea instantly pops up all enabled skills with icons, localized titles, descriptions, and `/slug` commands; supports full keyboard navigation and robust whitespace boundaries.
+- **Multi-Turn Context Handover Protocol**: Automatically tracks deliverable assets across turns (Markdown article, cover image, formatted HTML); when a slash command like `/wechat-article-formatter` or `/wechat-draft-publisher` is invoked, previous stage asset pointers are injected automatically, enabling seamless "Draft ➔ Format ➔ Publish" WeChat pipelines in a single drawer session without copy-pasting file paths.
+- **Dynamic Skill Badge & BaseDir Switching**: Typing a slash command dynamically updates the drawer title icon and name, and synchronizes the tool execution `baseDir` to the newly active skill directory.
+- **Settings Panel Cold-Start Persistence Fix**: Fixed a defensive overwrite bug in the AI settings panel where an unpopulated network catalog on boot would reset configured model profiles to `'auto'` and wipe reasoning levels; existing user configurations are now 100% preserved on restart.
+
+## v3.2:
+
+### 🚀 Universal AI Copilot & Multi-Source Context Injection
+
+1. **Universal AI Copilot Drawer & Dynamic Skill Routing**
+- Support invoking the AI Copilot Task Drawer without selecting a pre-designated skill; users can freely ask general questions or specify requests.
+- Dynamic skill activation: when the model calls the `read` tool on a skill definition file during execution, the drawer automatically detects and synchronizes the skill's name and icon in real-time.
+- Interactive skill switcher: easily toggle between universal copilot mode and specialized skill cards within the drawer form.
+- Active drawer guard: prevents creating duplicate or ghost modals, smoothly expanding and focusing the existing active drawer session.
+
+2. **Cross-Document Selection Injection & Unified Attachment Capsules**
+- Right-click editor selection feeding: highlight any paragraph or key data in notes and right-click "Send selection to AI Drawer" (`arrow-up-right`) to enqueue it as a referenced context capsule.
+- Smart line calculation: captures 1-based line ranges with selection end adjustments (`to.ch === 0`) to prevent trailing newline bleed.
+- Progressive disclosure safeguard: selections exceeding 6,000 characters automatically degrade into lightweight read pointers with `offset` and `limit`, preventing token waste and hallucination.
+- Unified attachment row: pending image thumbnails and text/file context capsules share the preview row with identical 16×16px close button styling, ellipsis truncation, and anti-overflow protection.
+
+3. **0-Token Local `@` File Mentions (DrawerFileSuggest)**
+- Type `@` directly in the follow-up input box to trigger native fuzzy search against readable Vault files (.md, .json, .csv, .xmind, etc.).
+- 100% local fuzzy scoring with zero network calls and zero model token overhead.
+- Keyboard navigation (Arrow Up/Down/Enter/Tab/Escape) and IME composition protection; selecting an entry removes the `@query` and mounts a `$VAULT_PATH/` file pointer capsule.
+- Input placeholder updated to clearly guide users on `@` file mentions, right-click text snippet feeding, and image paste/drag-and-drop.
+
+### 📚 Knowledge Wiki Agent (LLM-Wiki) & Vault-Level Skills
+
+4. **Karpathy-Style LLM-Wiki Agent Built-in**
+- Added the `wiki` agent skill (expanding built-in skills to 8), bringing automated personal knowledge base compilation, ingestion, and querying to Obsidian.
+- Fast-action suggestion chips in drawer: one-click fill for `/wiki ingest`, `/wiki absorb 10`, `/wiki query <question>`, `/wiki status`, `/wiki cleanup`, and `/wiki breakdown`.
+- Auto-syncing bundled script assets (`ingest.py`, `absorb.py`, `cleanup.py`, `breakdown.py`, `wiki_utils.py`) to the user vault with versioned upgrades.
+
+5. **Vault-Level Skill Scope Isolation**
+- Introduced `isVaultLevelSkill` classification to distinguish full-vault compilation skills from single-document skills.
+- Multi-file explorer context menus automatically compute the common folder scope (`getCommonFolderScope`) and pass scanning pointers rather than dumping raw file contents, eliminating full-vault context bombs.
+
+### 🛠️ Parser Engine Hardening & Defect Fixes
+
+6. **Hardened YAML Block Scalar Parser**
+- Fully supports YAML multi-line block scalars (`|`, `>`, `>-`, `|-`, etc.) in skill frontmatter.
+- Properly preserves internal paragraph breaks for literal blocks (`|`) while folding single-spaced lines for folded blocks (`>`).
+- Strict standalone delimiter matching prevents embedded `---` dividers within description blocks from prematurely cutting off frontmatter parsing.
+- Guarantees zero field loss for regular key-value pairs following block scalar definitions.
+
+7. **Safety Bounds & Test Coverage**
+- Tightened `detectSkillFromPath` to match strictly against registered `s.filePath` boundaries, avoiding broad wildcard collisions with user notes.
+- Added full `try...catch` lifecycle wraps in `startDrawerSession` to prevent `isExecuting` flags from locking the UI upon initial session failures.
+- Duplicate file attachments in drawer now trigger friendly user notices (`file_already_added`).
+- Expanded automated unit test suite to 375 tests across 26 test suites with 100% pass rate.
+
+## v3.3:
+
+### 🚀 Google Antigravity Provider & OAuth Integration
+
+1. **Official Loopback + PKCE Authorization Flow**
+- Deeply integrated official Google Antigravity OAuth architecture: desktop local loopback server (port 51121) + PKCE (S256) authorization code grant with automated browser callback capture.
+- Graceful manual paste fallback modal for restricted port environments or systems unable to launch external browsers.
+- Full catalog access to Google Antigravity models: `gemini-3-pro`, `gemini-3-flash`, and deep reasoning `claude-3-7-sonnet` models with structured category grouping.
+- Shared `platform-fetch` network layer consolidating Electron and Node.js native streaming with mobile platform guards.
+
+### 🌐 Native Web Access Subsystem (web_search & web_fetch)
+
+2. **High-Performance Web Access with Zero New Dependencies**
+- Added native `web_search` and `web_fetch` Agent tools for the Task Drawer and Skills with **zero new npm dependencies**, powered strictly by Obsidian native APIs and Node built-in modules.
+- Multi-provider architecture with intelligent failover (Auto routing): out-of-the-box keyless DuckDuckGo, authoritative Chinese search via Bocha, professional factual agent search via Tavily, and clean markdown reader formatting via Jina.
+- Strict enterprise-grade SSRF defense: blocks loopback addresses, private IP ranges, cloud metadata services (169.254.169.254), unsupported protocols (file/gopher/ftp), and DNS rebinding attacks.
+- Intelligent content extractor (`extractor.ts`): leverages native `htmlToMarkdown` with heuristic DOM noise filtering to eliminate scripts, styles, and navigation clutter, saving model context tokens.
+
+### 🎨 Unified Multi-Provider AI Image Generation Runtime
+
+3. **Parallel ImagesModels Engine & Provider Ecosystem**
+- Introduced `@earendil-works/pi-ai`'s parallel `ImagesModels` runtime, completely decoupling image generation from chat models with independent configuration and zero silent cross-provider fallbacks.
+- Comprehensive support for three major image generation platforms:
+  - **Google Antigravity**: high-fidelity image synthesis via `gemini-3-pro-image`, supporting 16:9, 1:1, 9:16 aspect ratios;
+  - **OpenRouter Image Catalog**: built-in access to 52+ image models (Flux.2-flex, SDXL, Seedream, etc.) with dynamic catalog discovery and `aspect_ratio` forwarding;
+  - **Custom OpenAI-compatible / SiliconFlow Endpoints**: dual protocol handling (`openai-images` and `siliconflow`), supporting both `b64_json` payloads and remote URL streaming download.
+- Secure credential isolation: custom image API keys stored in `ObsidianCredentialStore` under `image-generation:custom` namespace, never serialized to plaintext settings.
+- Cross-platform binary safety: `AgentTools` utilizes native `base64ToArrayBuffer` instead of Node `Buffer`, ensuring reliable image persistence across iOS, Android, and desktop.
+- Inline settings UI: flattened `renderImageServiceSection` directly embedded in AI settings for intuitive provider switching and key management.
+
+### 📝 Modernized WeChat Publishing Skills Suite
+
+4. **Aligned 4 Core WeChat Skills to Native Tool Contracts**
+- **Technology Writing (`wechat-tech-writer`)**: guarantees 16:9 cover image creation before drafting articles, streamlining the agent tool chain.
+- **Knowledge Management Writing (`wechat-km-writer`)**: generates deep scenario-driven articles with automated dual-image generation (cover + architecture diagram).
+- **Article Formatter (`wechat-article-formatter`)**: native Mode A conversion pipeline injecting elegant inline typography CSS, converting `![[...]]` embeds to responsive WeChat image containers, and formatting code blocks into Mac terminal styling.
+- **Draft Publisher (`wechat-draft-publisher`)**: adheres to `$VAULT_PATH` path conventions, enforces zero AppSecret persistence in the vault, and publishes formatted articles directly to WeChat draft box with lightweight summary reports.
+
+### 🌍 Comprehensive UI Internationalization & Presentation Decoupling
+
+5. **Eliminated Hardcoded Strings & Mixed Languages**
+- Purged all hardcoded Chinese UI text in the Copilot drawer, `AIAuthModal`, settings panels, and mindmap error handlers into `skills.drawer.*` and `ai.auth.*` locale keys.
+- Decoupled human-facing UI presentation from agent routing prompts (`skill-i18n.ts`): all 15 built-in skills now feature refined, native titles and descriptions across English, Simplified Chinese, and Traditional Chinese, eliminating awkward frontmatter trigger keywords from user view.
+
+### 🛡️ Agent Architecture Hardening & Memory Safety
+
+6. **Metadata Scope Decoupling & Re-entrance Protection**
+- Added frontmatter `scope: 'vault' | 'content'` specification, allowing `isVaultLevelSkill` to detect vault-level skills dynamically from metadata rather than hardcoded identifiers.
+- Drawer re-entrance cleanup: explicitly destroys previous `DrawerFileSuggest` instances before re-rendering drawer layout, eliminating event listener leaks.
+- Unit test suite expanded with all test files passing cleanly at 100%.
+
+### 🧠 CodeBuddy Deep Reasoning & Multimodal Vision Hardening
+
+7. **CodeBuddy Reasoning Effort Forwarding & Vision Capability Overhaul**
+- **Dynamic Reasoning Compatibility Binding**: dynamically binds `compat.supportsReasoningEffort` to the model's upstream reasoning capability (`supportsReasoning`), fixing the critical bug where hardcoded `false` caused `@earendil-works/pi-ai` to strip `reasoning_effort` and restoring deep reasoning control for DeepSeek-R1, Hunyuan Reasoning, etc.
+- **Strict Contract-Compliant Thinking Level Mapping**: adopts the native `ThinkingLevelMap` contract, traversing all standard Pi thinking levels (`PI_THINKING_LEVELS`) and explicitly marking unadvertised levels as `null`; sets `off: null` when `canDisableThinking === false` to eliminate invalid UI options that trigger upstream 400 errors.
+- **Intelligent Reasoning Level Preselection**: derives the preferred default thinking effort directly from supported model capabilities (`thinkingLevelMap`, prioritizing `high`), eliminating invalid `thinkingLevelMap.default` assignments or data-plane leakage.
+- **Unrestricted Multimodal Vision Input**: eliminated fragile regex ID whitelist matching, trusting upstream structured capabilities (`!m.disabledMultimodal && m.supportsImages !== false`) to ensure image attachments in mindmap insights and agent drawers pass through reliably on all compatible models.
+- **Defensive Data Validation & Direct Network Payload Tests**: added strict `Array.isArray` array guards and payload sanitization for remote `supportedEfforts`; updated unit test suite with direct assertions on HTTP request payloads, all test suites passing cleanly.
+

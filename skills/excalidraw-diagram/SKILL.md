@@ -392,9 +392,9 @@ See [references/excalidraw-schema.md](references/excalidraw-schema.md) for all e
 - 优先使用中文以提高清晰度
 
 #### 3. 使用 Write 工具自动保存文件
-- **保存位置**：当前工作目录（自动检测环境变量）
-- **完整路径**：`{current_directory}/[filename].md`
-- 这样可以实现灵活迁移，无需硬编码路径
+- **必须调用 `write` 工具落盘**，不要将图表 JSON 或 Markdown 正文直接输出到对话中
+- **path 参数只传文件名**（如 `商业模式.relationship.md`），**不要自行拼接目录前缀**；目标目录由宿主配置自动决定
+- 保存结果以 `write` 工具返回值或后续元数据摘要为准，由插件负责打开文件与建立双链
 
 #### 4. 确保 Markdown 结构完全正确
 **必须按以下格式生成**（不能有任何修改）：

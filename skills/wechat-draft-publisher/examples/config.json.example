@@ -1,0 +1,11 @@
+{
+  "appid": "your_appid_here",
+  "appsecret": "your_appsecret_here",
+  
+  "// 可选配置": "以下为中心令牌服务器配置（推荐）",
+  "use_center_token": false,
+  "center_token_url": "https://wewrite.3thinking.cn/mp_token",
+  
+  "// doc_id 说明": "首次使用 appid/appsecret 认证后自动生成，后续可只用 doc_id",
+  "doc_id": ""
+}

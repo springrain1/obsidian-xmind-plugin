@@ -6,7 +6,7 @@
 
 Interactive Editing • AI Smart Expansion • Multiple Export Formats • Enterprise-Grade Stability
 
-[![Version](https://img.shields.io/badge/version-2.8-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.3-blue.svg)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-Desktop%20%7C%20Mobile-green.svg)](#platform-support)
 
 [中文文档](README_cn.md)
@@ -24,9 +24,20 @@ Interactive Editing • AI Smart Expansion • Multiple Export Formats • Enter
 - **Rich Text Support**: Tables, Callouts, quotes, code blocks, embedded content
 
 ### 🤖 AI-Powered Enhancement
-- **Multiple AI Services**: OpenAI, Anthropic, Gemini, Deepseek, Ollama
+- **Unified AI Engine**: Powered by PiAI, supporting Google Antigravity, OpenAI, Anthropic, Gemini, Deepseek, CodeBuddy, OpenAI-compatible endpoints, and more
+- **OAuth / API Key Sign-in**: Auth modal with two authorization modes, credentials stored securely; official Antigravity Loopback + PKCE authorization flow
+- **Native Web Access Subsystem**: Zero-dependency `web_search` and `web_fetch` with SSRF protection and Auto routing (DuckDuckGo, Bocha, Tavily, Jina)
+- **Multi-Provider AI Image Generation**: Independent `ImagesModels` runtime supporting Google Antigravity, OpenRouter (52+ image models), and OpenAI-compatible / SiliconFlow endpoints
+- **WeChat Publishing Skills Suite**: Built-in tech writing, KM articles, typography formatting, and one-click draft box publishing
+- **Universal AI Copilot**: Direct assistant invocation without pre-selecting skills, dynamically adapting as tools load skills
+- **Skill Task Drawer**: Non-blocking docked drawer with collapsible floating bubble, multi-source context injection (selection feeding, 0-token `@` file mention), and multi-turn refinement
+- **Karpathy Wiki Agent (`wiki`)**: Built-in full-vault knowledge compilation, note ingestion, and incremental absorption
+- **Multimodal Vision**: Dynamic vision model resolution with automatic image attachment extraction from notes and mind maps
+- **Pi Agent Tool Calling**: read / edit / write / find / grep / ls / bash / web_search / web_fetch / generate_image — AI directly reads/writes notes, searches the web, and generates illustrations
+- **Native XMind Creator Skill**: Built-in 15 core skills, allowing AI to directly write `.xmind` files with boundaries, summaries, callouts, and relationships
+- **Comprehensive Internationalization**: Task drawer, auth modal, settings, and all 15 built-in skills fully localized in English, Simplified Chinese, and Traditional Chinese
 - **Smart Expansion**: One-click child node generation, deep analysis, content optimization
-- **Insight System**: Flomo-like AI insights with multi-dimensional analysis
+- **Insight System**: Flomo-like AI insights with multi-dimensional analysis, directly analyzing `.xmind` files alongside notes
 - **Custom Prompts**: Fully customizable AI interactions
 
 ### 🏗️ Enterprise-Grade Stability
@@ -119,11 +130,39 @@ Interactive Editing • AI Smart Expansion • Multiple Export Formats • Enter
 - Persistent data storage
 
 #### AI Skills System (Plus Feature)
-- Extensible AI workflows defined via SKILL.md
-- Multiple output formats: markdown, mermaid, excalidraw, canvas, base
-- Auto-scans vault `skills/` folder to discover skills
-- Streaming output, real-time file writing
+- Extensible AI workflows defined via SKILL.md, following the Agent Skills open standard
+- Multiple output formats: markdown, mermaid, excalidraw, canvas, base, and native `.xmind` mind maps
+- Built-in 7 core skills, including the new `xmind-creator` skill
+- Auto-scans vault `skills/` folder to discover skills, loading them on demand via progressive disclosure
+- ReAct agent tool loop for complex multi-step tasks
+- Streaming output, real-time file writing; automatically embeds artifact wikilinks (`![[artifact]]`) into source notes
 - Smart content extraction, strips AI explanatory text
+
+#### Skill Task Drawer & Multi-Turn Refinement
+- **Non-Blocking Drawer**: Operates smoothly without a blocking modal backdrop, allowing uninterrupted reading and editing
+- **Multi-Turn Session Refinement**: `SkillAgentSession` retains context across follow-up prompts for iterative polishing
+- **Collapsible Floating Bubble**: Minimize drawer into a bottom-right pill badge with a breathing pulse dot indicator
+- **Real-Time Activity Feed**: Live visualization of tool executions (read/edit/write/bash), execution turns, and token usage
+- **Artifact Card**: Detects the final deliverable and opens it in an Obsidian leaf with one click
+
+#### Multimodal Vision & Link Resolution
+- **Dynamic Vision Resolution**: Automatically verifies model vision capabilities across providers and custom endpoints
+- **Rich Content Extraction**: `LinkResolver` parses wikilinks, block refs, and raster images (`![[image.png]]`, `[alt](url)`)
+- **Multimodal AI Integration**: Selected text, mind map nodes, and multi-document insights automatically deliver images to vision models
+- **Privacy Control**: Enable `blockImages` in settings to disable image uploading at any time
+
+#### Pi Agent Tool Calling
+- Built-in `read` / `edit` / `write` / `find` / `grep` / `ls` / `bash` tools
+- `edit` performs batched targeted replacements instead of rewriting whole files
+- `write` compiles Markdown directly into native binary `.xmind` mind maps
+- `grep` / `find` regex search across the vault; multi-document insight retrieves on demand
+- Physical truncation protection (`truncateOutput`) protects the context window
+- Optional "Require Tool Confirmation" (`requireToolConfirmation`) setting before modifying files or executing bash
+
+#### File & Folder Context Menu AI
+- Multi-select files or right-click folders in the file list to launch AI insights directly
+- Folder right-click batches both Markdown documents and `.xmind` files
+- Direct in-memory extraction of `.xmind` outlines and images for AI analysis
 
 #### Unified Save Path Management
 - Three modes: custom path / vault root / source file directory
@@ -293,8 +332,8 @@ Method 2: Command palette → "Toggle markdown or mindmap mode"
 
 1. **Set Up AI Service**
    - Open plugin settings → AI Service Configuration
-   - Select provider (OpenAI, Gemini, Deepseek, etc.)
-   - Enter API Key and model name
+   - Select a provider (OpenAI, Anthropic, Gemini, Deepseek, CodeBuddy, etc.)
+   - Authenticate via API Key or OAuth, then pick a model
 
 2. **Use AI Expansion**
    - Click the 🧠 button on a node
@@ -333,6 +372,41 @@ Method 2: Command palette → "Toggle markdown or mindmap mode"
 ---
 
 ## 🔄 Latest Version
+
+### v3.3 - Google Antigravity, Native Web Access, Unified Image Generation & Skill Pipelines
+- 🌐 **Google Antigravity Provider & OAuth**: Desktop local loopback (port 51121) + PKCE authorization code grant with support for `gemini-3-pro`, `gemini-3-flash`, `claude-4-6-sonnet`, and more
+- 🔍 **Zero-Dependency Native Web Access**: Built-in `web_search` and `web_fetch` with enterprise SSRF defense and Auto routing (DuckDuckGo, Bocha, Tavily, Jina)
+- 🎨 **Unified Multi-Provider AI Image Generation**: Independent `ImagesModels` runtime supporting Google Antigravity, OpenRouter (52+ image models), and OpenAI-compatible / SiliconFlow endpoints
+- ⚡ **0-Token Drawer Slash (`/`) Skill Autocompletion**: Type `/` in the drawer input to instantly search and autocomplete all 15 enabled skills with keyboard navigation
+- 🔗 **Multi-Skill Sequential Pipelines**: Multi-turn context handover protocol seamlessly carrying assets across stages (e.g. WeChat "Draft ➔ Format ➔ Publish") in a single session
+- 🧠 **CodeBuddy Deep Reasoning & Multimodal Vision Hardening**: Dynamic `reasoning_effort` binding, contract-compliant thinking level mapping, unrestricted multimodal vision, and settings persistence fixes
+- 📱 **Modernized WeChat Publishing Skills Suite**: 4 core WeChat publishing skills aligned with `$VAULT_PATH` conventions and secure credential isolation
+- 🌍 **Comprehensive Internationalization**: Full elimination of hardcoded strings across drawers, modals, and settings; native localization for all 15 skills across EN, ZH-CN, and ZH-TW
+
+### v3.2 - Universal Copilot, Context Injection & Wiki Agent
+- ⚡ **Universal AI Copilot Drawer**: Launch task drawer without a designated skill; dynamically auto-detects and binds skill titles/icons when tools read skill definitions
+- 📝 **Selection Snippet Injection**: Highlight text across notes and right-click "Send selection to AI Drawer" with precise 1-based line bounds and >6000-char read pointer fallback
+- 🔍 **0-Token Local `@` File Mentions**: Type `@` in the input bar to search and attach Vault files (.md, .json, .csv, .xmind) via native fuzzy match with zero Token overhead
+- 📚 **Knowledge Wiki Agent (`wiki`)**: Built-in 8th skill based on Karpathy LLM-Wiki specifications with automated asset syncing and quick action suggestions
+- 🛡️ **Unified Attachment Row**: Unified 16×16px remove buttons and layout overflow protection across image thumbnails and context capsules
+- ⚙️ **Hardened Parser Engine**: Fully supports YAML block scalars (`|`, `>`, `>-`), preserving internal line breaks and fixing delimiter edge cases
+
+### v3.1 - Skill Task Drawer, Multimodal Vision & XMind Interoperability
+- 🎯 New Skill Task Drawer: Non-blocking drawer UI, multi-turn follow-up refinement, live activity feed, and deliverable artifact card
+- 🫧 Collapsible Floating Bubble: Dock drawer into a sleek bottom-right pill badge with a running pulse indicator
+- 👁️ Global Multimodal Vision: Dynamic model vision resolution and intelligent image extraction via `LinkResolver`
+- 🧠 New native `xmind-creator` skill (expanding default skills to 7) generating full `.xmind` files from Markdown with advanced components
+- 📁 Seamless `.xmind` document support in right-click menus and multi-document AI insights
+- 🛡️ New tool confirmation safety setting, standalone `truncateOutput` protection, and automatic artifact wikilink embedding
+- 🧹 Removed deprecated XMind previewer and legacy diff code (-4300+ lines), full localization across EN, ZH-CN, and ZH-TW
+
+### v3.0 - PiAI Engine & Pi Agent Toolchain
+- 🤖 AI core fully migrated to the PiAI engine; unified providers with OAuth / API Key auth and secure credential storage
+- 🔑 New AI auth modal and CodeBuddy provider (device-code OAuth, JWT, streaming responses)
+- 🛠️ New Pi Agent toolset: read / edit / write / find / grep / ls / bash
+- 🔁 Skill executor refactored into a ReAct agent loop; XML skill list injected into the system prompt
+- 📂 Multi-select files and right-click folders launch AI insights directly
+- 🐛 Lifecycle management prevents memory leaks, legacy settings auto-migrate, build compatibility improved
 
 ### v2.8 - Mind Map View Enhancements & Format Improvements
 - ✨ Mind map view now renders node tables with support for child nodes under table nodes

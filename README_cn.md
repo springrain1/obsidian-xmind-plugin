@@ -6,7 +6,7 @@
 
 支持交互式编辑 • AI 智能扩展 • 多种导出格式 • 企业级稳定性
 
-[![Version](https://img.shields.io/badge/version-2.8-blue.svg)](CHANGELOG_cn.md)
+[![Version](https://img.shields.io/badge/version-3.3-blue.svg)](CHANGELOG_cn.md)
 [![Platform](https://img.shields.io/badge/platform-Desktop%20%7C%20Mobile-green.svg)](#平台支持)
 
 [English](README.md)
@@ -24,9 +24,21 @@
 - **富文本支持**: 表格、Callout、引用、代码块、嵌入内容
 
 ### 🤖 AI 智能增强
-- **多 AI 服务**: OpenAI、Anthropic、Gemini、Deepseek、Ollama
+- **统一 AI 引擎**: 基于 PiAI，支持 Google Antigravity、OpenAI、Anthropic、Gemini、Deepseek、CodeBuddy、OpenAI 兼容端点等
+- **OAuth / API Key 登录**: 认证弹窗支持两种授权方式，凭据安全存储；支持 Antigravity 官方回环 + PKCE 授权流
+- **原生 Web Access 联网检索**: 零外部依赖集成 `web_search` 与 `web_fetch`，内置 SSRF 安全防御与 DuckDuckGo / 博查 / Tavily / Jina 智能路由
+- **多平台 AI 生图服务**: 独立 `ImagesModels` 运行时，支持 Antigravity、OpenRouter（52+ 生图模型）及 OpenAI 兼容端点（硅基流动等）
+- **微信公众号发布矩阵**: 内置技术科普、知识管理深度长文、内嵌样式排版转换与草稿箱直发一键工作流
+- **Skill 任务执行抽屉**: 非阻塞式交互抽屉，支持悬浮小气泡折叠与多轮自然语言修正微调，实时展示活动流与 Token 消耗
+- **多源上下文直投**: 笔记划选文本一键右键「发送所选内容到 AI 抽屉」，键入 `@` 0 Token 毫秒级模糊联想 Vault 内文件指针
+- **通用 AI Copilot**: 无需指定专属技能直接唤起智能助手，工具调用期间自动感知并同步特定技能身份
+- **知识库 Wiki Agent (LLM-Wiki)**: 全新内置核心技能 `wiki`，将自动化百科编纂、全库预扫描与渐进吸收编译引入 Obsidian
+- **多模态视觉理解**: 自动解析文档与导图引用的图片附件，无缝衔接多模态视觉模型深度解读
+- **Pi Agent 工具调用**: read / edit / write / find / grep / ls / bash / web_search / web_fetch / generate_image，AI 可直接读写笔记、检索全库、联网探查与生成插图
+- **原生 XMind 技能**: 内置 `xmind-creator` 等 15 项核心技能，AI 直接输出带外框/概要/联系/标注的原生 `.xmind` 脑图
+- **全界面深度国际化**: 任务抽屉与弹窗彻底告别硬编码，内置全部 15 个技能在简中、繁中、英文下均具备专业优美呈现
 - **智能扩展**: 一键生成子节点、深度分析、内容优化
-- **洞察系统**: 类似 Flomo AI 洞察，多维度分析笔记
+- **洞察系统**: 类似 Flomo AI 洞察，支持直接读取 `.xmind` 文件并结合图片多维度分析笔记
 - **自定义提示词**: 完全可定制的 AI 交互
 
 ### 🏗️ 企业级稳定性
@@ -119,12 +131,44 @@
 - 数据持久化存储
 
 #### AI Skills 技能系统（Plus 功能）
-- 基于 SKILL.md 定义可扩展的 AI 工作流
+- 基于 SKILL.md 定义可扩展的 AI 工作流，遵循 Agent Skills 开放标准
 - 文件夹结构：每个 Skill 含 SKILL.md + 可选 references/assets 等资源子文件夹
-- 支持多种输出格式：markdown、mermaid、excalidraw、canvas、base
-- 自动扫描 vault `skills/` 文件夹发现技能
-- 流式输出，实时写入文件
+- 支持多种输出格式：markdown、mermaid、excalidraw、canvas、base，并新增原生 `.xmind` 脑图支持
+- 内置 8 大核心技能（含 `wiki` 自动化知识库构建与全新 `xmind-creator` 脑图编写）
+- 自动扫描 vault `skills/` 文件夹发现技能，渐进式披露按需加载
+- ReAct Agent 工具循环，多轮工具调用完成复杂任务
+- 流式输出，实时写入文件；自动在原笔记中内嵌产物双链
 - 智能内容提取，去除 AI 解释性文本
+
+#### Skill 任务执行抽屉（Skill Task Drawer）
+- **非阻塞抽屉设计**: 告别阻塞式弹窗，抽屉在后台运行，无遮罩背景，执行中可自由浏览与编辑 Obsidian 笔记
+- **多源上下文注入（Context Capsules）**: 阅读长篇笔记时选中文本片段，右键一键「发送所选内容到 AI 抽屉」，自动带精确行号；超 6000 字符自动退化为 offset/limit 读取指针
+- **0 Token 本地 `@` 文件模糊联想**: 输入框键入 `@` 触发纯本地文件搜索浮层，毫秒级快速挂载 Vault 内可用文件指针
+- **通用 AI Copilot 模式**: 支持无需指定技能直接唤起抽屉，AI 执行期间动态识别调用的技能并实时更新标题与图标
+- **统一附件管理与防溢出**: 缩略图与上下文胶囊规范统一对齐 16×16px 白底细边框关闭 X 按钮，文件名超长自动截断防撑破
+- **多轮会话修正**: 引入 `SkillAgentSession`，生成后可直接在输入框继续追问、微调排版或补充内容
+- **悬浮小气泡（Floating Bubble）**: 一键最小化折叠到右下角小药丸徽标，呼吸脉冲灯显示运行状态，随时点击重新呼出
+- **实时活动流与指标**: 动态直观展示 Agent 工具调用细节（read/edit/write/bash）、耗时与 Token 消耗
+- **产物卡片**: 自动定位并展示已落盘交付物，一键跳转打开
+
+#### 多模态视觉与智能双链解析
+- **全局多模态视觉适配**: 自动探测模型视觉能力，兼容各大 Vision 模型与 OpenAI 兼容端点
+- **富文本与图片解析**: `LinkResolver` 智能解析双链、块引用以及光栅图片（`![[image.png]]`、`[alt](url)`）
+- **多场景图文融合**: 选中文本、思维导图节点及多文档洞察均可自动将上下文图片送入视觉模型进行深度解读
+- **隐私保护开关**: 可在设置中开启 `blockImages`，全面禁止图片上传
+
+#### Pi Agent 工具调用
+- 内置 `read` / `edit` / `write` / `find` / `grep` / `ls` / `bash` 工具
+- `edit` 批量局部替换，改动精准不重写全文
+- `write` 原生支持直接生成 `.xmind` 思维导图文件，自动转码为二进制 ZIP
+- `grep` / `find` 跨库正则检索，多文档洞察按需提炼
+- 工具输出自动物理截断保护（`truncateOutput`），防止上下文溢出
+- 支持开启「工具调用确认」（`requireToolConfirmation`），写文件或执行命令前需用户手动确认
+
+#### 文件与文件夹右键 AI
+- 文件列表多选文件、文件夹右键直接发起 AI 洞察
+- 文件夹右键批量收集 Markdown 文档与 XMind 思维导图分析
+- AI 洞察支持从选中文件/文件夹直接收集文档，`.xmind` 文件在内存中快速转码大纲直接参与分析
 
 #### 统一保存路径管理
 - 三种模式：自定义路径 / vault 根目录 / 源文件同目录
@@ -294,8 +338,8 @@
 
 1. **设置 AI 服务**
    - 打开插件设置 → AI 服务配置
-   - 选择提供商（OpenAI、Gemini、Deepseek 等）
-   - 输入 API Key 和模型名称
+   - 选择服务商（OpenAI、Anthropic、Gemini、Deepseek、CodeBuddy 等）
+   - 通过 API Key 或 OAuth 授权完成认证，并选择模型
 
 2. **使用 AI 扩展**
    - 点击节点上的 🧠 按钮
@@ -334,6 +378,41 @@
 ---
 
 ## 🔄 最新版本
+
+### v3.3 - Google Antigravity、原生联网检索、统一 AI 生图与技能流水线
+- 🌐 **Google Antigravity 官方 Provider**: 桌面端本地回环（51121 端口）+ PKCE 授权码流，支持 `gemini-3-pro`、`gemini-3-flash`、`claude-4-6-sonnet` 等顶尖模型
+- 🔍 **原生零依赖 Web Access 检索**: 零外部依赖集成 `web_search` 与 `web_fetch`，内置 SSRF 防御与 Auto 智能路由（DuckDuckGo / 博查 / Tavily / Jina）
+- 🎨 **多服务商统一 AI 生图架构**: 独立 `ImagesModels` 运行时，支持 Antigravity、OpenRouter（52+ 模型）与 OpenAI 兼容端点（硅基流动等）
+- ⚡ **抽屉 0-Token Slash (`/`) 技能联想**: 抽屉输入框键入 `/` 即刻本地模糊联想 15 项已启用技能，支持上下键选择与回车补全
+- 🔗 **多技能顺序接力流水线**: 会话级资产接力协议，公众号“撰写 (`wechat-km-writer`) ➔ 排版 (`wechat-article-formatter`) ➔ 发布 (`wechat-draft-publisher`)”在同一抽屉内 0 复制无缝流转
+- 🧠 **CodeBuddy 深度推理与视觉解封**: 动态绑定 `reasoning_effort`，原生契约映射全档位思考，彻底解封视觉模型图片多模态，修复重启回弹缺陷
+- 📱 **微信公众号发布矩阵**: 4 大微信技能原生改造，遵循 `$VAULT_PATH` 契约与凭据安全隔离
+- 🌍 **全界面深度国际化与呈现解耦**: 抽屉与弹窗告别硬编码，内置全部 15 项技能三语本地化呈现
+
+### v3.2 - 通用 Copilot、多源上下文直投与 Wiki 知识库 Agent
+- ⚡ **通用 AI Copilot 抽屉**: 无需前置指定技能直接唤起，工具调用期间动态感知并同步特定技能图标与标题
+- 📝 **选区上下文精准直投**: 文档划词右键一键投喂到正在运行的抽屉，带 1-based 行号范围与 >6000 字读取指针降级
+- 🔍 **0 Token 本地 `@` 文件模糊联想**: 键入 `@` 纯本地模糊匹配 Vault 文件，0 LLM 开销挂载文件指针胶囊
+- 📚 **知识库 Wiki Agent (`wiki`)**: 全新内置第 8 个核心技能，基于 Karpathy 规范自动化预扫描、吸收与编译个人维基
+- 🛡️ **统一附件行规范**: 统一缩略图与胶囊 16×16px 关闭 X 按钮样式，解决全局按钮撑破边框与文本溢出问题
+- ⚙️ **加固型 YAML 块标量引擎**: 完整支持 `|` / `>` / `>-` 等语法，正确保留内部段落空行并消除分隔符误判
+
+### v3.1 - Skill 任务抽屉、多模态视觉与 XMind 深度互通
+- 🎯 全新 Skill 任务执行抽屉（Skill Task Drawer）：非阻塞交互、多轮连续追问微调、实时活动流与产物卡片
+- 🫧 悬浮小气泡（Collapsible Floating Bubble）：支持将抽屉一键收缩至右下角小药丸，呼吸脉冲灯提示运行状态
+- 👁️ 全局多模态视觉理解：动态适配视觉模型，`LinkResolver` 智能提取文档和导图引用的图片附件供 AI 深度解读
+- 🧠 新增内置核心技能 `xmind-creator`（内置 7 大技能），AI 可通过 Markdown 语法直接生成包含外框、概要、联系、标注的原生 `.xmind` 导图
+- 📁 XMind 文件免转换直接参与 AI 洞察与右键分析，内存转码无损流转
+- 🛡️ 新增「工具调用确认」安全开关，独立 `truncateOutput` 截断保护，产物自动追加双链内嵌
+- 🧹 大幅移除冗余废弃组件（-4300+ 行代码），补充全量中英繁三语本地化
+
+### v3.0 - PiAI 引擎与 Pi Agent 工具链
+- 🤖 AI 内核全量迁移至 PiAI 引擎，统一各类 Provider，支持 OAuth / API Key 认证与凭据安全存储
+- 🔑 新增 AI 认证弹窗与 CodeBuddy Provider（设备码 OAuth、JWT、流式响应）
+- 🛠️ 新增 Pi Agent 工具集：read / edit / write / find / grep / ls / bash
+- 🔁 技能执行器重构为 ReAct Agent 循环，i18n 技能列表 XML 注入系统提示词
+- 📂 文件列表多选与文件夹右键直接发起 AI 洞察
+- 🐛 生命周期管理防止内存泄漏，旧版设置自动迁移，构建兼容性优化
 
 ### v2.8 - 思维导图视图增强与格式完善
 - ✨ 思维导图视图新增渲染节点表格，支持表格节点下子节点

@@ -13,7 +13,7 @@ description: Generate structured outline notes from text content in XMind-compat
 2. **通读理解**：通读全文，把握主旨、论述结构和关键思想
 3. **提炼生成**：按照下述角色定位、内容要求和格式规范，生成大纲笔记
 4. **检查验证**：检查结构完整性、格式合规性（缩进、控制标记等），确认要点无遗漏，并确认最终内容未包裹在 markdown 代码围栏中（即开头为三个反引号加 `markdown`、结尾为三个反引号）
-5. **保存输出**：将结果写入 `{topic}_outline.md`，保存到用户的活动项目目录（不是 skill 目录；路径不明确时向用户确认），使用绝对路径
+5. **保存输出**：调用 `write` 工具将结果写入 `{topic}_outline.md`，**path 参数只传文件名，不要拼接目录前缀或使用绝对路径**；目标目录由宿主配置自动决定
 
 > 如果遇到 XMind Markdown 格式的边界情况（如复杂的嵌套概要、多外框编号等），请阅读 `references/XMIND_MARKDOWN_CONVERSION_RULES.md` 获取完整转换规则。
 
