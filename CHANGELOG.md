@@ -634,3 +634,124 @@ An Obsidian XMind & AI Mind Mapping Plugin
 - **Unrestricted Multimodal Vision Input**: eliminated fragile regex ID whitelist matching, trusting upstream structured capabilities (`!m.disabledMultimodal && m.supportsImages !== false`) to ensure image attachments in mindmap insights and agent drawers pass through reliably on all compatible models.
 - **Defensive Data Validation & Direct Network Payload Tests**: added strict `Array.isArray` array guards and payload sanitization for remote `supportedEfforts`; updated unit test suite with direct assertions on HTTP request payloads, all test suites passing cleanly.
 
+## v3.4:
+
+### 🧭 XMind Multi-Skeleton Routing Engine
+
+1. **Declarative Frontmatter Skeletons**
+- Declare the whole-map structure via `skeleton:` at the top of a note, supporting 42 official skeletons across 11 families: MindMap-1..5, Timeline-1..7, Fishbone-1..3, OrgChart-1..3, LogicChart-1..3, TreeChart-1..6, BraceMap-1..3, Grid-1..5, Matrix-1..3, TreeTable-1..3, Spreadsheet-1.
+- Built-in case-insensitive alias resolution (e.g. `timeline`, `fishbone`, `org-chart`, `matrix`, `tree`, `brace`, `grid`), gracefully falling back to the default structure on no match without interrupting conversion.
+
+### 🎨 Official Color Theme Offline Library
+
+2. **53 Official Palettes + 42 Skeletons in Pure TS**
+- Extracted 53 offline themes from the official `palettes` (Rainbow, Energy, Space, Code, Dawn, Sophisticated, Classic, Mono, Macaron, Candy, CyberPunk, Aurora, Sakura, Crimson, etc.) with zero runtime dependencies.
+- Applied directly via Frontmatter `color:` / `theme:` (`color` takes precedence), case-insensitive with alias support (e.g. `fresh` → `Freshness`); `color: Name/N` (N=1~6) selects the theme's main-color variant, clamped when out of range.
+- **No-YAML defaults**: the Settings “XMind → Markdown to XMind” section lets you set a default skeleton, default theme, default main color, and long-note width auto-fit toggle, applied only when a document does not declare them explicitly; this section was moved out of the “Mind Map” tab to avoid confusion with Obsidian's markdown mind map view.
+
+### 🧩 Subtree Layout Mixing
+
+3. **Namespace-Tag Driven Multi-Structure Mixing**
+- Append `#layout/xxx`, Chinese `#排版/xxx`, or HTML comment `<!-- layout: xxx -->` to a branch heading to switch that subtree to an independent structure, enabling multiple structures within a single map.
+- Supports org / timeline / fishbone / logic / map / tree with directional variants and Chinese names.
+- **Consumed and stripped**: layout tags are removed from the title after parsing, leaving no residual stickers; ordinary business `#tags` are preserved; branches with local structures round-trip `#layout/xxx` when exporting `.xmind` back to Markdown.
+- **Icon marker passthrough**: `#marker/<id>` (and Chinese `#标记/<id>`) passes XMind icon markerIds through verbatim, lossless on round-trip and tolerant of unknown ids; task states still use `[ ]`/`[x]`/`[/]`/`[-]` checkboxes, with the two kept independent.
+
+### 📊 Native Markdown Table to 2D Matrix
+
+4. **Seamless Table Compilation to Spreadsheet**
+- Standard Markdown tables are auto-detected and compiled into XMind's official 2D comparison matrix: the header's first column becomes the root, remaining columns become dimensions injecting the `grid-number-of-columns` extension, data-row first cells become row topics, and cells become second-level topics tagged with column names.
+- Can be combined with `---` separators to place a matrix as an independent sheet alongside other skeletons.
+
+### 📐 Long-Note Width Auto-fit & Structural Robustness
+
+5. **Auto-fit, Validator & Metrics**
+- **Long-note width auto-fit**: based on CJK full-width (2) and ASCII half-width (1) measurement, injects tiered `customWidth` (320/400/480pt) when a single line exceeds 100, preventing long text from being squeezed.
+- **Lightweight structure validator**: asserts topic ID uniqueness, relationship endpoint existence, and top-level sheet validity before write, ensuring `.xmind` loads correctly on desktop and mobile.
+- **Structure metrics tool**: added the "View Current Mind Map Structure Metrics" command and `mode: "describe"` in the AI `read` tool, revealing total topics, max depth, main branches, skeleton, and color of thousand-node maps at roughly 50 tokens.
+
+### 🤖 AI Skill & Sample Library
+
+6. **xmind-creator Upgrade & Test Samples**
+- Updated the embedded skill templates with scenario intent routing, namespace layout tags, icon marker passthrough, and table-to-matrix authoring guidance, synced to the 42-skeleton / 53-theme catalog.
+- Grew the `docs/test-samples/` set to 20 conversion samples (adding TreeChart, BraceMap, Grid, TreeTable skeletons, marker passthrough round-trip, and main-color variants on top of the original 14), plus the `docs/XMind-v3.4-使用说明书.md` usage manual.
+## v3.5:
+
+### 🎨 XMind Advanced Visual & Task Extensions
+
+1. **Global Canvas Visuals (Frontmatter Declarative)**
+- Added six whole-map visual keys written into the XMind theme with bidirectional round-trip support:
+  - `background`: canvas background color (`svg:fill`), accepts hex / rgb / css color names; suppressed when matching theme default or plain white to prevent round-trip clutter.
+  - `font` / `font-family`: global font family, assembled as `'User Font', <fallback chain>`, falling back gracefully if not installed.
+  - `grid-columns`: grid / matrix column count (integer 2–12), written into the root's `org.xmind.ui.extended-style` `grid-number-of-columns`.
+  - `line-width`: 5 tiers (extra-thin / thin / medium / thick / extra-thick, with english aliases, `Npt` and bare numbers), mapping to 1/2/3/5/6 pt across text topic classes.
+  - `line-tapered`: tapered-line toggle (`true` / `false`).
+
+2. **Dynamic Multi-level Numbering `numbering`**
+- Drives XMind's native `org.xmind.ui.numbering` so numbers never break when nodes are reordered; supports `arabic` (1,2,3), `roman` (I,II,III), `alphabet` / `alphabet-uppercase` (A,B,C) and `alphabet-lowercase` (a,b,c).
+- **Global Inheritance & Subtree Overrides (xmind-cli aligned)**: Frontmatter `numbering:` stores root metadata and automatically cascades down to direct Main Topics without local tags; `#numbering/<pattern>` (Chinese `#编号/`) at branch headings overrides locally.
+- **Redundancy-free Round-trip**: On `.xmind → Markdown`, branches matching global numbering emit clean titles without redundant `#numbering/arabic` tags; only overrides and explicit subtopics retain tags.
+
+3. **Manual Node Width `#width`**
+- Inline `#width/<px>` (Chinese `#宽度/<px>`) pins a topic's card width via `topic.customWidth`, taking priority over long-note autofit; accepts digits only, stripped after consumption, round-tripped.
+
+4. **Task Project Metadata (Tasks + Dataview specs)**
+- Checkbox items support `📅 YYYY-MM-DD` (due date, ISO-validated to ms), `[duration:: N d|h|w]` (`effort` accepted), `[progress:: 50%]` or `[progress:: 0.8]`, and `@assignee`, written into XMind's `org.xmind.ui.task` extension.
+- **Progress auto-links native markers**: with a checkbox, `progress` maps to octant markers (`task-start` / `task-oct` / `task-5oct` / `task-7oct` / `task-done`); cancelled tasks (`- [-]`) are protected from being flipped to done by `100%`; plain nodes carrying task metadata are not forced to gain a checkbox. All round-trip losslessly (`@assignee` is restored without leaking into `#tags`).
+
+5. **Per-node Visual Emphasis `<span style>`**
+- Wrap a whole heading in `<span style="font-size: 20pt; border-color: #e53935;">` to set font size (`px` normalized to `pt` by ×0.75) and border color (auto-adds `border-line-width: 1pt` so the border is visible); all spans on a line are processed, stripped after consumption, and font-size + border-color are re-emitted on export.
+
+6. **2D Matrix Bidirectional Round-trip (Table ⇄ Matrix)**
+- On `.xmind → Markdown`, a well-formed Spreadsheet matrix sheet is **reconstructed back into a Markdown table** (row topics → rows, column-name labels → columns), suppressing the `skeleton` / `grid-columns` frontmatter so `table → matrix → table` closes the loop; triggered only when the matrix is well-formed (cells organized by column-name labels, no deeper nesting, no detached/summary topics), otherwise falls back to a normal outline to avoid data loss.
+
+### ⚙️ Settings UI & Experience
+- **Added "Default font" Setting**: In "Markdown to XMind Settings", configure a default font across vault notes when frontmatter is omitted.
+- **Removed Redundant `?` Buttons**: Cleaned up unmanaged DOM modal popups that repeated description text, restoring Obsidian native UI elegance.
+- **Settings Grouping & Agent Autonomy**: Grouped all conversion settings; cleanly decoupled desktop preferences from AI Agent execution so skill agents decide layouts autonomously via recipes.
+
+### 🛡️ Robustness Fixes
+- **Eliminated Style Shadowing**: Unified `line-width` and `font` across theme and topic inline styles, eliminating hardcoded 2pt line widths and fallback font overrides on central/branch topics.
+- Fixed a type error in `detectSheetBackground` from accessing a non-existent field, and the non-idempotent round-trip that added a phantom `background: "#ffffff"` to plain documents.
+- Fixed plain items with `[duration::]` / `📅` being force-given a `[ ]` checkbox, and cancelled tasks being flipped to done by `progress:: 100%`.
+- Fixed missing global flags on the `SPAN` and `@mention` regexes that leaked a second match into the title; restored `markerToTodoStatus` `todo` fallback for unknown `task-*` markers; added `customWidth` to `XMindTopic` to fix type checking.
+
+### 📚 Skills & Docs
+- Upgraded the `xmind-creator` skill template with authoring guidance for node width / numbering / task metadata / per-node emphasis, synced to the 42-skeleton / 53-theme catalog.
+- Expanded test fixtures to 25 sample files (`21` comprehensive demo, `22` dynamic numbering, `23` line/canvas styles, `24` task management cycle, `25` node width & emphasis); updated `docs/XMind-v3.5-使用说明书.md`.
+## v3.6:
+
+### 🚀 Key Features
+
+1. **AI Cognitive Insight 2.0 (24 Advanced Cognitive Perspectives)**
+- **Expanded Perspective Matrix**: Doubled built-in mental lenses from 12 to **24 curated cognitive perspectives** across four core categories: Review, Awareness, Decision, and Master (integrating Charlie Munger's mental lattices, Ray Dalio's radical truth, Feynman concept simplification, Peter Drucker's effective management, Naval Ravikant's leverage, and Elon Musk's first-principles iteration).
+- **Modernized UI & Interactions**:
+  - Category pill filter bar for one-click switching across cognitive dimensions;
+  - Sub-millisecond real-time search with instant keyword highlighting;
+  - Signature author badges on legendary lenses with subtle card halo micro-interactions;
+  - Integrated dynamic task execution drawer supporting custom perspective creation.
+
+2. **Left Ribbon AI Copilot Quick Entry**
+- Added dedicated `brain-circuit` (intelligent neural mindmap) icon to Obsidian's left ribbon bar;
+- One-click trigger for AI Copilot task drawer, automatically mounting active note context, with graceful fallback to vault-wide Agent mode when no file is open.
+
+3. **Card & Image Export 2.0 (Zero-Limit Download & Robust Pipeline)**
+- **Native Blob & ObjectURL Zero-Limit Download**: Replaced brittle Base64 DataURLs with browser-native binary `Blob` and `URL.createObjectURL`, bypassing Chromium/Electron's hard 2MB URL length limit (`TypeError: Failed to fetch` / `ERR_INVALID_URL`) to support effortless downloading of 50MB–100MB high-resolution cards.
+- **Adaptive Canvas Downscale Protection**: Automatically detects DOM height and dynamically scales down sampling on ultra-long notes, capping the final canvas strictly below the 16,000px hardware line to prevent GPU `MAX_TEXTURE_SIZE` (16,384px) crashes and Skia 16-bit integer overflow OOM panics.
+- **Dark Mode CSS Variable Isolation**: Cloned documents inject independent, self-contained base variables, shielding exported cards from host dark theme pollution.
+- **Font Ready Synchronization & Resource Cleanup**: Explicitly awaits `document.fonts.ready` prior to rasterization, and immediately resets canvas dimensions and revokes ObjectURLs in `finally` blocks.
+
+4. **Flomo Deep Analysis Studio (`flomo-analysis-studio`)**
+- Built-in 10 embedded skill templates in `defaultSkillTemplates.ts`, providing out-of-the-box support for idea clustering, tag topology, and knowledge regurgitation.
+
+### ⚙️ Settings Layout Architecture
+- **Dedicated "Image Export" Sub-Tab**: Full control over export width, 12 designer templates, summary toggle, author metadata (avatar/title), and watermark styles.
+- **Dedicated "AI Insight" Sub-Tab**: Manage enabled states for 24 built-in perspectives and configure custom perspective templates.
+
+### 🛡️ Conversion & Visual Rendering Hardening
+- **Contrast Compensation for 38 Light Palettes**: Unconditionally calculates relative luminance contrast, guaranteeing light-background central topics (such as `Code` fill `#FFFFFF`) render crisp `#000000` black text.
+- **Matrix Column Count Protection**: Pure Markdown tables lock actual table columns into `Spreadsheet-1`, preventing YAML frontmatter `grid-columns` from corrupting table layout.
+- **Lossless HTML Entity & Generics Round-trip**: Corrected tag stripping and entity decoding order so comparison operators (`a < b and c > d`) and generics (`List<String>`) round-trip with zero data loss.
+- **Mindmap Markdown Layout Protection**: Added `max-width: 100%; height: auto;` to embedded images and media, preventing oversized assets from breaking node boundaries.
+- **Callout Icon Contrast & Tech Theme Code Blocks**: Callout icons inherit node text colors; Tech theme code blocks retain high-contrast dark styling across light and dark Obsidian modes.
+- **Strict DOM XSS Prevention**: Outline search highlighting and skill chips refactored to standard DOM text node construction, eliminating XSS vectors and preventing `<`/`>` in formulas from being parsed as tags.

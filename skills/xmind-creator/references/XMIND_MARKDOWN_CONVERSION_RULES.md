@@ -61,10 +61,38 @@
 - `##`、`###` 继续形成主题层级。
 - 4 级及以下常由缩进列表承载。
 - 文档正文中再次出现的一级标题 `# 标题` 会作为自由主题挂到当前画布。
-- YAML frontmatter 会被忽略，不参与主题转换。
-- 正文中的 `---` 会分隔多个画布；frontmatter 的 `---` 不会被当成画布分隔符。
+- 文档顶层的 YAML frontmatter（由开头的首对 `---` 包裹）用于声明画布骨架（`skeleton`）与配色主题（`color`），不参与节点文本转换；文档中后续出现的独立 `---` 会作为多画布（Sheet）分隔符。
 
 ## Markdown → XMind 支持规则
+
+### 画布骨架与配色（Frontmatter）
+
+可在文档最顶部通过 YAML Frontmatter 自主指定骨架类型与官方配色方案：
+
+```yaml
+---
+skeleton: Timeline-1     # 42 个规范键，覆盖 MindMap/Timeline/Fishbone/OrgChart/LogicChart/TreeChart/BraceMap/Grid/Matrix/TreeTable/Spreadsheet 各族
+color: Rainbow           # 53 套官方主题，可用 Rainbow/3 选择主色变体
+---
+```
+
+- **骨架支持清单**（大小写不敏感，支持大量别名）：
+  - MindMap：`MindMap-1` … `MindMap-5`（标准放射状思维导图，默认）
+  - Timeline：`Timeline-1` … `Timeline-7`（横向/纵向/双侧等时间轴变体）
+  - Fishbone：`Fishbone-1` `Fishbone-2` `Fishbone-3`（鱼骨图，因果与根因追溯）
+  - OrgChart：`OrgChart-1` `OrgChart-2` `OrgChart-3`（组织架构，层级与 WBS）
+  - LogicChart：`LogicChart-1` `LogicChart-2` `LogicChart-3`（逻辑图，SOP 与决策树）
+  - TreeChart：`TreeChart-1` … `TreeChart-6`（树形结构，分类归纳）
+  - BraceMap：`BraceMap-1` `BraceMap-2` `BraceMap-3`（括号图，整体—部分拆解）
+  - Grid：`Grid-1` … `Grid-5`（网格看板，四象限/分栏）
+  - Matrix：`Matrix-1` `Matrix-2` `Matrix-3`（矩阵对比）
+  - TreeTable：`TreeTable-1` `TreeTable-2` `TreeTable-3`（树形表格）
+  - Spreadsheet：`Spreadsheet-1`（二维矩阵，原生 Markdown 表格自动路由至此）
+- **主题支持清单**（53 套，大小写不敏感，支持别名）：
+  - 常用：`Rainbow`（彩虹多分支）、`Rainbow-Dark`、`Energy`（活力橙黄）、`Freshness`（自然绿意）、`Space`（深空暗夜）、`Code`（终端代码风）、`Dawn`（黎明晨光）、`Sophisticated`（高雅沉稳）、`Classic` / `Classic-Colorful`（经典商务）、`Mono` / `Gray`（单色/灰阶）。
+  - 更多：`Dancing` `Kimono` `Islands` `Roses` `Rainforest` `GreenTea` `Innocence` `Macaron` `Woodland` `Cream` `Hawaii` `Pinecone` `Dystopia` `Forid` `Quaint` `Variety` `Dazzling` `Vintage` `Dessert` `Vanllia` `Candy` `CyberPunk` `Sakura` `Fire` `Christmas` `DeepSea` `Violet` `Iris` `Painter` `Aurora` `Hills` `Cartoon` `Jungle` `Amethyst` `Geek` `Crimson` `Vivid-Light` `Vivid-Dark` `Vivid-Colorful` `Light-Grayish` `Light-Colorful`。
+  - 主色变体：`color: 主题名/N`（N=1~6），选择主题的主色轮换变体，越界自动夹取。
+  - 无 YAML 时可在设置「XMind → Markdown 转 XMind」指定默认骨架、默认主题、默认主色。
 
 ### 主题标题
 

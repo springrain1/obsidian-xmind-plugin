@@ -640,3 +640,126 @@
 - **解封多模态图片输入**：废除基于模型 ID 正则模式匹配的脆弱白名单，直接基于服务端结构化能力声明（`!m.disabledMultimodal && m.supportsImages !== false`）放行图片多模态，确保思维导图 AI 洞察与 Agent 抽屉图片附件在所有兼容模型下透传无阻。
 - **健壮性防线与网络载荷断言**：对远端 `supportedEfforts` 实施严格的 `Array.isArray` 运行时数组守卫与非空清洗；重构单测用例对真实网络请求体（HTTP Payload）进行全量断言，自动化测试套件全绿通过。
 
+## v3.4：
+
+### 🧭 XMind 多骨架路由引擎
+
+1、**Frontmatter 声明式骨架**
+- 在笔记顶部通过 `skeleton:` 一键声明整图结构，支持 11 族共 42 个官方骨架：MindMap-1..5、Timeline-1..7、Fishbone-1..3、OrgChart-1..3、LogicChart-1..3、TreeChart-1..6、BraceMap-1..3、Grid-1..5、Matrix-1..3、TreeTable-1..3、Spreadsheet-1。
+- 内置大小写无关的别名解析（如 `timeline`、`fishbone`、`org-chart`、`matrix`、`矩阵`、`tree`、`brace`、`grid`），未匹配时优雅回退默认结构，绝不中断转换。
+
+### 🎨 官方配色主题离线库
+
+2、**53 套官方调色板纯 TS 落地**
+- 从官方 `palettes` 离线提取 53 套配色主题（Rainbow、Energy、Space、Code、Dawn、Sophisticated、Classic、Mono、Macaron、Candy、CyberPunk、Aurora、Sakura、Crimson 等），零运行时外部依赖。
+- 通过 Frontmatter `color:` / `theme:` 直接套用，`color` 优先，大小写无关且支持别名（如 `fresh` → `Freshness`）；`color: 主题名/N`（N=1~6）可选主题的主色轮换变体，越界自动夹取。
+- **无 YAML 默认样式**：设置「XMind → Markdown 转 XMind」分区可指定默认骨架、默认主题、默认主色与长备注宽度自适应开关，仅在文档未显式声明时生效；该分区从「思维导图」tab 迁出，避免与 Obsidian markdown 思维导图视图混淆。
+
+### 🧩 局部子树排版混排
+
+3、**命名空间标签驱动多结构混排**
+- 在分支标题行末尾追加 `#layout/xxx`、中文 `#排版/xxx` 或 HTML 注释 `<!-- layout: xxx -->`，即可让该子树切换为独立结构，实现同一张图内多结构混排。
+- 支持 org / timeline / fishbone / logic / map / tree 及其方向变体与中文名（架构图 / 时间轴 / 鱼骨图 / 逻辑图 / 思维导图）。
+- **消费后即剔除**：排版标签解析后自动从标题移除，不残留贴纸；普通业务 `#标签` 原样保留；`.xmind` 逆向转 Markdown 时对带局部结构的分支双向回写 `#layout/xxx`。
+- **图标标记纯透传**：`#marker/<id>`（含中文 `#标记/<id>`）原样进出 XMind 图标 markerId，往返无损、未知 id 不报错；任务态仍走 `[ ]`/`[x]`/`[/]`/`[-]` 复选框，两者互不干扰。
+
+### 📊 原生 Markdown 表格直转二维矩阵
+
+4、**表格无缝编译为 Spreadsheet**
+- 标准 Markdown 表格自动识别并编译为 XMind 官方二维对比矩阵：表头首列作根节点，其余列作列维度并注入 `grid-number-of-columns` 扩展，数据行首列作行主题、单元格作带列名标签的二级主题。
+- 可结合 `---` 分隔符将矩阵作为独立画布与其它骨架混排。
+
+### 📐 长备注宽度自适应与结构健壮性
+
+5、**Auto-fit、校验器与度量工具**
+- **长备注宽度自适应**：基于 CJK 全角（2 宽）与 ASCII 半角（1 宽）度量，单行超 100 时分档注入 `customWidth`（320/400/480pt），杜绝长文本挤压碎行。
+- **轻量结构校验器**：落盘前断言主题 ID 唯一性、联系线端点存在性与顶层 Sheet 合法性，保障 `.xmind` 在桌面端与移动端正常加载。
+- **结构度量工具**：新增命令面板「查看当前思维导图结构度量」，并在 AI `read` 工具支持 `mode: "describe"`，以约 50 Token 极低成本洞察千节点脑图的总主题数、最大深度、一级分支数、骨架与配色。
+
+### 🤖 AI 技能与样例库
+
+6、**xmind-creator 升级与测试样例**
+- 更新内嵌技能模板，注入场景意图路由、命名空间排版标签、图标标记透传与表格转矩阵的写作指引，同步 42 骨架 / 53 主题清单。
+- 新增 `docs/test-samples/` 共 20 个转换测试样例（在原 14 个基础上增补 TreeChart、BraceMap、Grid、TreeTable 骨架、marker 纯透传往返与主色变体），并配套 `docs/XMind-v3.4-使用说明书.md`。
+
+## v3.5：
+
+### 🎨 XMind 高级视觉与任务扩展
+
+1、**全局画布视觉（Frontmatter 声明式）**
+- 新增六个整图视觉键，写入 XMind 主题并支持 `.xmind → Markdown` 双向回写：
+  - `background`：画布底色（`svg:fill`），支持 hex / rgb / css 颜色名；等于主题默认底色或纯默认白时不发射，杜绝往返凭空多出 Frontmatter。
+  - `font` / `font-family`：全局字体，拼装 `'用户字体', <内置兜底链>`，未安装字体自动回退；回写排除内置字体名。
+  - `grid-columns`：网格 / 矩阵列数（2–12 整数），写入根节点 `org.xmind.ui.extended-style` 的 `grid-number-of-columns`。
+  - `line-width`：5 档线宽（`极细`/`细`/`中等`/`粗`/`极粗`，含 english 别名与 `Npt` / 纯数字），映射 1/2/3/5/6 pt 写入各级文本主题类。
+  - `line-tapered`：线条渐细开关（`true` / `false`）。
+
+2、**动态多级编号 `numbering`**
+- 调用 XMind 原生扩展 `org.xmind.ui.numbering`，拖动节点编号不错乱；支持 `arabic`（1,2,3）、`roman`（I,II,III）、`alphabet` / `alphabet-uppercase`（A,B,C）、`alphabet-lowercase`（a,b,c）。
+- **全局派发与分支覆盖（对齐 xmind-cli）**：Frontmatter `numbering:` 在根节点存储元数据，并自动向下派发继承至直属一级分支（Main Topics），未显式声明标签的分支自动享有全局序号；分支标题末尾 `#numbering/<pattern>`（中文 `#编号/`）可独立覆盖。
+- **反向转码防冗余**：`.xmind → Markdown` 时，仅对格式与全局不一致的分支或深层显式标注子主题保留 `#numbering/...`，继承自全局的分支标题干净输出。
+
+3、**节点手动定宽 `#width`**
+- 标题行内 `#width/<像素>`（中文 `#宽度/<像素>`）固定节点卡片宽度，注入 `topic.customWidth`，优先级高于长备注自适应；仅接受纯数字，消费后剥离，支持回写。
+
+4、**任务项目元数据（Tasks + Dataview 规范）**
+- 复选框任务项支持 `📅 YYYY-MM-DD`（截止日期，ISO 校验后转毫秒）、`[duration:: N d|h|w]`（`effort` 亦可）、`[progress:: 50%]` 或 `[progress:: 0.8]`、`@负责人`，写入 XMind 官方项目扩展 `org.xmind.ui.task`。
+- **进度联动原生图标**：带复选框时 `progress` 自动映射八分位 marker（`task-start` / `task-oct` / `task-5oct` / `task-7oct` / `task-done`）；取消态（`- [-]`）受保护不被 `100%` 改写为完成；纯节点携带任务元数据不会被凭空加复选框。均支持无损回写（`@负责人` 归位而不混入 `#标签`）。
+
+5、**单节点视觉强调 `<span style>`**
+- 用 `<span style="font-size: 20pt; border-color: #e53935;">` 包裹整节点标题，设置字号（`px` 按 ×0.75 规范化为 `pt`）与边框色（自动补 `border-line-width: 1pt` 使边框可见）；一行内多个 span 均处理，消费后剥离，回写输出 `font-size` 与 `border-color`。
+
+6、**二维矩阵双向回写（表格 ⇄ 矩阵）**
+- `.xmind → Markdown` 时把规范的 Spreadsheet 矩阵画布**反向重建为 Markdown 表格**（行主题→行、列名标签→列），并抑制 `skeleton` / `grid-columns` frontmatter，使 `表格 → 矩阵 → 表格` 往返闭合；仅当矩阵结构规范（单元格以列名标签组织、无更深层级、无游离/概要）时触发，否则回退普通大纲以防丢数据。
+
+### ⚙️ 设置面板与体验优化
+- **新增「默认字体 (Default font)」**：在「Markdown 转 XMind 设置」中提供全局默认字体输入，全库笔记缺省 Frontmatter 时自动兜底。
+- **移除冗余 `?` 帮助按钮**：清理设置项旁机械重复说明文本的非标准 DOM 浮层，消除内存与样式隐患，界面回归 Obsidian 原生整洁质感。
+- **转换设置聚合与解耦**：将 Markdown ↔ XMind 转换设置集中分类；保持桌面偏好与 AI Agent 执行场景边界解耦，Agent 写作严格依据技能 Recipes 自治决策。
+
+### 🛡️ 稳健性修复
+- **消除样式遮蔽（Style Shadowing）**：打通 `line-width` 与 `font` 的全局主题层与节点行内样式层，消除了节点内联 2pt 默认线宽与中心主题回退字体对全局配置的遮蔽。
+- 修复 `detectSheetBackground` 因访问不存在字段导致的类型错误，及普通文档往返凭空多出 `background: "#ffffff"` 的非幂等问题。
+- 修复带 `[duration::]` / `📅` 的普通条目被强制加 `[ ]` 复选框、以及取消态被 `progress:: 100%` 改写为完成的缺陷。
+- 修复 `SPAN` 与 `@提及` 正则缺全局标志导致一行内第二个匹配泄漏进标题；恢复 `markerToTodoStatus` 对未知 `task-*` 图标的 `todo` 兜底（避免往返丢失复选框）；`XMindTopic` 补 `customWidth` 字段修复类型检查。
+
+### 📚 技能与文档
+- 升级 `xmind-creator` 技能模板：补充定宽 / 编号 / 任务元数据 / 节点视觉强调的写作指引，同步 42 骨架 / 53 主题清单。
+- 新增测试样例至 25 个（`21` 综合演示、`22` 动态编号、`23` 线条画布、`24` 任务管理周期、`25` 节点定宽与强调）；更新 `docs/XMind-v3.5-使用说明书.md`。
+
+## v3.6：
+
+### 🚀 核心新特性
+
+1、**AI 认知洞察 2.0（24 大高阶认知视角矩阵）**
+- **视角矩阵大幅扩充**：由原 12 视角扩展至 **24 种内置高阶心智视角**，涵盖「复盘检视」「自我觉察」「决策推演」「大师智慧」四大核心分类（全面融合查理·芒格格栅思维、雷·达利欧原则、费曼概念简化、德鲁克卓有成效管理、纳瓦尔杠杆、埃隆·马斯克第一性原理五步法等）。
+- **现代化交互界面重构**：
+  - 新增分类胶囊过滤（Category Pills），一键切换四大认知维度；
+  - 新增毫秒级实时关键词搜索与高亮检索；
+  - 新增名家专属大师徽章（Author Badges）与卡片光晕微交互；
+  - 接入动态任务执行表单，支持自由扩充自定义认知视角。
+
+2、**左侧活动栏 AI Copilot 快捷入口（Ribbon Integration）**
+- 在 Obsidian 左侧活动栏新增专属 `brain-circuit`（大脑电路线 / 智能脑图）图标；
+- 一键呼出 AI Copilot 任务抽屉，自动感知并绑定当前活动笔记上下文；无打开文档时优雅降级为全局 Agent 任务模式。
+
+3、**图片导出 2.0（零限制长图下载与架构级加固）**
+- **原生 Blob 与 ObjectURL 零限制下载**：彻底废弃脆弱且受限的 Base64 DataURL，全流程改用浏览器原生二进制 `Blob` 与 `URL.createObjectURL`，彻底突破 Chromium/Electron 对 DataURL 超过 2MB 时抛出 `TypeError: Failed to fetch` 或 `ERR_INVALID_URL` 的硬编码限制，支持百兆级超长脑图与笔记卡片顺畅下载。
+- **长图 Canvas 尺寸智能自适应保护（Adaptive Downscale）**：实时探测 DOM 高度，针对长篇长图动态下调采样率，将最终 Canvas 尺寸严格控制在 16,000px 硬件安全线内，彻底消除击穿 GPU `MAX_TEXTURE_SIZE`（16,384px）及 Skia 整数溢出导致的内存雪崩（OOM）或黑屏白板。
+- **暗色模式变量隔离注入**：导出克隆文档注入自洽独立的浅色基础 CSS 变量，彻底阻断 Obsidian 宿主深色主题对导出卡片的变量污染，告别“深字压深底”不可读问题。
+- **字体加载防抖与内存安全**：在光栅化前显式等待 `document.fonts.ready`，避免回退字体引发排版折行改变；显式清空 Canvas 与即时 `revokeObjectURL`，杜绝显存泄漏。
+
+4、**Flomo 深度分析工作台（flomo-analysis-studio）**
+- 完整迁移并内置 10 套嵌入式技能模板（`defaultSkillTemplates.ts`），开箱即用支持碎片笔记聚类、标签拓扑分析与知识反刍。
+
+### ⚙️ 设置面板重构与双独立子 Tab
+- **「图片导出」独立子 Tab**：完整集成卡片尺寸、12 套设计师模板切换、摘要控制、作者信息（头像/头衔）与个性化水印设置。
+- **「AI 洞察」独立子 Tab**：支持管理 24 大内置视角启用状态及自定义透镜扩充。
+
+### 🛡️ 往返转换与视觉渲染加固
+- **38 套浅色/白底主题对比度补偿**：移除了错误的 `continue` 阻断，让 `readableTextColor` 无条件基于相对亮度计算文字色，白底中心节点（如 `Code` 主题 fill=`#FFFFFF`）文字强制补偿为 `#000000` 黑色，彻底消灭白字压白底。
+- **纯表格矩阵列数绝对保护**：矩阵工作表严格锁定实际表格列数，阻止 YAML Frontmatter 中的 `grid-columns` 覆盖真实数据列数。
+- **HTML 比较符号与泛型保真**：修正 HTML 标签剥离与实体解码时序，确保笔记中的比较运算符（`a < b and c > d`）与代码泛型（`List<String>`）100% 往返不丢失。
+- **脑图 Markdown 组件防爆框**：`.mm-node-content img, video, iframe, svg` 统一添加 `max-width: 100%; height: auto;`，彻底阻断大图撑破节点卡片。
+- **Callout 图标颜色继承与科技主题保真**：修复 Callout 图标白底隐形问题；科技主题代码块在浅色 Obsidian 模式下维持专业暗底。
+- **安全与 XSS 防护**：大纲视图搜索高亮与技能抽屉胶囊改用纯 DOM 节点构建，彻底消除潜在脚本注入风险，并修复大纲公式中 `<` 符号被误当 HTML 标签解析的问题。
