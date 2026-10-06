@@ -755,3 +755,39 @@ An Obsidian XMind & AI Mind Mapping Plugin
 - **Mindmap Markdown Layout Protection**: Added `max-width: 100%; height: auto;` to embedded images and media, preventing oversized assets from breaking node boundaries.
 - **Callout Icon Contrast & Tech Theme Code Blocks**: Callout icons inherit node text colors; Tech theme code blocks retain high-contrast dark styling across light and dark Obsidian modes.
 - **Strict DOM XSS Prevention**: Outline search highlighting and skill chips refactored to standard DOM text node construction, eliminating XSS vectors and preventing `<`/`>` in formulas from being parsed as tags.
+## v3.7:
+
+### 🚀 Key Features
+
+1. **AI Runtime Upgrade: @earendil-works/pi-ai 1.0.2 & Standalone MCP Client**
+- **Unified Pi-AI 1.0.2 Engine**: Refactored LLM text, vision, and tool dispatching, supporting seamless parallel orchestration across multiple providers (Antigravity, OpenAI-Compatible, SiliconFlow, etc.).
+- **Dynamic Adaptive Thinking (Auto Reasoning)**:
+  - Intelligently recognizes trivial stop words and short commands ("hi/ok/continue"), automatically disabling thinking when supported by the model to save tokens and latency;
+  - Automatically selects balanced thinking levels (`medium`) for real tasks, abandoning brittle client-side depth heuristics;
+  - Completely removed hardcoded `temperature: 0.2` overrides on high reasoning levels, preserving native undefined temperature and ensuring 100% compatibility with strict reasoning models (OpenAI `o1`/`o3-mini`).
+
+2. **Official Xmind MCP Connector & Standalone MCP Management**
+- **Featured Card & PKCE OAuth 2.0 Auth**: Built-in official Xmind card (China / Global regions) with local HTTP 3000 callback auto-exchange and refresh token rotation.
+- **Cross-Platform Roaming (Obsidian Sync Compatible)**: OAuth credentials synchronized via `settings.ai.auth.credentials` in `data.json`, enabling seamless zero-login roaming across mobile devices (iOS/Android).
+- **MCP Prompt Toolbox (`McpToolboxModal`)**: 6 one-click preset prompt workflows (standard 5-branch map, branch updates, Gantt task schedules, recent maps), deeply linked with the AI Copilot task drawer.
+- **Informed Tool Confirmation**: Displays formatted argument summaries (`Arguments: ...`) in the tool execution confirmation modal.
+
+3. **Security Hardening & Subprocess Isolation**
+- **Official Endpoint Whitelisting & SSRF Prevention**: Strictly binds `app.xmind.cn` and `app.xmind.com` HTTPS endpoints, blocking unauthorized endpoint tampering and credential leakage.
+- **OAuth State Cryptographic Verification & HTML Injection Defense**: Uses `crypto.getRandomValues` for 24-byte CSRF token verification; error queries are HTML-escaped.
+- **Stdio Privilege Isolation**: Enforces `inheritEnv: false` on `StdioTransport`, preventing child subprocesses from inheriting Obsidian host environment variables and secrets.
+- **401 Token Refresh-and-Retry & Mutex Locks**: Seamlessly fetches refresh tokens from the credential store to recover from 401 expiration, alongside single-server connection mutex locks (`connectLocks`).
+- **100% Lossless High-Fidelity MCP Transmission**: Preserves raw mindmap AST, JSON, and outlines with zero byte truncation.
+
+4. **Workspace & Native Core Plugin Integration**
+- **Native Web Viewer (`webviewer`) Core Plugin Integration**:
+  - Automatically recognizes Obsidian's built-in `webviewer` core plugin upon clicking "Open Mindmap";
+  - Opens cloud maps directly inside internal workspace tabs via `WorkspaceLeaf.setViewState({ type: 'webviewer', state: { url, navigate: true } })`, eliminating `about:blank` and duplicate browser windows.
+- **AI Drawer Text Selection & Copy Unlocked**:
+  - Overrode Obsidian Modal's default `user-select: none !important;` on `.skill-drawer-activity-feed` and `.skill-drawer-activity-item`, enabling full mouse selection and copying of text and links.
+- **Eliminated Undocumented API Hacks**: Removed direct manipulation and deletion of Obsidian's private `app.viewRegistry` in `main.ts`.
+
+5. **Localization & Mobile Adaptation**
+- Added complete Traditional Chinese (`zh-tw`) entries for all MCP toolbox presets and adaptive reasoning settings;
+- Fixed mobile `.insight-perspective-item` styling selector and modal pill scroll margins;
+- Added validation notifications for custom server JSON inputs.

@@ -6,7 +6,7 @@
 
 Interactive Editing • AI Smart Expansion • Multiple Export Formats • Enterprise-Grade Stability
 
-[![Version](https://img.shields.io/badge/version-3.3-blue.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-3.7-blue.svg)](CHANGELOG.md)
 [![Platform](https://img.shields.io/badge/platform-Desktop%20%7C%20Mobile-green.svg)](#platform-support)
 
 [中文文档](README_cn.md)
@@ -17,204 +17,140 @@ Interactive Editing • AI Smart Expansion • Multiple Export Formats • Enter
 
 ## ✨ Key Highlights
 
-### 🎯 Complete Mind Mapping Experience
-- **Native Obsidian Integration**: Seamlessly integrates into your Obsidian workflow
-- **Bidirectional Markdown Sync**: Real-time conversion between mind maps and Markdown
-- **13 Professional Themes**: Professional themes + dopamine color schemes for various scenarios
-- **Rich Text Support**: Tables, Callouts, quotes, code blocks, embedded content
+### 🌟 Dual-Engine Synergy: Lightweight Markdown Meets Professional XMind
+Bridges the gap between raw text notes and professional visual mapping. Enjoy seamless in-note mind map editing with rich media embeds inside Obsidian, while unlocking XMind's 42 architectural skeletons (mind maps, timelines, fishbones, 2D matrices) and 53 designer color palettes. High-fidelity bidirectional round-trip ensures your ideas flow freely between text and visuals.
 
-### 🤖 AI-Powered Enhancement
-- **Unified AI Engine**: Powered by PiAI, supporting Google Antigravity, OpenAI, Anthropic, Gemini, Deepseek, CodeBuddy, OpenAI-compatible endpoints, and more
-- **OAuth / API Key Sign-in**: Auth modal with two authorization modes, credentials stored securely; official Antigravity Loopback + PKCE authorization flow
-- **Native Web Access Subsystem**: Zero-dependency `web_search` and `web_fetch` with SSRF protection and Auto routing (DuckDuckGo, Bocha, Tavily, Jina)
-- **Multi-Provider AI Image Generation**: Independent `ImagesModels` runtime supporting Google Antigravity, OpenRouter (52+ image models), and OpenAI-compatible / SiliconFlow endpoints
-- **WeChat Publishing Skills Suite**: Built-in tech writing, KM articles, typography formatting, and one-click draft box publishing
-- **Universal AI Copilot**: Direct assistant invocation without pre-selecting skills, dynamically adapting as tools load skills
-- **Skill Task Drawer**: Non-blocking docked drawer with collapsible floating bubble, multi-source context injection (selection feeding, 0-token `@` file mention), and multi-turn refinement
-- **Karpathy Wiki Agent (`wiki`)**: Built-in full-vault knowledge compilation, note ingestion, and incremental absorption
-- **Multimodal Vision**: Dynamic vision model resolution with automatic image attachment extraction from notes and mind maps
-- **Pi Agent Tool Calling**: read / edit / write / find / grep / ls / bash / web_search / web_fetch / generate_image — AI directly reads/writes notes, searches the web, and generates illustrations
-- **Native XMind Creator Skill**: Built-in 15 core skills, allowing AI to directly write `.xmind` files with boundaries, summaries, callouts, and relationships
-- **Comprehensive Internationalization**: Task drawer, auth modal, settings, and all 15 built-in skills fully localized in English, Simplified Chinese, and Traditional Chinese
-- **Smart Expansion**: One-click child node generation, deep analysis, content optimization
-- **Insight System**: Flomo-like AI insights with multi-dimensional analysis, directly analyzing `.xmind` files alongside notes
-- **Custom Prompts**: Fully customizable AI interactions
+### 🤖 Autonomous Execution: Beyond Chatbots, An Agent That Delivers
+Powered by a unified Pi-AI runtime with adaptive reasoning intelligence. Docked non-blocking task drawer is always one click away, with selection quick-feeding and zero-token `@` note mentions. Equipped with 10 core specialized skills and modular extension packages, your AI copilot compiles native `.xmind` files, synthesizes personal vault wikis, and formats publication-ready articles.
 
-### 🏗️ Enterprise-Grade Stability
-- **Unified Resource Management**: Centralized resource lifecycle control
-- **Zero Memory Leaks**: Complete lifecycle management and automatic cleanup
-- **Async Safety**: Prevents race conditions accessing destroyed objects
-- **Optimized Performance**: Efficient rendering and memory usage
+### 🔌 Official Cloud Ecosystem: First-Class Xmind MCP Integration
+Pioneers deep integration with official Xmind MCP server protocols. Your AI autonomously creates, searches, and edits cloud mind maps, while programmatic links render natively inside Obsidian tabs without window switching. Enhanced with a singleton OAuth manager for months of uninterrupted session persistence.
 
-### 🎨 Rich Export Options
-- **Image Export**: PNG, JPEG, SVG with watermarks and author info
-- **Document Export**: Selected content export, 12 professional templates
-- **XMind Integration**: Bidirectional conversion with XMind files (Desktop)
+### 🧠 Cognitive Elevation & Flawless Presentation: 24 Master Lenses & Boundaryless Export
+Elevate your thinking with 24 high-order mental models (including Charlie Munger's Mental Models, Dalio's Principles, and the Feynman Technique) across four cognitive quadrants. Export ultra-large canvases with thousands of nodes in high definition without truncations or crashes, fully isolated from host dark themes for crisp contrast.
 
 ---
 
 ## 🚀 Core Features
 
-### 1. Mind Map Editing
+### 1. Mind Map Editing & View Enhancements
 
-#### Interactive Editing
-- ✅ Create and edit mind maps directly in Obsidian
-- ✅ Support for drag-and-drop, hotkeys, context menu
-- ✅ Real-time preview, WYSIWYG
-- ✅ Complete undo/redo history
+#### Interactive Editing & Layout Architectures
+- ✅ **Visual Canvas Editing**: Create and edit mind maps directly in Obsidian with fluid drag-and-drop, rich keyboard shortcuts, live WYSIWYG preview, and full undo/redo (`Ctrl+Z` / `Ctrl+Y`) history
+- **4 Global Layout Directions**: Center, Right, Left, and Clockwise distribution
+- **13 Built-in Themes & Styling**: 7 professional + 6 dopamine color palettes, smart branch connection color system, and canvas background picker
+- **Responsive Canvas**: Smooth zooming, panning, and auto-adapting canvas boundaries
 
-#### Layouts and Styles
-- **4 Layout Directions**: Center, Right, Left, Clockwise
-- **13 Themes**: 7 professional + 6 dopamine color schemes
-- **Custom Color Groups**: Smart node connection color system
-- **Responsive Canvas**: Auto-adapts to content size
+#### Comprehensive Rich Text & Embedded Rendering
+| Content Type | Supported Features & Behaviors |
+|-------------|--------------------------------|
+| **Markdown Syntax** | Bold, italic, highlight, strikethrough, inline code, multi-level headings |
+| **Tables** | Full visual table rendering and in-node editing, convertible to 2D matrices |
+| **Callout Boxes** | Multiple Callout types (NOTE, TIP, WARNING, etc.), theme-adaptive styling |
+| **Block Quotes** | Native blockquote rendering and long text block display |
+| **Code Blocks** | Syntax highlighting with dedicated child node rendering |
+| **Embedded Content** | Seamlessly embed Canvas, PDF++, Eagle, and Excalidraw whiteboards/media |
+| **Wikilinks** | Native Obsidian `[[Wikilink]]` navigation and backlink resolution |
+| **Math & Footnotes** | LaTeX math formula rendering and superscript footnote protection |
+| **Task Lists** | Interactive clickable checkboxes synced with task states |
 
-#### Rich Text Rendering
-| Content Type | Supported Features |
-|-------------|-------------------|
-| **Markdown Formatting** | Bold, italic, highlight, strikethrough, code |
-| **Tables** | Full table rendering and editing |
-| **Callouts** | Multiple Callout types, theme-adaptive |
-| **Block Quotes** | Block quotes, text block display |
-| **Code Blocks** | Syntax highlighting, rendered as child nodes |
-| **Embedded Content** | Canvas, PDF++, Eagle, Excalidraw |
-| **Internal Links** | Support for internal link navigation |
-| **Footnotes** | Superscript rendering, content protection |
-| **Task Lists** | Clickable checkboxes |
+#### View Enhancements & Quick Settings
+- **Quick Settings Bar**: Floating toolbar on the canvas top-right to instantly switch among 13 themes, toggle 4 layout structures, tune color palettes, and select background fills
+- **Outline View**: Tree structure display with real-time synchronized search and bidirectional scrolling
+- **Map Overview (Minimap)**: Thumbnail minimap, viewport indicator, smooth panning, and rapid jump navigation
+- **Fold State Persistence**: Uses `<!--c-->` comment markers, fully compatible with obsidian-workflowy-plugin
 
-### 2. View Enhancements
+### 2. Native XMind Engine & Format Interoperability
 
-#### Outline View
-- Tree structure display
-- Real-time search and quick navigation
-- Expand/collapse support
-- Synchronized scrolling with main view
+#### Multi-Skeleton Routing & Layout Mixing
+- **42 Layout Skeletons**: Full support for 42 skeletons across 11 families (Mind Map, Timeline, Fishbone, Org Chart, Logic Chart, Brace Map, Matrices, and Spreadsheets) via Frontmatter `skeleton:`
+- **Subtree Layout Mixing**: Append `#layout/xxx` to a branch heading to mix structures on a single canvas without altering parent or sibling nodes
+- **Verbatim Icon Passthrough**: `#marker/<id>` icons pass through to XMind verbatim with lossless round-trip and fault tolerance
+- **Markdown Tables to 2D Matrices**: Native Markdown comparison tables compile directly into structured XMind 2D comparison matrices (Spreadsheets) with auto-injected dimensions
 
-#### Map Overview
-- Thumbnail minimap
-- Visual navigation
-- Quick jump
-- Real-time updates
+#### 53 Master Themes & Granular Formatting
+- **53 Curated Designer Color Themes**: Built-in 53 offline color themes (Rainbow, Energy, Space, etc.) with customizable primary-color variants via Frontmatter `color:` or `theme:`
+- **Global Visual Frontmatter**: Control canvas background, typography, line width, and line tapering directly from note frontmatter
+- **Dynamic Multi-Level Numbering**: Automatic numbering (`numbering: arabic` or `#numbering/roman`) preserves continuous sequences through drag-and-drop
+- **Manual Node Width & Visual Emphasis**: `#width/<px>` pins topic card width; inline HTML tags enable per-node font size and border emphasis
+- **Task Project Metadata**: Obsidian Tasks due dates (`📅`) and Dataview progress syntax (`[progress:: 50%]`) map to XMind's native octant progress markers
+- **Deep High-Fidelity Sync**: Pure offline TypeScript engine with automatic contrast compensation and HTML entity preservation for reliable structure preservation
 
-#### Quick Settings
-- One-click theme switching
-- Adjust layout direction
-- Modify color groups
-- Background color picker
+### 3. All-in-One AI Copilot & Agent Ecosystem
 
-### 3. AI Features
+#### Unified Multi-Model Engine & Adaptive Thinking
+- **Unified AI Architecture**: Powered by Pi-AI, seamlessly connecting Google Antigravity, Claude, OpenAI, Gemini, DeepSeek, CodeBuddy, and custom endpoints under one roof
+- **Adaptive Thinking Intelligence**: Intelligently tunes reasoning depth based on complexity — handling deep architectural design with ease while delivering instant responses for casual prompts; locks strict reasoning models to undefined temperature
+- **Multimodal Visual Comprehension**: `LinkResolver` automatically extracts note attachments and mind map visual elements for deep vision analysis; toggle `blockImages` privacy protection at any time
 
-#### Node AI Expansion (Plus Feature)
-- **Generate Ideas**: AI brainstorming
-- **Generate Analysis**: Deep content analysis
-- **Detailed Expansion**: Refine node content
-- **Practical Applications**: Practical scenario suggestions
-- **Custom Prompts**: Fully customizable
+#### Non-Blocking Task Drawer & Context Feeding
+- **Non-Blocking Drawer UI**: Runs smoothly in the background without modal backdrops, allowing uninterrupted reading and editing
+- **Selection Quick-Feeding**: Highlight text across notes and right-click "Send selection to AI Drawer" with precise line ranges; falls back to reading pointers for long notes
+- **0-Token Local Note Mentions**: Type `@` for instant fuzzy matching of vault note pointers without wasting initial prompt tokens
+- **`/` Slash Skill Autocompletion**: Type `/` to search and autocomplete from enabled skills, with multi-turn session refinement (`SkillAgentSession`)
+- **Collapsible Floating Bubble & Telemetry**: Minimize drawer into a bottom-right breathing pill badge; live visualization of tool executions, duration, token metrics, and artifact cards
+- **Node & Context Menu AI**: Click the 🧠 icon or double-click nodes for instant brainstorming and analysis; right-click files or folders for batch AI insights
 
-#### Context Menu AI
-- Popup with streaming output
-- Support for editing and insertion
-- Smart Callout type selection
-- Regenerate and replace functionality
+#### Built-in Core Skills & Modular Extension Matrix
+> 💡 **Notice**: The plugin natively includes **10 core built-in skills** (automatically unpacked to your vault's `skills/` directory on first install), along with **6 modular extension skills** bundled in the repository for on-demand use.
 
-#### File AI Analysis
-- Document analysis and summary
-- Keyword extraction
-- Streaming output to new file
-- Custom save path
+| Category | Slash Command | Skill Name | Delivery | Output Artifact | Core Capability & Scenarios |
+|---|---|---|---|---|---|
+| **Mind & Outline** | `/xmind-creator` | **XMind Creator** | Core Built-in | `.xmind` (Native binary) | Compiles notes or outlines directly into native `.xmind` files with boundaries, summaries, and formulas |
+| | `/xmind-mdoutline-generator` | **XMind Markdown Outline** | Extension | `.md` (Outline note) | Generates hierarchical outline lists with XMind control markers (`[B]`, `[G]`, `[P]`) for seamless conversion |
+| | `/outliner-note` | **Outliner Note** | Core Built-in | `.md` (Structured note) | Synthesizes long articles, speeches, or papers into clear, high-signal hierarchical reading outlines |
+| **Knowledge Vault** | `/wiki` | **Vault Wiki Agent** | Core Built-in | `.md` / Wiki Index | Pre-scans vault notes, extracts core concepts, and progressively compiles an interconnected personal wiki |
+| | `/flomo-analysis-studio` | **Flomo Reflection Studio** | Core Built-in | `.md` (Deep report) | Analyzes fragmented thoughts, memos, and journals using compounding flywheels and cognitive mental lenses |
+| | `/obsidian-markdown` | **Obsidian Markdown** | Core Built-in | `.md` (Flavored note) | Generates Obsidian-native Markdown with wikilinks, embeds, callouts, and frontmatter properties |
+| | `/obsidian-bases` | **Obsidian Bases** | Core Built-in | `.base` (Database view) | Creates database views with customizable card/table layouts, filters, formulas, and aggregations |
+| **Canvas & Diagrams** | `/obsidian-canvas-creator` | **Obsidian Canvas Creator** | Extension | `.canvas` (Visual map) | Builds structured Obsidian Canvas files with tree hierarchies or multi-topic spatial clusters |
+| | `/json-canvas` | **JSON Canvas** | Core Built-in | `.canvas` (Open spec) | Precisely coordinates canvas nodes, dimensions, colors, and directed edges |
+| | `/mermaid-visualizer` | **Mermaid Visualizer** | Core Built-in | Mermaid codeblock | Transforms logic into clean Mermaid flowcharts, sequence diagrams, and architecture graphs |
+| | `/excalidraw-diagram` | **Excalidraw Diagram** | Core Built-in | `.excalidraw.md` | Creates sketch-style Excalidraw whiteboards, supporting embedded notes and animated diagrams |
+| | `/drawio` | **Draw.io Diagram** | Core Built-in | `.drawio` / SVG | Generates standard Draw.io / Diagrams.net vector technical flows and system architectures |
+| **Publishing Suite** | `/wechat-tech-writer` | **WeChat Tech Writer** | Extension | `.md` (Draft article) | Researches technical topics with live search and drafts engaging, well-structured tech explainer articles |
+| | `/wechat-km-writer` | **WeChat KM Writer** | Extension | `.md` (Draft article) | Drafts insightful knowledge management articles covering tools, cognition, and productivity methodologies |
+| | `/wechat-article-formatter` | **WeChat Article Formatter** | Extension | Inlined HTML | Injects elegant inline typography into Markdown, rendering clean HTML ready for WeChat editors |
+| | `/wechat-draft-publisher` | **WeChat Draft Publisher** | Extension | Draft box / Report | Securely uploads formatted articles and covers to WeChat Official Account drafts with delivery reports |
 
-#### AI Insight System
-- Multi-dimensional perspective analysis
-- Customizable built-in perspectives
-- Backlink expansion depth configuration
-- Persistent data storage
+#### Pi Agent 10 Native Toolchains & Safety Controls
+- **10 Native Tools Matrix**:
+  1. `read`: Inspect note contents and mind map hierarchical trees;
+  2. `edit`: Perform targeted incremental replacements;
+  3. `write`: Create notes or directly compile binary `.xmind` files;
+  4. `find`: Vault-wide file path and regex matching;
+  5. `grep`: Cross-document text pattern searching;
+  6. `ls`: List directory structures and vault files;
+  7. `bash`: Execute desktop system commands safely;
+  8. `generate_image`: Native multi-provider AI illustration generation;
+  9. `web_search`: Live multi-engine search across DuckDuckGo, Bocha, Tavily, and Jina;
+  10. `web_fetch`: In-depth clean article fetching and noise filtering (*Desktop only*).
+- **Tool Confirmation Safety**: Enable `requireToolConfirmation` to require explicit approval before modifying files or executing bash
+- **Physical Truncation Protection (`truncateOutput`)**: Shields the model context window against gigantic file overflow
+- **Unified Save Paths & Immediate Cancellation**: Save to custom paths, vault root, or source directory; full support for one-click stop buttons across mobile and desktop
+- **Plus Feature Licensing**: Includes a 7-day full free trial; core capabilities stay completely free forever, with optional sponsorship activation codes for advanced AI extensions
 
-#### AI Skills System (Plus Feature)
-- Extensible AI workflows defined via SKILL.md, following the Agent Skills open standard
-- Multiple output formats: markdown, mermaid, excalidraw, canvas, base, and native `.xmind` mind maps
-- Built-in 7 core skills, including the new `xmind-creator` skill
-- Auto-scans vault `skills/` folder to discover skills, loading them on demand via progressive disclosure
-- ReAct agent tool loop for complex multi-step tasks
-- Streaming output, real-time file writing; automatically embeds artifact wikilinks (`![[artifact]]`) into source notes
-- Smart content extraction, strips AI explanatory text
+### 4. Official Xmind Cloud Connector & Live Web Access
+- **Direct Xmind Cloud Integration**: Powered by official Xmind MCP services, enabling AI to create, search, and edit cloud mind maps while keeping topics, rich notes, and tags in sync
+- **In-App Mind Map Navigation**: Open and interact with cloud mind map links directly in native Obsidian `webviewer` tabs without constantly jumping between windows
+- **Seamless One-Time Sign-In**: Global singleton callback server provides smooth authorization with proactive token renewal and reactive 401 retry loops for months of uninterrupted connection
+- **Live Web Search & Deep Article Reading**: AI conducts real-time web research with built-in SSRF guards and noise-free article parsing across DuckDuckGo, Bocha, Tavily, and Jina
 
-#### Skill Task Drawer & Multi-Turn Refinement
-- **Non-Blocking Drawer**: Operates smoothly without a blocking modal backdrop, allowing uninterrupted reading and editing
-- **Multi-Turn Session Refinement**: `SkillAgentSession` retains context across follow-up prompts for iterative polishing
-- **Collapsible Floating Bubble**: Minimize drawer into a bottom-right pill badge with a breathing pulse dot indicator
-- **Real-Time Activity Feed**: Live visualization of tool executions (read/edit/write/bash), execution turns, and token usage
-- **Artifact Card**: Detects the final deliverable and opens it in an Obsidian leaf with one click
+### 5. 24 Master Cognitive Lenses & Deep Synthesis
+- **24 Curated Mental Lattices**: Draws from high-order thinking models including Charlie Munger's Mental Models, Dalio's Principles, the Feynman Technique, Drucker's Effectiveness, and Musk's First Principles
+- **Four Cognitive Quadrants**: Systematically covers Review (reflection), Awareness (blindspot removal), Decision (direction setting), and Mastery (mental clarity) to transcend conventional thinking patterns
+- **Dedicated Insight Studio**: Filter perspective pills, run instant keyword searches, and inspect master badges for multidimensional note examination
+- **Batch Document & Folder Insights**: Multi-select files or right-click folders to batch-collect notes and `.xmind` files for synthesized analysis
+- **Semantic Idea Clustering (Flomo Studio)**: Batch-analyze fragmented thoughts with 10 embedded templates to uncover latent connections and cluster raw ideas into structured outlines
 
-#### Multimodal Vision & Link Resolution
-- **Dynamic Vision Resolution**: Automatically verifies model vision capabilities across providers and custom endpoints
-- **Rich Content Extraction**: `LinkResolver` parses wikilinks, block refs, and raster images (`![[image.png]]`, `[alt](url)`)
-- **Multimodal AI Integration**: Selected text, mind map nodes, and multi-document insights automatically deliver images to vision models
-- **Privacy Control**: Enable `blockImages` in settings to disable image uploading at any time
-
-#### Pi Agent Tool Calling
-- Built-in `read` / `edit` / `write` / `find` / `grep` / `ls` / `bash` tools
-- `edit` performs batched targeted replacements instead of rewriting whole files
-- `write` compiles Markdown directly into native binary `.xmind` mind maps
-- `grep` / `find` regex search across the vault; multi-document insight retrieves on demand
-- Physical truncation protection (`truncateOutput`) protects the context window
-- Optional "Require Tool Confirmation" (`requireToolConfirmation`) setting before modifying files or executing bash
-
-#### File & Folder Context Menu AI
-- Multi-select files or right-click folders in the file list to launch AI insights directly
-- Folder right-click batches both Markdown documents and `.xmind` files
-- Direct in-memory extraction of `.xmind` outlines and images for AI analysis
-
-#### Unified Save Path Management
-- Three modes: custom path / vault root / source file directory
-- Shared across all AI features
-- Auto-creates directories when they don't exist
-
-#### AI Stop Button
-- Both AI Insight and Skills execution support interruption
-- Mobile progress indicator integrates stop button
-- Mind map node AI expansion also supports stopping
-
-#### Plus Feature Licensing
-- **Trial Period**: 7 days free trial for all Plus features
-- **Licensing**: Obtain registration code through sponsorship
-- **Scope**: Node AI expansion, context menu AI, file AI analysis
-- **Free Features**: All other features remain unrestricted after trial
-
-### 4. Export and Publishing
-
-#### Image Export
-```
-Supported Formats: PNG, JPEG, SVG
-Features:
-- Adjustable image width
-- Custom author info (avatar, name, extra text)
-- Watermark settings (text/image, transparency, rotation)
-- 12 professional templates
-- Mobile share menu integration
-```
-
-#### Document Export
-```
-Features:
-- Selected content export
-- Full document export
-- Card summary display
-- Filename and date control
-- Export preview modal
-```
-
-#### XMind Integration (Desktop)
-- Markdown ↔ XMind conversion
-- XMind file preview (thumbnails)
-- Folder auto-sync
-- Open XMind in tabs
-
-### 5. Collapse State Persistence
-
-- Uses `<!--c-->` comment markers
-- Compatible with obsidian-workflowy-plugin
-- Markdown view synchronization
-- Auto-save state
+### 6. Flawless High-Res Export & Cross-Device Sync
+- **Limitless Ultra-Large Canvas Export**: Bypasses Chromium 2MB limits with default 16,000px safety downscaling (configurable among 10,000 / 12,000 / 16,000px); exports mind maps with dozens to thousands of nodes in high definition without canvas blanking
+- **Pure Canvas Isolation**: Automatically renders clean, readable background colors and crisp text contrast regardless of your active Obsidian dark theme
+- **Rich Image Export Controls**:
+  * **Supported Formats**: High-res PNG, compressed JPEG, and lossless SVG vector graphics
+  * **Customization**: Adjustable image width, custom author avatars/names/signatures, and anti-theft watermarks
+- **12 Professional Document Templates**: Export mind map node outlines into beautifully formatted publication-ready documents with one click
+- **Seamless Cross-Device Sync**: Unified performance across Windows, macOS, iOS, and Android; integrates with Obsidian Sync with strictly local, private vault data storage
 
 ---
 
@@ -229,121 +165,89 @@ Features:
 ### Mobile (Basic Support)
 - ✅ iOS, Android
 - ✅ Mind map viewing and editing
-- ✅ Touch operations
-- ✅ Image export (share menu)
+- ✅ Touch operations and fluid pinch-to-zoom
+- ✅ Mobile-specific AI progress bar with stop button
+- ✅ Image export (system share menu)
 - ✅ Tab/Enter virtual buttons
-- ⚠️ **Not Supported**: XMind conversion, file sync
+- ⚠️ **Platform Differences**: Due to mobile OS sandbox limitations, native binary `.xmind` file direct parsing is only available on desktop (cloud MCP collaboration works across devices); `web_fetch` is desktop only (mobile supports live `web_search`)
 
 ---
 
 ## 📖 User Guide
 
-### Quick Start
-
-#### 1. Create Mind Map
-```
-Method 1: Ctrl+P → Search "Create new mind map"
-Method 2: Right-click folder → "New mind map"
-```
-
-#### 2. Open Existing File
-```
-Method 1: Right-click Markdown file → "Open as mind map"
-Method 2: Command palette → "Toggle markdown or mindmap mode"
-```
-
-### Keyboard Shortcuts
+### 1. Quick Start: Create & Edit Mind Maps
+- **Create New Mind Map**: Press `Ctrl+P` to open the command palette and search `Create new mind map`, or right-click any folder in the file tree and choose `New mind map`.
+- **Open Existing Note as Map**: Right-click any existing Markdown note and select `Open as mind map`, or click the mind map toggle icon at the top-right of the editor.
+- **Fluid WYSIWYG Editing**: Drag and drop nodes to reorder, drag to box-select multiple nodes, and use complete undo/redo (`Ctrl+Z` / `Ctrl+Y`) history.
 
 <details>
-<summary><b>Node Operations</b></summary>
+<summary><b>⌨️ Key Shortcuts Cheat Sheet (Click to expand)</b></summary>
 
-| Shortcut | Function |
-|----------|----------|
-| `Shift+F2` | Edit node |
-| `Shift+Insert` | Insert child node |
-| `Alt+Shift+Enter` | Add sibling node / End editing |
-| `Shift+Delete` | Delete node and children |
-| `Escape` | Cancel editing |
-| `Alt+Shift+S` | Select node text |
-| `Alt+Shift+D` | Move next siblings as children |
-| `Alt+Ctrl+Shift+D` | Move all siblings as children |
-| `Alt+Shift+J` | Join with node below |
-| `Alt+Ctrl+Shift+J` | Join as citation with node below |
+| Category | Shortcut | Description |
+|---|---|---|
+| **Node Editing** | `Shift+F2` | Edit current node text |
+| | `Shift+Insert` | Insert child node |
+| | `Alt+Shift+Enter` | Add sibling node / Finish editing |
+| | `Shift+Delete` | Delete current node and its children |
+| | `Escape` | Cancel current editing |
+| **Node Movement** | `Alt+Shift+↑` / `↓` | Move node up / down among siblings |
+| | `Alt+Shift+←` / `→` | Adjust node hierarchy level / indent |
+| | `Alt+Shift+D` | Fold subsequent siblings into child nodes |
+| **Folding** | `Ctrl+Shift+Space` | Toggle expand / collapse current branch |
+| | `Alt+↓` / `Alt+↑` | Expand one level / Collapse one level |
+| **Typography** | `Alt+Shift+B` | **Bold text** |
+| | `Alt+Shift+I` | *Italic text* |
+| | `Alt+Shift+H` | ==Highlight text== |
+| | `Alt+Shift+2` | ~~Strikethrough~~ |
+| **Canvas** | `Ctrl+ScrollWheel` | Zoom canvas (`Ctrl+0` resets to 100%) |
+| | `Alt+E` / `Alt+Shift+E` | Center active node / Center entire mind map |
 
 </details>
 
-<details>
-<summary><b>Node Movement</b></summary>
+### 2. Advanced Typography: 42 Skeletons, 53 Themes & Project Tasks
+- **42 Layout Skeletons**: Declare `skeleton:` directly in your note's Frontmatter (case-insensitive aliases supported):
+  ```yaml
+  ---
+  skeleton: timeline  # Options: mindmap, timeline, fishbone, org-chart, logic, brace, matrix, spreadsheet, etc.
+  ---
+  ```
+- **53 Curated Color Themes**: Specify `color:` or `theme:`, with support for primary-color variants (e.g. `color: Energy/2`):
+  ```yaml
+  ---
+  color: Rainbow      # Options: Rainbow, Energy, Space, Freshness, Dawn, Classic, etc.
+  ---
+  ```
+- **Mix Multiple Structures on One Canvas**: Append a layout tag to any branch heading to isolate its structure without altering parent or sibling nodes:
+  * `## Root Cause Analysis #layout/fishbone` ➔ Renders this branch as a fishbone diagram while keeping the rest as a standard mind map.
+- **Dynamic Multi-Level Numbering**: Add `numbering: arabic` to Frontmatter or `#numbering/roman` to branch tags; drag-and-drop reordering updates numbering sequences automatically.
+- **Task & Project Status Sync**: Tasks due dates and Dataview progress syntax map automatically to XMind's native octant progress markers:
+  ```markdown
+  - [ ] Architecture Design 📅 2026-10-01 [progress:: 50%] @assignee
+  ```
+- **Markdown Tables to 2D Comparison Matrices**: Native Markdown comparison tables compile directly into structured XMind 2D matrices (Spreadsheets) with auto-balanced columns.
 
-| Shortcut | Function |
-|----------|----------|
-| `Alt+Shift+↑` | Move node up |
-| `Alt+Shift+↓` | Move node down |
-| `Alt+Shift+←` | Move node left |
-| `Alt+Shift+→` | Move node right |
+### 3. AI Copilot Task Drawer & Specialized Skills
+- **Always-Accessible Non-Blocking Drawer**: Click the `brain-circuit` icon in the left ribbon or right-click to invoke the task drawer; operates in the background without interrupting editing.
+- **Selection Quick-Feeding & Zero-Token Note Mentions**:
+  * Highlight any text snippet and right-click `Send selection to AI Drawer` to feed exact context.
+  * Type `@` inside the input bar for instant fuzzy matching of vault note pointers without initial prompt token cost.
+- **`/` Slash Commands for Instant Skills**: Type `/` in the input bar to autocomplete from built-in core skills (such as `/xmind-creator`, `/wiki`, and WeChat drafting).
+- **Multi-Turn Refinement & Collapsible Bubble**: Follow up with natural language revisions directly; click the minimize button to dock the session into a pulsating bottom-right bubble.
 
-</details>
+### 4. Official Xmind Cloud Connector & MCP Workflows
+- **One-Click Authorization**: Navigate to `Settings → AI Configuration → MCP Servers` and click `Sign in to Xmind` (supports CN and Global regions); authorization stays active for months.
+- **Autonomous Cloud Collaboration**: Prompt the AI in your drawer to create and edit cloud mind maps, syncing topics, rich notes, and tag relationships automatically.
+- **In-App Obsidian Tab Navigation**: Generated cloud mind map links open directly in native Obsidian `webviewer` tabs, eliminating window switching.
 
-<details>
-<summary><b>Expand/Collapse</b></summary>
+### 5. 24 Master Cognitive Lenses & Deep Synthesis
+- **Multidimensional Perspective Examination**: Right-click any note or mind map and select `AI Cognitive Insight` to launch an interactive thinking studio.
+- **Four Cognitive Quadrants**: Filter across Review (reflection), Awareness (blindspot removal), Decision (direction setting), and Mastery (mental clarity); apply 24 high-order mental models including Munger, Dalio, Feynman, and Drucker.
+- **Semantic Idea Clustering (Flomo Studio)**: Batch-analyze fragmented thoughts to uncover latent connections, map conceptual topologies, and compile structured outlines.
 
-| Shortcut | Function |
-|----------|----------|
-| `Alt+↓` | Expand one level |
-| `Alt+↑` | Collapse one level |
-| `Alt+PageDown` | Expand one level from max displayed |
-| `Alt+PageUp` | Collapse one level from max displayed |
-| `Ctrl+Shift+Space` | Toggle expand/collapse |
-
-</details>
-
-<details>
-<summary><b>Text Formatting</b></summary>
-
-| Shortcut | Function |
-|----------|----------|
-| `Alt+Shift+B` | Bold |
-| `Alt+Shift+I` | Italic |
-| `Alt+Shift+H` | Highlight |
-| `Alt+Shift+2` | Strikethrough |
-| `Alt+Shift+L` | Remove line breaks |
-
-</details>
-
-<details>
-<summary><b>Other Operations</b></summary>
-
-| Shortcut | Function |
-|----------|----------|
-| `Alt+Shift+C` | Copy node |
-| `Alt+Shift+V` | Paste node |
-| `Alt+Shift+Z` | Undo |
-| `Alt+Shift+Y` | Redo |
-| `Alt+Ctrl+Shift+Z` | Replace with previous text |
-| `Alt+E` | Center current node |
-| `Alt+Shift+E` | Center entire map |
-| `Ctrl++` / `Ctrl+Scroll↑` | Zoom in |
-| `Ctrl+-` / `Ctrl+Scroll↓` | Zoom out |
-| `Ctrl+0` | Reset zoom |
-
-</details>
-
-### AI Configuration
-
-1. **Set Up AI Service**
-   - Open plugin settings → AI Service Configuration
-   - Select a provider (OpenAI, Anthropic, Gemini, Deepseek, CodeBuddy, etc.)
-   - Authenticate via API Key or OAuth, then pick a model
-
-2. **Use AI Expansion**
-   - Click the 🧠 button on a node
-   - Or `Ctrl+Double-click` the node
-   - Select expansion method
-
-3. **Custom Prompts**
-   - Plugin settings → AI Custom Prompts
-   - Use `{{nodeContent}}` placeholder
-   - Takes effect immediately after saving
+### 6. Flawless High-Res Export & Publication
+- **Limitless Ultra-Large Canvas Export**: Click Export in the mind map toolbar, choose PNG, JPEG, or SVG; built-in light-mode isolation and downscaling ensure zero crashes and crisp contrast.
+- **Personalized Signatures & Watermarks**: Configure author avatars, names, custom badges, and rotated anti-theft watermarks.
+- **12 Professional Document Templates**: Export mind map node outlines into beautifully formatted publication-ready documents with one click.
 
 ---
 
@@ -372,6 +276,35 @@ Method 2: Command palette → "Toggle markdown or mindmap mode"
 ---
 
 ## 🔄 Latest Version
+
+### v3.7 - Upgrade to Pi-AI 1.0.2, Official Xmind MCP Connector & Workspace Hardening
+- 🔌 **Official Xmind MCP Connector**: Native integration with official Xmind MCP services, enabling AI to create, search, and edit cloud mind maps while synchronizing topics, notes, and tags
+- 🌐 **Obsidian Native Webviewer Routing**: Programmatic cloud mind map links open directly in Obsidian's native core `webviewer` tab with intelligent system browser fallbacks
+- 🛡️ **Singleton OAuth Server Manager**: Global singleton loopback server on port 3000 dynamically handles OAuth callbacks, eliminating port collisions and CSRF false-positives
+- 🔑 **Dual Token Refresh Defenses**: Proactive token renewal 5 minutes prior to expiry paired with automated reactive 401 retry loops for uninterrupted multi-month authorization
+- 🧠 **Adaptive Thinking Intelligence**: Intelligently tunes reasoning depth based on complexity — handling deep architectural design while disabling thinking for casual greetings; locks strict reasoning models to undefined temperature
+- 📝 **Selectable Activity Feed**: Overrides parent modal styles to restore full text selection across AI drawer activity feeds for fluid link and text copying
+
+### v3.6 - AI Cognitive Insight 2.0 & Zero-Limit Export
+- 🧠 **24 Cognitive Perspective Matrix**: 24 curated mental lenses across Review, Awareness, Decision, and Master categories (integrating Munger, Dalio, Feynman, Drucker, Naval, Musk), with pill filtering, instant search, and author badges
+- ⚡ **Ribbon Quick Entry**: Dedicated `brain-circuit` icon in the left ribbon to trigger the AI Copilot task drawer with active note context
+- 🖼️ **Image Export 2.0**: Native binary download pipeline bypassing browser 2MB limits; adaptive downscale caps canvas height under 16,000px to prevent GPU crashes
+- 🎨 **Dark Mode CSS Variable Isolation**: Cloned export DOM injects clean light variables, eliminating host dark-theme variable pollution
+- 📝 **Flomo Deep Analysis Studio**: Embedded skill templates for semantic clustering and tag topology analysis of fragmented thoughts
+- 🔄 **Lossless Round-trip Hardening**: Automatic contrast compensation for 38 light palettes; spreadsheet matrix column protection; HTML comparison symbols and generics preserved with zero data loss
+
+### v3.5 - XMind Advanced Visual & Task Extensions
+- 🎨 **Global Canvas Visuals**: Declare `background` (canvas fill), `font` / `font-family`, `grid-columns` (2–12), `line-width` (5 tiers) and `line-tapered` directly in Frontmatter
+- 🔢 **Dynamic Multi-Level Numbering**: `numbering:` (Frontmatter, whole map) or `#numbering/<pattern>` (per branch) drives XMind's native numbering engine so numbers never break when nodes are reordered
+- 📏 **Manual Node Width & Visual Emphasis**: `#width/<px>` pins topic card width; inline HTML tags enable per-node emphasis
+- ✅ **Task Project Metadata**: Checkbox items with Tasks-spec due dates, Dataview-spec progress, and `@assignee` are written into XMind task extensions, auto-linking native octant markers
+
+### v3.4 - XMind Mind Map Engine Upgrade: 42 Skeletons & 53 Color Themes
+- 🧭 **42 Multi-Skeleton Routing**: Declare 42 skeletons across 11 families via Frontmatter `skeleton:`, with case-insensitive aliases
+- 🎨 **53 Official Color Themes**: Apply 53 official offline palettes (Rainbow, Energy, Space, etc.) directly via Frontmatter `color:` / `theme:` with primary color variants
+- 🌿 **Subtree Layout Mixing**: Append `#layout/xxx` to a branch heading to render different structures per branch
+- 🏷️ **Icon Marker Passthrough**: `#marker/<id>` passes XMind icons through verbatim with lossless round-trip
+- 📊 **Markdown Table to Matrix**: Native Markdown tables compile seamlessly into XMind 2D comparison matrices (Spreadsheet) with auto-injected dimensions
 
 ### v3.3 - Google Antigravity, Native Web Access, Unified Image Generation & Skill Pipelines
 - 🌐 **Google Antigravity Provider & OAuth**: Desktop local loopback (port 51121) + PKCE authorization code grant with support for `gemini-3-pro`, `gemini-3-flash`, `claude-4-6-sonnet`, and more

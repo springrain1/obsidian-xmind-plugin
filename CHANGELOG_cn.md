@@ -763,3 +763,39 @@
 - **脑图 Markdown 组件防爆框**：`.mm-node-content img, video, iframe, svg` 统一添加 `max-width: 100%; height: auto;`，彻底阻断大图撑破节点卡片。
 - **Callout 图标颜色继承与科技主题保真**：修复 Callout 图标白底隐形问题；科技主题代码块在浅色 Obsidian 模式下维持专业暗底。
 - **安全与 XSS 防护**：大纲视图搜索高亮与技能抽屉胶囊改用纯 DOM 节点构建，彻底消除潜在脚本注入风险，并修复大纲公式中 `<` 符号被误当 HTML 标签解析的问题。
+## v3.7：
+
+### 🚀 核心新特性
+
+1、**AI 运行时全面升级：@earendil-works/pi-ai 1.0.2 与独立 MCP 架构**
+- **统一 Pi-AI 1.0.2 引擎**：重构大模型文本、视觉与工具生态调度，实现多 Provider（Antigravity、OpenAI-Compatible、硅基流动等）并行高鲁棒通信。
+- **纯动态自适应思考（Auto Reasoning）**：
+  - 智能感知停用词与短指令（“你好/好的/继续”等），在模型支持时自动关闭思考节约 Token 与等待时长；
+  - 真实业务任务自动选用模型支持的均衡档位（`medium`），告别客户端脆弱规则猜深度；
+  - 彻底移除高思考档位硬编码 `temperature: 0.2`，保持原生未定义温度，全面兼容 OpenAI `o1`/`o3-mini` 等严格推理模型，杜绝 400 Bad Request 报错。
+
+2、**Xmind 官方专属 MCP 连接器与独立 MCP 客户端管理**
+- **官方专属卡片与 PKCE OAuth 2.0 授权体系**：内置 Xmind 官方专属卡片（China / Global 双区），支持本地 HTTP 3000 回调自动换票与长效 Token 刷新。
+- **全平台免登漫游（Obsidian Sync 友好）**：OAuth 凭据对齐 `settings.ai.auth.credentials`，移动端（iOS / Android）借助 Obsidian 同步实现免网页授权无缝漫游。
+- **MCP 快捷工具箱（McpToolboxModal）**：提供“标准 5 分支建图”、“局部微调分支”、“任务甘特图排期”、“最近导图检索”等 6 大常用场景的一键提示词预设，并与 AI Copilot 任务抽屉深度打通。
+- **知情确认与入参摘要**：MCP 工具确认弹窗全面呈现格式化参数摘要（Arguments），保障调用全透明。
+
+3、**安全加固与 MCP 传输层收敛**
+- **官方端点白名单与 SSRF 防护**：`McpClientManager` 严格绑定官方受信任端点白名单（`app.xmind.cn`、`app.xmind.com`），拦截非法端点篡改，严禁向外部主机泄露 Bearer Token。
+- **OAuth State 密码学校验与 HTML 注入防御**：基于 `crypto.getRandomValues` 生成 24 字节安全随机数实施强匹配校验；回调错误信息严格执行 HTML 实体转义，杜绝反射型 XSS 与 CSRF 风险。
+- **Stdio 子进程权限收敛**：启动 `StdioTransport` 强制声明 `inheritEnv: false`，彻底阻断子进程继承宿主 Obsidian 进程的全局环境变量与系统密钥。
+- **401 Token 静默刷新重试与并发互斥锁**：工具调用遭遇 401 认证过期时动态提取 Refresh Token 静默换票、重建连接并自动重试；建立单 Server 串行锁（`connectLocks`）彻底消除并发重复建连。
+- **MCP 产物 100% 高保真无损透传**：坚决不对思维导图 AST / JSON / 大纲数据添加人工截断，保障思维导图语法结构绝对完整。
+
+4、**Obsidian 工作区与原生核心插件联动集成**
+- **原生“网页浏览器”（Web viewer）核心插件无缝协同**：
+  - 点击 AI 抽屉【打开导图】按钮时，动态识别官方核心插件 `webviewer`；
+  - 通过 `WorkspaceLeaf.setViewState({ type: 'webviewer', state: { url, navigate: true } })` 直接在 Obsidian 内部新建网页标签页呈现 Xmind 云端导图，彻底消灭 `about:blank` 空白页与外部系统浏览器“双开”冲突；无内置浏览器时平滑降级至系统默认浏览器。
+- **AI 抽屉内容自由划选与复制解除限制**：
+  - 彻底破除 Obsidian 模态框默认的 `user-select: none` 限制，为 `.skill-drawer-activity-feed` 与 `.skill-drawer-activity-item` 显式开启 `user-select: text !important;` 与文本指针，链接与大模型输出文本均可随意划选和复制。
+- **移除未公开 API Hack**：彻底移除 `main.ts` 中针对未公开私有 `app.viewRegistry` 的直接探测与 `delete` 操作，改用标准的生命周期与安全包裹。
+
+5、**多语言与移动端自适应**
+- 补齐繁体中文（`zh-tw`）全部 MCP 工具箱与推理自适应词条；
+- 修复移动端 `.insight-perspective-item` 样式选择器，优化弹出层在小屏设备下的横向滚动与卡片边距；
+- 完善自定义 Server JSON 校验反馈（Notice）。
